@@ -36,7 +36,6 @@ static LLAppHelper *_instance = nil;
 NSNotificationName const LLAppHelperDidUpdateAppInfosNotificationName = @"LLAppHelperDidUpdateAppInfosNotificationName";
 NSString * const LLAppHelperCPUKey = @"LLAppHelperCPUKey";
 NSString * const LLAppHelperMemoryUsedKey = @"LLAppHelperMemoryUsedKey";
-NSString * const LLAppHelperMemoryFreeKey = @"LLAppHelperMemoryFreeKey";
 NSString * const LLAppHelperMemoryTotalKey = @"LLAppHelperMemoryTotalKey";
 NSString * const LLAppHelperFPSKey = @"LLAppHelperFPSKey";
 NSString * const LLAppHelperRequestDataTrafficKey = @"LLAppHelperRequestDataTrafficKey";
@@ -46,7 +45,6 @@ NSString * const LLAppHelperTotalDataTrafficKey = @"LLAppHelperTotalDataTrafficK
 @interface LLAppHelper ()
 {
     unsigned long long _usedMemory;
-    unsigned long long _freeMemory;
     unsigned long long _totalMemory;
     unsigned long long _requestDataTraffic;
     unsigned long long _responseDataTraffic;
@@ -145,8 +143,8 @@ NSString * const LLAppHelperTotalDataTrafficKey = @"LLAppHelperTotalDataTrafficK
 
 - (NSString *)memoryUsage {
     NSString *used = [NSByteCountFormatter stringFromByteCount:_usedMemory countStyle:NSByteCountFormatterCountStyleMemory];
-    NSString *free = [NSByteCountFormatter stringFromByteCount:_freeMemory countStyle:NSByteCountFormatterCountStyleMemory];
-    return [NSString stringWithFormat:@"Used:%@, Free:%@",used,free];
+    NSString *total = [NSByteCountFormatter stringFromByteCount:_totalMemory countStyle:NSByteCountFormatterCountStyleMemory];
+    return [NSString stringWithFormat:@"Used:%@, Total:%@",used,total];
 }
 
 - (NSString *)fps {
@@ -389,7 +387,36 @@ NSString * const LLAppHelperTotalDataTrafficKey = @"LLAppHelperTotalDataTrafficK
     }
 }
 
+//当前app使用的内存
+- (unsigned long long)useMemoryForApp{
+    task_vm_info_data_t vmInfo;
+    mach_msg_type_number_t count = TASK_VM_INFO_COUNT;
+    kern_return_t kernelReturn = task_info(mach_task_self(), TASK_VM_INFO, (task_info_t) &vmInfo, &count);
+    if(kernelReturn == KERN_SUCCESS)
+    {
+        int64_t memoryUsageInByte = (int64_t) vmInfo.phys_footprint;
+        return memoryUsageInByte;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+//设备总的内存
+- (unsigned long long)totalMemoryForDevice{
+    return [NSProcessInfo processInfo].physicalMemory;
+}
+
 #pragma mark - Memory
+- (void)memoryTimerAction:(NSTimer *)timer {
+    _usedMemory = [self useMemoryForApp];
+    _totalMemory = [self totalMemoryForDevice];
+    _cpu = [self getCpuUsage];
+    [self postAppHelperDidUpdateAppInfosNotification];
+}
+
+/*** source code , data differenet from instrument
 - (void)memoryTimerAction:(NSTimer *)timer {
     struct mstats stat = mstats();
     _usedMemory = stat.bytes_used;
@@ -398,10 +425,11 @@ NSString * const LLAppHelperTotalDataTrafficKey = @"LLAppHelperTotalDataTrafficK
     _cpu = [self getCpuUsage];
     [self postAppHelperDidUpdateAppInfosNotification];
 }
+ ***/
 
 - (void)postAppHelperDidUpdateAppInfosNotification {
     if ([[NSThread currentThread] isMainThread]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:LLAppHelperDidUpdateAppInfosNotificationName object:[self dynamicInfos] userInfo:@{LLAppHelperCPUKey:@(_cpu),LLAppHelperFPSKey:@(_fps),LLAppHelperMemoryFreeKey:@(_freeMemory),LLAppHelperMemoryUsedKey:@(_usedMemory),LLAppHelperMemoryTotalKey:@(_totalMemory),LLAppHelperRequestDataTrafficKey:@(_requestDataTraffic),LLAppHelperResponseDataTrafficKey:@(_responseDataTraffic),LLAppHelperTotalDataTrafficKey:@(_totalDataTraffic)}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:LLAppHelperDidUpdateAppInfosNotificationName object:[self dynamicInfos] userInfo:@{LLAppHelperCPUKey:@(_cpu),LLAppHelperFPSKey:@(_fps),LLAppHelperMemoryUsedKey:@(_usedMemory),LLAppHelperMemoryTotalKey:@(_totalMemory),LLAppHelperRequestDataTrafficKey:@(_requestDataTraffic),LLAppHelperResponseDataTrafficKey:@(_responseDataTraffic),LLAppHelperTotalDataTrafficKey:@(_totalDataTraffic)}];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self postAppHelperDidUpdateAppInfosNotification];
