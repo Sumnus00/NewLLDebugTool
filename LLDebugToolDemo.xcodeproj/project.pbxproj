@@ -447,6 +447,10 @@
 		899AB6332201967E00D2FC57 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				899AB6452201A6A500D2FC57 /* PrivateNetwork.m */,
+				899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */,
+				899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */,
+				899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */,
 				899AB6342201978300D2FC57 /* NSObject+Swizzling.h */,
 				899AB6352201978300D2FC57 /* NSObject+Swizzling.m */,
 			);
@@ -458,10 +462,6 @@
 			children = (
 				899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */,
 				899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */,
-				899AB6452201A6A500D2FC57 /* PrivateNetwork.m */,
-				899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */,
-				899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */,
-				899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */,
 			);
 			path = DemoSwizzle;
 			sourceTree = "<group>";
