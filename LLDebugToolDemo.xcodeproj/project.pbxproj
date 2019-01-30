@@ -28,6 +28,10 @@
 		36A0007720BE863700AE8810 /* NetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A0007620BE863700AE8810 /* NetTool.m */; };
 		36E248882123BAE300D03F44 /* LLDebugToolDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E248872123BAE300D03F44 /* LLDebugToolDemoTests.m */; };
 		36E248962123BAE900D03F44 /* LLDebugToolDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E248952123BAE900D03F44 /* LLDebugToolDemoUITests.m */; };
+		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
+		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
+		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
+		899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */; };
 		C43BA80C205AB095006307BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80B205AB095006307BE /* AppDelegate.m */; };
 		C43BA80F205AB095006307BE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80E205AB095006307BE /* ViewController.m */; };
 		C43BA812205AB095006307BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43BA810205AB095006307BE /* Main.storyboard */; };
@@ -175,6 +179,14 @@
 		533ECC0E7675B1A81455CB56 /* libPods-LLDebugToolDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LLDebugToolDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		638C108F891808060C7ED772 /* Pods-LLDebugToolDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoTests/Pods-LLDebugToolDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7630F57F70FEB38A6705DA1A /* Pods-LLDebugToolDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoTests/Pods-LLDebugToolDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
+		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
+		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
+		899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Swizzling.m"; sourceTree = "<group>"; };
+		899AB6452201A6A500D2FC57 /* PrivateNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateNetwork.m; sourceTree = "<group>"; };
+		899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PrivateNetwork+Swizzling.h"; sourceTree = "<group>"; };
+		899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PrivateNetwork+Swizzling.m"; sourceTree = "<group>"; };
+		899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateNetwork.h; sourceTree = "<group>"; };
 		ADC0AD5C07B446A537F680CF /* Pods-LLDebugToolDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C43BA807205AB095006307BE /* LLDebugToolDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLDebugToolDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43BA80A205AB095006307BE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -432,6 +444,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		899AB6332201967E00D2FC57 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				899AB6342201978300D2FC57 /* NSObject+Swizzling.h */,
+				899AB6352201978300D2FC57 /* NSObject+Swizzling.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		899AB63722019F5F00D2FC57 /* DemoSwizzle */ = {
+			isa = PBXGroup;
+			children = (
+				899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */,
+				899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */,
+				899AB6452201A6A500D2FC57 /* PrivateNetwork.m */,
+				899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */,
+				899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */,
+				899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */,
+			);
+			path = DemoSwizzle;
+			sourceTree = "<group>";
+		};
 		C43BA7FE205AB095006307BE = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +492,7 @@
 		C43BA809205AB095006307BE /* LLDebugToolDemo */ = {
 			isa = PBXGroup;
 			children = (
+				899AB63722019F5F00D2FC57 /* DemoSwizzle */,
 				3629E3852136830A00226C79 /* DemoViewControllers */,
 				36A0007520BE863700AE8810 /* NetTool.h */,
 				36A0007620BE863700AE8810 /* NetTool.m */,
@@ -479,6 +514,7 @@
 		C44F40542152AA7000153F46 /* LLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
+				899AB6332201967E00D2FC57 /* Category */,
 				C44F40552152AA7000153F46 /* Config */,
 				C44F40582152AA7000153F46 /* Components */,
 				C44F410F2152AA7000153F46 /* DebugTool */,
@@ -1198,7 +1234,10 @@
 			files = (
 				C44F414A2152AA7000153F46 /* LLNetworkContentVC.m in Sources */,
 				C44F41562152AA7000153F46 /* LLSandboxModel.m in Sources */,
+				899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */,
+				899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */,
 				C44F41212152AA7000153F46 /* LLScreenshotBaseOperation.m in Sources */,
+				899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */,
 				C44F412F2152AA7000153F46 /* LLSearchBar.m in Sources */,
 				C44F413C2152AA7000153F46 /* LLBaseViewController.m in Sources */,
 				C44F41462152AA7000153F46 /* LLNetworkVC.m in Sources */,
@@ -1227,6 +1266,7 @@
 				C44F41312152AA7000153F46 /* LLFilterOtherView.m in Sources */,
 				3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */,
 				C43BA81A205AB095006307BE /* main.m in Sources */,
+				899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */,
 				C44F413D2152AA7000153F46 /* LLBaseTableViewCell.m in Sources */,
 				C44F41642152AA7000153F46 /* LLAppInfoVC.m in Sources */,
 				C44F41662152AA7000153F46 /* LLWindow.m in Sources */,

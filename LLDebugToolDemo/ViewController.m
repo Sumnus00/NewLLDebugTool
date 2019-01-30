@@ -22,6 +22,7 @@
 #import "TestWindowStyleViewController.h"
 
 #import "LLStorageManager.h"
+#import "PrivateNetwork.h"
 
 static NSString *const kCellID = @"cellID";
 
@@ -123,7 +124,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -144,6 +145,9 @@ static NSString *const kCellID = @"cellID";
     }
     if (section == 5) {
         return 2;
+    }
+    if (section == 6){
+        return 1 ;
     }
     return 0;
 }
@@ -216,8 +220,14 @@ static NSString *const kCellID = @"cellID";
                     break;
             }
         }
+    }else if(indexPath.section == 6){
+        cell.textLabel.text = NSLocalizedString(@"test.swizzle", nil);
     }
     return cell;
+}
+
+static TestLogViewController *extracted() {
+    return [TestLogViewController alloc];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -225,7 +235,7 @@ static NSString *const kCellID = @"cellID";
         TestNetworkViewController *vc = [[TestNetworkViewController alloc] initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 1) {
-        TestLogViewController *vc = [[TestLogViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        TestLogViewController *vc = [extracted() initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 2) {
         TestCrashViewController *vc = [[TestCrashViewController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -242,6 +252,10 @@ static NSString *const kCellID = @"cellID";
             TestWindowStyleViewController *vc = [[TestWindowStyleViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:vc animated:YES];
         }
+    } else if (indexPath.section == 6){
+        PrivateNetwork *pn = [[PrivateNetwork alloc] init] ;
+        [pn sendBizData:@"test"] ;
+       
     }
     [self.tableView reloadData];
 }
@@ -259,6 +273,8 @@ static NSString *const kCellID = @"cellID";
         return @"Sandbox Info";
     } else if (section == 5) {
         return @"LLConfig";
+    } else if (section == 6){
+        return @"swizzling" ;
     }
     return nil;
 }
