@@ -32,6 +32,7 @@
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
 		899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */; };
+		899AB6F02201CC3600D2FC57 /* WnsSdkHelper+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6EF2201CC3600D2FC57 /* WnsSdkHelper+Swizzling.m */; };
 		C43BA80C205AB095006307BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80B205AB095006307BE /* AppDelegate.m */; };
 		C43BA80F205AB095006307BE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80E205AB095006307BE /* ViewController.m */; };
 		C43BA812205AB095006307BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43BA810205AB095006307BE /* Main.storyboard */; };
@@ -187,6 +188,8 @@
 		899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PrivateNetwork+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PrivateNetwork+Swizzling.m"; sourceTree = "<group>"; };
 		899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateNetwork.h; sourceTree = "<group>"; };
+		899AB6EE2201CC3600D2FC57 /* WnsSdkHelper+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WnsSdkHelper+Swizzling.h"; sourceTree = "<group>"; };
+		899AB6EF2201CC3600D2FC57 /* WnsSdkHelper+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WnsSdkHelper+Swizzling.m"; sourceTree = "<group>"; };
 		ADC0AD5C07B446A537F680CF /* Pods-LLDebugToolDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C43BA807205AB095006307BE /* LLDebugToolDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLDebugToolDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43BA80A205AB095006307BE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -449,6 +452,8 @@
 			children = (
 				899AB6452201A6A500D2FC57 /* PrivateNetwork.m */,
 				899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */,
+				899AB6EE2201CC3600D2FC57 /* WnsSdkHelper+Swizzling.h */,
+				899AB6EF2201CC3600D2FC57 /* WnsSdkHelper+Swizzling.m */,
 				899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */,
 				899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */,
 				899AB6342201978300D2FC57 /* NSObject+Swizzling.h */,
@@ -1309,6 +1314,7 @@
 				C44F414C2152AA7000153F46 /* LLCrashModel.m in Sources */,
 				C44F41392152AA7000153F46 /* LLFilterLabelCell.m in Sources */,
 				C44F41322152AA7000153F46 /* LLFilterFilePickerView.m in Sources */,
+				899AB6F02201CC3600D2FC57 /* WnsSdkHelper+Swizzling.m in Sources */,
 				C44F411C2152AA7000153F46 /* LLStorageModel.m in Sources */,
 				3629E3972136830A00226C79 /* TestColorStyleViewController.m in Sources */,
 				C44F412D2152AA7000153F46 /* LLSubTitleTableViewCell.m in Sources */,
@@ -1474,6 +1480,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1532,6 +1539,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1558,9 +1566,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48U7H75HY6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
+				);
 				INFOPLIST_FILE = LLDebugToolDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
+					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK/WTLoginSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = myCompany.HDB.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1577,9 +1594,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48U7H75HY6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
+				);
 				INFOPLIST_FILE = LLDebugToolDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
+					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK/WTLoginSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = myCompany.HDB.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
