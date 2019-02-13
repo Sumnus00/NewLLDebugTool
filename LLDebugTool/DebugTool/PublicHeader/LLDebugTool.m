@@ -226,13 +226,14 @@ static LLDebugTool *_instance = nil;
     self.receiveBlock = block ;
 }
 
-- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request{
+
+- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date{
     LLNetworkModel *model = [[LLNetworkModel alloc] init];
-    model.startDate = [LLTool stringFromDate:self.startDate];
+    model.startDate = [LLTool stringFromDate:date];
     model.url = [NSURL URLWithString:command] ;
     model.requestBody = [LLTool convertJSONStringFromData:request];
     model.responseData = response ;
-    model.totalDuration = [NSString stringWithFormat:@"%fs",[[NSDate date] timeIntervalSinceDate:self.startDate]];
+    model.totalDuration = [NSString stringWithFormat:@"%fs",[[NSDate date] timeIntervalSinceDate:date]];
     [[LLStorageManager sharedManager] saveModel:model complete:nil];
     [LLRoute updateRequestDataTraffic:model.requestDataTrafficValue responseDataTraffic:model.responseDataTrafficValue];
 }
