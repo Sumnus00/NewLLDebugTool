@@ -103,5 +103,5 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 
 - (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block;
 - (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block;
-- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSString *)date;
+- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date;
 @end
