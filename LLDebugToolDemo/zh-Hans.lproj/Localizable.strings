@@ -16,6 +16,7 @@
 "normal.session.network" = "普通网络请求(AFURLSessionManager/Json Response)";
 "image.network" = "图片网络请求(NSURLConnection/Image Response)";
 "HTML.network" = "HTML网络请求(NSURLSession/HTML Response)";
+"private.network" = "私有网络请求(private network)";
 
 "insert.log" = "插入一条Log";
 "insert.error.log" = "插入一条Error级别的Log";

@@ -89,4 +89,18 @@
  */
 - (void)logInFile:(NSString *_Nullable)file function:(NSString *_Nullable)function lineNo:(NSInteger)lineNo level:(LLConfigLogLevel)level onEvent:(NSString *_Nullable)onEvent message:(NSString *_Nullable)message;
 
+
+/**
+ 保存已经发送的报文
+ */
+@property (nonatomic,strong) NSMutableDictionary *cmd_seq_dict ;
+@property (nonatomic,strong) NSMutableString *cmd_to_send ;
+@property (nonatomic,strong) NSMutableString *cmd_to_receive ;
+typedef void (^PrivateNetworkBlock)(NSString *);
+@property (nonatomic, copy) PrivateNetworkBlock sendBlock;
+@property (nonatomic, copy) PrivateNetworkBlock receiveBlock;
+
+- (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block;
+- (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block;
+
 @end

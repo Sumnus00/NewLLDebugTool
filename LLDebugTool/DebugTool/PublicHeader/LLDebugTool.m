@@ -208,4 +208,13 @@ static LLDebugTool *_instance = nil;
     }
 }
 
+
+- (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block{
+    self.sendBlock = block ;
+}
+
+- (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block{
+    self.receiveBlock = block ;
+}
+
 @end

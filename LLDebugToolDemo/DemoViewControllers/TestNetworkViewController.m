@@ -25,7 +25,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -38,6 +38,8 @@ static NSString *const kCellID = @"cellID";
         cell.textLabel.text = NSLocalizedString(@"image.network", nil);
     } else if (indexPath.row == 3) {
         cell.textLabel.text = NSLocalizedString(@"HTML.network", nil);
+    } else if (indexPath.row == 4) {
+        cell.textLabel.text = NSLocalizedString(@"private.network", nil) ;
     }
     
     return cell;
@@ -52,6 +54,17 @@ static NSString *const kCellID = @"cellID";
         [self testImageNetworkRequest];
     } else if (indexPath.row == 3) {
         [self testHTMLNetworkRequest];
+    } else if (indexPath.row == 4) {
+        [[LLDebugTool sharedTool] addPrivateNetworkSendBlock:^(NSString *command) {
+                NSLog(@"捕获私有协议请求: %@",command);
+        }];
+        NSString *send_command = @"test send";
+        if ([LLDebugTool sharedTool].sendBlock) {
+            
+            [LLDebugTool sharedTool].sendBlock(send_command) ;
+        }else{
+            NSLog(@"no implementation") ;
+        }
     }
 }
 
