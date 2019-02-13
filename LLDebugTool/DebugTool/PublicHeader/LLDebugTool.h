@@ -100,7 +100,12 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 @property (nonatomic, copy) PrivateNetworkBlock sendBlock;
 @property (nonatomic, copy) PrivateNetworkBlock receiveBlock;
 
+/**
+ 保存发送的时间
+ */
+@property (nonatomic, strong) NSDate *startDate;
+
 - (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block;
 - (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block;
-
+- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request;
 @end

@@ -33,6 +33,8 @@
 #import "LLLogHelperEventDefine.h"
 #import "LLConfig.h"
 #import "LLTool.h"
+#import "LLNetworkModel.h"
+#import "LLRoute.h"
 
 static LLDebugTool *_instance = nil;
 
@@ -222,6 +224,17 @@ static LLDebugTool *_instance = nil;
 
 - (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block{
     self.receiveBlock = block ;
+}
+
+- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request{
+    LLNetworkModel *model = [[LLNetworkModel alloc] init];
+    model.startDate = [LLTool stringFromDate:self.startDate];
+    model.url = [NSURL URLWithString:command] ;
+    model.requestBody = [LLTool convertJSONStringFromData:request];
+    model.responseData = response ;
+    model.totalDuration = [NSString stringWithFormat:@"%fs",[[NSDate date] timeIntervalSinceDate:self.startDate]];
+    [[LLStorageManager sharedManager] saveModel:model complete:nil];
+    [LLRoute updateRequestDataTraffic:model.requestDataTrafficValue responseDataTraffic:model.responseDataTrafficValue];
 }
 
 @end
