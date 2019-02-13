@@ -126,11 +126,18 @@ static LLDebugTool *_instance = nil;
  */
 - (void)initial {
     // Set Default
+    _cmd_to_send = [[NSMutableString alloc] init];
+    
+    _cmd_to_receive = [[NSMutableString alloc] init];
+    
+    _cmd_seq_dict = [[NSMutableDictionary alloc] init];
+    
     _isBetaVersion = NO;
 
     _versionNumber = @"1.2.2";
 
     _version = _isBetaVersion ? [_versionNumber stringByAppendingString:@"(BETA)"] : _versionNumber;
+    
     
     // Check version.
     [self checkVersion];
