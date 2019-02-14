@@ -230,7 +230,9 @@ static LLDebugTool *_instance = nil;
 - (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date{
     LLNetworkModel *model = [[LLNetworkModel alloc] init];
     model.startDate = [LLTool stringFromDate:date];
-    model.url = [NSURL URLWithString:command] ;
+    NSURLComponents *components = [NSURLComponents new] ;
+    [components setHost:command] ;
+    model.url = components.URL ;
     model.requestBody = [LLTool convertJSONStringFromData:request];
     model.responseData = response ;
     model.totalDuration = [NSString stringWithFormat:@"%fs",[[NSDate date] timeIntervalSinceDate:date]];

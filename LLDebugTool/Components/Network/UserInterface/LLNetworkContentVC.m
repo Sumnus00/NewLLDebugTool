@@ -124,7 +124,12 @@ static NSString *const kNetworkImageCellID = @"NetworkImageCellID";
         self.titleArray = [[NSMutableArray alloc] init];
         self.contentArray = [[NSMutableArray alloc] init];
         [self.titleArray addObject:@"Request Url"];
-        [self.contentArray addObject:self.model.url.absoluteString?:@"unknown"];
+        
+        if(!self.model.url.absoluteString && [self.model.url.absoluteString hasPrefix:@"//"]){
+            [self.contentArray addObject:[self.model.url.absoluteString substringFromIndex:[@"//" length]]];
+        }else{
+            [self.contentArray addObject:self.model.url.absoluteString?:@"unknown"];
+        }
         if (self.model.method) {
             [self.titleArray addObject:@"Method"];
             [self.contentArray addObject:self.model.method];
