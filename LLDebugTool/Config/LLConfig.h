@@ -32,6 +32,30 @@
 #define LLCONFIG_BACKGROUND_COLOR [LLConfig sharedConfig].backgroundColor
 
 /**
+switch tag enum
+
+*/
+
+typedef NS_ENUM(NSUInteger, LLConfigSwitchTag) {
+    LLConfigSwitchTagMock,
+    LLConfigSwitchTagLowNetwork,
+    LLConfigSwitchTagLowMemory,
+    LLConfigSwitchTagExpected,
+};
+
+/**
+ Cell style enum
+ 
+ - LLConfigCellAccessoryStyleSwitch : switch style
+ - LLConfigCellAccessoryStyleDisclosureIndicator : disclosure indicator style
+ */
+typedef NS_ENUM(NSUInteger, LLConfigCellAccessoryStyle) {
+    LLConfigCellAccessoryStyleSwitch,
+    LLConfigCellAccessoryStyleDisclosureIndicator,
+    LLConfigCellAccessoryStyleNone,
+};
+
+/**
  Color style enum
  
  - LLConfigColorStyleHack: Green backgroundColor and white textColor.
@@ -109,6 +133,8 @@ typedef NS_OPTIONS(NSUInteger, LLConfigAvailableFeature) {
     LLConfigAvailableAppInfo    = 1 << 3,
     LLConfigAvailableSandbox    = 1 << 4,
     LLConfigAvailableScreenshot = 1 << 5,
+    LLConfigAvailableOther      = 1 << 6,
+    
     LLConfigAvailableAll        = 0xFF,
     
     // Quick options
@@ -118,6 +144,7 @@ typedef NS_OPTIONS(NSUInteger, LLConfigAvailableFeature) {
     LLConfigAvailableNoneAppInfo    = 0xFF - (1 << 3),
     LLConfigAvailableNoneSandbox    = 0xFF - (1 << 4),
     LLConfigAvailableNoneScreenshot = 0xFF - (1 << 5),
+    LLConfigAvailableNoneOther      = 0xFF - (1 << 6),
 };
 
 FOUNDATION_EXPORT NSNotificationName _Nonnull const LLConfigDidUpdateColorStyleNotificationName;

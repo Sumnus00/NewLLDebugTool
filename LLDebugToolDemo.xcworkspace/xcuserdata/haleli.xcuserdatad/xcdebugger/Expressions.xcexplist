@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "dic.allValues.firstObject">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
          <PersistentStrings>
             <PersistentString

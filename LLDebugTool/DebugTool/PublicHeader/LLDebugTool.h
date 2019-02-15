@@ -104,4 +104,13 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 - (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block;
 - (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block;
 - (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date;
+
+
+
+/**
+更多功能的 switch开关
+ */
+@property (nonatomic, assign) BOOL switch_mock;
+@property (nonatomic, assign) BOOL switch_low_network;
+@property (nonatomic, assign) BOOL switch_low_memory;
 @end

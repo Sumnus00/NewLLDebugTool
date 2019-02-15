@@ -37,6 +37,7 @@
 #import "LLDebugTool.h"
 #import "LLDebugToolMacros.h"
 #import "LLLogHelperEventDefine.h"
+#import "LLOtherVC.h"
 
 @interface LLWindowViewController ()
 
@@ -404,6 +405,13 @@
         sandboxNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
         sandboxNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
         
+        
+        LLOtherVC *otherVC = [[LLOtherVC alloc] initWithStyle:UITableViewStyleGrouped];
+        UINavigationController *otherNav = [[LLBaseNavigationController alloc] initWithRootViewController:otherVC];
+        otherNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Other" image:[UIImage LL_imageNamed:kSandboxImageName] selectedImage:nil];
+        otherNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
+        otherNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
+        
         NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
         LLConfigAvailableFeature availables = [LLConfig sharedConfig].availables;
         if (availables & LLConfigAvailableNetwork) {
@@ -418,12 +426,17 @@
         if (availables & LLConfigAvailableAppInfo) {
             [viewControllers addObject:appInfoNav];
         }
-        if (availables & LLConfigAvailableSandbox) {
-            [viewControllers addObject:sandboxNav];
+//        if (availables & LLConfigAvailableSandbox) {
+//            [viewControllers addObject:sandboxNav];
+//        }
+        
+        if (availables & LLConfigAvailableOther) {
+            [viewControllers addObject:otherNav] ;
         }
+
         if (viewControllers.count == 0) {
             [LLConfig sharedConfig].availables = LLConfigAvailableAll;
-            [viewControllers addObjectsFromArray:@[networkNav,logNav,crashNav,appInfoNav,sandboxNav]];
+            [viewControllers addObjectsFromArray:@[networkNav,logNav,crashNav,appInfoNav,sandboxNav,otherNav]];
         }
         
         tab.viewControllers = viewControllers;

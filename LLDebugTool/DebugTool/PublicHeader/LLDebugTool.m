@@ -236,7 +236,10 @@ static LLDebugTool *_instance = nil;
     model.requestBody = [LLTool convertJSONStringFromData:request];
     model.responseData = response ;
     model.totalDuration = [NSString stringWithFormat:@"%fs",[[NSDate date] timeIntervalSinceDate:date]];
+    
+    //request 和 response 为解包后的 bzibuff ，所以统计的流量只有bzibuff的量大小，而包头以及bzibuff在实际传输过程中的压缩以及加密等均不考虑
     [[LLStorageManager sharedManager] saveModel:model complete:nil];
+    
     [LLRoute updateRequestDataTraffic:model.requestDataTrafficValue responseDataTraffic:model.responseDataTrafficValue];
 }
 

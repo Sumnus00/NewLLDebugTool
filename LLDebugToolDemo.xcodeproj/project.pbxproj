@@ -32,6 +32,7 @@
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
 		899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */; };
+		89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FE073B22166154009BCD99 /* LLOtherVC.m */; };
 		C43BA80C205AB095006307BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80B205AB095006307BE /* AppDelegate.m */; };
 		C43BA80F205AB095006307BE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80E205AB095006307BE /* ViewController.m */; };
 		C43BA812205AB095006307BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43BA810205AB095006307BE /* Main.storyboard */; };
@@ -187,6 +188,8 @@
 		899AB6472201A8F200D2FC57 /* PrivateNetwork+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PrivateNetwork+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6482201A8F200D2FC57 /* PrivateNetwork+Swizzling.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PrivateNetwork+Swizzling.m"; sourceTree = "<group>"; };
 		899AB64A2201BF4600D2FC57 /* PrivateNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateNetwork.h; sourceTree = "<group>"; };
+		89FE073A22166154009BCD99 /* LLOtherVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOtherVC.h; sourceTree = "<group>"; };
+		89FE073B22166154009BCD99 /* LLOtherVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOtherVC.m; sourceTree = "<group>"; };
 		ADC0AD5C07B446A537F680CF /* Pods-LLDebugToolDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C43BA807205AB095006307BE /* LLDebugToolDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLDebugToolDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43BA80A205AB095006307BE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -466,6 +469,32 @@
 			path = DemoSwizzle;
 			sourceTree = "<group>";
 		};
+		89FE0734221651C6009BCD99 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				89FE0735221651FB009BCD99 /* Function */,
+				89FE07362216520A009BCD99 /* UserInterface */,
+			);
+			name = Other;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		89FE0735221651FB009BCD99 /* Function */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
+		89FE07362216520A009BCD99 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				89FE073A22166154009BCD99 /* LLOtherVC.h */,
+				89FE073B22166154009BCD99 /* LLOtherVC.m */,
+			);
+			path = UserInterface;
+			sourceTree = "<group>";
+		};
 		C43BA7FE205AB095006307BE = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +563,7 @@
 		C44F40582152AA7000153F46 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				89FE0734221651C6009BCD99 /* Other */,
 				C44F40B92152AA7000153F46 /* Network */,
 				C44F40F52152AA7000153F46 /* Log */,
 				C44F40D22152AA7000153F46 /* Crash */,
@@ -1293,6 +1323,7 @@
 				369D093E2153AE14001C9D4B /* NSURLSession+LL_Swizzling.m in Sources */,
 				C44F41302152AA7000153F46 /* LLNoneCopyTextField.m in Sources */,
 				C44F41222152AA7000153F46 /* LLScreenshotSelectorModel.m in Sources */,
+				89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */,
 				C44F41552152AA7000153F46 /* LLSandboxHelper.m in Sources */,
 				C44F41412152AA7000153F46 /* NSHTTPURLResponse+LL_Utils.m in Sources */,
 				C44F411F2152AA7000153F46 /* LLScreenshotToolbar.m in Sources */,
