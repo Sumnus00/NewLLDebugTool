@@ -110,7 +110,16 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 /**
 更多功能的 switch开关
  */
-@property (nonatomic, assign) BOOL switch_mock;
-@property (nonatomic, assign) BOOL switch_low_network;
-@property (nonatomic, assign) BOOL switch_low_memory;
+
+- (void)saveMockSwitch:(BOOL)on;
+
+- (BOOL)mockSwitch;
+
+- (void)saveLowNetworkSwitch:(BOOL)on;
+
+- (BOOL)lowNetworkSwitch;
+
+- (void)saveLowMemorySwitch:(BOOL)on;
+
+- (BOOL)lowMemorySwitch;
 @end

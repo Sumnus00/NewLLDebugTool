@@ -127,6 +127,12 @@ static LLDebugTool *_instance = nil;
  Initial something.
  */
 - (void)initial {
+    
+    //重新启动的时候，把所有的开关关掉
+    [self saveMockSwitch:NO];
+    [self saveLowNetworkSwitch:NO];
+    [self saveLowMemorySwitch:NO];
+  
     // Set Default
     _cmd_to_send = [[NSMutableString alloc] init];
     
@@ -241,6 +247,45 @@ static LLDebugTool *_instance = nil;
     [[LLStorageManager sharedManager] saveModel:model complete:nil];
     
     [LLRoute updateRequestDataTraffic:model.requestDataTrafficValue responseDataTraffic:model.responseDataTrafficValue];
+}
+
+
+static NSString * const kLLMockKey = @"ll_mock_key";
+static NSString * const kLLLowNetworkKey = @"ll_low_network_key";
+static NSString * const kLLLowMemoryKey = @"ll_low_memory_key";
+
+- (void)saveMockSwitch:(BOOL)on{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:on forKey:kLLMockKey];
+    [defaults synchronize];
+}
+
+- (BOOL)mockSwitch{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:kLLMockKey];
+}
+
+
+- (void)saveLowNetworkSwitch:(BOOL)on{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:on forKey:kLLLowNetworkKey];
+    [defaults synchronize];
+}
+
+- (BOOL)lowNetworkSwitch{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:kLLLowNetworkKey];
+}
+
+- (void)saveLowMemorySwitch:(BOOL)on{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:on forKey:kLLLowMemoryKey];
+    [defaults synchronize];
+}
+
+- (BOOL)lowMemorySwitch{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:kLLLowMemoryKey];
 }
 
 @end

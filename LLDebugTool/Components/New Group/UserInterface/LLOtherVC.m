@@ -145,11 +145,11 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     BOOL isButtonOn = [switchButton isOn];
     
     if(switchButton.tag == LLConfigSwitchTagMock){
-        [LLDebugTool sharedTool].switch_mock = isButtonOn;
+        [[LLDebugTool sharedTool] saveMockSwitch:isButtonOn];
     }else if(switchButton.tag == LLConfigSwitchTagLowNetwork){
-        [LLDebugTool sharedTool].switch_low_network = isButtonOn;
+        [[LLDebugTool sharedTool] saveLowNetworkSwitch:isButtonOn];
     }else if(switchButton.tag == LLConfigSwitchTagLowMemory){
-        [LLDebugTool sharedTool].switch_low_memory = isButtonOn;
+        [[LLDebugTool sharedTool] saveLowMemorySwitch:isButtonOn];
     }
 }
 @end
