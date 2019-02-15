@@ -87,16 +87,19 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
    
     
     UISwitch *myswitch = [[UISwitch alloc]init];
-    if([cell.textLabel.text isEqualToString:@"mock开关"])
-       myswitch.tag = LLConfigSwitchTagMock ;
-    else if([cell.textLabel.text isEqualToString:@"弱网开关"]){
-       myswitch.tag = LLConfigSwitchTagLowNetwork ;
+    if([cell.textLabel.text isEqualToString:@"mock开关"]){
+        myswitch.tag = LLConfigSwitchTagMock ;
+        myswitch.on = [[LLDebugTool sharedTool] mockSwitch] ;
+    }else if([cell.textLabel.text isEqualToString:@"弱网开关"]){
+        myswitch.tag = LLConfigSwitchTagLowNetwork ;
+        myswitch.on = [[LLDebugTool sharedTool] lowNetworkSwitch] ;
     }else if([cell.textLabel.text isEqualToString:@"低内存开关"]){
-       myswitch.tag = LLConfigSwitchTagLowMemory ;
+        myswitch.tag = LLConfigSwitchTagLowMemory ;
+        myswitch.on = [[LLDebugTool sharedTool] lowMemorySwitch] ;
     }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
        myswitch.tag = LLConfigSwitchTagExpected ;
     }
-    myswitch.on = NO;
+    
     [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     cell.accessoryView = myswitch ;
     return cell;
