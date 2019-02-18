@@ -106,6 +106,7 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 - (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date;
 
 
+@property (nonatomic, strong) NSThread *memoryThread;
 
 /**
 更多功能的 switch开关

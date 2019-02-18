@@ -14,11 +14,16 @@
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 
-@interface LLOtherVC ()
+@interface LLOtherVC (){
+    Byte  *_addMemory;
+}
 
 @property (nonatomic , strong) NSMutableArray *dataArray;
 
+
 @end
+
+
 
 @implementation LLOtherVC
 
@@ -153,6 +158,77 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         [[LLDebugTool sharedTool] saveLowNetworkSwitch:isButtonOn];
     }else if(switchButton.tag == LLConfigSwitchTagLowMemory){
         [[LLDebugTool sharedTool] saveLowMemorySwitch:isButtonOn];
+        if(isButtonOn){
+            [LLDebugTool sharedTool].memoryThread = [[NSThread alloc] initWithTarget:self selector:@selector(highMemoryOperate) object:nil];
+            [LLDebugTool sharedTool].memoryThread.name = @"HighMemoryThread";
+            NSLog(@"haleli >>> switch_low_memoryk : %@",@"开始") ;
+            [[LLDebugTool sharedTool].memoryThread  start];
+        }else{
+            NSLog(@"haleli >>> switch_low_memoryk : %@",@"关闭") ;
+            [[LLDebugTool sharedTool].memoryThread  cancel];
+            [LLDebugTool sharedTool].memoryThread  = nil;
+        }
     }
 }
+
+
+- (void)highMemoryOperate{
+    //点击按钮，如果未释放，则释放
+    @synchronized (self) {
+        if (_addMemory) {
+            NSLog(@"free memory") ;
+            free(_addMemory);
+            _addMemory = nil;
+            
+        }
+    }
+    int addedMemSize = 0;
+    int interval = 2;
+    BOOL needAddMem = TRUE ;
+    
+    while (TRUE) {
+        if(needAddMem){
+            addedMemSize = addedMemSize + 400 ;
+        }
+        
+        if ([[NSThread currentThread] isCancelled]) {
+            [NSThread exit];
+        }
+        
+        @synchronized (self) {
+            if (!_addMemory) {
+                _addMemory = malloc(1024*1024*addedMemSize);
+                if (_addMemory) {
+                    memset(_addMemory, 0, 1024*1024*addedMemSize);
+                    NSLog(@"add mem :%d",addedMemSize) ;
+                }else{
+                    addedMemSize = addedMemSize - 400 ;
+                    needAddMem = FALSE ;
+                    NSLog(@"add mem failed!");
+                }
+                
+            }
+        }
+        
+        [NSThread sleepForTimeInterval:interval];
+            
+        @synchronized (self) {
+            if (_addMemory) {
+                NSLog(@"free memory") ;
+                free(_addMemory);
+                _addMemory = nil;
+                
+            }
+        }
+            
+        if ([[NSThread currentThread] isCancelled]) {
+            [NSThread exit];
+        }
+        
+        
+        
+        [NSThread sleepForTimeInterval:interval];
+    }
+}
+
 @end
