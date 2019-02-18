@@ -38,7 +38,9 @@
 
 static LLDebugTool *_instance = nil;
 
-@interface LLDebugTool ()
+@interface LLDebugTool (){
+    float _packet_count;
+}
 
 @property (nonatomic , strong , nonnull) LLWindow *window;
 

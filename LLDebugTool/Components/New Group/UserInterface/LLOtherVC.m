@@ -200,7 +200,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 _addMemory = malloc(1024*1024*addedMemSize);
                 if (_addMemory) {
                     memset(_addMemory, 0, 1024*1024*addedMemSize);
-                    NSLog(@"add mem :%d",addedMemSize) ;
+                    NSLog(@"haleli >>> add memory :%d",addedMemSize) ;
                 }else{
                     addedMemSize = addedMemSize - 400 ;
                     needAddMem = FALSE ;
@@ -214,7 +214,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             
         @synchronized (self) {
             if (_addMemory) {
-                NSLog(@"free memory") ;
+                NSLog(@"haleli >>> free memory : %d",addedMemSize) ;
                 free(_addMemory);
                 _addMemory = nil;
                 
