@@ -87,7 +87,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     NSDictionary *dic = self.dataArray[indexPath.section][indexPath.row];
     cell.textLabel.text = dic.allKeys.firstObject;
 
-    //1、cell 要改 2、根据样式改变switch样式
+    //1、cell 要改 
 //    cell.detailTextLabel.text = @"开关";
    
     
@@ -95,18 +95,21 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     if([cell.textLabel.text isEqualToString:@"mock开关"]){
         myswitch.tag = LLConfigSwitchTagMock ;
         myswitch.on = [[LLDebugTool sharedTool] mockSwitch] ;
+        cell.accessoryView = myswitch ;
     }else if([cell.textLabel.text isEqualToString:@"弱网开关"]){
         myswitch.tag = LLConfigSwitchTagLowNetwork ;
         myswitch.on = [[LLDebugTool sharedTool] lowNetworkSwitch] ;
+        cell.accessoryView = myswitch ;
     }else if([cell.textLabel.text isEqualToString:@"低内存开关"]){
         myswitch.tag = LLConfigSwitchTagLowMemory ;
         myswitch.on = [[LLDebugTool sharedTool] lowMemorySwitch] ;
+        cell.accessoryView = myswitch ;
     }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
-       myswitch.tag = LLConfigSwitchTagExpected ;
+        cell.accessoryType = UITableViewCellAccessoryNone ;
     }
     
     [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    cell.accessoryView = myswitch ;
+    
     return cell;
 }
 
