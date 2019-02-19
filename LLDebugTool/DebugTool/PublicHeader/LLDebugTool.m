@@ -296,7 +296,7 @@ static NSString * const kLLLowMemoryKey = @"ll_low_memory_key";
 }
 
 //丢包率为0.08
-- (BOOL)addPacketCount:(float)increase{
+- (BOOL)isPacketLoss:(float)increase{
     _packetCount = _packetCount + increase ;
     if(_packetCount > 1){
         _packetCount = 0.0 ;
