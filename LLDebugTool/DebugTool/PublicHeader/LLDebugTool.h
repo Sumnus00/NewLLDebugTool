@@ -125,4 +125,9 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 - (void)saveLowMemorySwitch:(BOOL)on;
 
 - (BOOL)lowMemorySwitch;
+
+/**
+ 丢包率相关api
+ */
+-(BOOL)addPacketCount:(float)increase ;
 @end

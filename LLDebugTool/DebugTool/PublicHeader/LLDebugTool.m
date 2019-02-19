@@ -39,7 +39,10 @@
 static LLDebugTool *_instance = nil;
 
 @interface LLDebugTool (){
-    float _packet_count;
+    /**
+     丢包个数
+     */
+    float _packetCount;
 }
 
 @property (nonatomic , strong , nonnull) LLWindow *window;
@@ -136,6 +139,8 @@ static LLDebugTool *_instance = nil;
     [self saveLowMemorySwitch:NO];
   
     // Set Default
+    _packetCount = 0.0 ;
+    
     _cmd_to_send = [[NSMutableString alloc] init];
     
     _cmd_to_receive = [[NSMutableString alloc] init];
@@ -290,4 +295,13 @@ static NSString * const kLLLowMemoryKey = @"ll_low_memory_key";
     return [defaults boolForKey:kLLLowMemoryKey];
 }
 
+//丢包率为0.08
+- (BOOL)addPacketCount:(float)increase{
+    _packetCount = _packetCount + increase ;
+    if(_packetCount > 1){
+        _packetCount = 0.0 ;
+        return TRUE ;
+    }
+    return FALSE ;
+}
 @end
