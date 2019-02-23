@@ -11,6 +11,8 @@
 #import "LLMacros.h"
 #import "LLConfig.h"
 #import "LLDebugTool.h"
+#import "ZSFakeTouch.h"
+
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 
@@ -162,18 +164,28 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }else if(switchButton.tag == LLConfigSwitchTagLowMemory){
         [[LLDebugTool sharedTool] saveLowMemorySwitch:isButtonOn];
         if(isButtonOn){
-            [LLDebugTool sharedTool].memoryThread = [[NSThread alloc] initWithTarget:self selector:@selector(highMemoryOperate) object:nil];
-            [LLDebugTool sharedTool].memoryThread.name = @"HighMemoryThread";
-            NSLog(@"haleli >>> switch_low_memoryk : %@",@"开始") ;
-            [[LLDebugTool sharedTool].memoryThread  start];
+//            [LLDebugTool sharedTool].memoryThread = [[NSThread alloc] initWithTarget:self selector:@selector(highMemoryOperate) object:nil];
+//            [LLDebugTool sharedTool].memoryThread.name = @"HighMemoryThread";
+//            NSLog(@"haleli >>> switch_low_memoryk : %@",@"开始") ;
+//            [[LLDebugTool sharedTool].memoryThread  start];
+            [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
         }else{
-            NSLog(@"haleli >>> switch_low_memoryk : %@",@"关闭") ;
-            [[LLDebugTool sharedTool].memoryThread  cancel];
-            [LLDebugTool sharedTool].memoryThread  = nil;
+//            NSLog(@"haleli >>> switch_low_memoryk : %@",@"关闭") ;
+//            [[LLDebugTool sharedTool].memoryThread  cancel];
+//            [LLDebugTool sharedTool].memoryThread  = nil;
         }
     }
 }
 
+-(void)touchesWithPoint:(CGPoint)zspoint{
+    [ZSFakeTouch beginTouchWithPoint:zspoint];
+    [ZSFakeTouch endTouchWithPoint:zspoint];
+}
+
+- (void)randomMonkey{
+    NSLog(@"test monkey") ;
+    [self touchesWithPoint:CGPointMake(220,93)];
+}
 
 - (void)highMemoryOperate{
     //点击按钮，如果未释放，则释放
