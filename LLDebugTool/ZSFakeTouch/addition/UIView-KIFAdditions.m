@@ -8,8 +8,6 @@
 //  which Square, Inc. licenses this file to you.
 
 #import "UIView-KIFAdditions.h"
-#import "CGGeometry-KIFAdditions.h"
-#import "UIAccessibilityElement-KIFAdditions.h"
 #import "UIApplication-KIFAdditions.h"
 #import "UITouch-KIFAdditions.h"
 #import <objc/runtime.h>
@@ -59,8 +57,8 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         unichar expectedChar = [expected characterAtIndex:i];
         unichar actualChar = [actual characterAtIndex:i];
         if (expectedChar != actualChar &&
-           !(expectedChar == '\n' && actualChar == ' ') &&
-           !(expectedChar == ' '  && actualChar == '\n')) {
+            !(expectedChar == '\n' && actualChar == ' ') &&
+            !(expectedChar == ' '  && actualChar == '\n')) {
             return NO;
         }
     }
@@ -114,7 +112,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         BOOL labelsMatch = StringsMatchExceptLineBreaks(label, element.accessibilityLabel);
         BOOL traitsMatch = ((element.accessibilityTraits) & traits) == traits;
         BOOL valuesMatch = !value || [value isEqual:accessibilityValue];
-
+        
         return (BOOL)(labelsMatch && traitsMatch && valuesMatch);
     }];
 }
@@ -134,7 +132,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     UIAccessibilityElement *matchingButOccludedElement = nil;
     
     BOOL elementMatches = matchBlock((UIAccessibilityElement *)self);
-
+    
     if (elementMatches) {
         if (self.isTappable) {
             return (UIAccessibilityElement *)self;
@@ -157,7 +155,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
             continue;
         }
         
-        UIView *viewForElement = [UIAccessibilityElement viewContainingAccessibilityElement:element];
+        UIView *viewForElement = [self viewContainingAccessibilityElement:element];
         CGRect accessibilityFrame = [viewForElement.window convertRect:element.accessibilityFrame toView:viewForElement];
         
         if ([viewForElement isTappableInRect:accessibilityFrame]) {
@@ -174,11 +172,11 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         [elementStack removeLastObject];
         
         BOOL elementMatches = matchBlock(element);
-
+        
         if (elementMatches) {
-            UIView *viewForElement = [UIAccessibilityElement viewContainingAccessibilityElement:element];
+            UIView *viewForElement = [self viewContainingAccessibilityElement:element];
             CGRect accessibilityFrame = [viewForElement.window convertRect:element.accessibilityFrame toView:viewForElement];
-
+            
             if ([viewForElement isTappableInRect:accessibilityFrame]) {
                 return element;
             } else {
@@ -292,7 +290,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
             }
         }
     }
-        
+    
     return matchingButOccludedElement;
 }
 
@@ -323,7 +321,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         NSArray *matchingSubviews = [view subviewsWithClassNamePrefix:prefix];
         [result addObjectsFromArray:matchingSubviews];
     }
-
+    
     return result;
 }
 
@@ -360,7 +358,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         NSArray * matchingSubviews = [view subviewsWithClassNameOrSuperClassNamePrefix:prefix];
         [result addObjectsFromArray:matchingSubviews];
     }
-
+    
     return result;
 }
 
@@ -375,7 +373,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
 
 - (void)flash;
 {
-	UIColor *originalBackgroundColor = self.backgroundColor;
+    UIColor *originalBackgroundColor = self.backgroundColor;
     for (NSUInteger i = 0; i < 5; i++) {
         self.backgroundColor = [UIColor yellowColor];
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, .05, false);
@@ -416,17 +414,17 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     [touch setPhaseAndUpdateTimestamp:UITouchPhaseBegan];
     
     UIEvent *event = [self eventWithTouch:touch];
-
+    
     [[UIApplication sharedApplication] sendEvent:event];
     
     [touch setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
     [[UIApplication sharedApplication] sendEvent:event];
-
+    
     // Dispatching the event doesn't actually update the first responder, so fake it
     if ([touch.view isDescendantOfView:self] && [self canBecomeFirstResponder]) {
         [self becomeFirstResponder];
     }
-
+    
 }
 
 - (void)twoFingerTapAtPoint:(CGPoint)point {
@@ -436,13 +434,13 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     UITouch *touch2 = [[UITouch alloc] initAtPoint:finger2 inView:self];
     [touch1 setPhaseAndUpdateTimestamp:UITouchPhaseBegan];
     [touch2 setPhaseAndUpdateTimestamp:UITouchPhaseBegan];
-
+    
     UIEvent *event = [self eventWithTouches:@[touch1, touch2]];
     [[UIApplication sharedApplication] sendEvent:event];
-
+    
     [touch1 setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
     [touch2 setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
-
+    
     [[UIApplication sharedApplication] sendEvent:event];
 }
 
@@ -515,7 +513,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     {
         return;
     }
-
+    
     // all paths must have similar number of points
     NSUInteger pointsInPath = [arrayOfPaths[0] count];
     for (NSArray *path in arrayOfPaths)
@@ -525,9 +523,9 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
             return;
         }
     }
-
+    
     NSMutableArray *touches = [NSMutableArray array];
-
+    
     for (NSUInteger pointIndex = 0; pointIndex < pointsInPath; pointIndex++) {
         // create initial touch event and send touch down event
         if (pointIndex == 0)
@@ -557,9 +555,9 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
             }
             UIEvent *event = [self eventWithTouches:[NSArray arrayWithArray:touches]];
             [[UIApplication sharedApplication] sendEvent:event];
-
+            
             CFRunLoopRunInMode(UIApplicationCurrentRunMode, DRAG_TOUCH_DELAY, false);
-
+            
             // The last point needs to also send a phase ended touch.
             if (pointIndex == pointsInPath - 1) {
                 for (UITouch * touch in touches) {
@@ -568,16 +566,16 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
                     [[UIApplication sharedApplication] sendEvent:eventUp];
                     
                 }
-
+                
             }
         }
     }
-
+    
     // Dispatching the event doesn't actually update the first responder, so fake it
     if ([touches[0] view] == self && [self canBecomeFirstResponder]) {
         [self becomeFirstResponder];
     }
-
+    
     while (UIApplicationCurrentRunMode != kCFRunLoopDefaultMode) {
         CFRunLoopRunInMode(UIApplicationCurrentRunMode, 0.1, false);
     }
@@ -597,7 +595,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     NSArray *finger1Path = [self pointsFromStartPoint:finger1Start toPoint:finger1End steps:stepCount];
     NSArray *finger2Path = [self pointsFromStartPoint:finger2Start toPoint:finger2End steps:stepCount];
     NSArray *paths = @[finger1Path, finger2Path];
-
+    
     [self dragPointsAlongPaths:paths];
 }
 
@@ -611,7 +609,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     NSArray *finger1Path = [self pointsFromStartPoint:finger1Start toPoint:finger1End steps:stepCount];
     NSArray *finger2Path = [self pointsFromStartPoint:finger2Start toPoint:finger2End steps:stepCount];
     NSArray *paths = @[finger1Path, finger2Path];
-
+    
     [self dragPointsAlongPaths:paths];
 }
 
@@ -625,7 +623,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     NSArray *finger1Path = [self pointsFromStartPoint:finger1Start toPoint:finger1End steps:stepCount];
     NSArray *finger2Path = [self pointsFromStartPoint:finger2Start toPoint:finger2End steps:stepCount];
     NSArray *paths = @[finger1Path, finger2Path];
-
+    
     [self dragPointsAlongPaths:paths];
 }
 
@@ -633,7 +631,7 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     NSInteger stepCount = ABS(angleInDegrees)/2; // very rough approximation. 90deg = ~45 steps, 360 deg = ~180 steps
     CGFloat radius = kTwoFingerConstantWidth*2;
     double angleInRadians = KIFDegreesToRadians(angleInDegrees);
-
+    
     NSMutableArray *finger1Path = [NSMutableArray array];
     NSMutableArray *finger2Path = [NSMutableArray array];
     for (NSUInteger i = 0; i < stepCount; i++) {
@@ -648,10 +646,10 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
         // interpolate betwen 0 and the target rotation
         CGPoint offset1 = CGPointMake(radius * cos(currentAngle), radius * sin(currentAngle));
         CGPoint offset2 = CGPointMake(-offset1.x, -offset1.y); // second finger is just opposite of the first
-
+        
         CGPoint finger1 = CGPointMake(centerPoint.x + offset1.x, centerPoint.y + offset1.y);
         CGPoint finger2 = CGPointMake(centerPoint.x + offset2.x, centerPoint.y + offset2.y);
-
+        
         [finger1Path addObject:[NSValue valueWithCGPoint:finger1]];
         [finger2Path addObject:[NSValue valueWithCGPoint:finger2]];
     }
@@ -659,10 +657,10 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
 }
 
 - (NSArray *)pointsFromStartPoint:(CGPoint)startPoint toPoint:(CGPoint)toPoint steps:(NSUInteger)stepCount {
-
+    
     CGPoint displacement = CGPointMake(toPoint.x - startPoint.x, toPoint.y - startPoint.y);
     NSMutableArray *points = [NSMutableArray array];
-
+    
     for (NSUInteger i = 0; i < stepCount; i++) {
         CGFloat progress = ((CGFloat)i)/(stepCount - 1);
         CGPoint point = CGPointMake(startPoint.x + (progress * displacement.x),
@@ -784,11 +782,11 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     
     [event _clearTouches];
     [event kif_setEventWithTouches:touches];
-
+    
     for (UITouch *aTouch in touches) {
         [event _addTouch:aTouch forDelayedDelivery:NO];
     }
-
+    
     return event;
 }
 
@@ -908,5 +906,21 @@ NS_INLINE BOOL StringsMatchExceptLineBreaks(NSString *expected, NSString *actual
     }
 }
 
-
+#pragma mark -UIAccessibilityElement
+- (UIView *)viewContainingAccessibilityElement:(UIAccessibilityElement *)element;
+{
+    while (element && ![element isKindOfClass:[UIView class]]) {
+        // Sometimes accessibilityContainer will return a view that's too far up the view hierarchy
+        // UIAccessibilityElement instances will sometimes respond to view, so try to use that and then fall back to accessibilityContainer
+        id view = [element respondsToSelector:@selector(view)] ? [(id)element view] : nil;
+        
+        if (view) {
+            element = view;
+        } else {
+            element = [element accessibilityContainer];
+        }
+    }
+    
+    return (UIView *)element;
+}
 @end

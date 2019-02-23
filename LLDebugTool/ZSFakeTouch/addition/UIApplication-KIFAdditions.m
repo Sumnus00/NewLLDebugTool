@@ -10,7 +10,6 @@
 #import "UIApplication-KIFAdditions.h"
 #import "LoadableCategory.h"
 #import "UIView-KIFAdditions.h"
-#import "NSError-KIFAdditions.h"
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
@@ -98,7 +97,7 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
             return window;
         }
     }
-
+    
     return nil;
 }
 
@@ -119,7 +118,7 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     NSString *outputPath = [[[NSProcessInfo processInfo] environment] objectForKey:@"KIF_SCREENSHOTS"];
     if (!outputPath) {
         if (error) {
-            *error = [NSError KIFErrorWithFormat:@"Screenshot path not defined. Please set KIF_SCREENSHOTS environment variable."];
+            *error = [self KIFErrorWithFormat:@"Screenshot path not defined. Please set KIF_SCREENSHOTS environment variable."];
         }
         return NO;
     }
@@ -127,25 +126,25 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     NSArray *windows = [self windowsWithKeyWindow];
     if (windows.count == 0) {
         if (error) {
-            *error = [NSError KIFErrorWithFormat:@"Could not take screenshot.  No windows were available."];
+            *error = [self KIFErrorWithFormat:@"Could not take screenshot.  No windows were available."];
         }
         return NO;
     }
     
     if (!filename.length) {
         if (error) {
-            *error = [NSError KIFErrorWithFormat:@"Missing screenshot filename."];
+            *error = [self KIFErrorWithFormat:@"Missing screenshot filename."];
         }
         return NO;
     }
     
     UIGraphicsBeginImageContextWithOptions([[windows objectAtIndex:0] bounds].size, YES, 0);
     for (UIWindow *window in windows) {
-		//avoid https://github.com/kif-framework/KIF/issues/679
-		if (window.hidden) {
-			continue;
-		}
-
+        //avoid https://github.com/kif-framework/KIF/issues/679
+        if (window.hidden) {
+            continue;
+        }
+        
         if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
             [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
         } else {
@@ -154,25 +153,25 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     }
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-
+    
     outputPath = [outputPath stringByExpandingTildeInPath];
-
+    
     NSError *directoryCreationError = nil;
     if (![[NSFileManager defaultManager] createDirectoryAtPath:outputPath withIntermediateDirectories:YES attributes:nil error:&directoryCreationError]) {
         if (error) {
-            *error = [NSError KIFErrorWithFormat:@"Couldn't create directory at path %@ (details: %@)", outputPath, directoryCreationError];
+            *error = [self KIFErrorWithFormat:[NSString stringWithFormat:@"Couldn't create directory at path %@ (details: %@)", outputPath, directoryCreationError]];
         }
         return NO;
     }
-
+    
     NSString *imageName = [self imageNameForFile:filename lineNumber:lineNumber description:description];
     
     outputPath = [outputPath stringByAppendingPathComponent:imageName];
     outputPath = [outputPath stringByAppendingPathExtension:@"png"];
-
+    
     if (![UIImagePNGRepresentation(image) writeToFile:outputPath atomically:YES]) {
         if (error) {
-            *error = [NSError KIFErrorWithFormat:@"Could not write file at path %@", outputPath];
+            *error = [self KIFErrorWithFormat:[NSString stringWithFormat:@"Could not write file at path %@", outputPath]];
         }
         return NO;
     }
@@ -194,7 +193,7 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     if (description.length) {
         imageName = [imageName stringByAppendingFormat:@", %@", description];
     }
-
+    
     return imageName;
 }
 
@@ -290,7 +289,7 @@ static inline void Swizzle(Class c, SEL orig, SEL new)
         Swizzle(self, @selector(openURL:), @selector(KIF_openURL:));
         Swizzle(self, @selector(canOpenURL:), @selector(KIF_canOpenURL:));
     });
-
+    
     _KIF_UIApplicationMockOpenURL = YES;
     _KIF_UIApplicationMockOpenURL_returnValue = returnValue;
 }
@@ -300,4 +299,9 @@ static inline void Swizzle(Class c, SEL orig, SEL new)
     _KIF_UIApplicationMockOpenURL = NO;
 }
 
+#pragma mark -NSError
+- (NSError *)KIFErrorWithFormat:(NSString *)format
+{
+    return [NSError errorWithDomain:@"KIFTest" code:10086 userInfo:@{NSLocalizedDescriptionKey: format}];
+}
 @end

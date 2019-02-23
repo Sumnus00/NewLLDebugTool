@@ -14,6 +14,10 @@ extern double KIFRadiansToDegrees(double rad);
 
 typedef CGPoint KIFDisplacement;
 
+CG_INLINE CGPoint CGPointCenteredInRect(CGRect bounds) {
+    return CGPointMake(bounds.origin.x + bounds.size.width * 0.5f, bounds.origin.y + bounds.size.height * 0.5f);
+}
+
 @interface UIView (KIFAdditions)
 
 @property (nonatomic, readonly, getter=isProbablyTappable) BOOL probablyTappable;
