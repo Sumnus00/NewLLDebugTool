@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name                = "NewLLDebugTool"
   s.version             = "1.2.2"
-  s.summary             = "LLDebugTool is a debugging tool for developers and testers that can help you analyze and manipulate data in non-xcode situations."
+  s.summary             = "NewLLDebugTool is a debugging tool for developers and testers that can help you analyze and manipulate data in non-xcode situations."
   s.homepage            = "https://github.com/didiaodanding/NewLLDebugTool"
   s.license             = "MIT"
   s.author              = { "haleli" => "1404012659@qq.com" }
@@ -66,9 +66,9 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'General' do |ss|
-    ss.source_files             = "NewLLDebugTool/Config/*.{h,m}" , "LLDebugTool/Components/General/**/*.{h,m}"
+    ss.source_files             = "NewLLDebugTool/Config/*.{h,m}" , "NewLLDebugTool/Components/General/**/*.{h,m}"
     ss.resources                = "NewLLDebugTool/Components/General/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "NewLLDebugTool/Config/*.h" , "LLDebugTool/Components/General/**/*.h"
+    ss.public_header_files      = "NewLLDebugTool/Config/*.h" , "NewLLDebugTool/Components/General/**/*.h"
   end
 
 end
