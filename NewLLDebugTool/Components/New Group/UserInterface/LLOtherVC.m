@@ -183,8 +183,14 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 - (void)randomMonkey{
-    NSLog(@"test monkey") ;
-    [self touchesWithPoint:CGPointMake(220,93)];
+    
+    int width = self.view.bounds.size.width ;
+    int height = self.view.bounds.size.height ;
+    int x = arc4random() % width  ;
+    int y = arc4random() % height ;
+    
+    NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
+    [self touchesWithPoint:CGPointMake(x,y)];
 }
 
 - (void)highMemoryOperate{
