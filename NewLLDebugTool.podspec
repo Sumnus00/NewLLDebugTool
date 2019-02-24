@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "NewLLDebugTool"
-  s.version             = "1.2.4"
+  s.version             = "1.2.5"
   s.summary             = "NewLLDebugTool is a debugging tool for developers and testers that can help you analyze and manipulate data in non-xcode situations."
   s.homepage            = "https://github.com/didiaodanding/NewLLDebugTool"
   s.license             = "MIT"
@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
 #  s.dependency            "FMDB"
   # s.frameworks      = 'IOKit'
-  s.vendored_frameworks = 'NewLLDebugTool/frameworks/IOKit.framework'
 
   s.subspec 'Network' do |ss|
     ss.source_files             = "NewLLDebugTool/Components/Network/**/*.{h,m}"
