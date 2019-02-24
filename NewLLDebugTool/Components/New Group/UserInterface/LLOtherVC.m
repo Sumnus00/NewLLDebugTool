@@ -44,9 +44,14 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
              @{@"低内存开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleDisclosureIndicator]}];
 }
 
+- (NSArray *)monkeyInfos {
+    return @[@{@"Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
+}
+
 - (NSArray *)expectedInfos {
     return @[@{@"更多功能" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleNone]}];
 }
+
 
 - (NSMutableArray <NSArray <NSDictionary *>*>*)otherInfos {
     
@@ -56,10 +61,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     // low resource
     NSArray *lowResources = [self lowResourcesInfos];
     
+    //monkey
+    NSArray *monkey = [self monkeyInfos] ;
+    
     // expected
     NSArray *expected = [self expectedInfos];
     
-    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, expected, nil];
+    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,expected, nil];
 }
 
 - (void)initial {
@@ -106,6 +114,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         myswitch.tag = LLConfigSwitchTagLowMemory ;
         myswitch.on = [[LLDebugTool sharedTool] lowMemorySwitch] ;
         cell.accessoryView = myswitch ;
+    }else if([cell.textLabel.text isEqualToString:@"Monkey开关"]){
+        myswitch.tag = LLConfigSwitchTagMonkey ;
+        myswitch.on = [[LLDebugTool sharedTool] monkeySwitch] ;
+        cell.accessoryView = myswitch ;
     }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
         cell.accessoryType = UITableViewCellAccessoryNone ;
     }
@@ -139,7 +151,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         view.textLabel.text = @"随机mock功能";
     } else if (section == 1) {
         view.textLabel.text = @"低资源模拟功能";
-    } else if (section == 2) {
+    }else if (section == 2){
+        view.textLabel.text = @"monkey功能" ;
+    }else if (section == 3) {
         view.textLabel.text = @"敬请期待";
     }
     return view;
@@ -164,15 +178,31 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }else if(switchButton.tag == LLConfigSwitchTagLowMemory){
         [[LLDebugTool sharedTool] saveLowMemorySwitch:isButtonOn];
         if(isButtonOn){
-//            [LLDebugTool sharedTool].memoryThread = [[NSThread alloc] initWithTarget:self selector:@selector(highMemoryOperate) object:nil];
-//            [LLDebugTool sharedTool].memoryThread.name = @"HighMemoryThread";
-//            NSLog(@"haleli >>> switch_low_memoryk : %@",@"开始") ;
-//            [[LLDebugTool sharedTool].memoryThread  start];
-            [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
+            if ([LLDebugTool sharedTool].memoryThread == nil){
+                [LLDebugTool sharedTool].memoryThread = [[NSThread alloc] initWithTarget:self selector:@selector(highMemoryOperate) object:nil];
+                [LLDebugTool sharedTool].memoryThread.name = @"HighMemoryThread";
+                NSLog(@"haleli >>> switch_low_memoryk : %@",@"开始") ;
+                [[LLDebugTool sharedTool].memoryThread  start];
+            }
         }else{
-//            NSLog(@"haleli >>> switch_low_memoryk : %@",@"关闭") ;
-//            [[LLDebugTool sharedTool].memoryThread  cancel];
-//            [LLDebugTool sharedTool].memoryThread  = nil;
+            if([LLDebugTool sharedTool].memoryThread != nil){
+                NSLog(@"haleli >>> switch_low_memoryk : %@",@"关闭") ;
+                [[LLDebugTool sharedTool].memoryThread  cancel];
+                [LLDebugTool sharedTool].memoryThread  = nil;
+            }
+        }
+    }else if(switchButton.tag == LLConfigSwitchTagMonkey){
+        if(isButtonOn){
+            if([LLDebugTool sharedTool].monkeyTimer == nil){
+                NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
+                [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
+            }
+        }else{
+            if([LLDebugTool sharedTool].monkeyTimer != nil){
+                NSLog(@"haleli >>> switch_monkey : %@",@"关闭") ;
+                [[LLDebugTool sharedTool].monkeyTimer  invalidate];
+                [LLDebugTool sharedTool].monkeyTimer  = nil;
+            }
         }
     }
 }

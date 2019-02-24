@@ -110,6 +110,12 @@ typedef void (^PrivateNetworkBlock)(NSString *);
  */
 @property (nonatomic, strong) NSThread *memoryThread;
 
+
+/**
+ monkey定时器
+ */
+@property(nonatomic,strong)NSTimer *monkeyTimer;
+
 /**
 更多功能的 switch开关
  */
@@ -126,6 +132,9 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 
 - (BOOL)lowMemorySwitch;
 
+- (BOOL)monkeySwitch;
+
+- (void)saveMonkeySwitch:(BOOL)on;
 /**
  丢包率相关api
  */
