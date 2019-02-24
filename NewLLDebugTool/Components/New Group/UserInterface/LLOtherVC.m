@@ -182,10 +182,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 //    [ZSFakeTouch endTouchWithPoint:zspoint];
 //}
 
-//- (void)randomMonkey{
-//    NSLog(@"test monkey") ;
+- (void)randomMonkey{
+    NSLog(@"test monkey") ;
 //    [self touchesWithPoint:CGPointMake(220,93)];
-//}
+}
 
 - (void)highMemoryOperate{
     //点击按钮，如果未释放，则释放
