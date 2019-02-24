@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name                = "NewLLDebugTool"
+  s.name                = "LLDebugTool"
   s.version             = "1.2.2"
   s.summary             = "LLDebugTool is a debugging tool for developers and testers that can help you analyze and manipulate data in non-xcode situations."
   s.homepage            = "https://github.com/didiaodanding/LLDebugTool"
