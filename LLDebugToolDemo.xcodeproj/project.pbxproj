@@ -563,7 +563,7 @@
 		C43BA7FE205AB095006307BE = {
 			isa = PBXGroup;
 			children = (
-				C44F40542152AA7000153F46 /* LLDebugTool */,
+				C44F40542152AA7000153F46 /* NewLLDebugTool */,
 				C43BA809205AB095006307BE /* LLDebugToolDemo */,
 				36E248862123BAE300D03F44 /* LLDebugToolDemoTests */,
 				36E248942123BAE900D03F44 /* LLDebugToolDemoUITests */,
@@ -605,7 +605,7 @@
 			path = LLDebugToolDemo;
 			sourceTree = "<group>";
 		};
-		C44F40542152AA7000153F46 /* LLDebugTool */ = {
+		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
 				8914145F2221395A00974B52 /* ZSFakeTouch */,
@@ -615,7 +615,7 @@
 				C44F40582152AA7000153F46 /* Components */,
 				C44F410F2152AA7000153F46 /* DebugTool */,
 			);
-			path = LLDebugTool;
+			path = NewLLDebugTool;
 			sourceTree = "<group>";
 		};
 		C44F40552152AA7000153F46 /* Config */ = {
