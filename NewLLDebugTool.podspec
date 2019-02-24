@@ -9,66 +9,66 @@ Pod::Spec.new do |s|
   s.platform            = :ios, "8.0"
   s.source              = { :git => "https://github.com/didiaodanding/NewLLDebugTool.git", :tag => s.version }
   s.requires_arc        = true
-  s.public_header_files = "LLDebugTool/**/*.h"
-  s.source_files	    = "LLDebugTool/**/*.{h,m}"
-  s.resources		    = "LLDebugTool/**/*.{xib,storyboard,bundle}"
+  s.public_header_files = "NewLLDebugTool/**/*.h"
+  s.source_files	    = "NewLLDebugTool/**/*.{h,m}"
+  s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
 #  s.dependency            "FMDB"
   s.frameworks      = 'IOKit'
 
   s.subspec 'Network' do |ss|
-    ss.source_files             = "LLDebugTool/Components/Network/**/*.{h,m}"
-    ss.resources                = "LLDebugTool/Components/Network/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/Network/**/*.h"
-    ss.dependency                 "LLDebugTool/StorageManager"
+    ss.source_files             = "NewLLDebugTool/Components/Network/**/*.{h,m}"
+    ss.resources                = "NewLLDebugTool/Components/Network/**/*.{xib,storyboard,bundle}"
+    ss.public_header_files      = "NewLLDebugTool/Components/Network/**/*.h"
+    ss.dependency                 "NewLLDebugTool/StorageManager"
   end
 
   s.subspec 'Log' do |ss|
-    ss.source_files             = "LLDebugTool/Components/Log/**/*.{h,m}"
-    ss.resources                = "LLDebugTool/Components/Log/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/Log/**/*.h"
-    ss.dependency                 "LLDebugTool/StorageManager"
+    ss.source_files             = "NewLLDebugTool/Components/Log/**/*.{h,m}"
+    ss.resources                = "NewLLDebugTool/Components/Log/**/*.{xib,storyboard,bundle}"
+    ss.public_header_files      = "NewLLDebugTool/Components/Log/**/*.h"
+    ss.dependency                 "NewLLDebugTool/StorageManager"
   end
 
   s.subspec 'Crash' do |ss|
-    ss.source_files             = "LLDebugTool/Components/Crash/**/*.{h,m}"
-    ss.resources                = "LLDebugTool/Components/Crash/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/Crash/**/*.h"
-    ss.dependency                 "LLDebugTool/StorageManager"
+    ss.source_files             = "NewLLDebugTool/Components/Crash/**/*.{h,m}"
+    ss.resources                = "NewLLDebugTool/Components/Crash/**/*.{xib,storyboard,bundle}"
+    ss.public_header_files      = "NewLLDebugTool/Components/Crash/**/*.h"
+    ss.dependency                 "NewLLDebugTool/StorageManager"
   end
 
   s.subspec 'AppInfo' do |ss|
-    ss.source_files             = "LLDebugTool/Components/AppInfo/**/*.{h,m}"
+    ss.source_files             = "NewLLDebugTool/Components/AppInfo/**/*.{h,m}"
 #    ss.resources                = "LLDebugTool/Components/AppInfo/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/AppInfo/**/*.h"
-    ss.dependency                 "LLDebugTool/General"
+    ss.public_header_files      = "NewLLDebugTool/Components/AppInfo/**/*.h"
+    ss.dependency                 "NewLLDebugTool/General"
   end
 
   s.subspec 'Sandbox' do |ss|
-    ss.source_files             = "LLDebugTool/Components/Sandbox/**/*.{h,m}"
-    ss.resources                = "LLDebugTool/Components/Sandbox/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/Sandbox/**/*.h"
-    ss.dependency                 "LLDebugTool/General"
+    ss.source_files             = "NewLLDebugTool/Components/Sandbox/**/*.{h,m}"
+    ss.resources                = "NewLLDebugTool/Components/Sandbox/**/*.{xib,storyboard,bundle}"
+    ss.public_header_files      = "NewLLDebugTool/Components/Sandbox/**/*.h"
+    ss.dependency                 "NewLLDebugTool/General"
   end
 
   s.subspec 'Screenshot' do |ss|
-    ss.source_files             = "LLDebugTool/Components/Screenshot/**/*.{h,m}"
+    ss.source_files             = "NewLLDebugTool/Components/Screenshot/**/*.{h,m}"
 #    ss.resources                = "LLDebugTool/Components/Screenshot/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/Screenshot/**/*.h"
-    ss.dependency                 "LLDebugTool/General"
+    ss.public_header_files      = "NewLLDebugTool/Components/Screenshot/**/*.h"
+    ss.dependency                 "NewLLDebugTool/General"
   end
 
   s.subspec 'StorageManager' do |ss|
-    ss.source_files             = "LLDebugTool/Components/StorageManager/**/*.{h,m}"
+    ss.source_files             = "NewLLDebugTool/Components/StorageManager/**/*.{h,m}"
 #    ss.resources               = "LLDebugTool/Components/StorageManager/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Components/StorageManager/**/*.h"
+    ss.public_header_files      = "NewLLDebugTool/Components/StorageManager/**/*.h"
     ss.dependency                 "FMDB"
-    ss.dependency                 "LLDebugTool/General"
+    ss.dependency                 "NewLLDebugTool/General"
   end
 
   s.subspec 'General' do |ss|
-    ss.source_files             = "LLDebugTool/Config/*.{h,m}" , "LLDebugTool/Components/General/**/*.{h,m}"
-    ss.resources                = "LLDebugTool/Components/General/**/*.{xib,storyboard,bundle}"
-    ss.public_header_files      = "LLDebugTool/Config/*.h" , "LLDebugTool/Components/General/**/*.h"
+    ss.source_files             = "NewLLDebugTool/Config/*.{h,m}" , "LLDebugTool/Components/General/**/*.{h,m}"
+    ss.resources                = "NewLLDebugTool/Components/General/**/*.{xib,storyboard,bundle}"
+    ss.public_header_files      = "NewLLDebugTool/Config/*.h" , "LLDebugTool/Components/General/**/*.h"
   end
 
 end
