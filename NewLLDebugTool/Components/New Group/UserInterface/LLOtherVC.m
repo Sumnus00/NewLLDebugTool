@@ -192,6 +192,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             }
         }
     }else if(switchButton.tag == LLConfigSwitchTagMonkey){
+        [[LLDebugTool sharedTool] saveMonkeySwitch:isButtonOn];
         if(isButtonOn){
             if([LLDebugTool sharedTool].monkeyTimer == nil){
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
