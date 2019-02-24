@@ -11,7 +11,7 @@
 #import "LLMacros.h"
 #import "LLConfig.h"
 #import "LLDebugTool.h"
-#import "ZSFakeTouch.h"
+//#import "ZSFakeTouch.h"
 
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
@@ -177,15 +177,15 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 
--(void)touchesWithPoint:(CGPoint)zspoint{
-    [ZSFakeTouch beginTouchWithPoint:zspoint];
-    [ZSFakeTouch endTouchWithPoint:zspoint];
-}
+//-(void)touchesWithPoint:(CGPoint)zspoint{
+//    [ZSFakeTouch beginTouchWithPoint:zspoint];
+//    [ZSFakeTouch endTouchWithPoint:zspoint];
+//}
 
-- (void)randomMonkey{
-    NSLog(@"test monkey") ;
-    [self touchesWithPoint:CGPointMake(220,93)];
-}
+//- (void)randomMonkey{
+//    NSLog(@"test monkey") ;
+//    [self touchesWithPoint:CGPointMake(220,93)];
+//}
 
 - (void)highMemoryOperate{
     //点击按钮，如果未释放，则释放
