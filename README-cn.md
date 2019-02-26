@@ -138,7 +138,7 @@ In Objective-C
 
 如果你已经hook了工程的私有网络，你还需要添加延时和丢包函数来模拟弱网功能。
 
-###随身版monkey
+### 随身版monkey
 
 你不需要做任何操作，只需要调用"startWorking"和打开monkey开关。随身版monkey就会每三秒钟触发一次点击事件，你将会看到app自动运行。
 
