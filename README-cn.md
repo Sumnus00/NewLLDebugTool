@@ -128,7 +128,7 @@ In Objective-C
 
 ### App信息
 
-因为LLDebugTool获得的内存和Xcode不一致，所以NewLLDebugTool改变了内存的计算方式和xcode的一致。其他功能和LLDebugTool一样，没有更改。会监控app的CPU和FPS，可以更便捷的查看app的各种信息。
+因为LLDebugTool获得的内存和Xcode不一致，所以NewLLDebugTool改变了内存的计算方式，从而达到和xcode获得的内存数据一致。其他功能和LLDebugTool一样，没有更改。会监控app的CPU和FPS，可以更便捷的查看app的各种信息。
 
 ### 沙盒
 
