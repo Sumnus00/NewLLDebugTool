@@ -12,7 +12,7 @@ Fork from: <https://github.com/HDB-Li/LLDebugTool>
 
 ## Introduction
 
-[点击查看中文简介](https://github.com/didiaodanding/LLDebugTool/blob/master/README-cn.md)
+[点击查看中文简介](https://github.com/didiaodanding/NewLLDebugTool/blob/master/README-cn.md)
 
 NewLLDebugTool is the extension of [LLDebugTool](https://github.com/HDB-Li/LLDebugTool]). It partly changes and optimized  of the software implementation , such as memory info and log info . at the same time , it also adds a lot of funcitonalities ,such as hook private network , add weak network and portable monkey features.
 
