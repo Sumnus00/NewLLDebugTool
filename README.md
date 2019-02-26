@@ -12,16 +12,18 @@ Fork from: <https://github.com/HDB-Li/LLDebugTool>
 
 ## Introduction
 
+[点击查看中文简介](https://github.com/didiaodanding/LLDebugTool/blob/master/README-cn.md)
+
 NewLLDebugTool is the extension of [LLDebugTool](https://github.com/HDB-Li/LLDebugTool]). It partly changes and optimized  of the software implementation , such as memory info and log info . at the same time , it also adds a lot of funcitonalities ,such as hook private network , add weak network and portable monkey features.
 
-### CocoaPods
+## Installation
 
 [CocoaPods](http://cocoapods.org) is the recommended way to add `NewLLDebugTool` to your project.
 
-##### Objective - C
+#### Objective - C
 
 > 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.2.9'`, If only you want to use it in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.2.9' ,:configurations => ['Debug']`.
-> 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}'`, Currently supported components are
+> 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}', '~> 1.2.9'`, Currently supported components are
 > ```
 > pod 'NewLLDebugTool/AppInfo'
 > pod 'NewLLDebugTool/Crash'
