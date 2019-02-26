@@ -12,7 +12,7 @@ Fork from: <https://github.com/HDB-Li/LLDebugTool>
 
 ## Introduction
 
-This module is the extension of [LLDebugTool][https://github.com/HDB-Li/LLDebugTool] . It partly changes and optimized  of the software implementation , such as memory info and log info . at the same time , it also adds a lot of funcitonalities ,such as hook private network , weak network and portable monkey .
+NewLLDebugTool is the extension of [LLDebugTool](https://github.com/HDB-Li/LLDebugTool]). It partly changes and optimized  of the software implementation , such as memory info and log info . at the same time , it also adds a lot of funcitonalities ,such as hook private network , add weak network and portable monkey features.
 
 ### CocoaPods
 
@@ -20,7 +20,7 @@ This module is the extension of [LLDebugTool][https://github.com/HDB-Li/LLDebugT
 
 ##### Objective - C
 
-> 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.2.9'`, If only you want to use it only in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.2.9' ,:configurations => ['Debug']`.
+> 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.2.9'`, If only you want to use it in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.2.9' ,:configurations => ['Debug']`.
 > 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}'`, Currently supported components are
 > ```
 > pod 'NewLLDebugTool/AppInfo'
@@ -98,7 +98,7 @@ In Objective-C
 
 ### Log
 
-Print and save a log. More log macros details see [LLLogHelper.h](https://github.com/HDB-Li/LLDebugTool/blob/master/LLDebugTool/Helper/LogHelper/LLLogHelper.h).
+Print and save a log. 
 
 * `Save Log`
 
@@ -135,7 +135,7 @@ if you hook the private network , you also need to add delay and packet loss fun
 
 ### portable monkey
 
-You don't need to do anything, just call the "startWorking" and open the monkey switch . protable monkey will rigger a click event in three seconds , you will see the app runs automatically .
+You don't need to do anything, just call the "startWorking" and open the monkey switch . protable monkey will rigger a click event every three seconds , you will see the app runs automatically .
 
 ### More Usage
 
@@ -190,21 +190,21 @@ NewLLDebugTool requirements is same with LLDebugTool, it works on iOS 8+ and req
 - If you **found a bug**, _and can provide steps to reliably reproduce it_, open an issue.
 - If you **have a feature request**, open an issue.
 - If you **find anything wrong or anything dislike**, open an issue.
-- If you **have some good ideas or some requests**, send mail(1404012659@qq.com) to me.
+- If you **have some good ideas or some requests**, send mail [1404012659@qq.com](1404012659@qq.com) to me.
 - If you **want to contribute**, submit a pull request.
 
 ## Contact
 
-- Send email to [llworkinggroup1992@gmail.com](llworkinggroup1992@gmail.com)
+- Send email to [1404012659@qq.com](1404012659@qq.com)
 
 
 ## Change-log
 
 ### 2019-2-26
 
-1、changes and optimized  of memory and log
-2、hook private network , add delay and packet loss functions for weak network
-3、add portable monkey features  
+> 1. changes and optimized  of memory and log
+> 2. hook private network , add delay and packet loss functions for weak network
+> 3. add portable monkey features  
 
 ## License
 
