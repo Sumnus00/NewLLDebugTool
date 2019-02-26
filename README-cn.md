@@ -208,6 +208,7 @@ NewLLDebugTool的要求和LLDebugToo是一致的。NewLLDebugTool需要运行在
 
 >1. 更改和优化了内存和log的实现方式
 >2. hook私有网络、增加了延时和丢包函数来模拟弱网络
+>3. 增加随身版monkey功能
 
 ## 许可
 
