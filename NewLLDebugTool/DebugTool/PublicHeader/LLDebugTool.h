@@ -104,6 +104,7 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 - (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block;
 - (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block;
 - (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date;
+- (void)dealWithHttpResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date ;
 
 /**
  高内存操作线程

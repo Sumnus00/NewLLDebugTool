@@ -258,6 +258,48 @@ static LLDebugTool *_instance = nil;
 }
 
 
+- (void)dealWithHttpResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date{
+    LLNetworkModel *model = [[LLNetworkModel alloc] init];
+    model.startDate = [LLTool stringFromDate:date];
+    
+    
+    //request
+    NSDictionary* req_dict = [NSJSONSerialization JSONObjectWithData:request options:NSJSONReadingAllowFragments error:nil];
+    
+    NSString *jce_body = [req_dict objectForKey:@"jce_body"] ;
+    NSString *jce_method = [req_dict objectForKey:@"jce_method"] ;
+    NSString *jce_header = [req_dict objectForKey:@"jce_header"] ;
+    NSString *jce_domain = [req_dict objectForKey:@"jce_domain"] ;
+    
+    NSURLComponents *components = [NSURLComponents new] ;
+    [components setHost:command] ;
+    model.url = components.URL ;
+    model.requestBody = jce_body;
+    model.method = jce_method ;
+    model.headerFields = [NSDictionary dictionaryWithObject:jce_header forKey:@"headers"] ;
+    
+    
+    //rsponse
+    NSDictionary* response_dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+    NSString *httpResponseStatusCode = [response_dict objectForKey:@"httpResponseStatusCode"] ;
+    NSString *httpResponseVersion = [response_dict objectForKey:@"httpResponseVersion"] ;
+    NSDictionary *httpResponseHeader = [response_dict objectForKey:@"httpResponseHeader"] ;
+    NSString *httpResponseBody = [response_dict objectForKey:@"httpResponseBody"] ;
+    
+    model.statusCode = httpResponseStatusCode ;
+    model.responseData = [httpResponseBody dataUsingEncoding:NSUTF8StringEncoding] ;
+    model.responseHeaderFields = httpResponseHeader ;
+    
+    
+    model.totalDuration = [NSString stringWithFormat:@"%fs",[[NSDate date] timeIntervalSinceDate:date]];
+    
+    //request 和 response 为解包后的 bzibuff ，所以统计的流量只有bzibuff的量大小，而包头以及bzibuff在实际传输过程中的压缩以及加密等均不考虑
+    [[LLStorageManager sharedManager] saveModel:model complete:nil];
+    
+    [LLRoute updateRequestDataTraffic:model.requestDataTrafficValue responseDataTraffic:model.responseDataTrafficValue];
+}
+
+
 static NSString * const kLLMockKey = @"ll_mock_key";
 static NSString * const kLLLowNetworkKey = @"ll_low_network_key";
 static NSString * const kLLLowMemoryKey = @"ll_low_memory_key";
