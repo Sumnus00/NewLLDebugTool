@@ -417,18 +417,18 @@
         if (availables & LLConfigAvailableNetwork) {
             [viewControllers addObject:networkNav];
         }
-        if (availables & LLConfigAvailableLog) {
-            [viewControllers addObject:logNav];
-        }
+//        if (availables & LLConfigAvailableLog) {
+//            [viewControllers addObject:logNav];
+//        }
         if (availables & LLConfigAvailableCrash) {
             [viewControllers addObject:crashNav];
         }
         if (availables & LLConfigAvailableAppInfo) {
             [viewControllers addObject:appInfoNav];
         }
-//        if (availables & LLConfigAvailableSandbox) {
-//            [viewControllers addObject:sandboxNav];
-//        }
+        if (availables & LLConfigAvailableSandbox) {
+            [viewControllers addObject:sandboxNav];
+        }
         
         if (availables & LLConfigAvailableOther) {
             [viewControllers addObject:otherNav] ;

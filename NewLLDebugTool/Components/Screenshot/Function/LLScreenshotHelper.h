@@ -44,6 +44,11 @@
 - (void)simulateTakeScreenshot;
 
 /**
+ Direct take screenshot , don't need to confirm
+ */
+-(void)simulateDirectTakeScreenshot;
+
+/**
  Return a image from current screen.
  */
 - (UIImage *_Nullable)imageFromScreen;

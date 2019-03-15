@@ -139,6 +139,12 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 /**
  丢包率相关api
  */
--(BOOL)isPacketLoss:(float)increase ;
+- (BOOL)isPacketLoss:(float)increase ;
 - (void)setPacketCount:(float)packetCount ;
+
+/**
+ 截图api
+*/
+- (void)simulateDirectTakeScreenshot ;
+
 @end

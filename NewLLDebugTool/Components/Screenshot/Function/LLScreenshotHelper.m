@@ -67,6 +67,21 @@ static LLScreenshotHelper *_instance = nil;
     }    
 }
 
+-(void)simulateDirectTakeScreenshot{
+    if(self.enable){
+        [LLRoute hideWindow] ;
+        UIImage *image = [self imageFromScreen] ;
+        if(image){
+            [self saveScreenshot:image name:@"test" complete:nil] ;
+            [LLTool toastMessage:@"Save image in sandbox."];
+        }else{
+            [LLTool toastMessage:@"Save image failed."];
+        }
+        [LLRoute showWindow];
+    }
+}
+
+
 - (UIImage *_Nullable)imageFromScreen {
     NSData *data = [self dataWithScreenshotInPNGFormat];
     return [UIImage imageWithData:data];

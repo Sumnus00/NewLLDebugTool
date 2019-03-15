@@ -364,4 +364,8 @@ static NSString * const kLLMonkeyKey = @"ll_monkey_key";
 - (void)setPacketCount:(float)packetCount{
     _packetCount = packetCount ;
 }
+
+- (void)simulateDirectTakeScreenshot{
+    [[LLScreenshotHelper sharedHelper] simulateDirectTakeScreenshot] ;
+}
 @end
