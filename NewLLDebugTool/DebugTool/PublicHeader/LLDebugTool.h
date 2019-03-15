@@ -150,6 +150,6 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 /**
  获取日志api
  */
-- (NSMutableArray *)getLogFileWithLastHours:(NSNumber *)hours sourceFileArr:(NSArray*)sourceFileArr destDir:(NSString*)destDir ;
+- (NSMutableArray *)copySourceFileArr:(NSArray*)sourceFileArr toDestDir:(NSString*)destDir;
 
 @end
