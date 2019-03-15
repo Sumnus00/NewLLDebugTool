@@ -368,4 +368,30 @@ static NSString * const kLLMonkeyKey = @"ll_monkey_key";
 - (void)simulateDirectTakeScreenshot{
     [[LLScreenshotHelper sharedHelper] simulateDirectTakeScreenshot] ;
 }
+
+- (NSMutableArray *)getLogFileWithLastHours:(NSNumber *)hours sourceFileArr:(NSArray*)sourceFileArr destDir:(NSString*)destDir{
+    NSInteger hour = [hours integerValue];
+    NSInteger day = ceilf((float)hour / 24) + 1;
+    NSString* file = nil;
+    
+    NSMutableArray* tempFiles = [[NSMutableArray alloc] init];
+    for(NSString* filePath in sourceFileArr) {
+        NSString* name = [[[filePath lastPathComponent] stringByDeletingPathExtension] stringByAppendingPathExtension:@"txt"];
+        NSString* newPath = [destDir stringByAppendingPathComponent:name];
+        if([[NSFileManager defaultManager] fileExistsAtPath:newPath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:newPath error:nil];
+        }
+        [[NSFileManager defaultManager] copyItemAtPath:filePath
+                                                toPath:newPath
+                                                 error:nil];
+        [tempFiles addObject:newPath];
+        
+    }
+    
+    return tempFiles ;
+    
+}
+
+
+
 @end

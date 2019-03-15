@@ -147,4 +147,9 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 */
 - (void)simulateDirectTakeScreenshot ;
 
+/**
+ 获取日志api
+ */
+- (NSMutableArray *)getLogFileWithLastHours:(NSNumber *)hours sourceFileArr:(NSArray*)sourceFileArr destDir:(NSString*)destDir ;
+
 @end
