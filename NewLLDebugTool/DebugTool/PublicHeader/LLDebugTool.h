@@ -145,7 +145,7 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 /**
  截图api
 */
-- (void)simulateDirectTakeScreenshot ;
+- (void)simulateDirectTakeScreenshot:(NSString *)imagePath ;
 
 /**
  获取日志api

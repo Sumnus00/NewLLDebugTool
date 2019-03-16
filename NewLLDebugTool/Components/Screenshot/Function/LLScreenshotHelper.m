@@ -67,12 +67,12 @@ static LLScreenshotHelper *_instance = nil;
     }    
 }
 
--(void)simulateDirectTakeScreenshot{
+-(void)simulateDirectTakeScreenshot:(NSString *)imagePath{
     if(self.enable){
         [LLRoute hideWindow] ;
         UIImage *image = [self imageFromScreen] ;
         if(image){
-            [self saveScreenshot:image name:@"test" complete:nil] ;
+            [self saveScreenshotWithPath:image path:imagePath complete:nil] ;
             [LLTool toastMessage:@"Save image in sandbox."];
         }else{
             [LLTool toastMessage:@"Save image failed."];
@@ -86,7 +86,22 @@ static LLScreenshotHelper *_instance = nil;
     NSData *data = [self dataWithScreenshotInPNGFormat];
     return [UIImage imageWithData:data];
 }
-    
+
+- (void)saveScreenshotWithPath:(UIImage *)image path:(NSString *)imagePath complete:(void (^ __nullable)(BOOL finished))complete {
+    if ([[NSThread currentThread] isMainThread]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self saveScreenshotWithPath:image path:imagePath complete:complete];
+        });
+        return;
+    }
+    BOOL ret = [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+    if (complete) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            complete(ret);
+        });
+    }
+}
+
 #pragma mark - Screenshot
 - (void)saveScreenshot:(UIImage *)image name:(NSString *)name complete:(void (^ __nullable)(BOOL finished))complete {
     if ([[NSThread currentThread] isMainThread]) {

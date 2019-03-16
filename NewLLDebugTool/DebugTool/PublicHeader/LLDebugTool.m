@@ -365,8 +365,8 @@ static NSString * const kLLMonkeyKey = @"ll_monkey_key";
     _packetCount = packetCount ;
 }
 
-- (void)simulateDirectTakeScreenshot{
-    [[LLScreenshotHelper sharedHelper] simulateDirectTakeScreenshot] ;
+- (void)simulateDirectTakeScreenshot:(NSString *)imagePath{
+    [[LLScreenshotHelper sharedHelper] simulateDirectTakeScreenshot:imagePath] ;
 }
 
 - (NSMutableArray *)copySourceFileArr:(NSArray*)sourceFileArr toDestDir:(NSString*)destDir{

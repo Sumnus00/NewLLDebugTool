@@ -46,7 +46,7 @@
 /**
  Direct take screenshot , don't need to confirm
  */
--(void)simulateDirectTakeScreenshot;
+-(void)simulateDirectTakeScreenshot:(NSString *)imagePath;
 
 /**
  Return a image from current screen.
