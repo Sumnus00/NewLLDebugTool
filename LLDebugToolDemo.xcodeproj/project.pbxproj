@@ -36,6 +36,23 @@
 		891414F52222A06E00974B52 /* UIView-KIFAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 891414EC2222A06E00974B52 /* UIView-KIFAdditions.m */; };
 		891414F62222A06E00974B52 /* UIEvent+KIFAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 891414EE2222A06E00974B52 /* UIEvent+KIFAdditions.m */; };
 		891414F82222A18000974B52 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 891414F72222A18000974B52 /* IOKit.framework */; };
+		895B81D722409DE40038612B /* crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81B122409DE40038612B /* crypt.c */; };
+		895B81D822409DE40038612B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81B222409DE40038612B /* unzip.c */; };
+		895B81D922409DE40038612B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81B322409DE40038612B /* zip.c */; };
+		895B81DA22409DE40038612B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81B522409DE40038612B /* ioapi.c */; };
+		895B81DB22409DE40038612B /* ioapi_buf.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81B722409DE40038612B /* ioapi_buf.c */; };
+		895B81DC22409DE40038612B /* ioapi_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81BB22409DE40038612B /* ioapi_mem.c */; };
+		895B81DD22409DE40038612B /* minishared.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81BC22409DE40038612B /* minishared.c */; };
+		895B81DE22409DE40038612B /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81C222409DE40038612B /* aeskey.c */; };
+		895B81DF22409DE40038612B /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81C322409DE40038612B /* hmac.c */; };
+		895B81E022409DE40038612B /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81C622409DE40038612B /* aescrypt.c */; };
+		895B81E122409DE40038612B /* fileenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81C722409DE40038612B /* fileenc.c */; };
+		895B81E222409DE40038612B /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81C922409DE40038612B /* sha1.c */; };
+		895B81E322409DE40038612B /* aes_ni.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81CC22409DE40038612B /* aes_ni.c */; };
+		895B81E422409DE40038612B /* prng.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81CE22409DE40038612B /* prng.c */; };
+		895B81E522409DE40038612B /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81D022409DE40038612B /* pwd2key.c */; };
+		895B81E622409DE40038612B /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 895B81D122409DE40038612B /* aestab.c */; };
+		895B81E722409DE40038612B /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 895B81D622409DE40038612B /* SSZipArchive.m */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -205,6 +222,44 @@
 		891414EE2222A06E00974B52 /* UIEvent+KIFAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIEvent+KIFAdditions.m"; sourceTree = "<group>"; };
 		891414EF2222A06E00974B52 /* LoadableCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadableCategory.h; sourceTree = "<group>"; };
 		891414F72222A18000974B52 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		895B81AF22409DE40038612B /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		895B81B122409DE40038612B /* crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypt.c; sourceTree = "<group>"; };
+		895B81B222409DE40038612B /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		895B81B322409DE40038612B /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		895B81B422409DE40038612B /* minishared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minishared.h; sourceTree = "<group>"; };
+		895B81B522409DE40038612B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		895B81B622409DE40038612B /* ioapi_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi_mem.h; sourceTree = "<group>"; };
+		895B81B722409DE40038612B /* ioapi_buf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi_buf.c; sourceTree = "<group>"; };
+		895B81B822409DE40038612B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		895B81B922409DE40038612B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		895B81BA22409DE40038612B /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		895B81BB22409DE40038612B /* ioapi_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi_mem.c; sourceTree = "<group>"; };
+		895B81BC22409DE40038612B /* minishared.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minishared.c; sourceTree = "<group>"; };
+		895B81BD22409DE40038612B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		895B81BE22409DE40038612B /* ioapi_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi_buf.h; sourceTree = "<group>"; };
+		895B81C022409DE40038612B /* prng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prng.h; sourceTree = "<group>"; };
+		895B81C122409DE40038612B /* aes_ni.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_ni.h; sourceTree = "<group>"; };
+		895B81C222409DE40038612B /* aeskey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aeskey.c; sourceTree = "<group>"; };
+		895B81C322409DE40038612B /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
+		895B81C422409DE40038612B /* aestab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aestab.h; sourceTree = "<group>"; };
+		895B81C522409DE40038612B /* pwd2key.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pwd2key.h; sourceTree = "<group>"; };
+		895B81C622409DE40038612B /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
+		895B81C722409DE40038612B /* fileenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fileenc.c; sourceTree = "<group>"; };
+		895B81C822409DE40038612B /* aesopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aesopt.h; sourceTree = "<group>"; };
+		895B81C922409DE40038612B /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		895B81CA22409DE40038612B /* brg_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_types.h; sourceTree = "<group>"; };
+		895B81CB22409DE40038612B /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		895B81CC22409DE40038612B /* aes_ni.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_ni.c; sourceTree = "<group>"; };
+		895B81CD22409DE40038612B /* brg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_endian.h; sourceTree = "<group>"; };
+		895B81CE22409DE40038612B /* prng.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prng.c; sourceTree = "<group>"; };
+		895B81CF22409DE40038612B /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		895B81D022409DE40038612B /* pwd2key.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pwd2key.c; sourceTree = "<group>"; };
+		895B81D122409DE40038612B /* aestab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aestab.c; sourceTree = "<group>"; };
+		895B81D222409DE40038612B /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		895B81D322409DE40038612B /* fileenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileenc.h; sourceTree = "<group>"; };
+		895B81D422409DE40038612B /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		895B81D522409DE40038612B /* SSZipCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipCommon.h; sourceTree = "<group>"; };
+		895B81D622409DE40038612B /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -505,6 +560,67 @@
 			path = addition;
 			sourceTree = "<group>";
 		};
+		895B81AE22409DE40038612B /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				895B81B022409DE40038612B /* minizip */,
+				895B81AF22409DE40038612B /* ZipArchive.h */,
+				895B81D422409DE40038612B /* SSZipArchive.h */,
+				895B81D522409DE40038612B /* SSZipCommon.h */,
+				895B81D622409DE40038612B /* SSZipArchive.m */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		895B81B022409DE40038612B /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				895B81B122409DE40038612B /* crypt.c */,
+				895B81B222409DE40038612B /* unzip.c */,
+				895B81B322409DE40038612B /* zip.c */,
+				895B81B422409DE40038612B /* minishared.h */,
+				895B81B522409DE40038612B /* ioapi.c */,
+				895B81B622409DE40038612B /* ioapi_mem.h */,
+				895B81B722409DE40038612B /* ioapi_buf.c */,
+				895B81B822409DE40038612B /* crypt.h */,
+				895B81B922409DE40038612B /* zip.h */,
+				895B81BA22409DE40038612B /* unzip.h */,
+				895B81BB22409DE40038612B /* ioapi_mem.c */,
+				895B81BC22409DE40038612B /* minishared.c */,
+				895B81BD22409DE40038612B /* ioapi.h */,
+				895B81BE22409DE40038612B /* ioapi_buf.h */,
+				895B81BF22409DE40038612B /* aes */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		895B81BF22409DE40038612B /* aes */ = {
+			isa = PBXGroup;
+			children = (
+				895B81C022409DE40038612B /* prng.h */,
+				895B81C122409DE40038612B /* aes_ni.h */,
+				895B81C222409DE40038612B /* aeskey.c */,
+				895B81C322409DE40038612B /* hmac.c */,
+				895B81C422409DE40038612B /* aestab.h */,
+				895B81C522409DE40038612B /* pwd2key.h */,
+				895B81C622409DE40038612B /* aescrypt.c */,
+				895B81C722409DE40038612B /* fileenc.c */,
+				895B81C822409DE40038612B /* aesopt.h */,
+				895B81C922409DE40038612B /* sha1.c */,
+				895B81CA22409DE40038612B /* brg_types.h */,
+				895B81CB22409DE40038612B /* hmac.h */,
+				895B81CC22409DE40038612B /* aes_ni.c */,
+				895B81CD22409DE40038612B /* brg_endian.h */,
+				895B81CE22409DE40038612B /* prng.c */,
+				895B81CF22409DE40038612B /* aes.h */,
+				895B81D022409DE40038612B /* pwd2key.c */,
+				895B81D122409DE40038612B /* aestab.c */,
+				895B81D222409DE40038612B /* sha1.h */,
+				895B81D322409DE40038612B /* fileenc.h */,
+			);
+			path = aes;
+			sourceTree = "<group>";
+		};
 		899AB6332201967E00D2FC57 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +717,7 @@
 		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
+				895B81AE22409DE40038612B /* SSZipArchive */,
 				891414DE2222A06E00974B52 /* ZSFakeTouch */,
 				899AB6332201967E00D2FC57 /* Category */,
 				C44F40552152AA7000153F46 /* Config */,
@@ -1170,7 +1287,6 @@
 					36E248842123BAE300D03F44 = {
 						CreatedOnToolsVersion = 9.4.1;
 						ProvisioningStyle = Automatic;
-						TestTargetID = C43BA806205AB095006307BE;
 					};
 					36E248922123BAE900D03F44 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -1321,11 +1437,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				895B81E122409DE40038612B /* fileenc.c in Sources */,
+				895B81DF22409DE40038612B /* hmac.c in Sources */,
 				C44F414A2152AA7000153F46 /* LLNetworkContentVC.m in Sources */,
 				C44F41562152AA7000153F46 /* LLSandboxModel.m in Sources */,
 				899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */,
 				899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */,
 				C44F41212152AA7000153F46 /* LLScreenshotBaseOperation.m in Sources */,
+				895B81DC22409DE40038612B /* ioapi_mem.c in Sources */,
 				899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */,
 				C44F412F2152AA7000153F46 /* LLSearchBar.m in Sources */,
 				C44F413C2152AA7000153F46 /* LLBaseViewController.m in Sources */,
@@ -1335,6 +1454,7 @@
 				C44F41232152AA7000153F46 /* LLScreenshotActionView.m in Sources */,
 				891414F12222A06E00974B52 /* UIWindow-KIFAdditions.m in Sources */,
 				C44F413E2152AA7000153F46 /* LLBaseNavigationController.m in Sources */,
+				895B81DD22409DE40038612B /* minishared.c in Sources */,
 				C44F412B2152AA7000153F46 /* UIButton+LL_Utils.m in Sources */,
 				369D09382153853A001C9D4B /* LLLogContentVC.m in Sources */,
 				C44F414B2152AA7000153F46 /* LLCrashHelper.m in Sources */,
@@ -1343,6 +1463,7 @@
 				C44F413F2152AA7000153F46 /* LLURLProtocol.m in Sources */,
 				C44F41452152AA7000153F46 /* LLNetworkFilterView.m in Sources */,
 				C43BA80F205AB095006307BE /* ViewController.m in Sources */,
+				895B81DE22409DE40038612B /* aeskey.c in Sources */,
 				C44F41622152AA7000153F46 /* UIDevice+LL_Swizzling.m in Sources */,
 				C44F415A2152AA7000153F46 /* YWFilePreviewController.m in Sources */,
 				C44F41542152AA7000153F46 /* LLCrashContentVC.m in Sources */,
@@ -1356,12 +1477,16 @@
 				C44F41472152AA7000153F46 /* LLNetworkCell.m in Sources */,
 				C44F41312152AA7000153F46 /* LLFilterOtherView.m in Sources */,
 				3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */,
+				895B81E022409DE40038612B /* aescrypt.c in Sources */,
 				C43BA81A205AB095006307BE /* main.m in Sources */,
 				899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */,
 				C44F413D2152AA7000153F46 /* LLBaseTableViewCell.m in Sources */,
+				895B81E522409DE40038612B /* pwd2key.c in Sources */,
 				C44F41642152AA7000153F46 /* LLAppInfoVC.m in Sources */,
+				895B81DA22409DE40038612B /* ioapi.c in Sources */,
 				C44F41662152AA7000153F46 /* LLWindow.m in Sources */,
 				C44F411D2152AA7000153F46 /* LLScreenshotHelper.m in Sources */,
+				895B81DB22409DE40038612B /* ioapi_buf.c in Sources */,
 				C44F41522152AA7000153F46 /* LLCrashCell.m in Sources */,
 				C44F41272152AA7000153F46 /* NSObject+LL_Utils.m in Sources */,
 				C44F41262152AA7000153F46 /* NSString+LL_Utils.m in Sources */,
@@ -1374,6 +1499,7 @@
 				C44F413A2152AA7000153F46 /* LLFilterEventView.m in Sources */,
 				36A0007720BE863700AE8810 /* NetTool.m in Sources */,
 				C44F411A2152AA7000153F46 /* LLConfig.m in Sources */,
+				895B81D922409DE40038612B /* zip.c in Sources */,
 				C44F41242152AA7000153F46 /* LLScreenshotSelectorView.m in Sources */,
 				C44F41672152AA7000153F46 /* LLWindowViewController.m in Sources */,
 				C44F41422152AA7000153F46 /* LLNetworkModel.m in Sources */,
@@ -1384,13 +1510,17 @@
 				C44F41332152AA7000153F46 /* LLFilterTextFieldModel.m in Sources */,
 				C44F41432152AA7000153F46 /* LLNetworkHelper.m in Sources */,
 				C44F41652152AA7000153F46 /* LLDebugTool.m in Sources */,
+				895B81E322409DE40038612B /* aes_ni.c in Sources */,
+				895B81D822409DE40038612B /* unzip.c in Sources */,
 				369D093E2153AE14001C9D4B /* NSURLSession+LL_Swizzling.m in Sources */,
+				895B81E422409DE40038612B /* prng.c in Sources */,
 				C44F41302152AA7000153F46 /* LLNoneCopyTextField.m in Sources */,
 				C44F41222152AA7000153F46 /* LLScreenshotSelectorModel.m in Sources */,
 				89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */,
 				C44F41552152AA7000153F46 /* LLSandboxHelper.m in Sources */,
 				C44F41412152AA7000153F46 /* NSHTTPURLResponse+LL_Utils.m in Sources */,
 				C44F411F2152AA7000153F46 /* LLScreenshotToolbar.m in Sources */,
+				895B81D722409DE40038612B /* crypt.c in Sources */,
 				C44F41402152AA7000153F46 /* NSURLSessionConfiguration+LL_Swizzling.m in Sources */,
 				C44F414E2152AA7000153F46 /* LLCrashSignalContentVC.m in Sources */,
 				3629E3962136830A00226C79 /* TestNetworkViewController.m in Sources */,
@@ -1399,12 +1529,15 @@
 				C44F41372152AA7000153F46 /* LLFilterTextFieldCell.m in Sources */,
 				891414F42222A06E00974B52 /* IOHIDEvent+KIF.m in Sources */,
 				891414F02222A06E00974B52 /* ZSFakeTouch.m in Sources */,
+				895B81E722409DE40038612B /* SSZipArchive.m in Sources */,
 				369D09332153853A001C9D4B /* LLLogModel.m in Sources */,
 				C44F41502152AA7000153F46 /* LLCrashContentCell.m in Sources */,
+				895B81E622409DE40038612B /* aestab.c in Sources */,
 				C44F411B2152AA7000153F46 /* LLStorageManager.m in Sources */,
 				C43BA80C205AB095006307BE /* AppDelegate.m in Sources */,
 				C44F414C2152AA7000153F46 /* LLCrashModel.m in Sources */,
 				C44F41392152AA7000153F46 /* LLFilterLabelCell.m in Sources */,
+				895B81E222409DE40038612B /* sha1.c in Sources */,
 				C44F41322152AA7000153F46 /* LLFilterFilePickerView.m in Sources */,
 				C44F411C2152AA7000153F46 /* LLStorageModel.m in Sources */,
 				3629E3972136830A00226C79 /* TestColorStyleViewController.m in Sources */,
@@ -1474,16 +1607,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 638C108F891808060C7ED772 /* Pods-LLDebugToolDemoTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WGX6J37S3T;
 				INFOPLIST_FILE = LLDebugToolDemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.LLDebugToolDemoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LLDebugToolDemo.app/LLDebugToolDemo";
 			};
 			name = Debug;
 		};
@@ -1491,16 +1623,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7630F57F70FEB38A6705DA1A /* Pods-LLDebugToolDemoTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WGX6J37S3T;
 				INFOPLIST_FILE = LLDebugToolDemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.LLDebugToolDemoTests;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LLDebugToolDemo.app/LLDebugToolDemo";
 			};
 			name = Release;
 		};
@@ -1510,10 +1641,11 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WGX6J37S3T;
 				INFOPLIST_FILE = LLDebugToolDemoUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.LLDebugToolDemoUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = LLDebugToolDemo;
@@ -1526,10 +1658,11 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WGX6J37S3T;
 				INFOPLIST_FILE = LLDebugToolDemoUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.LLDebugToolDemoUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = LLDebugToolDemo;
@@ -1656,7 +1789,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48U7H75HY6;
+				DEVELOPMENT_TEAM = WGX6J37S3T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
@@ -1670,7 +1803,7 @@
 					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
 					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK/WTLoginSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.HDB.LLDebugToolDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1685,7 +1818,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48U7H75HY6;
+				DEVELOPMENT_TEAM = WGX6J37S3T;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
@@ -1699,7 +1832,7 @@
 					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK",
 					"$(PROJECT_DIR)/LLDebugTool/frameworks/WnsSDK/WTLoginSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.HDB.LLDebugToolDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

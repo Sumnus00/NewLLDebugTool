@@ -11,6 +11,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[LLSandboxVC shareItemClick:]:LLSandboxVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "model.filePath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
          <PersistentStrings>
             <PersistentString

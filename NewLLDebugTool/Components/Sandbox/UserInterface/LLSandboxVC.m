@@ -28,6 +28,7 @@
 #import "LLConfig.h"
 #import "LLImageNameConfig.h"
 #import "LLUITableViewLongPressGestureRecognizerDelegate.h"
+#import "SSZipArchive.h"
 
 static NSString *const kSandboxCellID = @"LLSandboxCell";
 
@@ -94,6 +95,38 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
     }
 }
 
+-(void)copytSourceFileFromPath:(NSString *)sourcePath toDestDir:(NSString *)destDir{
+    NSFileManager *fileManager = [[NSFileManager alloc] init ] ;
+    
+    NSString *fileDestPath = [destDir stringByAppendingPathComponent:[sourcePath lastPathComponent]] ;
+    BOOL isDir = NO;
+    if([fileManager fileExistsAtPath:sourcePath isDirectory:&isDir] && isDir){
+         [fileManager createDirectoryAtPath:fileDestPath withIntermediateDirectories:YES attributes:nil error:nil] ;
+        
+        NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:sourcePath error:nil] ;
+        for(NSString *fileName in fileNames){
+            NSLog(@"haleli >>> copy_fileName:%@", fileName);
+            NSString *fileSourcePath = [sourcePath stringByAppendingPathComponent:fileName] ;
+            
+            //判断是否是文件夹
+            BOOL isDir = NO;
+            if([fileManager fileExistsAtPath:fileSourcePath isDirectory:&isDir] && isDir){
+                
+                [self copytSourceFileFromPath:fileSourcePath toDestDir:fileDestPath] ;
+                
+            }else{
+                NSString *fileDestPathTemp = [fileDestPath stringByAppendingPathComponent:fileName] ;
+                [fileManager copyItemAtPath:fileSourcePath toPath:fileDestPathTemp error:nil] ;
+            }
+        }
+        
+    }else{
+        
+        [fileManager copyItemAtPath:sourcePath toPath:fileDestPath error:nil] ;
+    }
+    
+}
+
 - (void)shareItemClick:(UIBarButtonItem *)item {
     NSArray *indexPaths = self.tableView.indexPathsForSelectedRows;
     if (indexPaths.count) {
@@ -102,7 +135,51 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
             LLSandboxModel *model = self.sandboxModel.subModels[indexPath.row];
             [array addObject:[NSURL fileURLWithPath:model.filePath]];
         }
-        UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
+        
+        //分享的时间
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy_MM_dd_HH_mm_ss";
+        NSString *shareTime = [dateFormatter stringFromDate:[NSDate date]] ;
+        
+        //临时分享的目录 abcmouse_share
+        NSString* tempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:@"abcmouse_share"];
+        
+        BOOL isDir = NO;
+        if(![[NSFileManager defaultManager] fileExistsAtPath:tempDir isDirectory:&isDir] || !isDir) {
+            [[NSFileManager defaultManager] removeItemAtPath:tempDir error:nil];
+            [[NSFileManager defaultManager] createDirectoryAtPath:tempDir
+                                      withIntermediateDirectories:YES
+                                                       attributes:nil
+                                                            error:nil];
+        }
+        
+        for(NSIndexPath *indexPath in indexPaths){
+            LLSandboxModel *model = self.sandboxModel.subModels[indexPath.row] ;
+            [self copytSourceFileFromPath:model.filePath toDestDir:tempDir] ;
+        }
+        
+        //统一文件名
+        NSString* fileName = [NSString stringWithFormat:@"ios_share_%@",shareTime] ;
+        
+        //分享包路径
+        NSString* zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"zip"]] ;
+        
+        
+        if(![SSZipArchive createZipFileAtPath:zipPath withContentsOfDirectory:tempDir]){
+            NSLog(@"haleli >>> 创建zip share失败, zipfile:%@ tempDir:%@", zipPath, tempDir);
+        }else{
+            NSLog(@"haleli >>> 创建zip share成功, zipfile:%@ tempDir:%@", zipPath, tempDir);
+            NSArray *fileNames = [[[NSFileManager alloc] init] contentsOfDirectoryAtPath:tempDir error:nil] ;
+            for(NSString *fileName in fileNames){
+                NSLog(@"haleli >>> fileName:%@", fileName);
+            }
+            [[NSFileManager defaultManager] removeItemAtPath:tempDir error:nil];
+        }
+        
+        NSURL* zipFileURL = [NSURL fileURLWithPath:zipPath];
+        
+        UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[zipFileURL] applicationActivities:nil];
+        
         __weak typeof(self) weakSelf = self;
         vc.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
             [weakSelf rightItemClick];

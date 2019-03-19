@@ -124,7 +124,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -147,6 +147,9 @@ static NSString *const kCellID = @"cellID";
         return 2;
     }
     if (section == 6){
+        return 1 ;
+    }
+    if (section == 7){
         return 1 ;
     }
     return 0;
@@ -222,6 +225,8 @@ static NSString *const kCellID = @"cellID";
         }
     }else if(indexPath.section == 6){
         cell.textLabel.text = NSLocalizedString(@"test.swizzle", nil);
+    }else if(indexPath.section == 7){
+        cell.textLabel.text = NSLocalizedString(@"test.share", nil) ;
     }
     return cell;
 }
@@ -256,7 +261,16 @@ static TestLogViewController *extracted() {
         PrivateNetwork *pn = [[PrivateNetwork alloc] init] ;
         [pn sendBizData:@"test"] ;
        
+    }else if(indexPath.section == 7){
+        NSString *textToShare = @"要分享的文本内容";
+        NSURL *urlToShare = [NSURL URLWithString:@"http://blog.csdn.net/hitwhylz"];
+        NSArray *activityItems = @[textToShare,urlToShare];
+        
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+        
+        [self presentViewController:activityVC animated:YES completion:nil];
     }
+    
     [self.tableView reloadData];
 }
 
@@ -275,6 +289,8 @@ static TestLogViewController *extracted() {
         return @"LLConfig";
     } else if (section == 6){
         return @"swizzling" ;
+    } else if (section == 7){
+        return @"share" ;
     }
     return nil;
 }
