@@ -1,5 +1,5 @@
-#ifndef SSZipCommon
-#define SSZipCommon
+#ifndef LLZipCommon
+#define LLZipCommon
 
 /* unz_global_info structure contain global data about the ZIPfile
  These data comes from the end of central dir */
