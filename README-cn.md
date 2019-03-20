@@ -24,8 +24,8 @@ NewLLDebugTool是在开源工程[LLDebugTool](https://github.com/HDB-Li/LLDebugT
 
 #### Objective - C
 
-> 1. 添加 `pod 'NewLLDebugTool' , '~> 1.2.9'` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' , '~> 1.2.9' ,:configurations => ['Debug']` 到你的Podfile里 。
-> 2. 如果你想使用某一个模块，可是添加`pod 'NewLLDebugTool/{Component Name}' , '~> 1.2.9'`到你的Podfile里。目前支持的组件有
+> 1. 添加 `pod 'NewLLDebugTool' , '~> 1.3.0'` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' , '~> 1.3.0' ,:configurations => ['Debug']` 到你的Podfile里 。
+> 2. 如果你想使用某一个模块，可是添加`pod 'NewLLDebugTool/{Component Name}' , '~> 1.3.0'`到你的Podfile里。目前支持的组件有
 > ```
 > pod 'NewLLDebugTool/AppInfo'
 > pod 'NewLLDebugTool/Crash'
