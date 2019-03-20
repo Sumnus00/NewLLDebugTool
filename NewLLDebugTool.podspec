@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   s.platform            = :ios, "8.0"
   s.source              = { :git => "https://github.com/didiaodanding/NewLLDebugTool.git", :tag => s.version }
   s.requires_arc        = true
-  # s.public_header_files = "NewLLDebugTool/**/*.h"
-  s.source_files	    = "NewLLDebugTool/**/*.{h,m,c}"
+  s.public_header_files = "NewLLDebugTool/**/*.h"
+  s.source_files	    = "NewLLDebugTool/**/*.{h,m}"
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
 #  s.dependency            "FMDB"
   s.framework      = 'IOKit'
