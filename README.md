@@ -22,8 +22,8 @@ NewLLDebugTool is the extension of [LLDebugTool](https://github.com/HDB-Li/LLDeb
 
 #### Objective - C
 
-> 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.3.0'`, If only you want to use it in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.3.0' ,:configurations => ['Debug']`.
-> 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}', '~> 1.3.0'`, Currently supported components are
+> 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , :git => 'https://github.com/didiaodanding/NewLLDebugTool.git`, If only you want to use it in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' ,:git => 'https://github.com/didiaodanding/NewLLDebugTool.git ,:configurations => ['Debug']`.
+> 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}', :git => 'https://github.com/didiaodanding/NewLLDebugTool.git`, Currently supported components are
 > ```
 > pod 'NewLLDebugTool/AppInfo'
 > pod 'NewLLDebugTool/Crash'

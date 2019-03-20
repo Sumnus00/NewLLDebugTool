@@ -175,7 +175,6 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
             }
             [[NSFileManager defaultManager] removeItemAtPath:tempDir error:nil];
         }
-        
         NSURL* zipFileURL = [NSURL fileURLWithPath:zipPath];
         
         UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[zipFileURL] applicationActivities:nil];
