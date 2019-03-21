@@ -1,0 +1,6 @@
+module Pods_LLDebugToolDemo {
+  umbrella header "Pods-LLDebugToolDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

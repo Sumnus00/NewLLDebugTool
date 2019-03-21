@@ -12,7 +12,7 @@
 #import "LLConfig.h"
 #import "LLDebugTool.h"
 #import "ZSFakeTouch.h"
-#import "LLDebugToolDemo-Swift.h"
+@import SwiftMonkeyPaws ;
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 

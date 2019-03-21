@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22627C4A64609B1180987AA02E51A596"
-               BlueprintName = "Pods-LLDebugToolDemo"
+               BlueprintIdentifier = "81DA6C640FC16FDF2CD542B776765C9C"
+               BlueprintName = "SwiftMonkeyPaws"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-LLDebugToolDemo.a">
+               BuildableName = "libSwiftMonkeyPaws.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
