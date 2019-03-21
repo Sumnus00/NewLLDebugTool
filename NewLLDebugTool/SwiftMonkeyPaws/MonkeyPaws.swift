@@ -8,55 +8,67 @@
 
 import UIKit
 
-private let maxGesturesShown: Int = 1
-private let crossRadius: CGFloat = 7
-private let circleRadius: CGFloat = 7
-
 /**
- A class that visualises input events as an overlay over
- your regular UI. To use, simply instantiate it and
- keep a reference to it around so that it does not get
- deinited.
- 
- You will want to have some way to only instantiate it
- for test usage, though, such as adding a command-line
- flag to enable it.
- 
- Example usage:
- 
- ```
- var paws: MonkeyPaws?
- 
- func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
- if CommandLine.arguments.contains("--MonkeyPaws") {
- paws = MonkeyPaws(view: window!)
- }
- return true
- }
- ```
- */
+    A class that visualises input events as an overlay over
+    your regular UI. To use, simply instantiate it and
+    keep a reference to it around so that it does not get
+    deinited.
+
+    You will want to have some way to only instantiate it
+    for test usage, though, such as adding a command-line
+    flag to enable it.
+
+    Example usage:
+
+    ```
+    var paws: MonkeyPaws?
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        if CommandLine.arguments.contains("--MonkeyPaws") {
+            paws = MonkeyPaws(view: window!)
+        }
+        return true
+    }
+    ```
+*/
+
 public class MonkeyPaws: NSObject, CALayerDelegate {
+
+    public typealias BezierPathDrawer = () -> UIBezierPath
+
     private var gestures: [(hash: Int?, gesture: Gesture)] = []
     private weak var view: UIView?
 
+    let configuration: Configuration
+    let bezierPathDrawer: BezierPathDrawer
     let layer = CALayer()
 
     fileprivate static var tappingTracks: [WeakReference<MonkeyPaws>] = []
 
     /**
-     Create a MonkeyPaws object that will visualise input
-     events.
+        Create a MonkeyPaws object that will visualise input
+        events.
 
-     - parameter view: The view to put the visualisation
-     layer in. Usually, you will want to pass your main
-     `UIWindow` here.
-     - parameter tapUIApplication: By default, MonkeyPaws
-     will swizzle some methods in UIApplication to
-     intercept events so that it can visualise them.
-     If you do not want this, pass `false` here and
-     provide it with events manually.
-     */
-    @objc public init(view: UIView, tapUIApplication: Bool = true) {
+        - parameter view: The view to put the visualisation
+          layer in. Usually, you will want to pass your main
+          `UIWindow` here.
+        - parameter tapUIApplication: By default, MonkeyPaws
+          will swizzle some methods in UIApplication to
+          intercept events so that it can visualise them.
+          If you do not want this, pass `false` here and
+          provide it with events manually.
+        - parameter configuration: Configure the visual appearance
+          of the Monkey paws. By default it uses the built in visual
+          parameters.
+        - parameter bezierPathDrawer: Create your own visualisation by
+          defining a bezier path drawer closure
+    */
+    public init(view: UIView,
+                tapUIApplication: Bool = true,
+                configuration: Configuration = Configuration(),
+                bezierPathDrawer: @escaping BezierPathDrawer = MonkeyPawDrawer.monkeyHandPath) {
+        self.configuration = configuration
+        self.bezierPathDrawer = bezierPathDrawer
         super.init()
         self.view = view
 
@@ -74,10 +86,10 @@ public class MonkeyPaws: NSObject, CALayerDelegate {
     }
 
     /**
-     If you have disabled UIApplication event tapping,
-     use this method to pass in `UIEvent` objects to
-     visualise.
-     */
+        If you have disabled UIApplication event tapping,
+        use this method to pass in `UIEvent` objects to
+        visualise.
+    */
     public func append(event: UIEvent) {
         guard event.type == .touches else { return }
         guard let touches = event.allTouches else { return }
@@ -112,14 +124,16 @@ public class MonkeyPaws: NSObject, CALayerDelegate {
                 gesture.extend(to: point)
             }
         } else {
-            if gestures.count > maxGesturesShown {
+            if gestures.count > configuration.paws.maxShown {
                 gestures.removeFirst()
             }
 
-            gestures.append((hash: touchHash, gesture: Gesture(from: point, inLayer: layer)))
+            gestures.append((hash: touchHash, gesture: Gesture(from: point, inLayer: layer, configuration: configuration, bezierPathDrawer: bezierPathDrawer)))
 
             for i in 0 ..< gestures.count {
-                gestures[i].gesture.number = gestures.count - i
+                let number = gestures.count - i
+                let gesture = gestures[i].gesture
+                gesture.number = number
             }
         }
     }
@@ -127,12 +141,12 @@ public class MonkeyPaws: NSObject, CALayerDelegate {
     private static let swizzleMethods: Bool = {
         let originalSelector = #selector(UIApplication.sendEvent(_:))
         let swizzledSelector = #selector(UIApplication.monkey_sendEvent(_:))
-
+        
         let originalMethod = class_getInstanceMethod(UIApplication.self, originalSelector)
         let swizzledMethod = class_getInstanceMethod(UIApplication.self, swizzledSelector)
-
+        
         let didAddMethod = class_addMethod(UIApplication.self, originalSelector, method_getImplementation(swizzledMethod!), method_getTypeEncoding(swizzledMethod!))
-
+        
         if didAddMethod {
             class_replaceMethod(UIApplication.self, swizzledSelector, method_getImplementation(originalMethod!), method_getTypeEncoding(originalMethod!))
         } else {
@@ -141,7 +155,7 @@ public class MonkeyPaws: NSObject, CALayerDelegate {
 
         return true
     }()
-
+    
     private func tapUIApplicationSendEvent() {
         _ = MonkeyPaws.swizzleMethods
         MonkeyPaws.tappingTracks.append(WeakReference(self))
@@ -173,18 +187,21 @@ private class Gesture {
     var pathLayer: CAShapeLayer?
     var endLayer: CAShapeLayer?
 
+    let configuration: Configuration
+
     private static var counter: Int = 0
 
-    init(from: CGPoint, inLayer: CALayer) {
+    init(from: CGPoint, inLayer: CALayer, configuration: Configuration, bezierPathDrawer: @escaping MonkeyPaws.BezierPathDrawer) {
         self.points = [from]
+        self.configuration = configuration
 
         let counter = Gesture.counter
         Gesture.counter += 1
 
-        let angle = 45 * (CGFloat(fmod(Float(counter) * 0.279, 1)) * 2 - 1)
-        let mirrored = counter % 2 == 0
-        let colour = UIColor(hue: CGFloat(fmod(Float(counter) * 0.391, 1)), saturation: 1, brightness: 0.5, alpha: 1)
-        startLayer.path = monkeyHandPath(angle: angle, scale: 1, mirrored: mirrored).cgPath
+        let colour: UIColor = pawsColor(configuration: configuration.paws, seed: counter)
+
+        startLayer.path = customize(path: bezierPathDrawer(), seed: counter).cgPath
+
         startLayer.strokeColor = colour.cgColor
         startLayer.fillColor = nil
         startLayer.position = from
@@ -193,7 +210,7 @@ private class Gesture {
         numberLayer.string = "1"
         numberLayer.bounds = CGRect(x:0, y: 0, width: 32, height: 13)
         numberLayer.fontSize = 10
-        numberLayer.alignmentMode = CATextLayerAlignmentMode.center
+//        numberLayer.alignmentMode = CATextLayerAlignmentMode.center
         numberLayer.foregroundColor = colour.cgColor
         numberLayer.position = from
         numberLayer.contentsScale = UIScreen.main.scale
@@ -211,7 +228,7 @@ private class Gesture {
         didSet {
             numberLayer.string = String(number)
 
-            let fraction = Float(number - 1) / Float(maxGesturesShown)
+            let fraction = Float(number - 1) / Float(configuration.paws.maxShown)
             let alpha = sqrt(1 - fraction)
             containerLayer.opacity = alpha
         }
@@ -219,16 +236,16 @@ private class Gesture {
 
     func extend(to: CGPoint) {
         guard let startPath = startLayer.path,
-            let startPoint = points.first else {
-                assertionFailure("No start marker layer exists")
-                return
+        let startPoint = points.first else {
+            assertionFailure("No start marker layer exists")
+            return
         }
 
         points.append(to)
 
         let pathLayer = self.pathLayer ?? { () -> CAShapeLayer in
             let newLayer = CAShapeLayer()
-            newLayer.strokeColor = startLayer.strokeColor
+            newLayer.strokeColor = self.startLayer.strokeColor
             newLayer.fillColor = nil
 
             let maskPath = CGMutablePath()
@@ -237,15 +254,15 @@ private class Gesture {
 
             let maskLayer = CAShapeLayer()
             maskLayer.path = maskPath
-            maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
-            maskLayer.position = startLayer.position
+//            maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
+            maskLayer.position = self.startLayer.position
             newLayer.mask = maskLayer
 
             self.pathLayer = newLayer
-            containerLayer.addSublayer(newLayer)
+            self.containerLayer.addSublayer(newLayer)
 
             return newLayer
-            }()
+        }()
 
         let path = CGMutablePath()
         path.move(to: startPoint)
@@ -269,7 +286,7 @@ private class Gesture {
         layer.fillColor = nil
         layer.position = at
 
-        let path = circlePath()
+        let path = circlePath(radius: configuration.radius.circle)
         layer.path = path.cgPath
 
         containerLayer.addSublayer(layer)
@@ -289,56 +306,46 @@ private class Gesture {
         layer.fillColor = nil
         layer.position = at
 
-        let path = crossPath()
+        let path = crossPath(radius: configuration.radius.cross)
         layer.path = path.cgPath
 
         containerLayer.addSublayer(layer)
         endLayer = layer
     }
+
+    func pawsColor(configuration: Configuration.Paws, seed: Int) -> UIColor {
+        switch configuration.color {
+        case .randomized:
+            return UIColor(hue: CGFloat(fmod(Float(seed) * 0.391, 1)),
+                           saturation: 1,
+                           brightness: configuration.brightness,
+                           alpha: 1)
+        case .constant(let constantColour):
+            return constantColour.color(WithBrightness: configuration.brightness)
+        }
+    }
 }
 
-private func monkeyHandPath(angle: CGFloat, scale: CGFloat, mirrored: Bool) -> UIBezierPath {
-    let bezierPath = UIBezierPath()
-    bezierPath.move(to: CGPoint(x: -5.91, y: 8.76))
-    bezierPath.addCurve(to: CGPoint(x: -10.82, y: 2.15), controlPoint1: CGPoint(x: -9.18, y: 7.11), controlPoint2: CGPoint(x: -8.09, y: 4.9))
-    bezierPath.addCurve(to: CGPoint(x: -16.83, y: -1.16), controlPoint1: CGPoint(x: -13.56, y: -0.6), controlPoint2: CGPoint(x: -14.65, y: 0.5))
-    bezierPath.addCurve(to: CGPoint(x: -14.65, y: -6.11), controlPoint1: CGPoint(x: -19.02, y: -2.81), controlPoint2: CGPoint(x: -19.57, y: -6.66))
-    bezierPath.addCurve(to: CGPoint(x: -8.09, y: -2.81), controlPoint1: CGPoint(x: -9.73, y: -5.56), controlPoint2: CGPoint(x: -8.64, y: -0.05))
-    bezierPath.addCurve(to: CGPoint(x: -11.37, y: -13.82), controlPoint1: CGPoint(x: -7.54, y: -5.56), controlPoint2: CGPoint(x: -7, y: -8.32))
-    bezierPath.addCurve(to: CGPoint(x: -7.54, y: -17.13), controlPoint1: CGPoint(x: -15.74, y: -19.33), controlPoint2: CGPoint(x: -9.73, y: -20.98))
-    bezierPath.addCurve(to: CGPoint(x: -4.27, y: -8.87), controlPoint1: CGPoint(x: -5.36, y: -13.27), controlPoint2: CGPoint(x: -6.45, y: -7.76))
-    bezierPath.addCurve(to: CGPoint(x: -4.27, y: -18.23), controlPoint1: CGPoint(x: -2.08, y: -9.97), controlPoint2: CGPoint(x: -3.72, y: -12.72))
-    bezierPath.addCurve(to: CGPoint(x: 0.65, y: -18.23), controlPoint1: CGPoint(x: -4.81, y: -23.74), controlPoint2: CGPoint(x: 0.65, y: -25.39))
-    bezierPath.addCurve(to: CGPoint(x: 1.2, y: -8.32), controlPoint1: CGPoint(x: 0.65, y: -11.07), controlPoint2: CGPoint(x: -0.74, y: -9.29))
-    bezierPath.addCurve(to: CGPoint(x: 3.93, y: -18.78), controlPoint1: CGPoint(x: 2.29, y: -7.76), controlPoint2: CGPoint(x: 3.93, y: -9.3))
-    bezierPath.addCurve(to: CGPoint(x: 8.3, y: -16.03), controlPoint1: CGPoint(x: 3.93, y: -23.19), controlPoint2: CGPoint(x: 9.96, y: -21.86))
-    bezierPath.addCurve(to: CGPoint(x: 5.57, y: -6.11), controlPoint1: CGPoint(x: 7.76, y: -14.1), controlPoint2: CGPoint(x: 3.93, y: -6.66))
-    bezierPath.addCurve(to: CGPoint(x: 9.4, y: -10.52), controlPoint1: CGPoint(x: 7.21, y: -5.56), controlPoint2: CGPoint(x: 9.16, y: -10.09))
-    bezierPath.addCurve(to: CGPoint(x: 12.13, y: -6.66), controlPoint1: CGPoint(x: 12.13, y: -15.48), controlPoint2: CGPoint(x: 15.41, y: -9.42))
-    bezierPath.addCurve(to: CGPoint(x: 8.3, y: -1.16), controlPoint1: CGPoint(x: 8.85, y: -3.91), controlPoint2: CGPoint(x: 8.85, y: -3.91))
-    bezierPath.addCurve(to: CGPoint(x: 8.3, y: 7.11), controlPoint1: CGPoint(x: 7.76, y: 1.6), controlPoint2: CGPoint(x: 9.4, y: 4.35))
-    bezierPath.addCurve(to: CGPoint(x: -5.91, y: 8.76), controlPoint1: CGPoint(x: 7.21, y: 9.86), controlPoint2: CGPoint(x: -2.63, y: 10.41))
-    bezierPath.close()
+private func customize(path: UIBezierPath, seed: Int) -> UIBezierPath {
 
-    bezierPath.apply(CGAffineTransform(translationX: 0.5, y: 0))
-
-    bezierPath.apply(CGAffineTransform(scaleX: scale, y: scale))
+    let angle = 45 * (CGFloat(fmod(Float(seed) * 0.279, 1)) * 2 - 1)
+    let mirrored = seed % 2 == 0
 
     if mirrored {
-        bezierPath.apply(CGAffineTransform(scaleX: -1, y: 1))
+        path.apply(CGAffineTransform(scaleX: -1, y: 1))
     }
 
-    bezierPath.apply(CGAffineTransform(rotationAngle: angle / 180 * CGFloat.pi))
+    path.apply(CGAffineTransform(rotationAngle: angle / 180 * CGFloat.pi))
 
-    return bezierPath
+    return path
 }
 
-private func circlePath() -> UIBezierPath {
-    return UIBezierPath(ovalIn: CGRect(centre: CGPoint.zero, size: CGSize(width: circleRadius * 2, height: circleRadius * 2)))
+private func circlePath(radius: CGFloat) -> UIBezierPath {
+    return UIBezierPath(ovalIn: CGRect(centre: CGPoint.zero, size: CGSize(width: radius * 2, height: radius * 2)))
 }
 
-private func crossPath() -> UIBezierPath {
-    let rect = CGRect(centre: CGPoint.zero, size: CGSize(width: crossRadius * 2, height: crossRadius * 2))
+private func crossPath(radius: CGFloat) -> UIBezierPath {
+    let rect = CGRect(centre: CGPoint.zero, size: CGSize(width: radius * 2, height: radius * 2))
     let cross = UIBezierPath()
     cross.move(to: CGPoint(x: rect.minX, y: rect.minY))
     cross.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))

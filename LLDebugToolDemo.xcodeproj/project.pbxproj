@@ -53,7 +53,11 @@
 		8915E9CA22420620001B7660 /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B622420620001B7660 /* pwd2key.c */; };
 		8915E9CB22420620001B7660 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B722420620001B7660 /* aestab.c */; };
 		8915E9CC22420620001B7660 /* LLZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9BB22420620001B7660 /* LLZipArchive.m */; };
-		8915EA4C224323D9001B7660 /* MonkeyPaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EA4B224323D9001B7660 /* MonkeyPaws.swift */; };
+		8915EADA2243D2D1001B7660 /* MonkeyPaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAD62243D2D1001B7660 /* MonkeyPaws.swift */; };
+		8915EADB2243D2D1001B7660 /* UIColor+MonkeyPaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAD72243D2D1001B7660 /* UIColor+MonkeyPaws.swift */; };
+		8915EADC2243D2D1001B7660 /* MonkeyPawDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAD82243D2D1001B7660 /* MonkeyPawDrawer.swift */; };
+		8915EADD2243D2D1001B7660 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAD92243D2D1001B7660 /* Configuration.swift */; };
+		8915EADF2243D305001B7660 /* OCMonkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EADE2243D305001B7660 /* OCMonkey.swift */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -262,7 +266,11 @@
 		8915E9BA22420620001B7660 /* LLZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLZipArchive.h; sourceTree = "<group>"; };
 		8915E9BB22420620001B7660 /* LLZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLZipArchive.m; sourceTree = "<group>"; };
 		8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LLDebugToolDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		8915EA4B224323D9001B7660 /* MonkeyPaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyPaws.swift; sourceTree = "<group>"; };
+		8915EAD62243D2D1001B7660 /* MonkeyPaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyPaws.swift; sourceTree = "<group>"; };
+		8915EAD72243D2D1001B7660 /* UIColor+MonkeyPaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+MonkeyPaws.swift"; sourceTree = "<group>"; };
+		8915EAD82243D2D1001B7660 /* MonkeyPawDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyPawDrawer.swift; sourceTree = "<group>"; };
+		8915EAD92243D2D1001B7660 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		8915EADE2243D305001B7660 /* OCMonkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCMonkey.swift; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -624,10 +632,14 @@
 			path = aes;
 			sourceTree = "<group>";
 		};
-		8915EA492243235B001B7660 /* SwiftMonkeyPaws */ = {
+		8915EAD52243D2D1001B7660 /* SwiftMonkeyPaws */ = {
 			isa = PBXGroup;
 			children = (
-				8915EA4B224323D9001B7660 /* MonkeyPaws.swift */,
+				8915EADE2243D305001B7660 /* OCMonkey.swift */,
+				8915EAD62243D2D1001B7660 /* MonkeyPaws.swift */,
+				8915EAD72243D2D1001B7660 /* UIColor+MonkeyPaws.swift */,
+				8915EAD82243D2D1001B7660 /* MonkeyPawDrawer.swift */,
+				8915EAD92243D2D1001B7660 /* Configuration.swift */,
 			);
 			path = SwiftMonkeyPaws;
 			sourceTree = "<group>";
@@ -729,7 +741,7 @@
 			isa = PBXGroup;
 			children = (
 				8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */,
-				8915EA492243235B001B7660 /* SwiftMonkeyPaws */,
+				8915EAD52243D2D1001B7660 /* SwiftMonkeyPaws */,
 				8915E99322420620001B7660 /* SSZipArchive */,
 				891414DE2222A06E00974B52 /* ZSFakeTouch */,
 				899AB6332201967E00D2FC57 /* Category */,
@@ -1513,6 +1525,7 @@
 				C44F413A2152AA7000153F46 /* LLFilterEventView.m in Sources */,
 				36A0007720BE863700AE8810 /* NetTool.m in Sources */,
 				C44F411A2152AA7000153F46 /* LLConfig.m in Sources */,
+				8915EADC2243D2D1001B7660 /* MonkeyPawDrawer.swift in Sources */,
 				8915E9BE22420620001B7660 /* zip.c in Sources */,
 				C44F41242152AA7000153F46 /* LLScreenshotSelectorView.m in Sources */,
 				C44F41672152AA7000153F46 /* LLWindowViewController.m in Sources */,
@@ -1524,6 +1537,7 @@
 				C44F41332152AA7000153F46 /* LLFilterTextFieldModel.m in Sources */,
 				C44F41432152AA7000153F46 /* LLNetworkHelper.m in Sources */,
 				C44F41652152AA7000153F46 /* LLDebugTool.m in Sources */,
+				8915EADF2243D305001B7660 /* OCMonkey.swift in Sources */,
 				8915E9C822420620001B7660 /* aes_ni.c in Sources */,
 				8915E9BD22420620001B7660 /* unzip.c in Sources */,
 				369D093E2153AE14001C9D4B /* NSURLSession+LL_Swizzling.m in Sources */,
@@ -1534,7 +1548,9 @@
 				C44F41552152AA7000153F46 /* LLSandboxHelper.m in Sources */,
 				C44F41412152AA7000153F46 /* NSHTTPURLResponse+LL_Utils.m in Sources */,
 				C44F411F2152AA7000153F46 /* LLScreenshotToolbar.m in Sources */,
+				8915EADB2243D2D1001B7660 /* UIColor+MonkeyPaws.swift in Sources */,
 				8915E9BC22420620001B7660 /* crypt.c in Sources */,
+				8915EADD2243D2D1001B7660 /* Configuration.swift in Sources */,
 				C44F41402152AA7000153F46 /* NSURLSessionConfiguration+LL_Swizzling.m in Sources */,
 				C44F414E2152AA7000153F46 /* LLCrashSignalContentVC.m in Sources */,
 				3629E3962136830A00226C79 /* TestNetworkViewController.m in Sources */,
@@ -1559,7 +1575,7 @@
 				369D09342153853A001C9D4B /* LLLogHelper.m in Sources */,
 				C44F413B2152AA7000153F46 /* LLFilterLabelModel.m in Sources */,
 				C44F41292152AA7000153F46 /* LLTool.m in Sources */,
-				8915EA4C224323D9001B7660 /* MonkeyPaws.swift in Sources */,
+				8915EADA2243D2D1001B7660 /* MonkeyPaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
