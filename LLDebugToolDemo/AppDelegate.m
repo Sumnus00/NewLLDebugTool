@@ -45,7 +45,7 @@
     [[LLDebugTool sharedTool] startWorking];
     
     
-   self.paws = [[MonkeyPaws alloc] initWithView:self.window tapUIApplication:true] ;
+//   self.paws = [[MonkeyPaws alloc] initWithView:self.window tapUIApplication:true] ;
     
     return YES;
 }

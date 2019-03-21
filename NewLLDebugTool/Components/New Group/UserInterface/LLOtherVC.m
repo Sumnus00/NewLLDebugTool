@@ -12,7 +12,7 @@
 #import "LLConfig.h"
 #import "LLDebugTool.h"
 #import "ZSFakeTouch.h"
-
+#import "LLDebugToolDemo-Swift.h"
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 
@@ -21,7 +21,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 @property (nonatomic , strong) NSMutableArray *dataArray;
-
+@property (strong, nonatomic) MonkeyPaws *paws;
 
 @end
 
@@ -199,6 +199,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         if(isButtonOn){
             if([LLDebugTool sharedTool].monkeyTimer == nil){
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
+                self.paws = [[MonkeyPaws alloc] initWithView:[UIApplication sharedApplication].keyWindow tapUIApplication:true] ;
                 [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
             }
         }else{
