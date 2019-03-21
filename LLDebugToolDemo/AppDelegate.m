@@ -10,8 +10,12 @@
 
 // If you integrate with cocoapods, used #import <LLDebug.h>.
 #import "LLDebug.h"
+#import "LLDebugToolDemo-Swift.h"
+
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) MonkeyPaws *paws;
 
 @end
 
@@ -39,6 +43,9 @@
     // ####################### Start LLDebugTool #######################//
     // Use this line to start working.
     [[LLDebugTool sharedTool] startWorking];
+    
+    
+   self.paws = [[MonkeyPaws alloc] initWithView:self.window tapUIApplication:true] ;
     
     return YES;
 }

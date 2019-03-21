@@ -53,6 +53,7 @@
 		8915E9CA22420620001B7660 /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B622420620001B7660 /* pwd2key.c */; };
 		8915E9CB22420620001B7660 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B722420620001B7660 /* aestab.c */; };
 		8915E9CC22420620001B7660 /* LLZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9BB22420620001B7660 /* LLZipArchive.m */; };
+		8915EA4C224323D9001B7660 /* MonkeyPaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EA4B224323D9001B7660 /* MonkeyPaws.swift */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -260,6 +261,8 @@
 		8915E9B922420620001B7660 /* fileenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileenc.h; sourceTree = "<group>"; };
 		8915E9BA22420620001B7660 /* LLZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLZipArchive.h; sourceTree = "<group>"; };
 		8915E9BB22420620001B7660 /* LLZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLZipArchive.m; sourceTree = "<group>"; };
+		8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LLDebugToolDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		8915EA4B224323D9001B7660 /* MonkeyPaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyPaws.swift; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -621,6 +624,14 @@
 			path = aes;
 			sourceTree = "<group>";
 		};
+		8915EA492243235B001B7660 /* SwiftMonkeyPaws */ = {
+			isa = PBXGroup;
+			children = (
+				8915EA4B224323D9001B7660 /* MonkeyPaws.swift */,
+			);
+			path = SwiftMonkeyPaws;
+			sourceTree = "<group>";
+		};
 		899AB6332201967E00D2FC57 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -717,6 +728,8 @@
 		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
+				8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */,
+				8915EA492243235B001B7660 /* SwiftMonkeyPaws */,
 				8915E99322420620001B7660 /* SSZipArchive */,
 				891414DE2222A06E00974B52 /* ZSFakeTouch */,
 				899AB6332201967E00D2FC57 /* Category */,
@@ -1295,6 +1308,7 @@
 					};
 					C43BA806205AB095006307BE = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1545,6 +1559,7 @@
 				369D09342153853A001C9D4B /* LLLogHelper.m in Sources */,
 				C44F413B2152AA7000153F46 /* LLFilterLabelModel.m in Sources */,
 				C44F41292152AA7000153F46 /* LLTool.m in Sources */,
+				8915EA4C224323D9001B7660 /* MonkeyPaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1607,6 +1622,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 638C108F891808060C7ED772 /* Pods-LLDebugToolDemoTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -1623,6 +1639,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7630F57F70FEB38A6705DA1A /* Pods-LLDebugToolDemoTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -1639,6 +1656,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADC0AD5C07B446A537F680CF /* Pods-LLDebugToolDemoUITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -1656,6 +1674,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34ACB65EBB30B1CA47DFC39F /* Pods-LLDebugToolDemoUITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -1787,6 +1806,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -1798,6 +1818,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NewLLDebugTool/LLDebugToolDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1808,6 +1831,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -1819,6 +1843,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NewLLDebugTool/LLDebugToolDemo-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
