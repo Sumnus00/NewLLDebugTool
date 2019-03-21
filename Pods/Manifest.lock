@@ -17,32 +17,20 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - SwiftMonkeyPaws (2.1.1)
 
 DEPENDENCIES:
   - AFNetworking
   - FMDB
-  - SwiftMonkeyPaws (from `https://github.com/didiaodanding/SwiftMonkeyPaws.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - FMDB
 
-EXTERNAL SOURCES:
-  SwiftMonkeyPaws:
-    :git: https://github.com/didiaodanding/SwiftMonkeyPaws.git
-
-CHECKOUT OPTIONS:
-  SwiftMonkeyPaws:
-    :commit: 6ec88c45d189bf2cd97f2b0ae3a99786a1a9da49
-    :git: https://github.com/didiaodanding/SwiftMonkeyPaws.git
-
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  SwiftMonkeyPaws: 655524bb402df5ac2be836f9f604aca1068fbde6
 
-PODFILE CHECKSUM: 852852583a08752c89401bfc709552b1860c09da
+PODFILE CHECKSUM: 3ba6706ac0ac992b68300381760987e72e1bb0ab
 
 COCOAPODS: 1.5.3

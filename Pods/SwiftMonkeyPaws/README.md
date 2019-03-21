@@ -1,2 +1,0 @@
-# SwiftMonkeyPaws
-monkey paws

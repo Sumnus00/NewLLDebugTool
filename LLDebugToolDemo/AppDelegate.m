@@ -10,7 +10,14 @@
 
 // If you integrate with cocoapods, used #import <LLDebug.h>.
 #import "LLDebug.h"
+
+//#import "LLDebugToolDemo-Swift.h"
+
+#ifdef ISLOCAL
 #import "LLDebugToolDemo-Swift.h"
+#else
+#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
+#endif
 
 
 @interface AppDelegate ()

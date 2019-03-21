@@ -13,7 +13,6 @@ target 'LLDebugToolDemo' do
   # Only for demo
   pod 'AFNetworking'
   
-  pod ‘SwiftMonkeyPaws’ ,  :git => 'https://github.com/didiaodanding/SwiftMonkeyPaws.git'
 
   target 'LLDebugToolDemoTests' do
     inherit! :search_paths
