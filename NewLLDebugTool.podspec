@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source_files	    = "NewLLDebugTool/**/*.{h,m,swift,c}"
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
 #  s.dependency            "FMDB"
-  # s.dependency    "NewSwiftMonkeyPaws"
+  s.dependency    "NewSwiftMonkeyPaws"
   s.framework      = 'IOKit'
 
   s.subspec 'Network' do |ss|
