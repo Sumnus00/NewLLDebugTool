@@ -25,7 +25,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 @property (nonatomic , strong) NSMutableArray *dataArray;
-@property (strong, nonatomic) MonkeyPaws *paws;
 
 @end
 
@@ -203,7 +202,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         if(isButtonOn){
             if([LLDebugTool sharedTool].monkeyTimer == nil){
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
-                self.paws = [[MonkeyPaws alloc] initWithView:[UIApplication sharedApplication].keyWindow tapUIApplication:true] ;
+                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:[self lastWindow] tapUIApplication:true] ;
                 [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
             }
         }else{
@@ -216,9 +215,27 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 
+-(UIWindow *)lastWindow
+{
+    NSArray *windows = [UIApplication sharedApplication].windows;
+    for(UIWindow *window in [windows reverseObjectEnumerator]) {
+        if ([window isKindOfClass:[UIWindow class]] &&
+            CGRectEqualToRect(window.bounds, [UIScreen mainScreen].bounds))
+            return window;
+    }
+    return [UIApplication sharedApplication].keyWindow;
+}
+
+
 -(void)touchesWithPoint:(CGPoint)zspoint{
     [ZSFakeTouch beginTouchWithPoint:zspoint];
     [ZSFakeTouch endTouchWithPoint:zspoint];
+}
+
+-(void)swapWithPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint{
+    [ZSFakeTouch beginTouchWithPoint:startPoint];
+    [ZSFakeTouch moveTouchWithPoint:endPoint];
+    [ZSFakeTouch endTouchWithPoint:endPoint];
 }
 
 - (void)randomMonkey{
@@ -227,9 +244,17 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     int height = self.view.bounds.size.height ;
     int x = arc4random() % width  ;
     int y = arc4random() % height ;
+    int seed = arc4random() % 10 ;
     
-    NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
-    [self touchesWithPoint:CGPointMake(x,y)];
+    if(seed<3){
+        int endX = arc4random() % width ;
+        int endY = arc4random() % height ;
+        NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
+        [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
+    }else{
+        NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
+        [self touchesWithPoint:CGPointMake(x,y)];
+    }
 }
 
 - (void)highMemoryOperate{

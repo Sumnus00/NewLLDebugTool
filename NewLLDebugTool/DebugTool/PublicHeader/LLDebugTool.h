@@ -28,6 +28,12 @@
 #define LLSharedDebugTool [LLDebugTool sharedTool]
 #endif
 
+#ifdef ISLOCAL
+#import "LLDebugToolDemo-Swift.h"
+#else
+#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
+#endif
+
 @class LLWindow;
 
 /**
@@ -93,29 +99,29 @@
 /**
  保存已经发送的报文
  */
-@property (nonatomic,strong) NSMutableDictionary *cmd_seq_dict ;
-@property (nonatomic,strong) NSMutableString *cmd_to_send ;
-@property (nonatomic,strong) NSMutableString *cmd_to_receive ;
-typedef void (^PrivateNetworkBlock)(NSString *);
-@property (nonatomic, copy) PrivateNetworkBlock sendBlock;
-@property (nonatomic, copy) PrivateNetworkBlock receiveBlock;
+@property (nonatomic,strong,nonnull) NSMutableDictionary *cmd_seq_dict ;
+@property (nonatomic,strong,nonnull) NSMutableString *cmd_to_send ;
+@property (nonatomic,strong,nonnull) NSMutableString *cmd_to_receive ;
+typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
+@property (nonatomic, copy,nonnull) PrivateNetworkBlock sendBlock;
+@property (nonatomic, copy,nonnull) PrivateNetworkBlock receiveBlock;
 
 
-- (void)addPrivateNetworkSendBlock:(void(^)(NSString *command))block;
-- (void)addPrivateNetworkReceiveBlock:(void(^)(NSString *command))block;
-- (void)dealWithResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date;
-- (void)dealWithHttpResponseData:(NSString *)command response:(NSData *)response request:(NSData *)request date:(NSDate *)date ;
+- (void)addPrivateNetworkSendBlock:(void(^_Nullable)(NSString *_Nullable command))block;
+- (void)addPrivateNetworkReceiveBlock:(void(^_Nullable)(NSString *_Nullable command))block;
+- (void)dealWithResponseData:(NSString *_Nullable)command response:(NSData *_Nullable)response request:(NSData *_Nullable)request date:(NSDate *_Nullable)date;
+- (void)dealWithHttpResponseData:(NSString *_Nullable)command response:(NSData *_Nullable)response request:(NSData *_Nullable)request date:(NSDate *_Nullable)date ;
 
 /**
  高内存操作线程
  */
-@property (nonatomic, strong) NSThread *memoryThread;
+@property (nonatomic, strong,nullable) NSThread *memoryThread;
 
 
 /**
  monkey定时器
  */
-@property(nonatomic,strong)NSTimer *monkeyTimer;
+@property(nonatomic,strong,nullable)NSTimer *monkeyTimer;
 
 /**
 更多功能的 switch开关
@@ -145,11 +151,12 @@ typedef void (^PrivateNetworkBlock)(NSString *);
 /**
  截图api
 */
-- (void)simulateDirectTakeScreenshot:(NSString *)imagePath ;
+- (void)simulateDirectTakeScreenshot:(NSString *_Nullable)imagePath ;
 
 /**
  获取日志api
  */
-- (NSMutableArray *)copySourceFileArr:(NSArray*)sourceFileArr toDestDir:(NSString*)destDir;
+- (NSMutableArray *_Nullable)copySourceFileArr:(NSArray*_Nullable)sourceFileArr toDestDir:(NSString*_Nullable)destDir;
 
+@property (strong, nonatomic,nonnull) MonkeyPaws *paws;
 @end
