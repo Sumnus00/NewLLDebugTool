@@ -28,11 +28,7 @@
 #define LLSharedDebugTool [LLDebugTool sharedTool]
 #endif
 
-#ifdef ISLOCAL
-#import "LLDebugToolDemo-Swift.h"
-#else
-#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
-#endif
+
 
 @class LLWindow;
 
@@ -158,5 +154,5 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
  */
 - (NSMutableArray *_Nullable)copySourceFileArr:(NSArray*_Nullable)sourceFileArr toDestDir:(NSString*_Nullable)destDir;
 
-@property (strong, nonatomic,nonnull) MonkeyPaws *paws;
+
 @end
