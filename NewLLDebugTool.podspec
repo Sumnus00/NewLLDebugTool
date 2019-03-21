@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source              = { :git => "https://github.com/didiaodanding/NewLLDebugTool.git", :tag => s.version }
   s.requires_arc        = true
   s.public_header_files = "NewLLDebugTool/**/*.h"
-  s.source_files	    = "NewLLDebugTool/**/*.{h,m}"
+  s.source_files	    = "NewLLDebugTool/**/*.{h,m,swift,c}"
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
 #  s.dependency            "FMDB"
   s.framework      = 'IOKit'
