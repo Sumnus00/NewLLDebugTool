@@ -159,7 +159,8 @@ static NSString *const kEmptyCellID = @"emptyCellID";
 
 //Interface的方向是否会跟随设备方向自动旋转，如果返回NO,后两个方法不会再调用
 - (BOOL)shouldAutorotate {
-    return YES;
+    NSLog(@"hahaha") ;
+    return NO;
 }
 //返回直接支持的方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{

@@ -10,7 +10,6 @@
 
 @implementation UITabBarController (AutoRotate)
 -(BOOL)shouldAutorotate{
-    NSLog(@"123456789") ;
     return [self.selectedViewController shouldAutorotate];
 }
 
