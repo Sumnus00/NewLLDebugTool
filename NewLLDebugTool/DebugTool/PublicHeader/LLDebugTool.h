@@ -154,6 +154,9 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
  */
 - (NSMutableArray *_Nullable)copySourceFileArr:(NSArray*_Nullable)sourceFileArr toDestDir:(NSString*_Nullable)destDir;
 
+/**
+ monkey 小手
+ */
 @property(strong ,nonatomic) id paws ;
 
 @end
