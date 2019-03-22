@@ -54,8 +54,6 @@
 		8915E9CB22420620001B7660 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B722420620001B7660 /* aestab.c */; };
 		8915E9CC22420620001B7660 /* LLZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9BB22420620001B7660 /* LLZipArchive.m */; };
 		8915EAF32244867E001B7660 /* MonkeyPaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAF22244867E001B7660 /* MonkeyPaws.swift */; };
-		8915EAFF2244C4F9001B7660 /* UITabBarController+AutoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAFE2244C4F9001B7660 /* UITabBarController+AutoRotate.m */; };
-		8915EB062244C9B9001B7660 /* UINavigationController+AutoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915EB052244C9B9001B7660 /* UINavigationController+AutoRotate.m */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -265,10 +263,6 @@
 		8915E9BB22420620001B7660 /* LLZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLZipArchive.m; sourceTree = "<group>"; };
 		8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LLDebugToolDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		8915EAF22244867E001B7660 /* MonkeyPaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyPaws.swift; sourceTree = "<group>"; };
-		8915EAFD2244C4F9001B7660 /* UITabBarController+AutoRotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+AutoRotate.h"; sourceTree = "<group>"; };
-		8915EAFE2244C4F9001B7660 /* UITabBarController+AutoRotate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+AutoRotate.m"; sourceTree = "<group>"; };
-		8915EB042244C9B9001B7660 /* UINavigationController+AutoRotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+AutoRotate.h"; sourceTree = "<group>"; };
-		8915EB052244C9B9001B7660 /* UINavigationController+AutoRotate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+AutoRotate.m"; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -643,10 +637,6 @@
 			children = (
 				899AB6342201978300D2FC57 /* NSObject+Swizzling.h */,
 				899AB6352201978300D2FC57 /* NSObject+Swizzling.m */,
-				8915EAFD2244C4F9001B7660 /* UITabBarController+AutoRotate.h */,
-				8915EAFE2244C4F9001B7660 /* UITabBarController+AutoRotate.m */,
-				8915EB042244C9B9001B7660 /* UINavigationController+AutoRotate.h */,
-				8915EB052244C9B9001B7660 /* UINavigationController+AutoRotate.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1480,7 +1470,6 @@
 				C44F413E2152AA7000153F46 /* LLBaseNavigationController.m in Sources */,
 				8915E9C222420620001B7660 /* minishared.c in Sources */,
 				C44F412B2152AA7000153F46 /* UIButton+LL_Utils.m in Sources */,
-				8915EB062244C9B9001B7660 /* UINavigationController+AutoRotate.m in Sources */,
 				369D09382153853A001C9D4B /* LLLogContentVC.m in Sources */,
 				C44F414B2152AA7000153F46 /* LLCrashHelper.m in Sources */,
 				C44F41442152AA7000153F46 /* LLNetworkImageCell.m in Sources */,
@@ -1511,7 +1500,6 @@
 				8915E9BF22420620001B7660 /* ioapi.c in Sources */,
 				C44F41662152AA7000153F46 /* LLWindow.m in Sources */,
 				C44F411D2152AA7000153F46 /* LLScreenshotHelper.m in Sources */,
-				8915EAFF2244C4F9001B7660 /* UITabBarController+AutoRotate.m in Sources */,
 				8915E9C022420620001B7660 /* ioapi_buf.c in Sources */,
 				C44F41522152AA7000153F46 /* LLCrashCell.m in Sources */,
 				C44F41272152AA7000153F46 /* NSObject+LL_Utils.m in Sources */,

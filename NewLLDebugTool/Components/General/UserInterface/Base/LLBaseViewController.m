@@ -86,13 +86,7 @@ static NSString *const kEmptyCellID = @"emptyCellID";
 
 #pragma mark - Rewrite
 - (void)leftItemClick {
-    NSLog(@"testtesttest") ;
     [LLRoute showWindow];
-    NSNumber *resetOrientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
-    [[UIDevice currentDevice] setValue:resetOrientationTarget forKey:@"orientation"];
-    NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-    [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -161,19 +155,6 @@ static NSString *const kEmptyCellID = @"emptyCellID";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kEmptyCellID];
     }
     return cell;
-}
-
-//Interface的方向是否会跟随设备方向自动旋转，如果返回NO,后两个方法不会再调用
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-//返回直接支持的方向
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskPortrait;
-}
-//返回最优先显示的屏幕方向
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationPortrait;
 }
 
 @end
