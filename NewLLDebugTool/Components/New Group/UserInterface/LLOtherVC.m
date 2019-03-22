@@ -201,7 +201,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         if(isButtonOn){
             if([LLDebugTool sharedTool].monkeyTimer == nil){
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
-                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
+//                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
+                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:[self lastWindow] tapUIApplication:true] ;
                 [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
 //                [self dismissViewControllerAnimated:YES completion:nil];
