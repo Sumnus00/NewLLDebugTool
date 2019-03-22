@@ -61,7 +61,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initial];
+
 }
 
 - (void)dealloc {
@@ -101,9 +103,6 @@
         UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
         UIViewController* vc2 = vc.presentedViewController;
         
-        self.tabVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve ;
-        self.tabVC.modalPresentationStyle = UIModalPresentationFullScreen ;
-       
         
         [vc2?:vc presentViewController:self.tabVC animated:YES completion:nil];
         self.tabVC.selectedIndex = index;
