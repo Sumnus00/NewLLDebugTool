@@ -162,11 +162,27 @@ static NSString *const kEmptyCellID = @"emptyCellID";
 }
 //返回直接支持的方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscapeRight;
+    UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
+    // 支持竖屏
+    if(vc.supportedInterfaceOrientations & UIInterfaceOrientationMaskPortrait ){
+        return UIInterfaceOrientationMaskPortrait ;
+    }else{
+        //不支持竖屏
+        return UIInterfaceOrientationMaskLandscapeRight;
+    }
+    
 }
 //返回最优先显示的屏幕方向
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationLandscapeRight;
+    UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
+    // 支持竖屏
+    if(vc.supportedInterfaceOrientations & UIInterfaceOrientationMaskPortrait ){
+        return UIInterfaceOrientationPortrait ;
+    }else{
+        //不支持竖屏
+        return UIInterfaceOrientationLandscapeRight;
+    }
 }
+
 
 @end
