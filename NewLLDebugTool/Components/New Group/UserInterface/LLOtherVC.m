@@ -15,7 +15,8 @@
 #ifdef ISLOCAL
 #import "LLDebugToolDemo-Swift.h"
 #else
-#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
+//#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
+#import "NewLLDebugTool-Swift.h"
 #endif
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
