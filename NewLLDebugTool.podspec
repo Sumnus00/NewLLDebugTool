@@ -47,8 +47,10 @@ Pod::Spec.new do |s|
 
     
   s.subspec 'SSZipArchive' do |ss|
-    ss.source_files             = "NewLLDebugTool/SSZipArchive/*.{h,m}","NewLLDebugTool/SSZipArchive/**/*.{h}"
-    ss.public_header_files      = "NewLLDebugTool/SSZipArchive/*.h"
+    ss.source_files = 'NewLLDebugTool/SSZipArchive/*.{m,h}', 'NewLLDebugTool/SSZipArchive/minizip/*.{c,h}', 'NewLLDebugTool/SSZipArchive/minizip/aes/*.{c,h}'
+    ss.public_header_files = 'NewLLDebugTool/SSZipArchive/*.h'
+    # ss.source_files             = "NewLLDebugTool/SSZipArchive/*.{h,m}","NewLLDebugTool/SSZipArchive/**/*.{h}"
+    # ss.public_header_files      = "NewLLDebugTool/SSZipArchive/*.h"
   end
 
   s.subspec 'Sandbox' do |ss|
