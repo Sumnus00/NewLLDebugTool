@@ -13,14 +13,11 @@
 #import "LLDebugTool.h"
 #import "ZSFakeTouch.h"
 
-#ifdef ISPOD
-#define NewLLDebugTool-Swift.h NewLLDebugTool/NewLLDebugTool-Swift.h
-#endif
-
 #ifdef ISLOCAL
 #import "LLDebugToolDemo-Swift.h"
 #else
-#import "NewLLDebugTool-Swift.h"
+//#import "NewLLDebugTool-Swift.h"
+#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
 #endif
 
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
