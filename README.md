@@ -202,13 +202,13 @@ NewLLDebugTool requirements is same with LLDebugTool, it works on iOS 8+ and req
 
 ## Change-log
 
-### 2019-4-09
+### 2019-4-09(tag:1.3.0)
 >1. add share folder function
 >2. add monkey paws
 >3. compatible with horizontal and vertical screen
 
 
-### 2019-2-26
+### 2019-2-26(tag:1.2.9)
 
 > 1. changes and optimized  of memory and log
 > 2. hook private network , add delay and packet loss functions for weak network
