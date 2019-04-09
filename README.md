@@ -202,6 +202,12 @@ NewLLDebugTool requirements is same with LLDebugTool, it works on iOS 8+ and req
 
 ## Change-log
 
+### 2019-4-09
+>1. add share folder function
+>2. add monkey paws
+>3. compatible with horizontal and vertical screen
+
+
 ### 2019-2-26
 
 > 1. changes and optimized  of memory and log

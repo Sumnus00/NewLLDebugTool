@@ -204,6 +204,12 @@ NewLLDebugTool的要求和LLDebugToo是一致的。NewLLDebugTool需要运行在
 
 ## 更新日志
 
+### 2019-4-09
+>1. 可以分享文件夹
+>2. 增加monkey paws
+>3. 兼容横竖屏
+
+
 ### 2019-2-26
 
 >1. 更改和优化了内存和log的实现方式
