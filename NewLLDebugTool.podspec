@@ -49,7 +49,7 @@ Pod::Spec.new do |s|
     ss.source_files             = "NewLLDebugTool/Components/Sandbox/**/*.{h,m}"
     ss.resources                = "NewLLDebugTool/Components/Sandbox/**/*.{xib,storyboard,bundle}"
     ss.public_header_files      = "NewLLDebugTool/Components/Sandbox/**/*.h"
-    ss.dependency                 "NewLLDebugTool/General","NewLLDebugTool/ZipArchive"
+    ss.dependency                 "NewLLDebugTool/General","NewLLDebugTool/SSZipArchive"
   end
 
   s.subspec 'Screenshot' do |ss|
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
     ss.public_header_files      = "NewLLDebugTool/Config/*.h" , "NewLLDebugTool/Components/General/**/*.h"
   end
 
-  s.subspec 'ZipArchive' do |ss|
+  s.subspec 'SSZipArchive' do |ss|
     ss.source_files             = "NewLLDebugTool/SSZipArchive/*.{h,m}","NewLLDebugTool/SSZipArchive/**/*.{h,c}"
     ss.public_header_files      = "NewLLDebugTool/SSZipArchive/*.h"
   end
