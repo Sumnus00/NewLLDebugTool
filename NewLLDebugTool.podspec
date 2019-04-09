@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
   s.public_header_files = "NewLLDebugTool/**/*.h"
   s.source_files	    = "NewLLDebugTool/**/*.{h,m,swift,c}"
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
-  s.library = 'z'
   s.swift_version = "4.2"
 #  s.dependency            "FMDB"
   # s.dependency    "NewSwiftMonkeyPaws"
