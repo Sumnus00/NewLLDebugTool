@@ -47,7 +47,7 @@ Pod::Spec.new do |s|
 
     
   s.subspec 'SSZipArchive' do |ss|
-    ss.source_files             = "NewLLDebugTool/SSZipArchive/*.{h,m}","NewLLDebugTool/SSZipArchive/**/*.{h,c}"
+    ss.source_files             = "NewLLDebugTool/SSZipArchive/*.{h,m}"
     ss.public_header_files      = "NewLLDebugTool/SSZipArchive/*.h"
   end
 
