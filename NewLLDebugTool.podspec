@@ -13,10 +13,9 @@ Pod::Spec.new do |s|
   s.source_files	    = "NewLLDebugTool/**/*.{h,m,swift,c}"
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
   s.swift_version = "4.2"
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
-  s.xcconfig = {
-    "GCC_PREPROCESSOR_DEFINITIONS" => "ISLOCAL=1"
- }
+ #  s.xcconfig = {
+ #    "GCC_PREPROCESSOR_DEFINITIONS" => "ISLOCAL=1"
+ # }
 #  s.dependency            "FMDB"
   # s.dependency    "NewSwiftMonkeyPaws"
   s.framework      = 'IOKit'
