@@ -12,6 +12,9 @@
 #import "LLConfig.h"
 #import "LLDebugTool.h"
 #import "ZSFakeTouch.h"
+#import "FindElementTree.h"
+#import "KIF.h"
+#import "Actions.h"
 
 #ifdef ISLOCAL
 #import "LLDebugToolDemo-Swift.h"
@@ -206,7 +209,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
 //                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
                 [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:[self lastWindow] tapUIApplication:true] ;
-                [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
+                [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
 //                [self dismissViewControllerAnimated:YES completion:nil];
             }
@@ -243,22 +246,99 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     [ZSFakeTouch endTouchWithPoint:endPoint];
 }
 
-- (void)randomMonkey{
+-(UIViewController *)topController {
     
+    UIViewController *topC = [self topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (topC.presentedViewController) {
+        topC = [self topViewController:topC.presentedViewController];
+    }
+    return topC;
+}
+
+-(UIViewController *)topViewController:(UIViewController *)controller {
+    if ([controller isKindOfClass:[UINavigationController class]]) {
+        return [self topViewController:[(UINavigationController *)controller topViewController]];
+    } else if ([controller isKindOfClass:[UITabBarController class]]) {
+        return [self topViewController:[(UITabBarController *)controller selectedViewController]];
+    } else {
+        return controller;
+    }
+}
+-(void)randomTest{
+    NSString *accessibilityIdentifier = @"TBUIAutoTest_NavigationItem_" ;
+    [UINavigationBarActions tapNavigationBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+}
+
+- (void)randomMonkey{
+
     int width = self.view.bounds.size.width ;
     int height = self.view.bounds.size.height ;
     int x = arc4random() % width  ;
     int y = arc4random() % height ;
     int seed = arc4random() % 10 ;
     
-    if(seed<3){
+    //10%的概率发送滑动事件
+    if(seed<1){
         int endX = arc4random() % width ;
         int endY = arc4random() % height ;
         NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
         [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
-    }else{
+    //10%的返回事件
+    }
+    else if(seed<2){
+        NSLog(@"haleli >>>> test monkey,back action") ;
+        [BackActions back] ;
+    //10%的点击alert事件
+    }
+    else if(seed<3){
+        NSLog(@"haleli >>>> test monkey,acknowledge alert action") ;
+        [UIAlertActions acknowledgeAlert] ;
+    //30%的概率发送click事件
+    }
+    else if(seed<6){
         NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
         [self touchesWithPoint:CGPointMake(x,y)];
+    }else
+    if(seed < 10){
+        //40%的概率发送UI事件
+        //查找控件树
+        NSMutableArray *array = [FindElementTree tree] ;
+
+        if(array.count>0){
+            int random = arc4random() % [array count] ;
+            
+            NSDictionary *dict = [array objectAtIndex:random] ;
+            
+            if(![[dict objectForKey:@"identifier"] isEqual:@""] ){
+                NSString *accessibilityIdentifier = [dict objectForKey:@"identifier"] ;
+                NSString *className = [dict objectForKey:@"className"] ;
+                
+                if([className isEqual:@"UITableView"]){
+                    int tableSeed = arc4random() % 2 ;
+                    //50%执行活动操作
+                    if(tableSeed<1){
+                        NSLog(@"haleli >>>> test monkey,UITableView swipe action") ;
+                        [UITableViewActions swipeTableViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                    }else{
+                        NSLog(@"haleli >>>> test monkey,UITableView tap action") ;
+                        [UITableViewActions tapRowAtIndexPathWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                    }
+                }else if([className isEqual:@"UISwitch"]){
+                    NSLog(@"haleli >>>> test monkey,UISwitch tap action") ;
+                    [UISwitchActions setSwitchWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else if([className isEqual:@"UITabBar"]){
+                    NSLog(@"haleli >>>> test monkey,UITabBar tap action") ;
+                    [UITabBarActions tapTabBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else if([className isEqual:@"UINavigationBar"]){
+                    NSLog(@"haleli >>>> test monkey,UINavigationBar tap action") ;
+                    [UINavigationBarActions tapNavigationBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else{
+                    NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;
+                }
+            }else{
+                NSLog(@"haleli >>>> test monkey,no identifier") ;
+            }
+        }
     }
 }
 

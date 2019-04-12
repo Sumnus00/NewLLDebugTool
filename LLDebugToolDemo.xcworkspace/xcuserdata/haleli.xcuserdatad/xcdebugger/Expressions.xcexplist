@@ -3,12 +3,54 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "model.url.path">
+            </PersistentString>
+            <PersistentString
+               value = "model.url.host">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
          <PersistentStrings>
             <PersistentString
                value = "dic.allValues.firstObject">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LLOtherVC randomMonkey]:LLOtherVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSClassFromString(className) isKindOfClass:[UISwitch class]]">
+            </PersistentString>
+            <PersistentString
+               value = "NSClassFromString(className)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[KIFUITestActor tapStatusBar]:KIFUITestActor.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[BackActions back]:BackActions.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self topController]">
+            </PersistentString>
+            <PersistentString
+               value = "[self topController].navigationController">
+            </PersistentString>
+            <PersistentString
+               value = "navigationController.navigationBar.topItem.leftBarButtonItem.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__35-[KIFUITestActor tapScreenAtPoint:]_block_invoke:KIFUITestActor.m">
       </ContextState>
       <ContextState
          contextName = "-[LLSandboxVC shareItemClick:]:LLSandboxVC.m">
@@ -18,17 +60,6 @@
             </PersistentString>
             <PersistentString
                value = "model.filePath">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "model.url.path">
-            </PersistentString>
-            <PersistentString
-               value = "model.url.host">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -10,6 +10,8 @@
 #import "UITouch-KIFAdditions.h"
 #import "UIApplication-KIFAdditions.h"
 #import "UIEvent+KIFAdditions.h"
+#import "UITouch+FakeTouch.h"
+#import "UIApplication+FakeTouchPrivate.h"
 
 static UITouch *zsTouch;
 
