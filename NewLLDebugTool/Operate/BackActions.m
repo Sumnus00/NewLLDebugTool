@@ -10,13 +10,25 @@
 
 @implementation BackActions
 +(void)back{
+    //如果topItem设置了左侧按钮组(leftBarButtonItems属性)，则默认使用最后一个item
     //如果topItem设置了左侧按钮(leftBarButtonItem属性), 则展示左侧按钮
     //如果backItem设置了返回按钮(backBarButtonItem属性), 则展示返回按钮
     //如果backItem设置了标题文字(title属性), 则展示利用标题文字封装的返回按钮
     //如果当前是中文环境，则展示利用文字”返回”封装的返回按钮
     //如果当前是英文环境，则展示利用文字”Back”封装的返回按钮
     NSString *back = nil ;
-    if([FindTopController topController].navigationController.navigationBar.topItem.leftBarButtonItem){
+    if([FindTopController topController].navigationController.navigationBar.topItem.leftBarButtonItems){
+        UIBarButtonItem *item = [[FindTopController topController].navigationController.navigationBar.topItem.leftBarButtonItems lastObject] ;
+        //返回按钮是由UIBarButtonItem的initWithCustomView定义
+        if(item.customView){
+            back = item.customView.accessibilityLabel ;
+        }else{
+            //如果定义了title
+            if(item.title){
+                back = item.title ;
+            }
+        }
+    }else if([FindTopController topController].navigationController.navigationBar.topItem.leftBarButtonItem){
         
         //返回按钮是由UIBarButtonItem的initWithCustomView定义
         if([FindTopController topController].navigationController.navigationBar.topItem.leftBarButtonItem.customView){
