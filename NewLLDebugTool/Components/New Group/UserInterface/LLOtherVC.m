@@ -265,8 +265,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    NSString *accessibilityIdentifier = @"TBUIAutoTest_NavigationItem_" ;
-    [UINavigationBarActions tapNavigationBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+    NSString *accessibilityIdentifier = @"TBUIAutoTest_Property_tabBar" ;
+    [UITabBarActions tapTabBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+    [BackActions back] ;
 }
 
 - (void)randomMonkey{
