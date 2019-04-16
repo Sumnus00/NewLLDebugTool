@@ -13,7 +13,9 @@
     if ([FindTopController topController].presentingViewController) {
         [[FindTopController topController] dismissViewControllerAnimated:YES completion:nil];
     } else {
-        [[FindTopController topController].navigationController popViewControllerAnimated:YES];
+        //必须设置为No，参考文章https://blog.csdn.net/C_calary/article/details/52069639，如果需要更新UI（pop之类的也算），必须在主线程中进行
+        //因为我们是在子线程执行pop操作，所以要设置为no
+        [[FindTopController topController].navigationController popViewControllerAnimated:NO];
     }
 //    //如果topItem设置了左侧按钮组(leftBarButtonItems属性)，则默认使用最后一个item
 //    //如果topItem设置了左侧按钮(leftBarButtonItem属性), 则展示左侧按钮

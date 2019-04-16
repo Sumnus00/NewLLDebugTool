@@ -38,7 +38,7 @@
            [className isEqual:@"UIButton"]){
             
             
-            //UITableViewCell的默认UIButton无法点击，点击会发生crash。不影响button的功能，因为cell是可以点击的
+            //UITableViewCell的默认UIButton无法点击，点击会发生crash。这个不影响button的功能，因为cell是可以点击的
             if(!([className isEqual:@"UIButton"] && [[self superview] isKindOfClass:[UITableViewCell class]])){
                 [array addObject:@{@"identifier":identifier,@"className":className}] ;
             }

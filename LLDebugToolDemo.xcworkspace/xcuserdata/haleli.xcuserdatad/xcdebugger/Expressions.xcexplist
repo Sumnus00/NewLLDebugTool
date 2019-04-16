@@ -62,13 +62,13 @@
          contextName = "+[BackActions back]:BackActions.m">
          <PersistentStrings>
             <PersistentString
-               value = "[self topController]">
-            </PersistentString>
-            <PersistentString
-               value = "[self topController].navigationController">
-            </PersistentString>
-            <PersistentString
                value = "navigationController.navigationBar.topItem.leftBarButtonItem.title">
+            </PersistentString>
+            <PersistentString
+               value = "[FindTopController topController].navigationController">
+            </PersistentString>
+            <PersistentString
+               value = "[FindTopController topController]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -265,7 +265,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
+    
+    [UITableViewActions tapRowAtIndexPathWithAccessibilityIdentifier:@"TBUIAutoTest_Table"] ;
     [BackActions back] ;
 }
 
@@ -298,8 +299,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     else if(seed<6){
         NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
         [self touchesWithPoint:CGPointMake(x,y)];
-    }else
-    if(seed < 10){
+    }else if(seed < 10){
+        NSLog(@"haleli >>>> test monkey,ui action") ;
         //40%的概率发送UI事件
         //查找控件树
         NSMutableArray *array = [FindElementTree tree] ;
