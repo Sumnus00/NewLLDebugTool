@@ -265,8 +265,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    NSString *accessibilityIdentifier = @"TBUIAutoTest_Property_tabBar" ;
-    [UITabBarActions tapTabBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
     [BackActions back] ;
 }
 
@@ -277,7 +276,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     int x = arc4random() % width  ;
     int y = arc4random() % height ;
     int seed = arc4random() % 10 ;
-    
+
     //10%的概率发送滑动事件
     if(seed<1){
         int endX = arc4random() % width ;
@@ -333,6 +332,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 }else if([className isEqual:@"UINavigationBar"]){
                     NSLog(@"haleli >>>> test monkey,UINavigationBar tap action") ;
                     [UINavigationBarActions tapNavigationBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else if([className isEqual:@"UITextField"]){
+                    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else if([className isEqual:@"UIButton"]){
+                    [UIButtonActions tapButtonWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }else{
                     NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;
                 }

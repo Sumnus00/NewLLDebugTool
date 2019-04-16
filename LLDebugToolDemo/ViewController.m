@@ -23,7 +23,8 @@
 
 #import "LLStorageManager.h"
 #import "PrivateNetwork.h"
-
+#import "LoginVC.h"
+#import "UIView-Debugging.h"
 static NSString *const kCellID = @"cellID";
 
 @interface ViewController () <UITableViewDelegate , UITableViewDataSource>
@@ -124,7 +125,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 8;
+    return 10;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -150,6 +151,12 @@ static NSString *const kCellID = @"cellID";
         return 1 ;
     }
     if (section == 7){
+        return 1 ;
+    }
+    if(section == 8){
+        return 1 ;
+    }
+    if(section == 9){
         return 1 ;
     }
     return 0;
@@ -227,6 +234,10 @@ static NSString *const kCellID = @"cellID";
         cell.textLabel.text = NSLocalizedString(@"test.swizzle", nil);
     }else if(indexPath.section == 7){
         cell.textLabel.text = NSLocalizedString(@"test.share", nil) ;
+    }else if(indexPath.section == 8){
+        cell.textLabel.text = NSLocalizedString(@"test.login",nil) ;
+    }else if(indexPath.section==9){
+        cell.textLabel.text = NSLocalizedString(@"test.tree", nil) ;
     }
     return cell;
 }
@@ -269,6 +280,12 @@ static TestLogViewController *extracted() {
         UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
         
         [self presentViewController:activityVC animated:YES completion:nil];
+    }else if(indexPath.section == 8){
+        LoginVC *vc = [[LoginVC alloc] init] ;
+        [self.navigationController pushViewController:vc animated:YES] ;
+    }else if(indexPath.section == 9){
+        NSLog(@"testtest") ;
+        [UIView printViewHierarchy] ;
     }
     
     [self.tableView reloadData];
@@ -291,6 +308,10 @@ static TestLogViewController *extracted() {
         return @"swizzling" ;
     } else if (section == 7){
         return @"share" ;
+    } else if (section == 8){
+        return @"login" ;
+    } else if(section == 9){
+        return @"tree" ;
     }
     return nil;
 }

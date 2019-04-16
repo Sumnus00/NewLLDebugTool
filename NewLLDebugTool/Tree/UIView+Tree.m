@@ -27,15 +27,21 @@
 - (void)subviews:(NSMutableArray *)array
 {
     NSString* identifier = self.accessibilityIdentifier;
-    
     if(identifier){
         NSString* className = NSStringFromClass([self class]);
-        if([className isEqual:@"UITabBar"] ||
+        if(
+           [className isEqual:@"UITabBar"] ||
            [className isEqual:@"UITableView"] ||
            [className isEqual:@"UISwitch"] ||
-           [className isEqual:@"UINavigationBar"]){
-
-            [array addObject:@{@"identifier":identifier,@"className":className}] ;
+           [className isEqual:@"UINavigationBar"] ||
+           [className isEqual:@"UITextField"] ||
+           [className isEqual:@"UIButton"]){
+            
+            
+            //UITableViewCell的默认UIButton无法点击，点击会发生crash。不影响button的功能，因为cell是可以点击的
+            if(!([className isEqual:@"UIButton"] && [[self superview] isKindOfClass:[UITableViewCell class]])){
+                [array addObject:@{@"identifier":identifier,@"className":className}] ;
+            }
         }
     }
     for (UIView *view in self.subviews) {

@@ -153,6 +153,15 @@
         UITableView *tableView = (UITableView *)view;
         tableView.accessibilityIdentifier = @"TBUIAutoTest_Table" ;
         NSIndexPath *indexPath = [tableView indexPathForCell:(UITableViewCell *)self];
+    
+        UITableViewCell *cell = ((UITableViewCell *)self) ;
+        
+        cell.textLabel.accessibilityIdentifier = [NSString stringWithFormat:@"TBUIAutoTest_TableCell_%@_%@_%ld_%ld", ((UITableViewCell *)self).reuseIdentifier,@"TextLabel",(long)indexPath.section, (long)indexPath.row];
+        
+        for (UIView *view in self.subviews) {
+            view.accessibilityIdentifier = [NSString stringWithFormat:@"TBUIAutoTest_TableCell_%@_%@_%ld_%ld", ((UITableViewCell *)self).reuseIdentifier, NSStringFromClass([view class]),(long)indexPath.section, (long)indexPath.row];
+        }
+        
         return [NSString stringWithFormat:@"TBUIAutoTest_TableCell_%@_%ld_%ld", ((UITableViewCell *)self).reuseIdentifier, (long)indexPath.section, (long)indexPath.row];
     }
     if ([self isKindOfClass:[UICollectionViewCell class]]) {//UICollectionViewCell 特殊处理

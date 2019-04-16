@@ -57,6 +57,9 @@
 		89256713225F3B6A00E89146 /* UINavigationBarActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89256712225F3B6A00E89146 /* UINavigationBarActions.m */; };
 		89256716225F707800E89146 /* UIAlertActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89256715225F707800E89146 /* UIAlertActions.m */; };
 		8925671B225F71D600E89146 /* FindTopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8925671A225F71D600E89146 /* FindTopController.m */; };
+		89256793226577D400E89146 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89256792226577D400E89146 /* LoginVC.m */; };
+		8925679622658D7400E89146 /* UITextFieldActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8925679522658D7400E89146 /* UITextFieldActions.m */; };
+		892567992265B87C00E89146 /* UIButtonActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567982265B87C00E89146 /* UIButtonActions.m */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -308,6 +311,12 @@
 		89256719225F71D600E89146 /* FindTopController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTopController.h; sourceTree = "<group>"; };
 		8925671A225F71D600E89146 /* FindTopController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTopController.m; sourceTree = "<group>"; };
 		8925671C2260493100E89146 /* Actions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Actions.h; sourceTree = "<group>"; };
+		89256791226577D400E89146 /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		89256792226577D400E89146 /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		8925679422658D7400E89146 /* UITextFieldActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITextFieldActions.h; sourceTree = "<group>"; };
+		8925679522658D7400E89146 /* UITextFieldActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextFieldActions.m; sourceTree = "<group>"; };
+		892567972265B87C00E89146 /* UIButtonActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonActions.h; sourceTree = "<group>"; };
+		892567982265B87C00E89146 /* UIButtonActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonActions.m; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -753,6 +762,10 @@
 				89256714225F707800E89146 /* UIAlertActions.h */,
 				89256715225F707800E89146 /* UIAlertActions.m */,
 				8925671C2260493100E89146 /* Actions.h */,
+				8925679422658D7400E89146 /* UITextFieldActions.h */,
+				8925679522658D7400E89146 /* UITextFieldActions.m */,
+				892567972265B87C00E89146 /* UIButtonActions.h */,
+				892567982265B87C00E89146 /* UIButtonActions.m */,
 			);
 			path = Operate;
 			sourceTree = "<group>";
@@ -764,6 +777,15 @@
 				8925671A225F71D600E89146 /* FindTopController.m */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		89256790226577B000E89146 /* DemoLogin */ = {
+			isa = PBXGroup;
+			children = (
+				89256791226577D400E89146 /* LoginVC.h */,
+				89256792226577D400E89146 /* LoginVC.m */,
+			);
+			path = DemoLogin;
 			sourceTree = "<group>";
 		};
 		899AB6332201967E00D2FC57 /* Category */ = {
@@ -961,6 +983,7 @@
 		C43BA809205AB095006307BE /* LLDebugToolDemo */ = {
 			isa = PBXGroup;
 			children = (
+				89256790226577B000E89146 /* DemoLogin */,
 				899AB63722019F5F00D2FC57 /* DemoSwizzle */,
 				3629E3852136830A00226C79 /* DemoViewControllers */,
 				36A0007520BE863700AE8810 /* NetTool.h */,
@@ -1728,6 +1751,7 @@
 				C44F41202152AA7000153F46 /* LLScreenshotImageView.m in Sources */,
 				C44F41582152AA7000153F46 /* LLSandboxVC.m in Sources */,
 				C44F41232152AA7000153F46 /* LLScreenshotActionView.m in Sources */,
+				89256793226577D400E89146 /* LoginVC.m in Sources */,
 				89C022DB225CBAC400686898 /* UIScreen+KIFAdditions.m in Sources */,
 				C44F413E2152AA7000153F46 /* LLBaseNavigationController.m in Sources */,
 				8915E9C222420620001B7660 /* minishared.c in Sources */,
@@ -1770,6 +1794,7 @@
 				899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */,
 				C44F413D2152AA7000153F46 /* LLBaseTableViewCell.m in Sources */,
 				8915E9CA22420620001B7660 /* pwd2key.c in Sources */,
+				8925679622658D7400E89146 /* UITextFieldActions.m in Sources */,
 				C44F41642152AA7000153F46 /* LLAppInfoVC.m in Sources */,
 				89C022DD225CBAC400686898 /* NSString+KIFAdditions.m in Sources */,
 				8915E9BF22420620001B7660 /* ioapi.c in Sources */,
@@ -1780,6 +1805,7 @@
 				C44F41522152AA7000153F46 /* LLCrashCell.m in Sources */,
 				89C022F1225CC00300686898 /* UIApplication+FakeTouchPrivate.m in Sources */,
 				89C022D5225CBAC400686898 /* KIFUITestActor-ConditionalTests.m in Sources */,
+				892567992265B87C00E89146 /* UIButtonActions.m in Sources */,
 				C44F41272152AA7000153F46 /* NSObject+LL_Utils.m in Sources */,
 				C44F41262152AA7000153F46 /* NSString+LL_Utils.m in Sources */,
 				C44F41632152AA7000153F46 /* LLAppHelper.m in Sources */,

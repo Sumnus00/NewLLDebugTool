@@ -3,6 +3,23 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "__35-[KIFUITestActor tapScreenAtPoint:]_block_invoke:KIFUITestActor.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LLOtherVC randomTest]:LLOtherVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.accessibilityLabel">
+            </PersistentString>
+            <PersistentString
+               value = "[view superview]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[UIButtonActions tapButtonWithAccessibilityIdentifier:]:UIButtonActions.m">
+      </ContextState>
+      <ContextState
          contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
          <PersistentStrings>
             <PersistentString
@@ -14,10 +31,19 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
+         contextName = "-[UIView(TBUIAutoTest) labelForReuseView]:UIView+TBUIAutoTest.m">
          <PersistentStrings>
             <PersistentString
-               value = "dic.allValues.firstObject">
+               value = "cell.accessoryType">
+            </PersistentString>
+            <PersistentString
+               value = "cell.subviews">
+            </PersistentString>
+            <PersistentString
+               value = "cell.accessoryView">
+            </PersistentString>
+            <PersistentString
+               value = "cell.accessibilityIdentifier">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -31,9 +57,6 @@
                value = "NSClassFromString(className)">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[KIFUITestActor tapStatusBar]:KIFUITestActor.m">
       </ContextState>
       <ContextState
          contextName = "+[BackActions back]:BackActions.m">
@@ -50,7 +73,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__35-[KIFUITestActor tapScreenAtPoint:]_block_invoke:KIFUITestActor.m">
+         contextName = "__49-[KIFUITestActor tapAccessibilityElement:inView:]_block_invoke:KIFUITestActor.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.isUserInteractionActuallyEnabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[UIView(Tree) tree]:UIView+Tree.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "dic.allValues.firstObject">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[UIView(Tree) subviews:]:UIView+Tree.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.subviews">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[KIFUITestActor tapStatusBar]:KIFUITestActor.m">
       </ContextState>
       <ContextState
          contextName = "-[LLSandboxVC shareItemClick:]:LLSandboxVC.m">

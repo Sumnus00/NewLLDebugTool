@@ -15,6 +15,7 @@
 #import "UITabBarActions.h"
 #import "UINavigationBarActions.h"
 #import "UIAlertActions.h"
-
+#import "UITextFieldActions.h"
+#import "UIButtonActions.h"
 
 #endif /* Actions_h */
