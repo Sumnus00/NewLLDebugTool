@@ -12,7 +12,7 @@ target 'LLDebugToolDemo' do
 
   # Only for demo
   pod 'AFNetworking'
-  
+  pod "MJRefresh"
 
   target 'LLDebugToolDemoTests' do
     inherit! :search_paths

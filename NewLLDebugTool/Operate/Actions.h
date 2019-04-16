@@ -17,5 +17,7 @@
 #import "UIAlertActions.h"
 #import "UITextFieldActions.h"
 #import "UIButtonActions.h"
+#import "UISegmentedControlActions.h"
+#import "UICollectionViewActions.h"
 
 #endif /* Actions_h */

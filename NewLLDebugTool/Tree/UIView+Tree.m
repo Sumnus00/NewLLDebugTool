@@ -35,7 +35,9 @@
            [className isEqual:@"UISwitch"] ||
            [className isEqual:@"UINavigationBar"] ||
            [className isEqual:@"UITextField"] ||
-           [className isEqual:@"UIButton"]){
+           [className isEqual:@"UIButton"] ||
+           [className isEqual:@"UISegmentedControl"] ||
+           [className isEqual:@"UICollectionView"]){
             
             
             //UITableViewCell的默认UIButton无法点击，点击会发生crash。这个不影响button的功能，因为cell是可以点击的

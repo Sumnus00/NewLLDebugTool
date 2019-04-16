@@ -60,6 +60,10 @@
 		89256793226577D400E89146 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89256792226577D400E89146 /* LoginVC.m */; };
 		8925679622658D7400E89146 /* UITextFieldActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8925679522658D7400E89146 /* UITextFieldActions.m */; };
 		892567992265B87C00E89146 /* UIButtonActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567982265B87C00E89146 /* UIButtonActions.m */; };
+		8925679C2265FACD00E89146 /* UISegmentedControlActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8925679B2265FACD00E89146 /* UISegmentedControlActions.m */; };
+		892567A2226604C600E89146 /* CYXWaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8925679E226604C500E89146 /* CYXWaterFlowLayout.m */; };
+		892567A3226604C600E89146 /* CYXWaterflowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567A0226604C500E89146 /* CYXWaterflowController.m */; };
+		892567A622660D0300E89146 /* UICollectionViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567A522660D0300E89146 /* UICollectionViewActions.m */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -317,6 +321,14 @@
 		8925679522658D7400E89146 /* UITextFieldActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextFieldActions.m; sourceTree = "<group>"; };
 		892567972265B87C00E89146 /* UIButtonActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonActions.h; sourceTree = "<group>"; };
 		892567982265B87C00E89146 /* UIButtonActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonActions.m; sourceTree = "<group>"; };
+		8925679A2265FACD00E89146 /* UISegmentedControlActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UISegmentedControlActions.h; sourceTree = "<group>"; };
+		8925679B2265FACD00E89146 /* UISegmentedControlActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UISegmentedControlActions.m; sourceTree = "<group>"; };
+		8925679E226604C500E89146 /* CYXWaterFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYXWaterFlowLayout.m; sourceTree = "<group>"; };
+		8925679F226604C500E89146 /* CYXWaterFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYXWaterFlowLayout.h; sourceTree = "<group>"; };
+		892567A0226604C500E89146 /* CYXWaterflowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYXWaterflowController.m; sourceTree = "<group>"; };
+		892567A1226604C600E89146 /* CYXWaterflowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYXWaterflowController.h; sourceTree = "<group>"; };
+		892567A422660D0300E89146 /* UICollectionViewActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICollectionViewActions.h; sourceTree = "<group>"; };
+		892567A522660D0300E89146 /* UICollectionViewActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewActions.m; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -766,6 +778,10 @@
 				8925679522658D7400E89146 /* UITextFieldActions.m */,
 				892567972265B87C00E89146 /* UIButtonActions.h */,
 				892567982265B87C00E89146 /* UIButtonActions.m */,
+				8925679A2265FACD00E89146 /* UISegmentedControlActions.h */,
+				8925679B2265FACD00E89146 /* UISegmentedControlActions.m */,
+				892567A422660D0300E89146 /* UICollectionViewActions.h */,
+				892567A522660D0300E89146 /* UICollectionViewActions.m */,
 			);
 			path = Operate;
 			sourceTree = "<group>";
@@ -786,6 +802,17 @@
 				89256792226577D400E89146 /* LoginVC.m */,
 			);
 			path = DemoLogin;
+			sourceTree = "<group>";
+		};
+		8925679D2266047C00E89146 /* DemoCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				892567A1226604C600E89146 /* CYXWaterflowController.h */,
+				892567A0226604C500E89146 /* CYXWaterflowController.m */,
+				8925679F226604C500E89146 /* CYXWaterFlowLayout.h */,
+				8925679E226604C500E89146 /* CYXWaterFlowLayout.m */,
+			);
+			path = DemoCollectionView;
 			sourceTree = "<group>";
 		};
 		899AB6332201967E00D2FC57 /* Category */ = {
@@ -983,6 +1010,7 @@
 		C43BA809205AB095006307BE /* LLDebugToolDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8925679D2266047C00E89146 /* DemoCollectionView */,
 				89256790226577B000E89146 /* DemoLogin */,
 				899AB63722019F5F00D2FC57 /* DemoSwizzle */,
 				3629E3852136830A00226C79 /* DemoViewControllers */,
@@ -1560,6 +1588,7 @@
 				C43BA803205AB095006307BE /* Sources */,
 				C43BA804205AB095006307BE /* Frameworks */,
 				C43BA805205AB095006307BE /* Resources */,
+				C827041F775091A13BDB2206 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1692,6 +1721,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C827041F775091A13BDB2206 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LLDebugToolDemo/Pods-LLDebugToolDemo-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LLDebugToolDemo/Pods-LLDebugToolDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D88507F3CEB58B2391736619 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1755,9 +1802,11 @@
 				89C022DB225CBAC400686898 /* UIScreen+KIFAdditions.m in Sources */,
 				C44F413E2152AA7000153F46 /* LLBaseNavigationController.m in Sources */,
 				8915E9C222420620001B7660 /* minishared.c in Sources */,
+				892567A3226604C600E89146 /* CYXWaterflowController.m in Sources */,
 				C44F412B2152AA7000153F46 /* UIButton+LL_Utils.m in Sources */,
 				89C02302225CC39B00686898 /* UIImage+TBUIAutoTest.m in Sources */,
 				89256713225F3B6A00E89146 /* UINavigationBarActions.m in Sources */,
+				892567A622660D0300E89146 /* UICollectionViewActions.m in Sources */,
 				8915EB3422452786001B7660 /* UINavigationController+AutoRotate.m in Sources */,
 				89C02305225CC39B00686898 /* UIView+TBUIAutoTest.m in Sources */,
 				89C022D8225CBAC400686898 /* KIFTypist.m in Sources */,
@@ -1790,6 +1839,7 @@
 				3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */,
 				89C02303225CC39B00686898 /* TBUIAutoTest.m in Sources */,
 				8915E9C522420620001B7660 /* aescrypt.c in Sources */,
+				892567A2226604C600E89146 /* CYXWaterFlowLayout.m in Sources */,
 				C43BA81A205AB095006307BE /* main.m in Sources */,
 				899AB6492201A8F200D2FC57 /* PrivateNetwork+Swizzling.m in Sources */,
 				C44F413D2152AA7000153F46 /* LLBaseTableViewCell.m in Sources */,
@@ -1831,6 +1881,7 @@
 				89C022E9225CBAC400686898 /* NSError-KIFAdditions.m in Sources */,
 				C44F41422152AA7000153F46 /* LLNetworkModel.m in Sources */,
 				8925671B225F71D600E89146 /* FindTopController.m in Sources */,
+				8925679C2265FACD00E89146 /* UISegmentedControlActions.m in Sources */,
 				C44F41342152AA7000153F46 /* LLFilterDateView.m in Sources */,
 				C44F411E2152AA7000153F46 /* LLScreenshotView.m in Sources */,
 				8925670D225F22FD00E89146 /* UISwitchActions.m in Sources */,

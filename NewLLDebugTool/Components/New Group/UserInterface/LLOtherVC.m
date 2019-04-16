@@ -265,9 +265,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    
-    [UITableViewActions tapRowAtIndexPathWithAccessibilityIdentifier:@"TBUIAutoTest_Table"] ;
-    [BackActions back] ;
+    [UICollectionViewActions tapItemAtIndexPathWithAccessibilityIdentifier:@"collectionView"] ;
+   
 }
 
 - (void)randomMonkey{
@@ -300,7 +299,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
         [self touchesWithPoint:CGPointMake(x,y)];
     }else if(seed < 10){
-        NSLog(@"haleli >>>> test monkey,ui action") ;
         //40%的概率发送UI事件
         //查找控件树
         NSMutableArray *array = [FindElementTree tree] ;
@@ -334,10 +332,26 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                     NSLog(@"haleli >>>> test monkey,UINavigationBar tap action") ;
                     [UINavigationBarActions tapNavigationBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }else if([className isEqual:@"UITextField"]){
+                    NSLog(@"haleli >>>> test monkey,UITextFieldActions enter text action") ;
                     [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }else if([className isEqual:@"UIButton"]){
+                    NSLog(@"haleli >>>> test monkey,UIButton tap action") ;
                     [UIButtonActions tapButtonWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else{
+                }else if([className isEqual:@"UISegmentedControl"]){
+                    NSLog(@"haleli >>>> test monkey,UISegmentedControl tap action") ;
+                    [UISegmentedControlActions tapSegmentedControlWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else if([className isEqual:@"UICollectionView"]){
+                    int collectionSeed = arc4random() % 2 ;
+                    //50%执行活动操作
+                    if(collectionSeed<1){
+                        NSLog(@"haleli >>>> test monkey,UICollectionView swipe action") ;
+                        [UICollectionViewActions swipeCollectionViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                    }else{
+                        NSLog(@"haleli >>>> test monkey,UICollectionView tap action") ;
+                        [UICollectionViewActions tapItemAtIndexPathWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                    }
+                }
+                else{
                     NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;
                 }
             }else{

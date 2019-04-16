@@ -119,14 +119,20 @@
                 NSString* title = [((UITabBar*)self).items objectAtIndex:i].title ;
                 [((UITabBar*)self).items objectAtIndex:i].accessibilityLabel = [NSString stringWithFormat:@"TBUIAutoTest_TabBar_%@",title?: @""] ;
             }
+            
         }
         else if([self isKindOfClass:[UISegmentedControl class]]){
             long int count =  ((UISegmentedControl*)self).numberOfSegments ;
+            NSString *str = @"" ;
             for(int i=0 ;i<count ;i++){
                 NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
-                [[[[[((UISegmentedControl *)self) subviews] reverseObjectEnumerator] allObjects] objectAtIndex:i] setAccessibilityLabel:[NSString stringWithFormat:@"TBUIAutoTest_Segment_%@",title?: @""]] ;
+                str = [str stringByAppendingFormat:@"_%@",title?: @"" ] ;
             }
-            
+            for(int i=0;i<count;i++){
+                NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
+                [[[[[((UISegmentedControl *)self) subviews] reverseObjectEnumerator] allObjects] objectAtIndex:i] setAccessibilityLabel:[NSString stringWithFormat:@"TBUIAutoTest_Segment_%@_%@",str,title?: @""]] ;
+            }
+            labelStr = [@"TBUIAutoTest_UISegmentedControl" stringByAppendingFormat:@"%@",str];
         }
         
         NSString *label = [self labelForReuseView];
