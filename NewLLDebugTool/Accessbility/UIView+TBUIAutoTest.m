@@ -113,7 +113,7 @@
             labelStr = [NSString stringWithFormat:@"TBUIAutoTest_Switch_%ld",((UISwitch *)self).tag] ;
         }
         else if ([self isKindOfClass: [UITabBar class]]){
-            ((UITabBar*)self).accessibilityLabel = @"TBUIAutoTest_TabBar" ;
+            labelStr = @"TBUIAutoTest_TabBar" ;
             long int count =  ((UITabBar*)self).items.count ;
             for(int i=0 ; i<count ;i++){
                 NSString* title = [((UITabBar*)self).items objectAtIndex:i].title ;
