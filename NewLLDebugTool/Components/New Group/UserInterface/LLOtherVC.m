@@ -208,7 +208,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             if([LLDebugTool sharedTool].monkeyTimer == nil){
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
 //                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
-                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:[self lastWindow] tapUIApplication:true] ;
+                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:[UIApplication sharedApplication].keyWindow tapUIApplication:YES] ;
                 [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
 //                [self dismissViewControllerAnimated:YES completion:nil];
@@ -265,12 +265,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    [UICollectionViewActions tapItemAtIndexPathWithAccessibilityIdentifier:@"collectionView"] ;
-   
+    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:@"TBUIAutoTest_Property_account"] ;
+    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
+    [BackActions back] ;
 }
 
 - (void)randomMonkey{
-
+    
     int width = self.view.bounds.size.width ;
     int height = self.view.bounds.size.height ;
     int x = arc4random() % width  ;

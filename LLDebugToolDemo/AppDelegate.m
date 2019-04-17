@@ -30,6 +30,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    //    self.paws = [[MonkeyPaws alloc] initWithView:self.window tapUIApplication:YES] ;
+    
+    
     //####################### Color Style #######################//
     // Uncomment one of the following lines to change the color configuration.
     // [LLConfig sharedConfig].colorStyle = LLConfigColorStyleSystem;
