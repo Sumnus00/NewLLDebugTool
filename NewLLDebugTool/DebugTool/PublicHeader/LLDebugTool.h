@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LLConfig.h"
+#import "MonkeyPaws.h"
 
 #ifndef LLSharedDebugTool
 #define LLSharedDebugTool [LLDebugTool sharedTool]
@@ -157,6 +158,6 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
 /**
  monkey 小手
  */
-@property(strong ,nonatomic) id paws ;
-
+//@property(strong ,nonatomic) id paws ;
+@property (strong, nonatomic) MonkeyPaws *paws;
 @end

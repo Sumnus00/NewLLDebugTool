@@ -25,6 +25,9 @@
 #import "PrivateNetwork.h"
 #import "LoginVC.h"
 #import "UIView-Debugging.h"
+#import "WKWebViewVC.h"
+#import "UIWebViewVC.h"
+
 static NSString *const kCellID = @"cellID";
 
 @interface ViewController () <UITableViewDelegate , UITableViewDataSource>
@@ -125,7 +128,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return 11;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -158,6 +161,9 @@ static NSString *const kCellID = @"cellID";
     }
     if(section == 9){
         return 1 ;
+    }
+    if(section == 10){
+        return 2 ;
     }
     return 0;
 }
@@ -238,6 +244,14 @@ static NSString *const kCellID = @"cellID";
         cell.textLabel.text = NSLocalizedString(@"test.login",nil) ;
     }else if(indexPath.section==9){
         cell.textLabel.text = NSLocalizedString(@"test.tree", nil) ;
+    }else if(indexPath.section == 10){
+        if (indexPath.row == 0) {
+            cell.textLabel.text = NSLocalizedString(@"test.uiwebview", nil);
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else if (indexPath.row == 1) {
+            cell.textLabel.text = NSLocalizedString(@"test.wkwebview", nil);
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
     }
     return cell;
 }
@@ -284,8 +298,15 @@ static TestLogViewController *extracted() {
         LoginVC *vc = [[LoginVC alloc] init] ;
         [self.navigationController pushViewController:vc animated:YES] ;
     }else if(indexPath.section == 9){
-        NSLog(@"testtest") ;
         [UIView printViewHierarchy] ;
+    }else if(indexPath.section == 10){
+        if (indexPath.row == 0) {
+            UIWebViewVC *vc = [[UIWebViewVC alloc] init] ;
+            [self.navigationController pushViewController:vc animated:YES] ;
+        } else if (indexPath.row == 1) {
+            WKWebViewVC *vc = [[WKWebViewVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
     [self.tableView reloadData];
@@ -312,6 +333,8 @@ static TestLogViewController *extracted() {
         return @"login" ;
     } else if(section == 9){
         return @"tree" ;
+    } else if(section == 10){
+        return @"webview" ;
     }
     return nil;
 }

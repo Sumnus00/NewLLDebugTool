@@ -47,7 +47,6 @@
 		8915E9CA22420620001B7660 /* pwd2key.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B622420620001B7660 /* pwd2key.c */; };
 		8915E9CB22420620001B7660 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9B722420620001B7660 /* aestab.c */; };
 		8915E9CC22420620001B7660 /* LLZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915E9BB22420620001B7660 /* LLZipArchive.m */; };
-		8915EAF32244867E001B7660 /* MonkeyPaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8915EAF22244867E001B7660 /* MonkeyPaws.swift */; };
 		8915EB3322452786001B7660 /* UITabBarController+AutoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915EB3022452785001B7660 /* UITabBarController+AutoRotate.m */; };
 		8915EB3422452786001B7660 /* UINavigationController+AutoRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8915EB3222452786001B7660 /* UINavigationController+AutoRotate.m */; };
 		89256707225D985200E89146 /* UITableViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89256706225D985200E89146 /* UITableViewActions.m */; };
@@ -64,6 +63,12 @@
 		892567A2226604C600E89146 /* CYXWaterFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8925679E226604C500E89146 /* CYXWaterFlowLayout.m */; };
 		892567A3226604C600E89146 /* CYXWaterflowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567A0226604C500E89146 /* CYXWaterflowController.m */; };
 		892567A622660D0300E89146 /* UICollectionViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567A522660D0300E89146 /* UICollectionViewActions.m */; };
+		893799192268250600FDF142 /* WKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 893799182268250600FDF142 /* WKWebViewVC.m */; };
+		8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8937991B226830FF00FDF142 /* UIWebViewVC.m */; };
+		8980765522700E3700B28780 /* GestureHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980764C22700E3600B28780 /* GestureHash.m */; };
+		8980765622700E3700B28780 /* Gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980764D22700E3600B28780 /* Gesture.m */; };
+		8980765722700E3700B28780 /* MonkeyPaws.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980764F22700E3700B28780 /* MonkeyPaws.m */; };
+		8980765822700E3700B28780 /* UIApplication+Monkey.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980765322700E3700B28780 /* UIApplication+Monkey.m */; };
 		899AB6362201978300D2FC57 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6352201978300D2FC57 /* NSObject+Swizzling.m */; };
 		899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB63922019F6D00D2FC57 /* NSMutableArray+Swizzling.m */; };
 		899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 899AB6452201A6A500D2FC57 /* PrivateNetwork.m */; };
@@ -295,7 +300,6 @@
 		8915E9BA22420620001B7660 /* LLZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLZipArchive.h; sourceTree = "<group>"; };
 		8915E9BB22420620001B7660 /* LLZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLZipArchive.m; sourceTree = "<group>"; };
 		8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LLDebugToolDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		8915EAF22244867E001B7660 /* MonkeyPaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkeyPaws.swift; sourceTree = "<group>"; };
 		8915EB2F22452785001B7660 /* UITabBarController+AutoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+AutoRotate.h"; sourceTree = "<group>"; };
 		8915EB3022452785001B7660 /* UITabBarController+AutoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+AutoRotate.m"; sourceTree = "<group>"; };
 		8915EB3122452786001B7660 /* UINavigationController+AutoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+AutoRotate.h"; sourceTree = "<group>"; };
@@ -329,6 +333,19 @@
 		892567A1226604C600E89146 /* CYXWaterflowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYXWaterflowController.h; sourceTree = "<group>"; };
 		892567A422660D0300E89146 /* UICollectionViewActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICollectionViewActions.h; sourceTree = "<group>"; };
 		892567A522660D0300E89146 /* UICollectionViewActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewActions.m; sourceTree = "<group>"; };
+		893799172268250600FDF142 /* WKWebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKWebViewVC.h; sourceTree = "<group>"; };
+		893799182268250600FDF142 /* WKWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewVC.m; sourceTree = "<group>"; };
+		8937991A226830FF00FDF142 /* UIWebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIWebViewVC.h; sourceTree = "<group>"; };
+		8937991B226830FF00FDF142 /* UIWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIWebViewVC.m; sourceTree = "<group>"; };
+		8980764C22700E3600B28780 /* GestureHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureHash.m; sourceTree = "<group>"; };
+		8980764D22700E3600B28780 /* Gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gesture.m; sourceTree = "<group>"; };
+		8980764E22700E3600B28780 /* MonkeyPaws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonkeyPaws.h; sourceTree = "<group>"; };
+		8980764F22700E3700B28780 /* MonkeyPaws.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonkeyPaws.m; sourceTree = "<group>"; };
+		8980765022700E3700B28780 /* OCMonkeyPaws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMonkeyPaws.h; sourceTree = "<group>"; };
+		8980765122700E3700B28780 /* UIApplication+Monkey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Monkey.h"; sourceTree = "<group>"; };
+		8980765222700E3700B28780 /* GestureHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHash.h; sourceTree = "<group>"; };
+		8980765322700E3700B28780 /* UIApplication+Monkey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Monkey.m"; sourceTree = "<group>"; };
+		8980765422700E3700B28780 /* Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gesture.h; sourceTree = "<group>"; };
 		899AB6342201978300D2FC57 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
 		899AB6352201978300D2FC57 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		899AB63822019F6D00D2FC57 /* NSMutableArray+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Swizzling.h"; sourceTree = "<group>"; };
@@ -749,14 +766,6 @@
 			path = aes;
 			sourceTree = "<group>";
 		};
-		8915EAD52243D2D1001B7660 /* SwiftMonkeyPaws */ = {
-			isa = PBXGroup;
-			children = (
-				8915EAF22244867E001B7660 /* MonkeyPaws.swift */,
-			);
-			path = SwiftMonkeyPaws;
-			sourceTree = "<group>";
-		};
 		89256704225D96AA00E89146 /* Operate */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,6 +822,33 @@
 				8925679E226604C500E89146 /* CYXWaterFlowLayout.m */,
 			);
 			path = DemoCollectionView;
+			sourceTree = "<group>";
+		};
+		893799162268249C00FDF142 /* DemoWebView */ = {
+			isa = PBXGroup;
+			children = (
+				893799172268250600FDF142 /* WKWebViewVC.h */,
+				893799182268250600FDF142 /* WKWebViewVC.m */,
+				8937991A226830FF00FDF142 /* UIWebViewVC.h */,
+				8937991B226830FF00FDF142 /* UIWebViewVC.m */,
+			);
+			path = DemoWebView;
+			sourceTree = "<group>";
+		};
+		8980764B22700DF400B28780 /* OCMonkeyPaws */ = {
+			isa = PBXGroup;
+			children = (
+				8980765422700E3700B28780 /* Gesture.h */,
+				8980764D22700E3600B28780 /* Gesture.m */,
+				8980765222700E3700B28780 /* GestureHash.h */,
+				8980764C22700E3600B28780 /* GestureHash.m */,
+				8980764E22700E3600B28780 /* MonkeyPaws.h */,
+				8980764F22700E3700B28780 /* MonkeyPaws.m */,
+				8980765022700E3700B28780 /* OCMonkeyPaws.h */,
+				8980765122700E3700B28780 /* UIApplication+Monkey.h */,
+				8980765322700E3700B28780 /* UIApplication+Monkey.m */,
+			);
+			path = OCMonkeyPaws;
 			sourceTree = "<group>";
 		};
 		899AB6332201967E00D2FC57 /* Category */ = {
@@ -1010,6 +1046,7 @@
 		C43BA809205AB095006307BE /* LLDebugToolDemo */ = {
 			isa = PBXGroup;
 			children = (
+				893799162268249C00FDF142 /* DemoWebView */,
 				8925679D2266047C00E89146 /* DemoCollectionView */,
 				89256790226577B000E89146 /* DemoLogin */,
 				899AB63722019F5F00D2FC57 /* DemoSwizzle */,
@@ -1035,11 +1072,11 @@
 			isa = PBXGroup;
 			children = (
 				8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */,
+				8980764B22700DF400B28780 /* OCMonkeyPaws */,
 				89256704225D96AA00E89146 /* Operate */,
 				89C022F9225CC31C00686898 /* Accessbility */,
 				89C022F2225CC20700686898 /* Tree */,
 				89C02290225CBAC300686898 /* KIF */,
-				8915EAD52243D2D1001B7660 /* SwiftMonkeyPaws */,
 				8915E99322420620001B7660 /* SSZipArchive */,
 				891414DE2222A06E00974B52 /* ZSFakeTouch */,
 				899AB6332201967E00D2FC57 /* Category */,
@@ -1784,6 +1821,7 @@
 				89C022D0225CBAC400686898 /* KIFTextInputTraitsOverrides.m in Sources */,
 				8915E9C422420620001B7660 /* hmac.c in Sources */,
 				C44F414A2152AA7000153F46 /* LLNetworkContentVC.m in Sources */,
+				893799192268250600FDF142 /* WKWebViewVC.m in Sources */,
 				89C022E0225CBAC400686898 /* UIScrollView-KIFAdditions.m in Sources */,
 				C44F41562152AA7000153F46 /* LLSandboxModel.m in Sources */,
 				899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */,
@@ -1800,6 +1838,7 @@
 				C44F41232152AA7000153F46 /* LLScreenshotActionView.m in Sources */,
 				89256793226577D400E89146 /* LoginVC.m in Sources */,
 				89C022DB225CBAC400686898 /* UIScreen+KIFAdditions.m in Sources */,
+				8980765722700E3700B28780 /* MonkeyPaws.m in Sources */,
 				C44F413E2152AA7000153F46 /* LLBaseNavigationController.m in Sources */,
 				8915E9C222420620001B7660 /* minishared.c in Sources */,
 				892567A3226604C600E89146 /* CYXWaterflowController.m in Sources */,
@@ -1825,6 +1864,7 @@
 				C44F41622152AA7000153F46 /* UIDevice+LL_Swizzling.m in Sources */,
 				C44F415A2152AA7000153F46 /* YWFilePreviewController.m in Sources */,
 				C44F41542152AA7000153F46 /* LLCrashContentVC.m in Sources */,
+				8980765822700E3700B28780 /* UIApplication+Monkey.m in Sources */,
 				3629E3942136830A00226C79 /* TestWindowStyleViewController.m in Sources */,
 				C44F41572152AA7000153F46 /* LLSandboxCell.m in Sources */,
 				C44F414D2152AA7000153F46 /* LLCrashSignalModel.m in Sources */,
@@ -1866,6 +1906,7 @@
 				369D093B2153855D001C9D4B /* LLLogFilterView.m in Sources */,
 				C44F41252152AA7000153F46 /* LLRoute.m in Sources */,
 				C44F413A2152AA7000153F46 /* LLFilterEventView.m in Sources */,
+				8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */,
 				89C022EB225CBAC400686898 /* CALayer-KIFAdditions.m in Sources */,
 				36A0007720BE863700AE8810 /* NetTool.m in Sources */,
 				C44F411A2152AA7000153F46 /* LLConfig.m in Sources */,
@@ -1889,6 +1930,7 @@
 				C44F41332152AA7000153F46 /* LLFilterTextFieldModel.m in Sources */,
 				C44F41432152AA7000153F46 /* LLNetworkHelper.m in Sources */,
 				89C022D3225CBAC400686898 /* KIFUIViewTestActor.m in Sources */,
+				8980765522700E3700B28780 /* GestureHash.m in Sources */,
 				C44F41652152AA7000153F46 /* LLDebugTool.m in Sources */,
 				8915E9C822420620001B7660 /* aes_ni.c in Sources */,
 				8915E9BD22420620001B7660 /* unzip.c in Sources */,
@@ -1914,6 +1956,7 @@
 				891414F02222A06E00974B52 /* ZSFakeTouch.m in Sources */,
 				369D09332153853A001C9D4B /* LLLogModel.m in Sources */,
 				C44F41502152AA7000153F46 /* LLCrashContentCell.m in Sources */,
+				8980765622700E3700B28780 /* Gesture.m in Sources */,
 				8915E9CB22420620001B7660 /* aestab.c in Sources */,
 				89C022E1225CBAC400686898 /* UIView-Debugging.m in Sources */,
 				C44F411B2152AA7000153F46 /* LLStorageManager.m in Sources */,
@@ -1933,7 +1976,6 @@
 				369D09342153853A001C9D4B /* LLLogHelper.m in Sources */,
 				C44F413B2152AA7000153F46 /* LLFilterLabelModel.m in Sources */,
 				C44F41292152AA7000153F46 /* LLTool.m in Sources */,
-				8915EAF32244867E001B7660 /* MonkeyPaws.swift in Sources */,
 				89C022EA225CBAC400686898 /* NSPredicate+KIFAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1997,7 +2039,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 638C108F891808060C7ED772 /* Pods-LLDebugToolDemoTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -2014,7 +2055,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7630F57F70FEB38A6705DA1A /* Pods-LLDebugToolDemoTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -2031,7 +2071,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADC0AD5C07B446A537F680CF /* Pods-LLDebugToolDemoUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;
@@ -2049,7 +2088,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 34ACB65EBB30B1CA47DFC39F /* Pods-LLDebugToolDemoUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WGX6J37S3T;

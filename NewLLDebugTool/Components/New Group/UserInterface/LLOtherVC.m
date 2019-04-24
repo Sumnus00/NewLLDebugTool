@@ -15,13 +15,13 @@
 #import "FindElementTree.h"
 #import "KIF.h"
 #import "Actions.h"
-
-#ifdef ISLOCAL
-#import "LLDebugToolDemo-Swift.h"
-#else
-//#import "NewLLDebugTool-Swift.h"
-#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
-#endif
+#import "MonkeyPaws.h"
+//#ifdef ISLOCAL
+//#import "LLDebugToolDemo-Swift.h"
+//#else
+////#import "NewLLDebugTool-Swift.h"
+//#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
+//#endif
 
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
@@ -208,8 +208,28 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             if([LLDebugTool sharedTool].monkeyTimer == nil){
                 NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
 //                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
-                UIWindow *theWindow = [[UIApplication sharedApplication] delegate].window ;
-                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:theWindow tapUIApplication:YES] ;
+//                UIWindow *theWindow = [[UIApplication sharedApplication] delegate].window ;
+//                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:theWindow tapUIApplication:YES] ;
+                
+                
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
+                    if (delegate) {
+                        UIWindow *window;
+                        if ([delegate respondsToSelector:@selector(window)]) {
+                            window = [delegate window];
+                        } else {
+                            NSLog(@"Delegate does not respond to selector (window).");
+                            window = [[UIApplication sharedApplication] windows][0];
+                        }
+                         [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:window tapUIApplication:YES];
+                    } else {
+                         NSLog(@"Delegate is nil.");
+                    }
+                });
+                
+                
                 [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
 //                [self dismissViewControllerAnimated:YES completion:nil];
@@ -266,9 +286,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:@"TBUIAutoTest_Property_account"] ;
-    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
-    [BackActions back] ;
+//    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:@"TBUIAutoTest_Property_account"] ;
+//    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
+//    [BackActions back] ;
+    [system deactivateAppForDuration:1] ;
 }
 
 - (void)randomMonkey{

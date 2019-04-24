@@ -11,14 +11,14 @@
 // If you integrate with cocoapods, used #import <LLDebug.h>.
 #import "LLDebug.h"
 
+////#import "LLDebugToolDemo-Swift.h"
+//
+//#ifdef ISLOCAL
 //#import "LLDebugToolDemo-Swift.h"
-
-#ifdef ISLOCAL
-#import "LLDebugToolDemo-Swift.h"
-#else
-#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
-#endif
-
+//#else
+//#import "NewLLDebugTool/NewLLDebugTool-Swift.h"
+//#endif
+#import "MonkeyPaws.h"
 
 @interface AppDelegate ()
 
@@ -30,7 +30,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    //    self.paws = [[MonkeyPaws alloc] initWithView:self.window tapUIApplication:YES] ;
+//    self.paws = [[MonkeyPaws alloc] initWithView:self.window tapUIApplication:YES] ;
     
     
     //####################### Color Style #######################//

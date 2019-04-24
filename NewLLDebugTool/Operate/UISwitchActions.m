@@ -24,8 +24,5 @@
             [tester setSwitch:view element:element On:TRUE] ;
         }
     }
-    
-    
-   
 }
 @end
