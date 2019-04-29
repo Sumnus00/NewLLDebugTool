@@ -128,7 +128,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 11;
+    return 12;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -165,6 +165,10 @@ static NSString *const kCellID = @"cellID";
     if(section == 10){
         return 2 ;
     }
+    if(section == 11){
+        return 1 ;
+    }
+    
     return 0;
 }
 
@@ -252,6 +256,8 @@ static NSString *const kCellID = @"cellID";
             cell.textLabel.text = NSLocalizedString(@"test.wkwebview", nil);
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+    }else if(indexPath.section == 11){
+        cell.textLabel.text = NSLocalizedString(@"test.block", nil) ;
     }
     return cell;
 }
@@ -307,6 +313,26 @@ static TestLogViewController *extracted() {
             WKWebViewVC *vc = [[WKWebViewVC alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
+    }else if(indexPath.section==11){
+        [[LLDebugTool sharedTool] addCocosCreatorTree:^(){
+            return @{@"test":@"test"} ;
+        }];
+        if([LLDebugTool sharedTool].ccTree) {
+            
+            NSDictionary *dictionary = [LLDebugTool sharedTool].ccTree() ;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                               options:0
+                                                                 error:nil];
+            NSString *jsonString = @"";
+            if (jsonData) {
+                jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            }
+            jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            NSLog(@"%@",jsonString) ;
+        }else{
+            NSLog(@"no implementation") ;
+        }
     }
     
     [self.tableView reloadData];
@@ -335,6 +361,8 @@ static TestLogViewController *extracted() {
         return @"tree" ;
     } else if(section == 10){
         return @"webview" ;
+    } else if(section ==11){
+        return @"block" ;
     }
     return nil;
 }

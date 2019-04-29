@@ -388,6 +388,8 @@ static NSString * const kLLMonkeyKey = @"ll_monkey_key";
     
 }
 
-
+- (void)addCocosCreatorTree:(CocosCreatorTree)ccTree{
+    self.ccTree = ccTree ;
+}
 
 @end

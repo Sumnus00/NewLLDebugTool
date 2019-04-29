@@ -160,4 +160,12 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
  */
 //@property(strong ,nonatomic) id paws ;
 @property (strong, nonatomic) MonkeyPaws *paws;
+
+
+/**
+ 获取CocosCreator控件树
+ */
+typedef NSDictionary* (^CocosCreatorTree)(void) ;
+@property (nonatomic, copy,nonnull) CocosCreatorTree ccTree;
+- (void)addCocosCreatorTree:(CocosCreatorTree)ccTree;
 @end

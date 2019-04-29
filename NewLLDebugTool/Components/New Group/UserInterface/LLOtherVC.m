@@ -289,7 +289,21 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 //    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:@"TBUIAutoTest_Property_account"] ;
 //    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
 //    [BackActions back] ;
-    [system deactivateAppForDuration:1] ;
+    if([LLDebugTool sharedTool].ccTree){
+        NSDictionary *dictionary = [LLDebugTool sharedTool].ccTree() ;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                           options:0
+                                                             error:nil];
+        NSString *jsonString = @"";
+        if (jsonData) {
+            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        }
+        jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSLog(@"%@",jsonString) ;
+    }else{
+        NSLog(@"cocos creator don't get tree") ;
+    }
 }
 
 - (void)randomMonkey{
@@ -325,7 +339,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         //40%的概率发送UI事件
         //查找控件树
         NSMutableArray *array = [FindElementTree tree] ;
-
+        
         if(array.count>0){
             int random = arc4random() % [array count] ;
             
