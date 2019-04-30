@@ -40,7 +40,8 @@ typedef NS_ENUM(NSUInteger, LLConfigSwitchTag) {
     LLConfigSwitchTagMock,
     LLConfigSwitchTagLowNetwork,
     LLConfigSwitchTagLowMemory,
-    LLConfigSwitchTagMonkey,
+    LLConfigSwitchTagIOSMonkey,
+    LLConfigSwitchTagCocosMonkey,
     LLConfigSwitchTagExpected,
 };
 

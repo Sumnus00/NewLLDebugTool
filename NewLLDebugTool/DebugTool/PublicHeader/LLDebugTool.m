@@ -137,7 +137,8 @@ static LLDebugTool *_instance = nil;
     [self saveMockSwitch:NO];
     [self saveLowNetworkSwitch:NO];
     [self saveLowMemorySwitch:NO];
-    [self saveMonkeySwitch:NO];
+    [self saveIOSMonkeySwitch:NO];
+    [self saveCocosMonkeySwitch:NO];
   
     // Set Default
     _packetCount = 0.0 ;
@@ -303,7 +304,8 @@ static LLDebugTool *_instance = nil;
 static NSString * const kLLMockKey = @"ll_mock_key";
 static NSString * const kLLLowNetworkKey = @"ll_low_network_key";
 static NSString * const kLLLowMemoryKey = @"ll_low_memory_key";
-static NSString * const kLLMonkeyKey = @"ll_monkey_key";
+static NSString * const kLLIOSMonkeyKey = @"ll_ios_monkey_key";
+static NSString * const kLLCocosMonkeyKey = @"ll_cocos_monkey_key";
 
 
 - (void)saveMockSwitch:(BOOL)on{
@@ -340,14 +342,25 @@ static NSString * const kLLMonkeyKey = @"ll_monkey_key";
     return [defaults boolForKey:kLLLowMemoryKey];
 }
 
-- (BOOL)monkeySwitch{
+- (BOOL)iosMonkeySwitch{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults boolForKey:kLLMonkeyKey];
+    return [defaults boolForKey:kLLIOSMonkeyKey];
 }
 
-- (void)saveMonkeySwitch:(BOOL)on{
+- (void)saveIOSMonkeySwitch:(BOOL)on{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:on forKey:kLLMonkeyKey];
+    [defaults setBool:on forKey:kLLIOSMonkeyKey];
+    [defaults synchronize];
+}
+
+- (BOOL)cocosMonkeySwitch{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:kLLCocosMonkeyKey];
+}
+
+- (void)saveCocosMonkeySwitch:(BOOL)on{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:on forKey:kLLCocosMonkeyKey];
     [defaults synchronize];
 }
 

@@ -118,7 +118,8 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
 /**
  monkey定时器
  */
-@property(nonatomic,strong,nullable)NSTimer *monkeyTimer;
+@property(nonatomic,strong,nullable)NSTimer *iosMonkeyTimer;
+@property(nonatomic,strong,nullable)NSTimer *cocosMonkeyTimer;
 
 /**
 更多功能的 switch开关
@@ -136,9 +137,13 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
 
 - (BOOL)lowMemorySwitch;
 
-- (BOOL)monkeySwitch;
+- (BOOL)iosMonkeySwitch;
 
-- (void)saveMonkeySwitch:(BOOL)on;
+- (void)saveIOSMonkeySwitch:(BOOL)on;
+
+- (BOOL)cocosMonkeySwitch;
+
+- (void)saveCocosMonkeySwitch:(BOOL)on;
 /**
  丢包率相关api
  */

@@ -53,7 +53,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 - (NSArray *)monkeyInfos {
-    return @[@{@"Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
+    return @[@{@"ios Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]},
+             @{@"cocos Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
 }
 
 - (NSArray *)expectedInfos {
@@ -122,9 +123,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         myswitch.tag = LLConfigSwitchTagLowMemory ;
         myswitch.on = [[LLDebugTool sharedTool] lowMemorySwitch] ;
         cell.accessoryView = myswitch ;
-    }else if([cell.textLabel.text isEqualToString:@"Monkey开关"]){
-        myswitch.tag = LLConfigSwitchTagMonkey ;
-        myswitch.on = [[LLDebugTool sharedTool] monkeySwitch] ;
+    }else if([cell.textLabel.text isEqualToString:@"ios Monkey开关"]){
+        myswitch.tag = LLConfigSwitchTagIOSMonkey ;
+        myswitch.on = [[LLDebugTool sharedTool] iosMonkeySwitch] ;
+        cell.accessoryView = myswitch ;
+    }else if([cell.textLabel.text isEqualToString:@"cocos Monkey开关"]){
+        myswitch.tag = LLConfigSwitchTagCocosMonkey ;
+        myswitch.on = [[LLDebugTool sharedTool] cocosMonkeySwitch] ;
         cell.accessoryView = myswitch ;
     }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
         cell.accessoryType = UITableViewCellAccessoryNone ;
@@ -178,6 +183,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 - (void)switchAction:(id)sender{
     UISwitch *switchButton = (UISwitch*)sender;
     BOOL isButtonOn = [switchButton isOn];
+    static dispatch_once_t onceToken;
     
     if(switchButton.tag == LLConfigSwitchTagMock){
         [[LLDebugTool sharedTool] saveMockSwitch:isButtonOn];
@@ -202,17 +208,15 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 [LLDebugTool sharedTool].memoryThread  = nil;
             }
         }
-    }else if(switchButton.tag == LLConfigSwitchTagMonkey){
-        [[LLDebugTool sharedTool] saveMonkeySwitch:isButtonOn];
+    }else if(switchButton.tag == LLConfigSwitchTagIOSMonkey){
+        [[LLDebugTool sharedTool] saveIOSMonkeySwitch:isButtonOn];
         if(isButtonOn){
-            if([LLDebugTool sharedTool].monkeyTimer == nil){
-                NSLog(@"haleli >>> switch_monkey : %@",@"开始") ;
+            if([LLDebugTool sharedTool].iosMonkeyTimer == nil){
+                NSLog(@"haleli >>> switch_ios_monkey : %@",@"开始") ;
 //                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
 //                UIWindow *theWindow = [[UIApplication sharedApplication] delegate].window ;
 //                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:theWindow tapUIApplication:YES] ;
                 
-                
-                static dispatch_once_t onceToken;
                 dispatch_once(&onceToken, ^{
                     id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
                     if (delegate) {
@@ -230,15 +234,49 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 });
                 
                 
-                [LLDebugTool sharedTool].monkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomMonkey) userInfo:nil repeats:YES];
+                [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomIOSMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
 //                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
-            if([LLDebugTool sharedTool].monkeyTimer != nil){
-                NSLog(@"haleli >>> switch_monkey : %@",@"关闭") ;
-                [[LLDebugTool sharedTool].monkeyTimer  invalidate];
-                [LLDebugTool sharedTool].monkeyTimer  = nil;
+            if([LLDebugTool sharedTool].iosMonkeyTimer != nil){
+                NSLog(@"haleli >>> switch_ios_monkey : %@",@"关闭") ;
+                [[LLDebugTool sharedTool].iosMonkeyTimer  invalidate];
+                [LLDebugTool sharedTool].iosMonkeyTimer  = nil;
+            }
+        }
+    }else if(switchButton.tag == LLConfigSwitchTagCocosMonkey){
+        [[LLDebugTool sharedTool] saveCocosMonkeySwitch:isButtonOn];
+        if(isButtonOn){
+            if([LLDebugTool sharedTool].cocosMonkeyTimer == nil){
+                NSLog(@"haleli >>> switch_cocos_monkey : %@",@"开始") ;
+                
+                dispatch_once(&onceToken, ^{
+                    id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
+                    if (delegate) {
+                        UIWindow *window;
+                        if ([delegate respondsToSelector:@selector(window)]) {
+                            window = [delegate window];
+                        } else {
+                            NSLog(@"Delegate does not respond to selector (window).");
+                            window = [[UIApplication sharedApplication] windows][0];
+                        }
+                        [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:window tapUIApplication:YES];
+                    } else {
+                        NSLog(@"Delegate is nil.");
+                    }
+                });
+                
+                
+                [LLDebugTool sharedTool].cocosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomCocosMonkey) userInfo:nil repeats:YES];
+                NSLog(@"haleli >>> 界面消失") ;
+                //                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }else{
+            if([LLDebugTool sharedTool].cocosMonkeyTimer != nil){
+                NSLog(@"haleli >>> switch_cocos_monkey : %@",@"关闭") ;
+                [[LLDebugTool sharedTool].cocosMonkeyTimer  invalidate];
+                [LLDebugTool sharedTool].cocosMonkeyTimer  = nil;
             }
         }
     }
@@ -286,27 +324,90 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-//    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:@"TBUIAutoTest_Property_account"] ;
-//    [UIButtonActions tapButtonWithAccessibilityIdentifier:@"TBUIAutoTest_Property_loginButton"] ;
-//    [BackActions back] ;
     if([LLDebugTool sharedTool].ccTree){
-        NSDictionary *dictionary = [LLDebugTool sharedTool].ccTree() ;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                           options:0
-                                                             error:nil];
-        NSString *jsonString = @"";
-        if (jsonData) {
-            jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        }
-        jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        NSLog(@"%@",jsonString) ;
+        
+        double width = MAX([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
+        double height = MIN([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
+        
+        NSDictionary *tree = [LLDebugTool sharedTool].ccTree() ;
+        NSArray *children = [tree objectForKey:@"children"] ;
+        
+        int random = arc4random() % [children count] ;
+        NSDictionary *child = [children objectAtIndex:random] ;
+        
+        NSDictionary *payload = [child objectForKey:@"payload"] ;
+        NSLog(@"click name : %@" , [child objectForKey:@"name"]) ;
+        NSArray *pos = [payload objectForKey:@"pos"] ;
+        
+        
+        double x = [[pos objectAtIndex:0] doubleValue] * width;
+        double y = [[pos objectAtIndex:1] doubleValue] * height;
+        
+        [self touchesWithPoint:CGPointMake(x,y)];
+        
     }else{
         NSLog(@"cocos creator don't get tree") ;
     }
 }
 
-- (void)randomMonkey{
+- (void)randomCocosMonkey{
+    int width = self.view.bounds.size.width ;
+    int height = self.view.bounds.size.height ;
+    int x = arc4random() % width  ;
+    int y = arc4random() % height ;
+    int seed = arc4random() % 10 ;
+    
+    //10%的概率发送滑动事件
+    if(seed<1){
+        int endX = arc4random() % width ;
+        int endY = arc4random() % height ;
+        NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
+        [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
+      //10%的概率发送click事件
+    }else if(seed<2){
+        NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
+        [self touchesWithPoint:CGPointMake(x,y)];
+    }else if(seed < 10){
+        if([LLDebugTool sharedTool].ccTree){
+            
+            double width = MAX([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
+            double height = MIN([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
+            
+            NSDictionary *tree = [LLDebugTool sharedTool].ccTree() ;
+        
+            NSArray *children = [tree objectForKey:@"children"] ;
+            
+            NSDictionary *child = nil ;
+             //10%的返回事件
+            if(seed < 3){
+                if([children count] > 0){
+                    child = [children lastObject] ;
+                }
+            //70%的概率发送UI事件
+            }else{
+                if([children count] > 1){
+                    int random = arc4random() % ([children count] - 1);
+                    child = [children objectAtIndex:random] ;
+                }
+            }
+            
+            NSDictionary *payload = [child objectForKey:@"payload"] ;
+            NSLog(@"click name : %@" , [child objectForKey:@"name"]) ;
+            NSArray *pos = [payload objectForKey:@"pos"] ;
+            
+            
+            double x = [[pos objectAtIndex:0] doubleValue] * width;
+            double y = [[pos objectAtIndex:1] doubleValue] * height;
+            [self touchesWithPoint:CGPointMake(x,y)];
+            
+            
+        }else{
+            NSLog(@"cocos creator don't get tree") ;
+        }
+    }
+}
+
+- (void)randomIOSMonkey{
     
     int width = self.view.bounds.size.width ;
     int height = self.view.bounds.size.height ;
