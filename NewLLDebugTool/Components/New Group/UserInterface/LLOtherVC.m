@@ -381,18 +381,27 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
              //10%的返回事件
             if(seed < 3){
                 if([children count] > 0){
+                    
                     child = [children lastObject] ;
+                    NSLog(@"haleli >>>> test monkey,back action , click name : %@ ",[child objectForKey:@"name"]) ;
+                    if(![[[child objectForKey:@"name"] lowercaseString] containsString:@"back"]){
+                        [self touchesWithPoint:CGPointMake(344,32)];
+                        return ;
+                    }
+                   
                 }
             //70%的概率发送UI事件
             }else{
                 if([children count] > 1){
                     int random = arc4random() % ([children count] - 1);
                     child = [children objectAtIndex:random] ;
+                    
+                    NSLog(@"haleli >>>> test monkey,ui action , click name : %@ ",[child objectForKey:@"name"]) ;
                 }
             }
             
             NSDictionary *payload = [child objectForKey:@"payload"] ;
-            NSLog(@"click name : %@" , [child objectForKey:@"name"]) ;
+
             NSArray *pos = [payload objectForKey:@"pos"] ;
             
             
