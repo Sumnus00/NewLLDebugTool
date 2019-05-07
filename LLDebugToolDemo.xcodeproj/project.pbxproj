@@ -109,6 +109,7 @@
 		89C02303225CC39B00686898 /* TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C022FD225CC39A00686898 /* TBUIAutoTest.m */; };
 		89C02304225CC39B00686898 /* UIResponder+TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C022FF225CC39B00686898 /* UIResponder+TBUIAutoTest.m */; };
 		89C02305225CC39B00686898 /* UIView+TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C02301225CC39B00686898 /* UIView+TBUIAutoTest.m */; };
+		89CCD9D822817345001848E5 /* monkey_driver.js in Resources */ = {isa = PBXBuildFile; fileRef = 89CCD9D722817345001848E5 /* monkey_driver.js */; };
 		89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FE073B22166154009BCD99 /* LLOtherVC.m */; };
 		C43BA80C205AB095006307BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80B205AB095006307BE /* AppDelegate.m */; };
 		C43BA80F205AB095006307BE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80E205AB095006307BE /* ViewController.m */; };
@@ -430,6 +431,7 @@
 		89C022FF225CC39B00686898 /* UIResponder+TBUIAutoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+TBUIAutoTest.m"; sourceTree = "<group>"; };
 		89C02300225CC39B00686898 /* UIImage+TBUIAutoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TBUIAutoTest.h"; sourceTree = "<group>"; };
 		89C02301225CC39B00686898 /* UIView+TBUIAutoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TBUIAutoTest.m"; sourceTree = "<group>"; };
+		89CCD9D722817345001848E5 /* monkey_driver.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = monkey_driver.js; sourceTree = "<group>"; };
 		89FE073A22166154009BCD99 /* LLOtherVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOtherVC.h; sourceTree = "<group>"; };
 		89FE073B22166154009BCD99 /* LLOtherVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOtherVC.m; sourceTree = "<group>"; };
 		ADC0AD5C07B446A537F680CF /* Pods-LLDebugToolDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -994,6 +996,14 @@
 			path = Accessbility;
 			sourceTree = "<group>";
 		};
+		89CCD9D622817322001848E5 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				89CCD9D722817345001848E5 /* monkey_driver.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
 		89FE0734221651C6009BCD99 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,6 +1082,7 @@
 			isa = PBXGroup;
 			children = (
 				8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */,
+				89CCD9D622817322001848E5 /* js */,
 				8980764B22700DF400B28780 /* OCMonkeyPaws */,
 				89256704225D96AA00E89146 /* Operate */,
 				89C022F9225CC31C00686898 /* Accessbility */,
@@ -1710,6 +1721,7 @@
 				369D09372153853A001C9D4B /* LLLogCell.xib in Resources */,
 				C44F412C2152AA7000153F46 /* LLDebugTool.bundle in Resources */,
 				C44F41382152AA7000153F46 /* LLFilterTextFieldCell.xib in Resources */,
+				89CCD9D822817345001848E5 /* monkey_driver.js in Resources */,
 				C43BA817205AB095006307BE /* LaunchScreen.storyboard in Resources */,
 				C44F41352152AA7000153F46 /* LLFilterLabelCell.xib in Resources */,
 				C43BA814205AB095006307BE /* Assets.xcassets in Resources */,

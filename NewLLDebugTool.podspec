@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc        = true
   s.public_header_files = "NewLLDebugTool/**/*.h"
   s.source_files	    = "NewLLDebugTool/**/*.{h,m,swift,c}"
-  s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle}"
+  s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle,js}"
   s.swift_version = "4.2"
   # s.xcconfig = {
   #     "GCC_PREPROCESSOR_DEFINITIONS" => "ISLOCAL=2"
