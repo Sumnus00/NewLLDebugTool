@@ -147,14 +147,22 @@ static LLScreenshotHelper *_instance = nil;
 {
     CGSize imageSize = CGSizeZero;
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (UIInterfaceOrientationIsPortrait(orientation))
-        imageSize = [UIScreen mainScreen].bounds.size;
+    if (UIInterfaceOrientationIsPortrait(orientation)){
+        UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
+        // 支持竖屏
+        if(vc.supportedInterfaceOrientations & UIInterfaceOrientationMaskPortrait ){
+            imageSize = [UIScreen mainScreen].bounds.size;
+        }else{
+            //不支持竖屏
+            imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+        }
+    }
     else
         imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-    
+
     UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
+
     NSMutableArray *windows = [[NSMutableArray alloc] initWithArray:[[UIApplication sharedApplication] windows]];
     UIView *statusBar = [[UIApplication sharedApplication] valueForKey:@"_statusBar"];
     if ([statusBar isKindOfClass:[UIView class]]) {
@@ -191,10 +199,10 @@ static LLScreenshotHelper *_instance = nil;
             CGContextRestoreGState(context);
         }
     }
-    
+
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     return UIImagePNGRepresentation(image);
 }
 

@@ -54,15 +54,30 @@
 
 - (void)show {
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
-    self.frame = CGRectMake(0, LL_SCREEN_HEIGHT, LL_SCREEN_WIDTH, LL_SCREEN_HEIGHT);
-    [window addSubview:self];
-    [LLRoute hideWindow];
-    [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.frame = CGRectMake(0, 0, LL_SCREEN_WIDTH, LL_SCREEN_HEIGHT);
-    } completion:^(BOOL finished) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
-    }];
+    UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
+    // 支持竖屏
+    if(vc.supportedInterfaceOrientations & UIInterfaceOrientationMaskPortrait ){
+        self.frame = CGRectMake(0, LL_SCREEN_HEIGHT, LL_SCREEN_WIDTH, LL_SCREEN_HEIGHT);
+        [window addSubview:self];
+        [LLRoute hideWindow];
+        [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.frame = CGRectMake(0, 0, LL_SCREEN_WIDTH, LL_SCREEN_HEIGHT);
+        } completion:^(BOOL finished) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+        }];
+    }else{
+        //不支持竖屏
+        self.frame = CGRectMake(0, LL_SCREEN_HEIGHT, LL_SCREEN_WIDTH, LL_SCREEN_HEIGHT);
+        [window addSubview:self];
+        [LLRoute hideWindow];
+        [UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.frame = CGRectMake(0, 0,MAX(LL_SCREEN_WIDTH,LL_SCREEN_HEIGHT), MIN(LL_SCREEN_WIDTH,LL_SCREEN_HEIGHT));
+        } completion:^(BOOL finished) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+        }];
+    }
 }
 
 - (void)hide {
@@ -152,19 +167,41 @@
     
     CGFloat rate = 0.1;
     CGFloat toolBarHeight = 80;
-    CGFloat imgViewWidth = (1 - rate * 2) * LL_SCREEN_WIDTH;
-    CGFloat imgViewHeight = (1 - rate * 2) * LL_SCREEN_HEIGHT;
-    CGFloat imgViewTop = (rate * 2 * LL_SCREEN_HEIGHT - toolBarHeight) / 2.0;
-    // Init ImageView
-    self.imageView = [[LLScreenshotImageView alloc] initWithFrame:CGRectMake(rate * LL_SCREEN_WIDTH, imgViewTop, imgViewWidth, imgViewHeight)];
-    self.originalImageFrame = self.imageView.frame;
-    self.imageView.image = image;
-    [self addSubview:self.imageView];
     
-    // Init Controls
-    self.toolBar = [[LLScreenshotToolbar alloc] initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y + self.imageView.frame.size.height + 10, self.imageView.frame.size.width, toolBarHeight)];
-    self.toolBar.delegate = self;
-    [self addSubview:self.toolBar];
+    UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
+    // 支持竖屏
+    if(vc.supportedInterfaceOrientations & UIInterfaceOrientationMaskPortrait ){
+        CGFloat imgViewWidth = (1 - rate * 2) * LL_SCREEN_WIDTH;
+        CGFloat imgViewHeight = (1 - rate * 2) * LL_SCREEN_HEIGHT;
+        CGFloat imgViewTop = (rate * 2 * LL_SCREEN_HEIGHT - toolBarHeight) / 2.0;
+        // Init ImageView
+        self.imageView = [[LLScreenshotImageView alloc] initWithFrame:CGRectMake(rate * LL_SCREEN_WIDTH, imgViewTop, imgViewWidth, imgViewHeight)];
+        
+        self.originalImageFrame = self.imageView.frame;
+        self.imageView.image = image;
+        [self addSubview:self.imageView];
+        
+        // Init Controls
+        self.toolBar = [[LLScreenshotToolbar alloc] initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y + self.imageView.frame.size.height + 10, self.imageView.frame.size.width, toolBarHeight)];
+        self.toolBar.delegate = self;
+        [self addSubview:self.toolBar];
+    }else{
+        //不支持竖屏
+        CGFloat imgViewWidth = (1 - rate * 2) * MAX(LL_SCREEN_WIDTH,LL_SCREEN_HEIGHT);
+        CGFloat imgViewHeight = (1 - rate * 2) * MIN(LL_SCREEN_WIDTH,LL_SCREEN_HEIGHT);
+        CGFloat imgViewTop = (rate * 2 * MIN(LL_SCREEN_WIDTH,LL_SCREEN_HEIGHT) - toolBarHeight) / 2.0;
+        // Init ImageView
+        self.imageView = [[LLScreenshotImageView alloc] initWithFrame:CGRectMake(rate * MAX(LL_SCREEN_WIDTH,LL_SCREEN_HEIGHT), imgViewTop, imgViewWidth, imgViewHeight)];
+        
+        self.originalImageFrame = self.imageView.frame;
+        self.imageView.image = image;
+        [self addSubview:self.imageView];
+        
+        // Init Controls
+        self.toolBar = [[LLScreenshotToolbar alloc] initWithFrame:CGRectMake(self.imageView.frame.origin.x, self.imageView.frame.origin.y + self.imageView.frame.size.height + 10, self.imageView.frame.size.width, toolBarHeight)];
+        self.toolBar.delegate = self;
+        [self addSubview:self.toolBar];
+    }
 }
 
 - (UIImage *)convertViewToImage:(UIView *)view{
