@@ -57,6 +57,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
              @{@"cocos Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
 }
 
+- (NSArray *)privateNetworkInfos {
+    return @[@{@"私有包显示开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
+}
+
 - (NSArray *)expectedInfos {
     return @[@{@"更多功能" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleNone]}];
 }
@@ -73,10 +77,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     //monkey
     NSArray *monkey = [self monkeyInfos] ;
     
+    //private network
+    NSArray *privateNetwork = [self privateNetworkInfos] ;
+    
     // expected
     NSArray *expected = [self expectedInfos];
     
-    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,expected, nil];
+    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,privateNetwork,expected, nil];
 }
 
 - (void)initial {
@@ -131,7 +138,12 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         myswitch.tag = LLConfigSwitchTagCocosMonkey ;
         myswitch.on = [[LLDebugTool sharedTool] cocosMonkeySwitch] ;
         cell.accessoryView = myswitch ;
-    }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
+    }else if([cell.textLabel.text isEqualToString:@"私有包显示开关"]){
+        myswitch.tag = LLConfigSwitchTagPrivateNetwork ;
+        myswitch.on = [[LLDebugTool sharedTool] privateNetworkSwitch];
+        cell.accessoryView = myswitch ;
+    }
+    else if([cell.textLabel.text isEqualToString:@"更多功能"]){
         cell.accessoryType = UITableViewCellAccessoryNone ;
     }
     
@@ -166,7 +178,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         view.textLabel.text = @"低资源模拟功能";
     }else if (section == 2){
         view.textLabel.text = @"monkey功能" ;
-    }else if (section == 3) {
+    }else if(section == 3){
+        view.textLabel.text = @"私有包显示功能" ;
+    }else if (section == 4) {
         view.textLabel.text = @"敬请期待";
     }
     return view;
@@ -187,8 +201,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     
     if(switchButton.tag == LLConfigSwitchTagMock){
         [[LLDebugTool sharedTool] saveMockSwitch:isButtonOn];
-        NSLog(@"haleli >>> 界面消失") ;
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        NSLog(@"haleli >>> 界面消失") ;
+//        [self dismissViewControllerAnimated:YES completion:nil];
         
     }else if(switchButton.tag == LLConfigSwitchTagLowNetwork){
         [[LLDebugTool sharedTool] saveLowNetworkSwitch:isButtonOn];
@@ -236,7 +250,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 
                 [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomIOSMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
-//                [self dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
             if([LLDebugTool sharedTool].iosMonkeyTimer != nil){
@@ -270,7 +284,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 
                 [LLDebugTool sharedTool].cocosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomCocosMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
-                //                [self dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
             if([LLDebugTool sharedTool].cocosMonkeyTimer != nil){
@@ -279,6 +293,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 [LLDebugTool sharedTool].cocosMonkeyTimer  = nil;
             }
         }
+    }else if(switchButton.tag == LLConfigSwitchTagPrivateNetwork){
+        [[LLDebugTool sharedTool] savePrivateNetworkSwitch:isButtonOn];
     }
 }
 

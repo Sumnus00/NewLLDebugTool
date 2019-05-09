@@ -144,6 +144,10 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
 - (BOOL)cocosMonkeySwitch;
 
 - (void)saveCocosMonkeySwitch:(BOOL)on;
+
+- (BOOL)privateNetworkSwitch ;
+
+- (void)savePrivateNetworkSwitch:(BOOL)on ;
 /**
  丢包率相关api
  */

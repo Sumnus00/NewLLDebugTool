@@ -139,6 +139,7 @@ static LLDebugTool *_instance = nil;
     [self saveLowMemorySwitch:NO];
     [self saveIOSMonkeySwitch:NO];
     [self saveCocosMonkeySwitch:NO];
+    [self savePrivateNetworkSwitch:NO];
   
     // Set Default
     _packetCount = 0.0 ;
@@ -306,6 +307,7 @@ static NSString * const kLLLowNetworkKey = @"ll_low_network_key";
 static NSString * const kLLLowMemoryKey = @"ll_low_memory_key";
 static NSString * const kLLIOSMonkeyKey = @"ll_ios_monkey_key";
 static NSString * const kLLCocosMonkeyKey = @"ll_cocos_monkey_key";
+static NSString * const kLLPrivateNetworkKey = @"ll_private_network_key";
 
 
 - (void)saveMockSwitch:(BOOL)on{
@@ -361,6 +363,17 @@ static NSString * const kLLCocosMonkeyKey = @"ll_cocos_monkey_key";
 - (void)saveCocosMonkeySwitch:(BOOL)on{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:on forKey:kLLCocosMonkeyKey];
+    [defaults synchronize];
+}
+
+- (BOOL)privateNetworkSwitch{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:kLLPrivateNetworkKey];
+}
+
+- (void)savePrivateNetworkSwitch:(BOOL)on{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:on forKey:kLLPrivateNetworkKey];
     [defaults synchronize];
 }
 
