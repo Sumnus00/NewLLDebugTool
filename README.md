@@ -22,8 +22,8 @@ NewLLDebugTool is the extension of [LLDebugTool](https://github.com/HDB-Li/LLDeb
 
 #### Objective - C
 
-> 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , :git => 'https://github.com/didiaodanding/NewLLDebugTool.git`, If only you want to use it in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' ,:git => 'https://github.com/didiaodanding/NewLLDebugTool.git ,:configurations => ['Debug']`.
-> 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}', :git => 'https://github.com/didiaodanding/NewLLDebugTool.git`, Currently supported components are
+> 1. Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' , '~> 1.3.1'`, If only you want to use it in Debug mode, Add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool' ,'~> 1.3.1' ,:configurations => ['Debug']`.
+> 2. If you want to use a module, add a pod entry for NewLLDebugTool to your Podfile `pod 'NewLLDebugTool/{Component Name}', '1.3.1'`, Currently supported components are
 > ```
 > pod 'NewLLDebugTool/AppInfo'
 > pod 'NewLLDebugTool/Crash'
@@ -201,6 +201,13 @@ NewLLDebugTool requirements is same with LLDebugTool, it works on iOS 8+ and req
 
 
 ## Change-log
+
+### 2019-5-15(tag:1.3.1)
+>1. add cocos monkey function
+>2. fix screenshot compatible with horizontal and vertical screen
+>3. change swift monkey paws to oc monkey paws
+>4. ios monkey add element recognition function 
+
 
 ### 2019-4-09(tag:1.3.0)
 >1. add share folder function

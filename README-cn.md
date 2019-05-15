@@ -24,8 +24,8 @@ NewLLDebugTool是在开源工程[LLDebugTool](https://github.com/HDB-Li/LLDebugT
 
 #### Objective - C
 
-> 1. 添加 `pod 'NewLLDebugTool' , :git => 'https://github.com/didiaodanding/NewLLDebugTool.git` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' , :git => 'https://github.com/didiaodanding/NewLLDebugTool.git ,:configurations => ['Debug']` 到你的Podfile里 。
-> 2. 如果你想使用某一个模块，可是添加`pod 'NewLLDebugTool/{Component Name}' , :git => 'https://github.com/didiaodanding/NewLLDebugTool.git`到你的Podfile里。目前支持的组件有
+> 1. 添加 `pod 'NewLLDebugTool' ,  '~> 1.3.1'` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' ,  '~> 1.3.1' ,:configurations => ['Debug']` 到你的Podfile里 。
+> 2. 如果你想使用某一个模块，可是添加`pod 'NewLLDebugTool/{Component Name}' ,  '1.3.1'`到你的Podfile里。目前支持的组件有
 > ```
 > pod 'NewLLDebugTool/AppInfo'
 > pod 'NewLLDebugTool/Crash'
@@ -203,6 +203,12 @@ NewLLDebugTool的要求和LLDebugToo是一致的。NewLLDebugTool需要运行在
 - 可以发邮件到[1404012659@qq.com](1404012659@qq.com)
 
 ## 更新日志
+
+### 2019-5-15(tag:1.3.1)
+>1. 增加cocos monkey功能
+>2. 修复横竖屏截图兼容性问题
+>3. 使用oc重写了swift monkey paws
+>4. ios monkey 增加控件识别能力
 
 ### 2019-4-09(tag:1.3.0)
 >1. 可以分享文件夹
