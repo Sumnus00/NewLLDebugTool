@@ -9,6 +9,6 @@
 #ifndef OCMonkeyPaws_h
 #define OCMonkeyPaws_h
 
-#import <OCMonkeyPaws/MonkeyPaws.h>
+#import "MonkeyPaws.h"
 
 #endif /* OCMonkeyPaws_h */
