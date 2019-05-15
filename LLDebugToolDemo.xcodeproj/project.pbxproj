@@ -300,7 +300,6 @@
 		8915E9B922420620001B7660 /* fileenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fileenc.h; sourceTree = "<group>"; };
 		8915E9BA22420620001B7660 /* LLZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLZipArchive.h; sourceTree = "<group>"; };
 		8915E9BB22420620001B7660 /* LLZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLZipArchive.m; sourceTree = "<group>"; };
-		8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LLDebugToolDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		8915EB2F22452785001B7660 /* UITabBarController+AutoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+AutoRotate.h"; sourceTree = "<group>"; };
 		8915EB3022452785001B7660 /* UITabBarController+AutoRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+AutoRotate.m"; sourceTree = "<group>"; };
 		8915EB3122452786001B7660 /* UINavigationController+AutoRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+AutoRotate.h"; sourceTree = "<group>"; };
@@ -1081,7 +1080,6 @@
 		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
-				8915EA4A224323D9001B7660 /* LLDebugToolDemo-Bridging-Header.h */,
 				89CCD9D622817322001848E5 /* js */,
 				8980764B22700DF400B28780 /* OCMonkeyPaws */,
 				89256704225D96AA00E89146 /* Operate */,
@@ -2248,7 +2246,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "NewLLDebugTool/LLDebugToolDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -2279,7 +2277,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "NewLLDebugTool/LLDebugToolDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
