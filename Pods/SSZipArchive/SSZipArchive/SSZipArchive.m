@@ -1,40 +1,44 @@
 //
-//  LLZipArchive.m
-//  LLZipArchive
+//  SSZipArchive.m
+//  SSZipArchive
 //
 //  Created by Sam Soffes on 7/21/10.
 //  Copyright (c) Sam Soffes 2010-2015. All rights reserved.
 //
 
-#import "LLZipArchive.h"
-#include "unzip.h"
-#include "zip.h"
-#include "minishared.h"
+#import "SSZipArchive.h"
+#include "minizip/unzip.h"
+#include "minizip/zip.h"
+#include "minizip/minishared.h"
 
 #include <sys/stat.h>
 
-NSString *const LLZipArchiveErrorDomain = @"LLZipArchiveErrorDomain";
+NSString *const SSZipArchiveErrorDomain = @"SSZipArchiveErrorDomain";
 
 #define CHUNK 16384
 
-int _zipOpenEntryLL(zipFile entry, NSString *name, const zip_fileinfo *zipfi, int level, NSString *password, BOOL aes);
-BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
+int _zipOpenEntry(zipFile entry, NSString *name, const zip_fileinfo *zipfi, int level, NSString *password, BOOL aes);
+BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
 
 #ifndef API_AVAILABLE
 // Xcode 7- compatibility
 #define API_AVAILABLE(...)
 #endif
 
-@interface NSData(LLZipArchive)
+@interface NSData(SSZipArchive)
 - (NSString *)_base64RFC4648 API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 - (NSString *)_hexString;
 @end
 
-@interface LLZipArchive ()
+@interface NSString (SSZipArchive)
+- (NSString *)_sanitizedPath;
+@end
+
+@interface SSZipArchive ()
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 @end
 
-@implementation LLZipArchive
+@implementation SSZipArchive
 {
     /// path for zip file
     NSString *_path;
@@ -50,27 +54,36 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
         return NO;
     }
     
+    BOOL passwordProtected = NO;
     int ret = unzGoToFirstFile(zip);
     if (ret == UNZ_OK) {
         do {
             ret = unzOpenCurrentFile(zip);
             if (ret != UNZ_OK) {
-                return NO;
+                // attempting with an arbitrary password to workaround `unzOpenCurrentFile` limitation on AES encrypted files
+                ret = unzOpenCurrentFilePassword(zip, "");
+                unzCloseCurrentFile(zip);
+                if (ret == UNZ_OK || ret == UNZ_BADPASSWORD) {
+                    passwordProtected = YES;
+                }
+                break;
             }
             unz_file_info fileInfo = {};
             ret = unzGetCurrentFileInfo(zip, &fileInfo, NULL, 0, NULL, 0, NULL, 0);
+            unzCloseCurrentFile(zip);
             if (ret != UNZ_OK) {
-                return NO;
+                break;
             } else if ((fileInfo.flag & 1) == 1) {
-                return YES;
+                passwordProtected = YES;
+                break;
             }
             
-            unzCloseCurrentFile(zip);
             ret = unzGoToNextFile(zip);
         } while (ret == UNZ_OK);
     }
     
-    return NO;
+    unzClose(zip);
+    return passwordProtected;
 }
 
 + (BOOL)isPasswordValidForArchiveAtPath:(NSString *)path password:(NSString *)pw error:(NSError **)error {
@@ -81,13 +94,15 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     zipFile zip = unzOpen(path.fileSystemRepresentation);
     if (zip == NULL) {
         if (error) {
-            *error = [NSError errorWithDomain:LLZipArchiveErrorDomain
-                                         code:LLZipArchiveErrorCodeFailedOpenZipFile
+            *error = [NSError errorWithDomain:SSZipArchiveErrorDomain
+                                         code:SSZipArchiveErrorCodeFailedOpenZipFile
                                      userInfo:@{NSLocalizedDescriptionKey: @"failed to open zip file"}];
         }
         return NO;
     }
 
+    // Initialize passwordValid to YES (No password required)
+    BOOL passwordValid = YES;
     int ret = unzGoToFirstFile(zip);
     if (ret == UNZ_OK) {
         do {
@@ -99,22 +114,24 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
             if (ret != UNZ_OK) {
                 if (ret != UNZ_BADPASSWORD) {
                     if (error) {
-                        *error = [NSError errorWithDomain:LLZipArchiveErrorDomain
-                                                     code:LLZipArchiveErrorCodeFailedOpenFileInZip
+                        *error = [NSError errorWithDomain:SSZipArchiveErrorDomain
+                                                     code:SSZipArchiveErrorCodeFailedOpenFileInZip
                                                  userInfo:@{NSLocalizedDescriptionKey: @"failed to open first file in zip file"}];
                     }
                 }
-                return NO;
+                passwordValid = NO;
+                break;
             }
             unz_file_info fileInfo = {};
             ret = unzGetCurrentFileInfo(zip, &fileInfo, NULL, 0, NULL, 0, NULL, 0);
             if (ret != UNZ_OK) {
                 if (error) {
-                    *error = [NSError errorWithDomain:LLZipArchiveErrorDomain
-                                                 code:LLZipArchiveErrorCodeFileInfoNotLoadable
+                    *error = [NSError errorWithDomain:SSZipArchiveErrorDomain
+                                                 code:SSZipArchiveErrorCodeFileInfoNotLoadable
                                              userInfo:@{NSLocalizedDescriptionKey: @"failed to retrieve info for file"}];
                 }
-                return NO;
+                passwordValid = NO;
+                break;
             } else if ((fileInfo.flag & 1) == 1) {
                 unsigned char buffer[10] = {0};
                 int readBytes = unzReadCurrentFile(zip, buffer, (unsigned)MIN(10UL,fileInfo.uncompressed_size));
@@ -123,14 +140,16 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                     // Let's assume other errors are caused by Content Not Readable
                     if (readBytes != Z_DATA_ERROR) {
                         if (error) {
-                            *error = [NSError errorWithDomain:LLZipArchiveErrorDomain
-                                                         code:LLZipArchiveErrorCodeFileContentNotReadable
+                            *error = [NSError errorWithDomain:SSZipArchiveErrorDomain
+                                                         code:SSZipArchiveErrorCodeFileContentNotReadable
                                                      userInfo:@{NSLocalizedDescriptionKey: @"failed to read contents of file entry"}];
                         }
                     }
-                    return NO;
+                    passwordValid = NO;
+                    break;
                 }
-                return YES;
+                passwordValid = YES;
+                break;
             }
             
             unzCloseCurrentFile(zip);
@@ -138,8 +157,8 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
         } while (ret == UNZ_OK);
     }
     
-    // No password required
-    return YES;
+    unzClose(zip);
+    return passwordValid;
 }
 
 #pragma mark - Unzipping
@@ -154,7 +173,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:overwrite password:password error:error delegate:nil progressHandler:nil completionHandler:nil];
 }
 
-+ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination delegate:(nullable id<LLZipArchiveDelegate>)delegate
++ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination delegate:(nullable id<SSZipArchiveDelegate>)delegate
 {
     return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:YES password:nil error:nil delegate:delegate progressHandler:nil completionHandler:nil];
 }
@@ -164,7 +183,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
               overwrite:(BOOL)overwrite
                password:(nullable NSString *)password
                   error:(NSError **)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate
 {
     return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:overwrite password:password error:error delegate:delegate progressHandler:nil completionHandler:nil];
 }
@@ -193,7 +212,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
               overwrite:(BOOL)overwrite
                password:(nullable NSString *)password
                   error:(NSError * *)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate
 {
     return [self unzipFileAtPath:path toDestination:destination preserveAttributes:preserveAttributes overwrite:overwrite password:password error:error delegate:delegate progressHandler:nil completionHandler:nil];
 }
@@ -204,7 +223,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
               overwrite:(BOOL)overwrite
                password:(nullable NSString *)password
                   error:(NSError **)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate
         progressHandler:(void (^_Nullable)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
       completionHandler:(void (^_Nullable)(NSString *path, BOOL succeeded, NSError * _Nullable error))completionHandler
 {
@@ -218,7 +237,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
          nestedZipLevel:(NSInteger)nestedZipLevel
                password:(nullable NSString *)password
                   error:(NSError **)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate
         progressHandler:(void (^_Nullable)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
       completionHandler:(void (^_Nullable)(NSString *path, BOOL succeeded, NSError * _Nullable error))completionHandler
 {
@@ -226,7 +245,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     if (path.length == 0 || destination.length == 0)
     {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"received invalid argument(s)"};
-        NSError *err = [NSError errorWithDomain:LLZipArchiveErrorDomain code:LLZipArchiveErrorCodeInvalidArguments userInfo:userInfo];
+        NSError *err = [NSError errorWithDomain:SSZipArchiveErrorDomain code:SSZipArchiveErrorCodeInvalidArguments userInfo:userInfo];
         if (error)
         {
             *error = err;
@@ -243,7 +262,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     if (zip == NULL)
     {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"failed to open zip file"};
-        NSError *err = [NSError errorWithDomain:LLZipArchiveErrorDomain code:LLZipArchiveErrorCodeFailedOpenZipFile userInfo:userInfo];
+        NSError *err = [NSError errorWithDomain:SSZipArchiveErrorDomain code:SSZipArchiveErrorCodeFailedOpenZipFile userInfo:userInfo];
         if (error)
         {
             *error = err;
@@ -256,7 +275,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     }
     
     NSDictionary * fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
-    unsigned long long fileSize = [fileAttributes[NSFileSize] unsignedLongLongValue];
+    unsigned long long fileSize = [[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];
     unsigned long long currentPosition = 0;
     
     unz_global_info globalInfo = {};
@@ -268,7 +287,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     if (ret != UNZ_OK && ret != UNZ_END_OF_LIST_OF_FILE)
     {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"failed to open first file in zip file"};
-        NSError *err = [NSError errorWithDomain:LLZipArchiveErrorDomain code:LLZipArchiveErrorCodeFailedOpenFileInZip userInfo:userInfo];
+        NSError *err = [NSError errorWithDomain:SSZipArchiveErrorDomain code:SSZipArchiveErrorCodeFailedOpenFileInZip userInfo:userInfo];
         if (error)
         {
             *error = err;
@@ -277,6 +296,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
         {
             completionHandler(nil, NO, err);
         }
+        unzClose(zip);
         return NO;
     }
     
@@ -299,8 +319,9 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     NSError *unzippingError;
     do {
         currentFileNumber++;
-        if (ret == UNZ_END_OF_LIST_OF_FILE)
+        if (ret == UNZ_END_OF_LIST_OF_FILE) {
             break;
+        }
         @autoreleasepool {
             if (password.length == 0) {
                 ret = unzOpenCurrentFile(zip);
@@ -309,7 +330,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
             }
             
             if (ret != UNZ_OK) {
-                unzippingError = [NSError errorWithDomain:@"LLZipArchiveErrorDomain" code:LLZipArchiveErrorCodeFailedOpenFileInZip userInfo:@{NSLocalizedDescriptionKey: @"failed to open file in zip file"}];
+                unzippingError = [NSError errorWithDomain:@"SSZipArchiveErrorDomain" code:SSZipArchiveErrorCodeFailedOpenFileInZip userInfo:@{NSLocalizedDescriptionKey: @"failed to open file in zip file"}];
                 success = NO;
                 break;
             }
@@ -320,7 +341,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
             
             ret = unzGetCurrentFileInfo(zip, &fileInfo, NULL, 0, NULL, 0, NULL, 0);
             if (ret != UNZ_OK) {
-                unzippingError = [NSError errorWithDomain:@"LLZipArchiveErrorDomain" code:LLZipArchiveErrorCodeFileInfoNotLoadable userInfo:@{NSLocalizedDescriptionKey: @"failed to retrieve info for file"}];
+                unzippingError = [NSError errorWithDomain:@"SSZipArchiveErrorDomain" code:SSZipArchiveErrorCodeFileInfoNotLoadable userInfo:@{NSLocalizedDescriptionKey: @"failed to retrieve info for file"}];
                 success = NO;
                 unzCloseCurrentFile(zip);
                 break;
@@ -357,19 +378,18 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
             unzGetCurrentFileInfo(zip, &fileInfo, filename, fileInfo.size_filename + 1, NULL, 0, NULL, 0);
             filename[fileInfo.size_filename] = '\0';
             
-            BOOL fileIsSymbolicLinkLL = _fileIsSymbolicLinkLL(&fileInfo);
+            BOOL fileIsSymbolicLink = _fileIsSymbolicLink(&fileInfo);
             
-            NSString * strPath = [LLZipArchive _filenameStringWithCString:filename size:fileInfo.size_filename];
+            NSString * strPath = [SSZipArchive _filenameStringWithCString:filename
+                                                          version_made_by:fileInfo.version
+                                                     general_purpose_flag:fileInfo.flag
+                                                                     size:fileInfo.size_filename];
             if ([strPath hasPrefix:@"__MACOSX/"]) {
                 // ignoring resource forks: https://superuser.com/questions/104500/what-is-macosx-folder
                 unzCloseCurrentFile(zip);
                 ret = unzGoToNextFile(zip);
                 free(filename);
                 continue;
-            }
-            if (!strPath.length) {
-                // if filename data is unsalvageable, we default to currentFileNumber
-                strPath = @(currentFileNumber).stringValue;
             }
             
             // Check if it contains directory
@@ -379,9 +399,11 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
             }
             free(filename);
             
-            // Contains a path
-            if ([strPath rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"/\\"]].location != NSNotFound) {
-                strPath = [strPath stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+            // Sanitize paths in the file name.
+            strPath = [strPath _sanitizedPath];
+            if (!strPath.length) {
+                // if filename data is unsalvageable, we default to currentFileNumber
+                strPath = @(currentFileNumber).stringValue;
             }
             
             NSString *fullPath = [destination stringByAppendingPathComponent:strPath];
@@ -397,7 +419,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
             } else {
                 [fileManager createDirectoryAtPath:fullPath.stringByDeletingLastPathComponent withIntermediateDirectories:YES attributes:directoryAttr error:&err];
             }
-            if (nil != err) {
+            if (err != nil) {
                 if ([err.domain isEqualToString:NSCocoaErrorDomain] &&
                     err.code == 640) {
                     unzippingError = err;
@@ -405,7 +427,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                     success = NO;
                     break;
                 }
-                NSLog(@"[LLZipArchive] Error: %@", err.localizedDescription);
+                NSLog(@"[SSZipArchive] Error: %@", err.localizedDescription);
             }
             
             if ([fileManager fileExistsAtPath:fullPath] && !isDirectory && !overwrite) {
@@ -415,7 +437,9 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                 continue;
             }
             
-            if (!fileIsSymbolicLinkLL) {
+            if (isDirectory && !fileIsSymbolicLink) {
+                // nothing to read/write for a directory
+            } else if (!fileIsSymbolicLink) {
                 // ensure we are not creating stale file entries
                 int readBytes = unzReadCurrentFile(zip, buffer, 4096);
                 if (readBytes >= 0) {
@@ -425,9 +449,9 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                             if (0 == fwrite(buffer, readBytes, 1, fp)) {
                                 if (ferror(fp)) {
                                     NSString *message = [NSString stringWithFormat:@"Failed to write file (check your free space)"];
-                                    NSLog(@"[LLZipArchive] %@", message);
+                                    NSLog(@"[SSZipArchive] %@", message);
                                     success = NO;
-                                    unzippingError = [NSError errorWithDomain:@"LLZipArchiveErrorDomain" code:LLZipArchiveErrorCodeFailedToWriteFile userInfo:@{NSLocalizedDescriptionKey: message}];
+                                    unzippingError = [NSError errorWithDomain:@"SSZipArchiveErrorDomain" code:SSZipArchiveErrorCodeFailedToWriteFile userInfo:@{NSLocalizedDescriptionKey: message}];
                                     break;
                                 }
                             }
@@ -469,7 +493,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                                 if (attr) {
                                     if (![fileManager setAttributes:attr ofItemAtPath:fullPath error:nil]) {
                                         // Can't set attributes
-                                        NSLog(@"[LLZipArchive] Failed to set attributes - whilst setting modification date");
+                                        NSLog(@"[SSZipArchive] Failed to set attributes - whilst setting modification date");
                                     }
                                 }
                             }
@@ -484,12 +508,12 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                                 NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithDictionary:[fileManager attributesOfItemAtPath:fullPath error:nil]];
                                 
                                 // Set the value in the attributes dict
-                                attrs[NSFilePosixPermissions] = permissionsValue;
+                                [attrs setObject:permissionsValue forKey:NSFilePosixPermissions];
                                 
                                 // Update attributes
                                 if (![fileManager setAttributes:attrs ofItemAtPath:fullPath error:nil]) {
                                     // Unable to set the permissions attribute
-                                    NSLog(@"[LLZipArchive] Failed to set attributes - whilst setting permissions");
+                                    NSLog(@"[SSZipArchive] Failed to set attributes - whilst setting permissions");
                                 }
                             }
                         }
@@ -541,9 +565,9 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                         if (!removeSuccess)
                         {
                             NSString *message = [NSString stringWithFormat:@"Failed to delete existing symbolic link at \"%@\"", error.localizedDescription];
-                            NSLog(@"[LLZipArchive] %@", message);
+                            NSLog(@"[SSZipArchive] %@", message);
                             success = NO;
-                            unzippingError = [NSError errorWithDomain:LLZipArchiveErrorDomain code:error.code userInfo:@{NSLocalizedDescriptionKey: message}];
+                            unzippingError = [NSError errorWithDomain:SSZipArchiveErrorDomain code:error.code userInfo:@{NSLocalizedDescriptionKey: message}];
                         }
                     }
                 }
@@ -556,7 +580,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                 {
                     // Bubble the error up to the completion handler
                     NSString *message = [NSString stringWithFormat:@"Failed to create symbolic link at \"%@\" to \"%@\" - symlink() error code: %d", fullPath, destinationPath, errno];
-                    NSLog(@"[LLZipArchive] %@", message);
+                    NSLog(@"[SSZipArchive] %@", message);
                     success = NO;
                     unzippingError = [NSError errorWithDomain:NSPOSIXErrorDomain code:symlinkError userInfo:@{NSLocalizedDescriptionKey: message}];
                 }
@@ -595,11 +619,11 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     if (success && preserveAttributes) {
         NSError * err = nil;
         for (NSDictionary * d in directoriesModificationDates) {
-            if (![[NSFileManager defaultManager] setAttributes:@{NSFileModificationDate: d[@"modDate"]} ofItemAtPath:d[@"path"] error:&err]) {
-                NSLog(@"[LLZipArchive] Set attributes failed for directory: %@.", d[@"path"]);
+            if (![[NSFileManager defaultManager] setAttributes:@{NSFileModificationDate: [d objectForKey:@"modDate"]} ofItemAtPath:[d objectForKey:@"path"] error:&err]) {
+                NSLog(@"[SSZipArchive] Set attributes failed for directory: %@.", [d objectForKey:@"path"]);
             }
             if (err) {
-                NSLog(@"[LLZipArchive] Error setting directory file modification date attribute: %@", err.localizedDescription);
+                NSLog(@"[SSZipArchive] Error setting directory file modification date attribute: %@", err.localizedDescription);
             }
         }
     }
@@ -617,7 +641,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     if (crc_ret == UNZ_CRCERROR)
     {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"crc check failed for file"};
-        retErr = [NSError errorWithDomain:LLZipArchiveErrorDomain code:LLZipArchiveErrorCodeFileInfoNotLoadable userInfo:userInfo];
+        retErr = [NSError errorWithDomain:SSZipArchiveErrorDomain code:SSZipArchiveErrorCodeFileInfoNotLoadable userInfo:userInfo];
     }
     
     if (error) {
@@ -644,19 +668,19 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
 #pragma mark - Zipping
 + (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths
 {
-    return [LLZipArchive createZipFileAtPath:path withFilesAtPaths:paths withPassword:nil];
+    return [SSZipArchive createZipFileAtPath:path withFilesAtPaths:paths withPassword:nil];
 }
 + (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath {
-    return [LLZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath withPassword:nil];
+    return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath withPassword:nil];
 }
 
 + (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath keepParentDirectory:(BOOL)keepParentDirectory {
-    return [LLZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:keepParentDirectory withPassword:nil];
+    return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:keepParentDirectory withPassword:nil];
 }
 
 + (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths withPassword:(NSString *)password
 {
-    LLZipArchive *zipArchive = [[LLZipArchive alloc] initWithPath:path];
+    SSZipArchive *zipArchive = [[SSZipArchive alloc] initWithPath:path];
     BOOL success = [zipArchive open];
     if (success) {
         for (NSString *filePath in paths) {
@@ -668,12 +692,12 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
 }
 
 + (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath withPassword:(nullable NSString *)password {
-    return [LLZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:NO withPassword:password];
+    return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:NO withPassword:password];
 }
 
 
 + (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath keepParentDirectory:(BOOL)keepParentDirectory withPassword:(nullable NSString *)password {
-    return [LLZipArchive createZipFileAtPath:path
+    return [SSZipArchive createZipFileAtPath:path
                      withContentsOfDirectory:directoryPath
                          keepParentDirectory:keepParentDirectory
                                 withPassword:password
@@ -697,7 +721,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
                         AES:(BOOL)aes
             progressHandler:(void(^ _Nullable)(NSUInteger entryNumber, NSUInteger total))progressHandler {
     
-    LLZipArchive *zipArchive = [[LLZipArchive alloc] initWithPath:path];
+    SSZipArchive *zipArchive = [[SSZipArchive alloc] initWithPath:path];
     BOOL success = [zipArchive open];
     if (success) {
         // use a local fileManager (queue/thread compatibility)
@@ -705,29 +729,31 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
         NSDirectoryEnumerator *dirEnumerator = [fileManager enumeratorAtPath:directoryPath];
         NSArray<NSString *> *allObjects = dirEnumerator.allObjects;
         NSUInteger total = allObjects.count, complete = 0;
-        NSString *fileName;
-        for (fileName in allObjects) {
-            BOOL isDir;
+        if (keepParentDirectory && !total) {
+            allObjects = @[@""];
+            total = 1;
+        }
+        for (__strong NSString *fileName in allObjects) {
             NSString *fullFilePath = [directoryPath stringByAppendingPathComponent:fileName];
-            [fileManager fileExistsAtPath:fullFilePath isDirectory:&isDir];
             
-            if (keepParentDirectory)
-            {
+            if (keepParentDirectory) {
                 fileName = [directoryPath.lastPathComponent stringByAppendingPathComponent:fileName];
             }
             
+            BOOL isDir;
+            [fileManager fileExistsAtPath:fullFilePath isDirectory:&isDir];
             if (!isDir) {
+                // file
                 success &= [zipArchive writeFileAtPath:fullFilePath withFileName:fileName compressionLevel:compressionLevel password:password AES:aes];
-            }
-            else
-            {
-                if ([[NSFileManager defaultManager] subpathsOfDirectoryAtPath:fullFilePath error:nil].count == 0)
-                {
+            } else {
+                // directory
+                if (![fileManager enumeratorAtPath:fullFilePath].nextObject) {
+                    // empty directory
                     success &= [zipArchive writeFolderAtPath:fullFilePath withFolderName:fileName withPassword:password];
                 }
             }
-            complete++;
             if (progressHandler) {
+                complete++;
                 progressHandler(complete, total);
             }
         }
@@ -762,9 +788,9 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     
     zip_fileinfo zipInfo = {};
     
-    [LLZipArchive zipInfo:&zipInfo setAttributesOfItemAtPath:path];
+    [SSZipArchive zipInfo:&zipInfo setAttributesOfItemAtPath:path];
     
-    int error = _zipOpenEntryLL(_zip, [folderName stringByAppendingString:@"/"], &zipInfo, Z_NO_COMPRESSION, password, 0);
+    int error = _zipOpenEntry(_zip, [folderName stringByAppendingString:@"/"], &zipInfo, Z_NO_COMPRESSION, password, 0);
     const void *buffer = NULL;
     zipWriteInFileInZip(_zip, buffer, 0);
     zipCloseFileInZip(_zip);
@@ -799,7 +825,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     
     zip_fileinfo zipInfo = {};
     
-    [LLZipArchive zipInfo:&zipInfo setAttributesOfItemAtPath:path];
+    [SSZipArchive zipInfo:&zipInfo setAttributesOfItemAtPath:path];
     
     void *buffer = malloc(CHUNK);
     if (buffer == NULL)
@@ -808,7 +834,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
         return NO;
     }
     
-    int error = _zipOpenEntryLL(_zip, fileName, &zipInfo, compressionLevel, password, aes);
+    int error = _zipOpenEntry(_zip, fileName, &zipInfo, compressionLevel, password, aes);
     
     while (!feof(input) && !ferror(input))
     {
@@ -836,9 +862,9 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
         return NO;
     }
     zip_fileinfo zipInfo = {};
-    [LLZipArchive zipInfo:&zipInfo setDate:[NSDate date]];
+    [SSZipArchive zipInfo:&zipInfo setDate:[NSDate date]];
     
-    int error = _zipOpenEntryLL(_zip, filename, &zipInfo, compressionLevel, password, aes);
+    int error = _zipOpenEntry(_zip, filename, &zipInfo, compressionLevel, password, aes);
     
     zipWriteInFileInZip(_zip, data.bytes, (unsigned int)data.length);
     
@@ -848,16 +874,47 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
 
 - (BOOL)close
 {
-    NSAssert((_zip != NULL), @"[LLZipArchive] Attempting to close an archive which was never opened");
+    NSAssert((_zip != NULL), @"[SSZipArchive] Attempting to close an archive which was never opened");
     int error = zipClose(_zip, NULL);
     _zip = nil;
-    return error == UNZ_OK;
+    return error == ZIP_OK;
 }
 
 #pragma mark - Private
 
-+ (NSString *)_filenameStringWithCString:(const char *)filename size:(uint16_t)size_filename
-{
++ (NSString *)_filenameStringWithCString:(const char *)filename
+                         version_made_by:(uint16_t)version_made_by
+                    general_purpose_flag:(uint16_t)flag
+                                    size:(uint16_t)size_filename {
+    
+    // Respect Language encoding flag only reading filename as UTF-8 when this is set
+    // when file entry created on dos system.
+    //
+    // https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+    //   Bit 11: Language encoding flag (EFS).  If this bit is set,
+    //           the filename and comment fields for this file
+    //           MUST be encoded using UTF-8. (see APPENDIX D)
+    uint16_t made_by = version_made_by >> 8;
+    BOOL made_on_dos = made_by == 0;
+    BOOL languageEncoding = (flag & (1 << 11)) != 0;
+    if (!languageEncoding && made_on_dos) {
+        // APPNOTE.TXT D.1:
+        //   D.2 If general purpose bit 11 is unset, the file name and comment should conform
+        //   to the original ZIP character encoding.  If general purpose bit 11 is set, the
+        //   filename and comment must support The Unicode Standard, Version 4.1.0 or
+        //   greater using the character encoding form defined by the UTF-8 storage
+        //   specification.  The Unicode Standard is published by the The Unicode
+        //   Consortium (www.unicode.org).  UTF-8 encoded data stored within ZIP files
+        //   is expected to not include a byte order mark (BOM).
+        
+        //  Code Page 437 corresponds to kCFStringEncodingDOSLatinUS
+        NSStringEncoding encoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingDOSLatinUS);
+        NSString* strPath = [NSString stringWithCString:filename encoding:encoding];
+        if (strPath) {
+            return strPath;
+        }
+    }
+    
     // attempting unicode encoding
     NSString * strPath = @(filename);
     if (strPath) {
@@ -866,20 +923,17 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     
     // if filename is non-unicode, detect and transform Encoding
     NSData *data = [NSData dataWithBytes:(const void *)filename length:sizeof(unsigned char) * size_filename];
-#ifdef __MAC_10_13
-    // Xcode 9+
-    if (@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)) {
-        // supported encodings are in [NSString availableStringEncodings]
-        [NSString stringEncodingForData:data encodingOptions:nil convertedString:&strPath usedLossyConversion:nil];
-    }
-#else
+// Testing availability of @available (https://stackoverflow.com/a/46927445/1033581)
+#if __clang_major__ < 9
     // Xcode 8-
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber10_9_2) {
+#else
+    // Xcode 9+
+    if (@available(macOS 10.10, iOS 8.0, watchOS 2.0, tvOS 9.0, *)) {
+#endif
         // supported encodings are in [NSString availableStringEncodings]
         [NSString stringEncodingForData:data encodingOptions:nil convertedString:&strPath usedLossyConversion:nil];
-    }
-#endif
-    else {
+    } else {
         // fallback to a simple manual detect for macOS 10.9 or older
         NSArray<NSNumber *> *encodings = @[@(kCFStringEncodingGB_18030_2000), @(kCFStringEncodingShiftJIS)];
         for (NSNumber *encoding in encodings) {
@@ -904,15 +958,15 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error: nil];
     if (attr)
     {
-        NSDate *fileDate = (NSDate *)attr[NSFileModificationDate];
+        NSDate *fileDate = (NSDate *)[attr objectForKey:NSFileModificationDate];
         if (fileDate)
         {
             [self zipInfo:zipInfo setDate:fileDate];
         }
         
-        // Write permissions into the external attributes, for details on this see here: http://unix.stackexchange.com/a/14727
+        // Write permissions into the external attributes, for details on this see here: https://unix.stackexchange.com/a/14727
         // Get the permissions value from the files attributes
-        NSNumber *permissionsValue = (NSNumber *)attr[NSFilePosixPermissions];
+        NSNumber *permissionsValue = (NSNumber *)[attr objectForKey:NSFilePosixPermissions];
         if (permissionsValue != nil) {
             // Get the short value for the permissions
             short permissionsShort = permissionsValue.shortValue;
@@ -933,7 +987,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
 
 + (void)zipInfo:(zip_fileinfo *)zipInfo setDate:(NSDate *)date
 {
-    NSCalendar *currentCalendar = LLZipArchive._gregorian;
+    NSCalendar *currentCalendar = SSZipArchive._gregorian;
     NSCalendarUnit flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     NSDateComponents *components = [currentCalendar components:flags fromDate:date];
     struct tm tmz_date;
@@ -978,7 +1032,7 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
     static const UInt32 kMinuteMask = 0x7E0;
     static const UInt32 kSecondMask = 0x1F;
     
-    NSAssert(0xFFFFFFFF == (kYearMask | kMonthMask | kDayMask | kHourMask | kMinuteMask | kSecondMask), @"[LLZipArchive] MSDOS date masks don't add up");
+    NSAssert(0xFFFFFFFF == (kYearMask | kMonthMask | kDayMask | kHourMask | kMinuteMask | kSecondMask), @"[SSZipArchive] MSDOS date masks don't add up");
     
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.year = 1980 + ((msdosDateTime & kYearMask) >> 25);
@@ -994,37 +1048,37 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo);
 
 @end
 
-int _zipOpenEntryLL(zipFile entry, NSString *name, const zip_fileinfo *zipfi, int level, NSString *password, BOOL aes)
+int _zipOpenEntry(zipFile entry, NSString *name, const zip_fileinfo *zipfi, int level, NSString *password, BOOL aes)
 {
-    return zipOpenNewFileInZip5(entry, name.fileSystemRepresentation, zipfi, NULL, 0, NULL, 0, NULL, 0, 0, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, aes);
+    return zipOpenNewFileInZip5(entry, name.fileSystemRepresentation, zipfi, NULL, 0, NULL, 0, NULL, 0, 0, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, password.UTF8String, aes, 0);
 }
 
 #pragma mark - Private tools for file info
 
-BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo)
+BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo)
 {
     //
     // Determine whether this is a symbolic link:
     // - File is stored with 'version made by' value of UNIX (3),
-    //   as per http://www.pkware.com/documents/casestudies/APPNOTE.TXT
+    //   as per https://www.pkware.com/documents/casestudies/APPNOTE.TXT
     //   in the upper byte of the version field.
     // - BSD4.4 st_mode constants are stored in the high 16 bits of the
     //   external file attributes (defacto standard, verified against libarchive)
     //
     // The original constants can be found here:
-    //    http://minnie.tuhs.org/cgi-bin/utree.pl?file=4.4BSD/usr/include/sys/stat.h
+    //    https://minnie.tuhs.org/cgi-bin/utree.pl?file=4.4BSD/usr/include/sys/stat.h
     //
     const uLong ZipUNIXVersion = 3;
     const uLong BSD_SFMT = 0170000;
     const uLong BSD_IFLNK = 0120000;
     
-    BOOL fileIsSymbolicLinkLL = ((fileInfo->version >> 8) == ZipUNIXVersion) && BSD_IFLNK == (BSD_SFMT & (fileInfo->external_fa >> 16));
-    return fileIsSymbolicLinkLL;
+    BOOL fileIsSymbolicLink = ((fileInfo->version >> 8) == ZipUNIXVersion) && BSD_IFLNK == (BSD_SFMT & (fileInfo->external_fa >> 16));
+    return fileIsSymbolicLink;
 }
 
 #pragma mark - Private tools for unreadable encodings
 
-@implementation NSData (LLZipArchive)
+@implementation NSData (SSZipArchive)
 
 // `base64EncodedStringWithOptions` uses a base64 alphabet with '+' and '/'.
 // we got those alternatives to make it compatible with filenames: https://en.wikipedia.org/wiki/Base64
@@ -1064,6 +1118,73 @@ BOOL _fileIsSymbolicLinkLL(const unz_file_info *fileInfo)
                                                  encoding:NSASCIIStringEncoding
                                              freeWhenDone:YES];
     return str;
+}
+
+@end
+
+#pragma mark Private tools for security
+
+@implementation NSString (SSZipArchive)
+
+// One implementation alternative would be to use the algorithm found at mz_path_resolve from https://github.com/nmoinvaz/minizip/blob/dev/mz_os.c,
+// but making sure to work with unichar values and not ascii values to avoid breaking Unicode characters containing 2E ('.') or 2F ('/') in their decomposition
+/// Sanitize path traversal characters to prevent directory backtracking. Ignoring these characters mimicks the default behavior of the Unarchiving tool on macOS.
+- (NSString *)_sanitizedPath
+{
+    // Change Windows paths to Unix paths: https://en.wikipedia.org/wiki/Path_(computing)
+    // Possible improvement: only do this if the archive was created on a non-Unix system
+    NSString *strPath = [self stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+    
+    // Percent-encode file path (where path is defined by https://tools.ietf.org/html/rfc8089)
+    // The key part is to allow characters "." and "/" and disallow "%".
+    // CharacterSet.urlPathAllowed seems to do the job
+    // Testing availability of @available (https://stackoverflow.com/a/46927445/1033581)
+#if __clang_major__ < 9
+    // Xcode 8-
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber10_8_4) {
+#else
+    // Xcode 9+
+    if (@available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, *)) {
+#endif
+        strPath = [strPath stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLPathAllowedCharacterSet];
+    } else {
+        strPath = [strPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    // `NSString.stringByAddingPercentEncodingWithAllowedCharacters:` may theorically fail: https://stackoverflow.com/questions/33558933/
+    // But because we auto-detect encoding using `NSString.stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:`,
+    // we likely already prevent UTF-16, UTF-32 and invalid Unicode in the form of unpaired surrogate chars: https://stackoverflow.com/questions/53043876/
+    // To be on the safe side, we will still perform a guard check.
+    if (strPath == nil) {
+        return nil;
+    }
+    
+    // Add scheme "file:///" to support sanitation on names with a colon like "file:a/../../../usr/bin"
+    strPath = [@"file:///" stringByAppendingString:strPath];
+    
+    // Sanitize path traversal characters to prevent directory backtracking. Ignoring these characters mimicks the default behavior of the Unarchiving tool on macOS.
+    // "../../../../../../../../../../../tmp/test.txt" -> "tmp/test.txt"
+    // "a/b/../c.txt" -> "a/c.txt"
+    strPath = [NSURL URLWithString:strPath].standardizedURL.absoluteString;
+    
+    // Remove the "file:///" scheme
+    strPath = [strPath substringFromIndex:8];
+    
+    // Remove the percent-encoding
+    // Testing availability of @available (https://stackoverflow.com/a/46927445/1033581)
+#if __clang_major__ < 9
+    // Xcode 8-
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber10_8_4) {
+#else
+    // Xcode 9+
+    if (@available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, *)) {
+#endif
+        strPath = strPath.stringByRemovingPercentEncoding;
+    } else {
+        strPath = [strPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    return strPath;
 }
 
 @end

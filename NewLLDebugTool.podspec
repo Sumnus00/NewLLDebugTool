@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc        = true
   s.public_header_files = "NewLLDebugTool/**/*.h"
 #  s.source_files      = "NewLLDebugTool/**/*.{h,m,swift,c}"
-  s.source_files	    = "NewLLDebugTool/**/*.{h,m,c}"
+  s.source_files	    = "NewLLDebugTool/**/*.{h,m}"
   s.resources		    = "NewLLDebugTool/**/*.{xib,storyboard,bundle,js}"
   #s.swift_version = "4.2"
 
@@ -51,10 +51,10 @@ Pod::Spec.new do |s|
   end
 
     
-  s.subspec 'SSZipArchive' do |ss|
-    ss.source_files = 'NewLLDebugTool/SSZipArchive/*.{m,h}'
-    ss.public_header_files = 'NewLLDebugTool/SSZipArchive/*.h'
-  end
+  # s.subspec 'SSZipArchive' do |ss|
+  #   ss.source_files = 'NewLLDebugTool/SSZipArchive/*.{m,h}'
+  #   ss.public_header_files = 'NewLLDebugTool/SSZipArchive/*.h'
+  # end
 
 
   s.subspec 'Sandbox' do |ss|
@@ -62,7 +62,8 @@ Pod::Spec.new do |s|
     ss.resources                = "NewLLDebugTool/Components/Sandbox/**/*.{xib,storyboard,bundle}"
     ss.public_header_files      = "NewLLDebugTool/Components/Sandbox/**/*.h"
     ss.dependency                 "NewLLDebugTool/General"
-    ss.dependency                 "NewLLDebugTool/SSZipArchive"
+    # ss.dependency                 "NewLLDebugTool/SSZipArchive"
+    ss.dependency                 "SSZipArchive"
   end
 
   s.subspec 'Screenshot' do |ss|

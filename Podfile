@@ -9,10 +9,13 @@ target 'LLDebugToolDemo' do
 
   # Request
   pod 'FMDB',:inhibit_warnings => true
-
+  
   # Only for demo
   pod 'AFNetworking'
-  pod "MJRefresh"
+  
+  pod 'SSZipArchive'
+  
+  pod 'MJRefresh'
 
   target 'LLDebugToolDemoTests' do
     inherit! :search_paths

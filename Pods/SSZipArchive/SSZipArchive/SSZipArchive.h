@@ -1,32 +1,32 @@
 //
-//  LLZipArchive.h
-//  LLZipArchive
+//  SSZipArchive.h
+//  SSZipArchive
 //
 //  Created by Sam Soffes on 7/21/10.
 //  Copyright (c) Sam Soffes 2010-2015. All rights reserved.
 //
 
-#ifndef _LLZIPARCHIVE_H
-#define _LLZIPARCHIVE_H
+#ifndef _SSZIPARCHIVE_H
+#define _SSZIPARCHIVE_H
 
 #import <Foundation/Foundation.h>
-#include "LLZipCommon.h"
+#include "SSZipCommon.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const LLZipArchiveErrorDomain;
-typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
-    LLZipArchiveErrorCodeFailedOpenZipFile      = -1,
-    LLZipArchiveErrorCodeFailedOpenFileInZip    = -2,
-    LLZipArchiveErrorCodeFileInfoNotLoadable    = -3,
-    LLZipArchiveErrorCodeFileContentNotReadable = -4,
-    LLZipArchiveErrorCodeFailedToWriteFile      = -5,
-    LLZipArchiveErrorCodeInvalidArguments       = -6,
+extern NSString *const SSZipArchiveErrorDomain;
+typedef NS_ENUM(NSInteger, SSZipArchiveErrorCode) {
+    SSZipArchiveErrorCodeFailedOpenZipFile      = -1,
+    SSZipArchiveErrorCodeFailedOpenFileInZip    = -2,
+    SSZipArchiveErrorCodeFileInfoNotLoadable    = -3,
+    SSZipArchiveErrorCodeFileContentNotReadable = -4,
+    SSZipArchiveErrorCodeFailedToWriteFile      = -5,
+    SSZipArchiveErrorCodeInvalidArguments       = -6,
 };
 
-@protocol LLZipArchiveDelegate;
+@protocol SSZipArchiveDelegate;
 
-@interface LLZipArchive : NSObject
+@interface SSZipArchive : NSObject
 
 // Password check
 + (BOOL)isFilePasswordProtectedAtPath:(NSString *)path;
@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
 
 // Unzip
 + (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination;
-+ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination delegate:(nullable id<LLZipArchiveDelegate>)delegate;
++ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination delegate:(nullable id<SSZipArchiveDelegate>)delegate;
 
 + (BOOL)unzipFileAtPath:(NSString *)path
           toDestination:(NSString *)destination
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
               overwrite:(BOOL)overwrite
                password:(nullable NSString *)password
                   error:(NSError * *)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate NS_REFINED_FOR_SWIFT;
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate NS_REFINED_FOR_SWIFT;
 
 + (BOOL)unzipFileAtPath:(NSString *)path
           toDestination:(NSString *)destination
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
               overwrite:(BOOL)overwrite
                password:(nullable NSString *)password
                   error:(NSError * *)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate;
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate;
 
 + (BOOL)unzipFileAtPath:(NSString *)path
           toDestination:(NSString *)destination
@@ -76,7 +76,7 @@ typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
          nestedZipLevel:(NSInteger)nestedZipLevel
                password:(nullable NSString *)password
                   error:(NSError **)error
-               delegate:(nullable id<LLZipArchiveDelegate>)delegate
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate
         progressHandler:(void (^_Nullable)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
       completionHandler:(void (^_Nullable)(NSString *path, BOOL succeeded, NSError * _Nullable error))completionHandler;
 
@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
 
 @end
 
-@protocol LLZipArchiveDelegate <NSObject>
+@protocol SSZipArchiveDelegate <NSObject>
 
 @optional
 
@@ -143,4 +143,4 @@ typedef NS_ENUM(NSInteger, LLZipArchiveErrorCode) {
 
 NS_ASSUME_NONNULL_END
 
-#endif /* _LLZIPARCHIVE_H */
+#endif /* _SSZIPARCHIVE_H */

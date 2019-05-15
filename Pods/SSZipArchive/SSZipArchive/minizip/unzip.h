@@ -19,7 +19,7 @@
 #ifndef _UNZ_H
 #define _UNZ_H
 
-#include "LLZipCommon.h"
+#include "SSZipCommon.h"
 
 #define HAVE_AES
 

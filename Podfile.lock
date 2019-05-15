@@ -18,23 +18,27 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - MJRefresh (3.1.16)
+  - SSZipArchive (2.1.5)
 
 DEPENDENCIES:
   - AFNetworking
   - FMDB
   - MJRefresh
+  - SSZipArchive
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - FMDB
     - MJRefresh
+    - SSZipArchive
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   MJRefresh: 7798e16e53a5ef7f332dd05b27664db4e29530fd
+  SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
 
-PODFILE CHECKSUM: 6535bc51a53d19e76d9ef48580f7a99b6c50625d
+PODFILE CHECKSUM: 07be71ceba26487a8ddc06096bf2b92f5db6ed46
 
 COCOAPODS: 1.7.0.beta.3

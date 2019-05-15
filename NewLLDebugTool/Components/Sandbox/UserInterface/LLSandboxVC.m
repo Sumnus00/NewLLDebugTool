@@ -28,7 +28,7 @@
 #import "LLConfig.h"
 #import "LLImageNameConfig.h"
 #import "LLUITableViewLongPressGestureRecognizerDelegate.h"
-#import "LLZipArchive.h"
+#import <SSZipArchive/SSZipArchive.h>
 
 static NSString *const kSandboxCellID = @"LLSandboxCell";
 
@@ -165,7 +165,7 @@ static NSString *const kSandboxCellID = @"LLSandboxCell";
         NSString* zipPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"zip"]] ;
         
         
-        if(![LLZipArchive createZipFileAtPath:zipPath withContentsOfDirectory:tempDir]){
+        if(![SSZipArchive createZipFileAtPath:zipPath withContentsOfDirectory:tempDir]){
             NSLog(@"haleli >>> 创建zip share失败, zipfile:%@ tempDir:%@", zipPath, tempDir);
         }else{
             NSLog(@"haleli >>> 创建zip share成功, zipfile:%@ tempDir:%@", zipPath, tempDir);
