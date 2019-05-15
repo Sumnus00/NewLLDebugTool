@@ -16,6 +16,8 @@
 #import "KIF.h"
 #import "Actions.h"
 #import "MonkeyPaws.h"
+#import "KIFTestActor+Monkey.h"
+#import <objc/runtime.h>
 //#ifdef ISLOCAL
 //#import "LLDebugToolDemo-Swift.h"
 //#else
@@ -232,6 +234,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 //                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:theWindow tapUIApplication:YES] ;
                 
                 dispatch_once(&onceToken, ^{
+                    
+                    [self swizzleMethods];
+                    
                     id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
                     if (delegate) {
                         UIWindow *window;
@@ -266,6 +271,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 NSLog(@"haleli >>> switch_cocos_monkey : %@",@"开始") ;
                 
                 dispatch_once(&onceToken, ^{
+                    
+                    [self swizzleMethods];
+                    
                     id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
                     if (delegate) {
                         UIWindow *window;
@@ -439,6 +447,28 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         NSLog(@"haleli >>>> 页面 属于 iOS") ;
         [self randomIOSMonkey] ;
     }
+}
+
+-(BOOL)swizzleMethods
+{
+    Class class = [KIFTestActor class];
+    SEL originalSelector = @selector(failWithError:stopTest:);
+    SEL swizzledSelector = @selector(monkey_failWithError:stopTest:);
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    BOOL didAddMethod = class_addMethod(class,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+    return YES;
 }
 
 - (void)randomIOSMonkey{

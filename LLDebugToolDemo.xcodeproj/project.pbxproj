@@ -48,6 +48,7 @@
 		892567A622660D0300E89146 /* UICollectionViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567A522660D0300E89146 /* UICollectionViewActions.m */; };
 		893799192268250600FDF142 /* WKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 893799182268250600FDF142 /* WKWebViewVC.m */; };
 		8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8937991B226830FF00FDF142 /* UIWebViewVC.m */; };
+		897728C8228C379700E7B223 /* KIFTestActor+Monkey.m in Sources */ = {isa = PBXBuildFile; fileRef = 897728C7228C379700E7B223 /* KIFTestActor+Monkey.m */; };
 		8980765522700E3700B28780 /* GestureHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980764C22700E3600B28780 /* GestureHash.m */; };
 		8980765622700E3700B28780 /* Gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980764D22700E3600B28780 /* Gesture.m */; };
 		8980765722700E3700B28780 /* MonkeyPaws.m in Sources */ = {isa = PBXBuildFile; fileRef = 8980764F22700E3700B28780 /* MonkeyPaws.m */; };
@@ -282,6 +283,8 @@
 		893799182268250600FDF142 /* WKWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewVC.m; sourceTree = "<group>"; };
 		8937991A226830FF00FDF142 /* UIWebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIWebViewVC.h; sourceTree = "<group>"; };
 		8937991B226830FF00FDF142 /* UIWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIWebViewVC.m; sourceTree = "<group>"; };
+		897728C6228C379700E7B223 /* KIFTestActor+Monkey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KIFTestActor+Monkey.h"; sourceTree = "<group>"; };
+		897728C7228C379700E7B223 /* KIFTestActor+Monkey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "KIFTestActor+Monkey.m"; sourceTree = "<group>"; };
 		8980764C22700E3600B28780 /* GestureHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureHash.m; sourceTree = "<group>"; };
 		8980764D22700E3600B28780 /* Gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gesture.m; sourceTree = "<group>"; };
 		8980764E22700E3600B28780 /* MonkeyPaws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonkeyPaws.h; sourceTree = "<group>"; };
@@ -745,6 +748,8 @@
 				8915EB3022452785001B7660 /* UITabBarController+AutoRotate.m */,
 				899AB6342201978300D2FC57 /* NSObject+Swizzling.h */,
 				899AB6352201978300D2FC57 /* NSObject+Swizzling.m */,
+				897728C6228C379700E7B223 /* KIFTestActor+Monkey.h */,
+				897728C7228C379700E7B223 /* KIFTestActor+Monkey.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1807,6 +1812,7 @@
 				8925671B225F71D600E89146 /* FindTopController.m in Sources */,
 				8925679C2265FACD00E89146 /* UISegmentedControlActions.m in Sources */,
 				C44F41342152AA7000153F46 /* LLFilterDateView.m in Sources */,
+				897728C8228C379700E7B223 /* KIFTestActor+Monkey.m in Sources */,
 				C44F411E2152AA7000153F46 /* LLScreenshotView.m in Sources */,
 				8925670D225F22FD00E89146 /* UISwitchActions.m in Sources */,
 				89C022F8225CC25A00686898 /* UIView+Tree.m in Sources */,
