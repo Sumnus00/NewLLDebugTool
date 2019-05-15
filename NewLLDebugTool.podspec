@@ -56,6 +56,11 @@ Pod::Spec.new do |s|
     ss.public_header_files = 'NewLLDebugTool/SSZipArchive/*.h'
   end
 
+  s.subspec 'OCMonkeyPaws' do |ss|
+    ss.source_files = 'NewLLDebugTool/OCMonkeyPaws/*.{m,h}'
+    ss.public_header_files = 'NewLLDebugTool/OCMonkeyPaws/*.h'
+  end
+
   s.subspec 'Sandbox' do |ss|
     ss.source_files             = "NewLLDebugTool/Components/Sandbox/**/*.{h,m}"
     ss.resources                = "NewLLDebugTool/Components/Sandbox/**/*.{xib,storyboard,bundle}"
