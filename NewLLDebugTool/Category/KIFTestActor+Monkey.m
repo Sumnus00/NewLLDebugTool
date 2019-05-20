@@ -11,5 +11,6 @@
 @implementation KIFTestActor (Monkey)
 - (void)monkey_failWithError:(NSError *)error stopTest:(BOOL)stopTest{
     //nothing to do ,fail with monkey continue to execute
+    NSLog(@"haleli >>> KIF error , monkey continue to execute") ;
 }
 @end
