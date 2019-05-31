@@ -124,7 +124,12 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         if(indexPath.row == 0){
             //日志上传
             if([LLDebugTool sharedTool].uploadLog){
-                [LLDebugTool sharedTool].uploadLog() ;
+                [self showAlertControllerWithMessage:@"Sure to upload log ?" handler:^(NSInteger action) {
+                    if (action == 1) {
+                        [LLDebugTool sharedTool].uploadLog() ;
+                    }
+                }];
+                
             }
         }
     }else if(indexPath.section == 5){
