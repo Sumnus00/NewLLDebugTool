@@ -340,15 +340,10 @@ static TestLogViewController *extracted() {
             }
         }else if(indexPath.row == 1){
             [[LLDebugTool sharedTool] addUploadLog:^(){
-                return YES ;
+                return ;
             }] ;
             if([LLDebugTool sharedTool].uploadLog){
-                BOOL flag = [LLDebugTool sharedTool].uploadLog() ;
-                if(flag){
-                    NSLog(@"True") ;
-                }else{
-                    NSLog(@"False") ;
-                }
+                NSLog(@"upload log") ;
             }
         }
     }

@@ -181,7 +181,7 @@ typedef NSDictionary* (^CocosCreatorTree)(void) ;
 /**
  上传日志接口
  */
-typedef BOOL (^UploadLog)(void) ;
+typedef void (^UploadLog)(void) ;
 @property (nonatomic, copy,nonnull) UploadLog uploadLog;
 - (void)addUploadLog:(UploadLog)uploadLog;
 @end

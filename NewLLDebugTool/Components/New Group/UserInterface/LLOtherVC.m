@@ -148,40 +148,50 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 //    cell.detailTextLabel.text = @"开关";
    
     
-    UISwitch *myswitch = [[UISwitch alloc]init];
+    
     if([cell.textLabel.text isEqualToString:@"mock开关"]){
+        UISwitch *myswitch = [[UISwitch alloc]init];
         myswitch.tag = LLConfigSwitchTagMock ;
         myswitch.on = [[LLDebugTool sharedTool] mockSwitch] ;
         cell.accessoryView = myswitch ;
+        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }else if([cell.textLabel.text isEqualToString:@"弱网开关"]){
+        UISwitch *myswitch = [[UISwitch alloc]init];
         myswitch.tag = LLConfigSwitchTagLowNetwork ;
         myswitch.on = [[LLDebugTool sharedTool] lowNetworkSwitch] ;
         cell.accessoryView = myswitch ;
+        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }else if([cell.textLabel.text isEqualToString:@"低内存开关"]){
+        UISwitch *myswitch = [[UISwitch alloc]init];
         myswitch.tag = LLConfigSwitchTagLowMemory ;
         myswitch.on = [[LLDebugTool sharedTool] lowMemorySwitch] ;
         cell.accessoryView = myswitch ;
+        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }else if([cell.textLabel.text isEqualToString:@"ios Monkey开关"]){
+        UISwitch *myswitch = [[UISwitch alloc]init];
         myswitch.tag = LLConfigSwitchTagIOSMonkey ;
         myswitch.on = [[LLDebugTool sharedTool] iosMonkeySwitch] ;
         cell.accessoryView = myswitch ;
+        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }else if([cell.textLabel.text isEqualToString:@"cocos Monkey开关"]){
+        UISwitch *myswitch = [[UISwitch alloc]init];
         myswitch.tag = LLConfigSwitchTagCocosMonkey ;
         myswitch.on = [[LLDebugTool sharedTool] cocosMonkeySwitch] ;
         cell.accessoryView = myswitch ;
+        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }else if([cell.textLabel.text isEqualToString:@"私有包显示开关"]){
+        UISwitch *myswitch = [[UISwitch alloc]init];
         myswitch.tag = LLConfigSwitchTagPrivateNetwork ;
         myswitch.on = [[LLDebugTool sharedTool] privateNetworkSwitch];
         cell.accessoryView = myswitch ;
+        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     }else if([cell.textLabel.text isEqualToString:@"日志上传"]){
         cell.textLabel.textColor = [[UIView alloc] init].tintColor ;
         cell.accessoryType = UITableViewCellAccessoryNone ;
     }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
         cell.accessoryType = UITableViewCellAccessoryNone ;
     }
-    
-    [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    
+
     return cell;
 }
 
