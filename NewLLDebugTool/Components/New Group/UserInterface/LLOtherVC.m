@@ -123,7 +123,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         //常用工具
         if(indexPath.row == 0){
             //日志上传
-            NSLog(@"aaaaaa") ;
+            if([LLDebugTool sharedTool].uploadLog){
+                [LLDebugTool sharedTool].uploadLog() ;
+            }
         }
     }else if(indexPath.section == 5){
         //敬请期待
