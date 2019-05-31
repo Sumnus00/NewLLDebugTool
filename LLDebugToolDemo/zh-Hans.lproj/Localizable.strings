@@ -42,7 +42,8 @@
 "test.swizzle" = "展示swizzle用法";
 "test.uiwebview" = "展示UIWebView用法";
 "test.wkwebview" = "展示WKWebView用法" ;
-"test.block" = "展示block用法" ;
+"test.block1" = "展示block用法(cocos creator tree)" ;
+"test.block2" = "展示block用法(日志上传)" ;
 "test.share" = "展示UIActivityViewController用法";
 "test.login" = "登陆界面" ;
 "test.tree" = "控件树" ;

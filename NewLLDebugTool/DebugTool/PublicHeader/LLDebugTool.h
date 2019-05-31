@@ -177,4 +177,11 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
 typedef NSDictionary* (^CocosCreatorTree)(void) ;
 @property (nonatomic, copy,nonnull) CocosCreatorTree ccTree;
 - (void)addCocosCreatorTree:(CocosCreatorTree)ccTree;
+
+/**
+ 上传日志接口
+ */
+typedef BOOL (^UploadLog)(void) ;
+@property (nonatomic, copy,nonnull) UploadLog uploadLog;
+- (void)addUploadLog:(UploadLog)uploadLog;
 @end

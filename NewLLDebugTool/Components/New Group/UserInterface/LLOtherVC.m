@@ -63,6 +63,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     return @[@{@"私有包显示开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
 }
 
+- (NSArray *)commonToolsInfos {
+    return @[@{@"日志上传" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleNone]}];
+}
+
 - (NSArray *)expectedInfos {
     return @[@{@"更多功能" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleNone]}];
 }
@@ -82,10 +86,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     //private network
     NSArray *privateNetwork = [self privateNetworkInfos] ;
     
+    //common tools
+    NSArray *commonTools = [self commonToolsInfos] ;
+    
     // expected
     NSArray *expected = [self expectedInfos];
     
-    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,privateNetwork,expected, nil];
+    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,privateNetwork,commonTools,expected, nil];
 }
 
 - (void)initial {
@@ -101,6 +108,26 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dataArray[section] count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section==0){
+        //随机mock功能
+    }else if(indexPath.section==1){
+        //低资源模拟功能
+    }else if(indexPath.section == 2){
+        //monkey功能
+    }else if(indexPath.section == 3){
+        //私有包显示功能
+    }else if(indexPath.section ==4){
+        //常用工具
+        if(indexPath.row == 0){
+            //日志上传
+            NSLog(@"aaaaaa") ;
+        }
+    }else if(indexPath.section == 5){
+        //敬请期待
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,8 +171,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         myswitch.tag = LLConfigSwitchTagPrivateNetwork ;
         myswitch.on = [[LLDebugTool sharedTool] privateNetworkSwitch];
         cell.accessoryView = myswitch ;
-    }
-    else if([cell.textLabel.text isEqualToString:@"更多功能"]){
+    }else if([cell.textLabel.text isEqualToString:@"日志上传"]){
+        cell.textLabel.textColor = [[UIView alloc] init].tintColor ;
+        cell.accessoryType = UITableViewCellAccessoryNone ;
+    }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
         cell.accessoryType = UITableViewCellAccessoryNone ;
     }
     
@@ -182,7 +211,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         view.textLabel.text = @"monkey功能" ;
     }else if(section == 3){
         view.textLabel.text = @"私有包显示功能" ;
-    }else if (section == 4) {
+    }else if(section == 4){
+        view.textLabel.text = @"常用工具" ;
+    }else if (section == 5) {
         view.textLabel.text = @"敬请期待";
     }
     return view;

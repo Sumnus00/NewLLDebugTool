@@ -418,4 +418,7 @@ static NSString * const kLLPrivateNetworkKey = @"ll_private_network_key";
     self.ccTree = ccTree ;
 }
 
+- (void)addUploadLog:(UploadLog)uploadLog{
+    self.uploadLog = uploadLog ;
+}
 @end

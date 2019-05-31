@@ -166,7 +166,7 @@ static NSString *const kCellID = @"cellID";
         return 2 ;
     }
     if(section == 11){
-        return 1 ;
+        return 2 ;
     }
     
     return 0;
@@ -257,7 +257,11 @@ static NSString *const kCellID = @"cellID";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }else if(indexPath.section == 11){
-        cell.textLabel.text = NSLocalizedString(@"test.block", nil) ;
+        if(indexPath.row == 0){
+            cell.textLabel.text = NSLocalizedString(@"test.block1", nil) ;
+        }else if(indexPath.row == 1){
+            cell.textLabel.text = NSLocalizedString(@"test.block2", nil) ;
+        }
     }
     return cell;
 }
@@ -314,24 +318,38 @@ static TestLogViewController *extracted() {
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if(indexPath.section==11){
-        [[LLDebugTool sharedTool] addCocosCreatorTree:^(){
-            return @{@"test":@"test"} ;
-        }];
-        if([LLDebugTool sharedTool].ccTree) {
-            
-            NSDictionary *dictionary = [LLDebugTool sharedTool].ccTree() ;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                               options:0
-                                                                 error:nil];
-            NSString *jsonString = @"";
-            if (jsonData) {
-                jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        if(indexPath.row == 0){
+            [[LLDebugTool sharedTool] addCocosCreatorTree:^(){
+                return @{@"test":@"test"} ;
+            }];
+            if([LLDebugTool sharedTool].ccTree) {
+                
+                NSDictionary *dictionary = [LLDebugTool sharedTool].ccTree() ;
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                                   options:0
+                                                                     error:nil];
+                NSString *jsonString = @"";
+                if (jsonData) {
+                    jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                }
+                jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                NSLog(@"%@",jsonString) ;
+            }else{
+                NSLog(@"no implementation") ;
             }
-            jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-            NSLog(@"%@",jsonString) ;
-        }else{
-            NSLog(@"no implementation") ;
+        }else if(indexPath.row == 1){
+            [[LLDebugTool sharedTool] addUploadLog:^(){
+                return YES ;
+            }] ;
+            if([LLDebugTool sharedTool].uploadLog){
+                BOOL flag = [LLDebugTool sharedTool].uploadLog() ;
+                if(flag){
+                    NSLog(@"True") ;
+                }else{
+                    NSLog(@"False") ;
+                }
+            }
         }
     }
     
