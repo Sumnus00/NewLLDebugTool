@@ -96,6 +96,8 @@
 		89C02303225CC39B00686898 /* TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C022FD225CC39A00686898 /* TBUIAutoTest.m */; };
 		89C02304225CC39B00686898 /* UIResponder+TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C022FF225CC39B00686898 /* UIResponder+TBUIAutoTest.m */; };
 		89C02305225CC39B00686898 /* UIView+TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C02301225CC39B00686898 /* UIView+TBUIAutoTest.m */; };
+		89C4A2D022A7B84600D8CD73 /* MonkeyRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4A2CF22A7B84600D8CD73 /* MonkeyRunner.m */; };
+		89C4A2D322A7C20000D8CD73 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4A2D222A7C20000D8CD73 /* App.m */; };
 		89CCD9D822817345001848E5 /* monkey_driver.js in Resources */ = {isa = PBXBuildFile; fileRef = 89CCD9D722817345001848E5 /* monkey_driver.js */; };
 		89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FE073B22166154009BCD99 /* LLOtherVC.m */; };
 		C43BA80C205AB095006307BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80B205AB095006307BE /* AppDelegate.m */; };
@@ -388,6 +390,10 @@
 		89C022FF225CC39B00686898 /* UIResponder+TBUIAutoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+TBUIAutoTest.m"; sourceTree = "<group>"; };
 		89C02300225CC39B00686898 /* UIImage+TBUIAutoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TBUIAutoTest.h"; sourceTree = "<group>"; };
 		89C02301225CC39B00686898 /* UIView+TBUIAutoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TBUIAutoTest.m"; sourceTree = "<group>"; };
+		89C4A2CE22A7B84600D8CD73 /* MonkeyRunner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonkeyRunner.h; sourceTree = "<group>"; };
+		89C4A2CF22A7B84600D8CD73 /* MonkeyRunner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonkeyRunner.m; sourceTree = "<group>"; };
+		89C4A2D122A7C20000D8CD73 /* App.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		89C4A2D222A7C20000D8CD73 /* App.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
 		89CCD9D722817345001848E5 /* monkey_driver.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = monkey_driver.js; sourceTree = "<group>"; };
 		89FE073A22166154009BCD99 /* LLOtherVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOtherVC.h; sourceTree = "<group>"; };
 		89FE073B22166154009BCD99 /* LLOtherVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOtherVC.m; sourceTree = "<group>"; };
@@ -759,6 +765,10 @@
 				897378DD2293F3D200ECF1EF /* Tree.m */,
 				897378DF2293F42F00ECF1EF /* Element.h */,
 				897378E02293F42F00ECF1EF /* Element.m */,
+				89C4A2CE22A7B84600D8CD73 /* MonkeyRunner.h */,
+				89C4A2CF22A7B84600D8CD73 /* MonkeyRunner.m */,
+				89C4A2D122A7C20000D8CD73 /* App.h */,
+				89C4A2D222A7C20000D8CD73 /* App.m */,
 			);
 			path = algorithms;
 			sourceTree = "<group>";
@@ -1818,6 +1828,7 @@
 				C44F41532152AA7000153F46 /* LLCrashVC.m in Sources */,
 				89256716225F707800E89146 /* UIAlertActions.m in Sources */,
 				C44F41282152AA7000153F46 /* LLBaseModel.m in Sources */,
+				89C4A2D322A7C20000D8CD73 /* App.m in Sources */,
 				369D093B2153855D001C9D4B /* LLLogFilterView.m in Sources */,
 				C44F41252152AA7000153F46 /* LLRoute.m in Sources */,
 				C44F413A2152AA7000153F46 /* LLFilterEventView.m in Sources */,
@@ -1830,6 +1841,7 @@
 				C44F41242152AA7000153F46 /* LLScreenshotSelectorView.m in Sources */,
 				89C022E7225CBAC400686898 /* UITableView-KIFAdditions.m in Sources */,
 				8925670A225ED7AE00E89146 /* BackActions.m in Sources */,
+				89C4A2D022A7B84600D8CD73 /* MonkeyRunner.m in Sources */,
 				C44F41672152AA7000153F46 /* LLWindowViewController.m in Sources */,
 				89C022DA225CBAC400686898 /* UIAccessibilityElement-KIFAdditions.m in Sources */,
 				89C022E5225CBAC400686898 /* UIView-KIFAdditions.m in Sources */,
