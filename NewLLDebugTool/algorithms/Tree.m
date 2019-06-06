@@ -17,7 +17,6 @@
         _treeName = treeName ;
         _clickTimes = 0 ;
         _elements = [[NSMutableDictionary alloc] init] ;
-        _isClickedDone = false ;
     }
     return self ;
 }
@@ -38,16 +37,14 @@
 }
 
 -(void) updateTreeWithElements:(NSArray<Element*>*)elements{
-    bool isClickedDone = true ;
     for(int i=0 ;i<[elements count] ;i++){
         Element *element = [elements objectAtIndex:i] ;
         if([self isExistsElement:element]){
             
         }else{
-            isClickedDone = isClickedDone && element.isClicked ;
             [self setElement:element] ;
         }
     }
-    _isClickedDone = _isClickedDone && isClickedDone ;
+   
 }
 @end

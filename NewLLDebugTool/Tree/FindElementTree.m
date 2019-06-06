@@ -14,4 +14,8 @@
     NSMutableArray *array = [UIView tree] ;
     return array ;
 }
+
++(void)tree:(out Tree *  __autoreleasing *)curTree withElements:(out NSArray<Tree *> * __autoreleasing *)elements{
+
+}
 @end

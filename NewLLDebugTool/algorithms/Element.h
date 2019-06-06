@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Tree.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Element : NSObject
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,assign) BOOL isTreeChanged ;
 @property (nonatomic , assign) BOOL isJumped ;
 @property (nonatomic , assign) BOOL isBack ;
+@property (nonatomic , strong) Tree *toTree ;
 - (instancetype)initWithElementId:(NSString*)elementId withElementName:(NSString*)elementName ;
 - (NSInteger) getElementScore ;
 @end

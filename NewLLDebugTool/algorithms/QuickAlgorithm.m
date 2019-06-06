@@ -19,8 +19,8 @@
     //更新树
     [self updateTree:currentTree withElements:elements] ;
     
-    NSInteger maxScore = -1 ;
-    Element *maxElement = nil ;
+    NSInteger minScore = 10000 ;
+    Element *minElement = nil ;
     
     for(int i=0;i<[elements count] ;i++){
         Element *element = [elements objectAtIndex:i] ;
@@ -29,12 +29,21 @@
             continue ;
         }
         
-        if(score > maxScore){
-            maxScore = score ;
-            maxElement = element ;
+        if(score < minScore){
+            minScore = score ;
+            minElement = element ;
         }
     }
-    return maxElement ;
+    
+    if(minScore > 3 ){
+        NSLog(@"elements of current tree are clicked") ;
+    }
+    
+    if(minScore > 9){
+        NSLog(@"elements of current tree are clicked over 7 times") ;
+        return nil
+    }
+    return minElement ;
 }
 
 -(void) updateTree:(Tree *)currentTree withElements:(NSArray<Element*>*)elements{
