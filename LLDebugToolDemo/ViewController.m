@@ -190,8 +190,8 @@ static NSString *const kCellID = @"cellID";
         cell.textLabel.text = NSLocalizedString(@"test.log", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 2) {
-        cell.textLabel.text = NSLocalizedString(@"test.crash", nil);
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.textLabel.text = NSLocalizedString(@"test.crash", nil);
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 3) {
         cell.textLabel.text = NSLocalizedString(@"app.info", nil);
     } else if (indexPath.section == 4) {

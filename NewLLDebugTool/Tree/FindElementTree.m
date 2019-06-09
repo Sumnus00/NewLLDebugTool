@@ -15,7 +15,11 @@
     return array ;
 }
 
-+(void)tree:(out Tree *  __autoreleasing *)curTree withElements:(out NSArray<Tree *> * __autoreleasing *)elements{
-
++(Tree *)tree1{
+    NSString * treeId = NSStringFromClass([[FindTopController topController] class]) ;
+    Tree* tree = [[Tree alloc] initWithTreeId:treeId withTreeName:treeId] ;
+    NSMutableDictionary *dict = [UIView tree1] ;
+    tree.elements = dict ;
+    return tree ;
 }
 @end

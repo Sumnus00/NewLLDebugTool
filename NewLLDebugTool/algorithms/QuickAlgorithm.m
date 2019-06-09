@@ -9,16 +9,15 @@
 #import "QuickAlgorithm.h"
 
 @implementation QuickAlgorithm
--(Element *) chooseElementFromTree:(Tree *)currentTree AmongElements:(NSArray<Element*>*)elements{
+-(Element *) chooseElementFromTree:(Tree *)currentTree{
+    
+    NSArray<Element*> *elements = currentTree.elements.allValues ;
     //获取的元素列表为空，则表示没有元素
     if(elements == nil || [elements count] == 0){
         NSLog(@"current tree no elements") ;
         return nil ;
     }
-    
-    //更新树
-    [self updateTree:currentTree withElements:elements] ;
-    
+
     NSInteger minScore = 10000 ;
     Element *minElement = nil ;
     
@@ -37,16 +36,14 @@
     
     if(minScore > 3 ){
         NSLog(@"elements of current tree are clicked") ;
+        return nil ;
     }
     
     if(minScore > 9){
         NSLog(@"elements of current tree are clicked over 7 times") ;
-        return nil
+        return nil ;
     }
     return minElement ;
 }
 
--(void) updateTree:(Tree *)currentTree withElements:(NSArray<Element*>*)elements{
-    [currentTree updateTreeWithElements:elements] ;
-}
 @end

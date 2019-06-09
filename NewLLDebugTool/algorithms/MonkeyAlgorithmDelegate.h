@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MonkeyAlgorithmDelegate <NSObject>
--(Element *) chooseElementFromTree:(Tree *)currentTree AmongElements:(NSArray<Element*>*)elements ;
+-(Element *) chooseElementFromTree:(Tree *)currentTree;
 @end
 
 NS_ASSUME_NONNULL_END

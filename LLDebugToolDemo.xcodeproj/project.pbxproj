@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18D3AF2A22AB908F00B5A263 /* UITableViewCellActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */; };
+		18D3AF2D22AB98FA00B5A263 /* UICollectionViewCellActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */; };
 		208678B3E17E2AAB3B0E945F /* libPods-LLDebugToolDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533ECC0E7675B1A81455CB56 /* libPods-LLDebugToolDemo.a */; };
 		256DF576EB32FE0F9D9E099F /* libPods-LLDebugToolDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */; };
 		3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3629E3862136830A00226C79 /* BaseTestViewController.m */; };
@@ -199,6 +201,10 @@
 
 /* Begin PBXFileReference section */
 		0857CAF55E62609DE772D43C /* Pods-LLDebugToolDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemo/Pods-LLDebugToolDemo.release.xcconfig"; sourceTree = "<group>"; };
+		18D3AF2822AB908F00B5A263 /* UITableViewCellActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITableViewCellActions.h; sourceTree = "<group>"; };
+		18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellActions.m; sourceTree = "<group>"; };
+		18D3AF2B22AB98FA00B5A263 /* UICollectionViewCellActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCellActions.h; sourceTree = "<group>"; };
+		18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCellActions.m; sourceTree = "<group>"; };
 		250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LLDebugToolDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34ACB65EBB30B1CA47DFC39F /* Pods-LLDebugToolDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3629E3862136830A00226C79 /* BaseTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTestViewController.m; sourceTree = "<group>"; };
@@ -695,6 +701,10 @@
 				8925679B2265FACD00E89146 /* UISegmentedControlActions.m */,
 				892567A422660D0300E89146 /* UICollectionViewActions.h */,
 				892567A522660D0300E89146 /* UICollectionViewActions.m */,
+				18D3AF2822AB908F00B5A263 /* UITableViewCellActions.h */,
+				18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */,
+				18D3AF2B22AB98FA00B5A263 /* UICollectionViewCellActions.h */,
+				18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */,
 			);
 			path = Operate;
 			sourceTree = "<group>";
@@ -1754,6 +1764,7 @@
 				C44F414A2152AA7000153F46 /* LLNetworkContentVC.m in Sources */,
 				893799192268250600FDF142 /* WKWebViewVC.m in Sources */,
 				89C022E0225CBAC400686898 /* UIScrollView-KIFAdditions.m in Sources */,
+				18D3AF2D22AB98FA00B5A263 /* UICollectionViewCellActions.m in Sources */,
 				C44F41562152AA7000153F46 /* LLSandboxModel.m in Sources */,
 				899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */,
 				899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */,
@@ -1865,6 +1876,7 @@
 				89C022DC225CBAC400686898 /* NSException-KIFAdditions.m in Sources */,
 				89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */,
 				89C022E8225CBAC400686898 /* UIEvent+KIFAdditions.m in Sources */,
+				18D3AF2A22AB908F00B5A263 /* UITableViewCellActions.m in Sources */,
 				C44F41552152AA7000153F46 /* LLSandboxHelper.m in Sources */,
 				C44F41412152AA7000153F46 /* NSHTTPURLResponse+LL_Utils.m in Sources */,
 				C44F411F2152AA7000153F46 /* LLScreenshotToolbar.m in Sources */,

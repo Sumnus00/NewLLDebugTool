@@ -18,6 +18,8 @@
 #import "MonkeyPaws.h"
 #import "KIFTestActor+Monkey.h"
 #import <objc/runtime.h>
+#import "QuickAlgorithm.h"
+#import "MonkeyRunner.h"
 //#ifdef ISLOCAL
 //#import "LLDebugToolDemo-Swift.h"
 //#else
@@ -30,6 +32,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 
 @interface LLOtherVC (){
     Byte  *_addMemory;
+    MonkeyRunner *runner ;
 }
 
 @property (nonatomic , strong) NSMutableArray *dataArray;
@@ -300,8 +303,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                     }
                 });
                 
-                
-                [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomIOSMonkey) userInfo:nil repeats:YES];
+                QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
+                runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
+                [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
@@ -396,30 +400,29 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     }
 }
 -(void)randomTest{
-    if([LLDebugTool sharedTool].ccTree){
-        
-        double width = MAX([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
-        double height = MIN([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
-        
-        NSDictionary *tree = [LLDebugTool sharedTool].ccTree() ;
-        NSArray *children = [tree objectForKey:@"children"] ;
-        
-        int random = arc4random() % [children count] ;
-        NSDictionary *child = [children objectAtIndex:random] ;
-        
-        NSDictionary *payload = [child objectForKey:@"payload"] ;
-        NSLog(@"click name : %@" , [child objectForKey:@"name"]) ;
-        NSArray *pos = [payload objectForKey:@"pos"] ;
-        
-        
-        double x = [[pos objectAtIndex:0] doubleValue] * width;
-        double y = [[pos objectAtIndex:1] doubleValue] * height;
-        
-        [self touchesWithPoint:CGPointMake(x,y)];
-        
-    }else{
-        NSLog(@"cocos creator don't get tree") ;
-    }
+    
+    [runner runOneStep] ;
+    
+//    NSMutableArray *array = [FindElementTree tree] ;
+//
+//    if(array.count>0){
+//        int random = arc4random() % [array count] ;
+//
+//        NSDictionary *dict = [array objectAtIndex:0] ;
+//
+//        if(![[dict objectForKey:@"identifier"] isEqual:@""] ){
+//            NSString *accessibilityIdentifier = [dict objectForKey:@"identifier"] ;
+//            NSString *className = [dict objectForKey:@"className"] ;
+//
+//            if([className isEqual:@"UITableViewCell"]){
+//                NSLog(@"accessibilityIdentifier:%@",accessibilityIdentifier) ;
+//                 [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
+//                [BackActions back] ;
+//            }
+//        }else{
+//            NSLog(@"haleli >>>> test monkey,no identifier") ;
+//        }
+//    }
 }
 
 - (void)randomCocosMonkey{
@@ -563,15 +566,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 NSString *className = [dict objectForKey:@"className"] ;
                 
                 if([className isEqual:@"UITableView"]){
-                    int tableSeed = arc4random() % 2 ;
-                    //50%执行活动操作
-                    if(tableSeed<1){
-                        NSLog(@"haleli >>>> test monkey,UITableView swipe action") ;
-                        [UITableViewActions swipeTableViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                    }else{
-                        NSLog(@"haleli >>>> test monkey,UITableView tap action") ;
-                        [UITableViewActions tapRowAtIndexPathWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                    }
+                    NSLog(@"haleli >>>> test monkey,UITableView swipe action") ;
+                    [UITableViewActions swipeTableViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }else if([className isEqual:@"UISwitch"]){
                     NSLog(@"haleli >>>> test monkey,UISwitch tap action") ;
                     [UISwitchActions setSwitchWithAccessibilityIdentifier:accessibilityIdentifier] ;
@@ -591,15 +587,15 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                     NSLog(@"haleli >>>> test monkey,UISegmentedControl tap action") ;
                     [UISegmentedControlActions tapSegmentedControlWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }else if([className isEqual:@"UICollectionView"]){
-                    int collectionSeed = arc4random() % 2 ;
-                    //50%执行活动操作
-                    if(collectionSeed<1){
-                        NSLog(@"haleli >>>> test monkey,UICollectionView swipe action") ;
-                        [UICollectionViewActions swipeCollectionViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                    }else{
-                        NSLog(@"haleli >>>> test monkey,UICollectionView tap action") ;
-                        [UICollectionViewActions tapItemAtIndexPathWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                    }
+                    NSLog(@"haleli >>>> test monkey,UICollectionView swipe action") ;
+                    [UICollectionViewActions swipeCollectionViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                    
+                }else if([className isEqual:@"UITableViewCell"]){
+                    NSLog(@"haleli >>>> test monkey,UITableViewCell tap action") ;
+                    [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
+                }else if([className isEqual:@"UICollectionViewCell"]){
+                    NSLog(@"haleli >>>> test monkey,UICollectionViewCell tap action") ;
+                    [UICollectionViewCellActions tapCollectionViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }
                 else{
                     NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;

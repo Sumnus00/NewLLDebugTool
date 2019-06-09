@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Element.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (Tree)
 +(NSMutableArray *)tree ;
++(NSMutableDictionary *)tree1 ;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Tree.h"
-#import "FindTopController.h"
+#import "FindElementTree.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) NSMutableDictionary<NSString* , Tree*> *trees ;
 + (instancetype)sharedApp;
 -(Tree *)getCurrentTree;
+-(void) updateTree:(Tree*)tree ;
 @end
 
 NS_ASSUME_NONNULL_END

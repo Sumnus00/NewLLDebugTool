@@ -8,21 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "Element.h"
-
+@class Element ;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Tree : NSObject
 @property (copy , nonatomic , nonnull) NSString *treeID ;
 @property (copy , nonatomic , nonnull) NSString *treeName ;
-@property (nonatomic, assign) NSInteger clickTimes ;
 @property (nonatomic , strong) NSMutableDictionary<NSString* , Element*> *elements ;
-@property (nonatomic ,assign) BOOL isClickedDone ;
 
 - (instancetype)initWithTreeId:(NSString*)treeID withTreeName:(NSString*)treeName ;
--(BOOL)isElementExists:(Element*)element ;
+-(BOOL)isSameTree:(Tree*)tree ;
+-(BOOL)isSameTreeId:(Tree*)tree ;
+-(BOOL)isExistsElement:(Element*)element ;
 -(void)setElement:(Element*)element ;
 -(Element *)getElement:(NSString*)elementID ;
--(void) updateTreeWithElements:(NSArray<Element*>*)elements ;
 @end
 
 @interface Path : NSObject

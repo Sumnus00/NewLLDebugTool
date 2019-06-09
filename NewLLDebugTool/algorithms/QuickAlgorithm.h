@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MonkeyAlgorithmDelegate.h"
+#import "App.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QuickAlgorithm : NSObject <MonkeyAlgorithmDelegate>

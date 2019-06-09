@@ -19,5 +19,7 @@
 #import "UIButtonActions.h"
 #import "UISegmentedControlActions.h"
 #import "UICollectionViewActions.h"
+#import "UITableViewCellActions.h"
+#import "UICollectionViewCellActions.h"
 
 #endif /* Actions_h */

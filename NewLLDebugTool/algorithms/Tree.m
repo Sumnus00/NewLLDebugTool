@@ -15,10 +15,28 @@
     if(self = [super init]){
         _treeID = treeID ;
         _treeName = treeName ;
-        _clickTimes = 0 ;
         _elements = [[NSMutableDictionary alloc] init] ;
     }
     return self ;
+}
+
+-(BOOL)isSameTreeId:(Tree*)tree{
+    if(tree == nil){
+        return false ;
+    }
+    return [_treeID isEqualToString:tree.treeID] ;
+}
+
+
+-(BOOL)isSameTree:(Tree*)tree{
+    if(tree==nil){
+        return false ;
+    }
+    if([self isSameTreeId:tree]){
+        return [self.elements isEqual:tree.elements] ;
+    }else{
+        return false ;
+    }
 }
 
 -(BOOL)isExistsElement:(Element*)element{
@@ -36,15 +54,5 @@
     return [_elements objectForKey:elementId] ;
 }
 
--(void) updateTreeWithElements:(NSArray<Element*>*)elements{
-    for(int i=0 ;i<[elements count] ;i++){
-        Element *element = [elements objectAtIndex:i] ;
-        if([self isExistsElement:element]){
-            
-        }else{
-            [self setElement:element] ;
-        }
-    }
-   
-}
+
 @end

@@ -8,18 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "Tree.h"
+@class Tree ;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Element : NSObject
 @property (copy , nonatomic , nonnull) NSString *elementId ;
 @property (copy , nonatomic , nonnull) NSString *elementName ;
 @property (nonatomic, assign) NSInteger clickTimes ;
-@property (nonatomic ,assign) BOOL isClicked ;
 @property (nonatomic ,assign) BOOL isTreeChanged ;
 @property (nonatomic , assign) BOOL isJumped ;
 @property (nonatomic , assign) BOOL isBack ;
 @property (nonatomic , strong) Tree *toTree ;
-- (instancetype)initWithElementId:(NSString*)elementId withElementName:(NSString*)elementName ;
+@property (copy , nonatomic , nonnull) NSString *type ;
+- (instancetype)initWithElementId:(NSString*)elementId elementName:(NSString*)elementName type:(NSString*)type;
 - (NSInteger) getElementScore ;
 @end
 
