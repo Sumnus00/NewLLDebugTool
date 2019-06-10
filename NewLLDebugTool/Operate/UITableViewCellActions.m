@@ -9,7 +9,8 @@
 #import "UITableViewCellActions.h"
 
 @implementation UITableViewCellActions
-+(void)tapTableViewCellWithAccessibilityIdentifier:(NSString *)identifier{
++(void)tapTableViewCellWithAccessibilityIdentifier:(NSString *)identifier section:(NSInteger) section row:(NSInteger) row{
+    
     UIView *view = nil;
     UIAccessibilityElement *element = nil;
     
@@ -17,8 +18,16 @@
     
     [tester tryFindingAccessibilityElement:&element view:&view withElementMatchingPredicate:filter tappable:NO error:nil] ;
     
-    if([view isKindOfClass:[UITableViewCell class]]){
-        [tester tapAccessibilityElement:element inView:view] ;
+    if([view isKindOfClass:[UITableView class]]){
+        NSInteger sections = ((UITableView *)view).numberOfSections ;
+        if(section < sections){
+            NSInteger rows = [((UITableView *)view) numberOfRowsInSection:section] ;
+            if(row < rows){
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section] ;
+                [tester tapRowAtIndexPath:indexPath inTableView:view] ;
+            }
+        }
+       
     }
 }
 @end

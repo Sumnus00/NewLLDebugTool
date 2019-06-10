@@ -114,12 +114,6 @@
         }
         else if ([self isKindOfClass: [UITabBar class]]){
             labelStr = @"TBUIAutoTest_TabBar" ;
-            long int count =  ((UITabBar*)self).items.count ;
-            for(int i=0 ; i<count ;i++){
-                NSString* title = [((UITabBar*)self).items objectAtIndex:i].title ;
-                [((UITabBar*)self).items objectAtIndex:i].accessibilityLabel = [NSString stringWithFormat:@"TBUIAutoTest_TabBar_%@",title?: @""] ;
-            }
-            
         }
         else if([self isKindOfClass:[UISegmentedControl class]]){
             long int count =  ((UISegmentedControl*)self).numberOfSegments ;
@@ -127,10 +121,6 @@
             for(int i=0 ;i<count ;i++){
                 NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
                 str = [str stringByAppendingFormat:@"_%@",title?: @"" ] ;
-            }
-            for(int i=0;i<count;i++){
-                NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
-                [[[[[((UISegmentedControl *)self) subviews] reverseObjectEnumerator] allObjects] objectAtIndex:i] setAccessibilityLabel:[NSString stringWithFormat:@"TBUIAutoTest_Segment_%@_%@",str,title?: @""]] ;
             }
             labelStr = [@"TBUIAutoTest_UISegmentedControl" stringByAppendingFormat:@"%@",str];
         }
@@ -151,6 +141,37 @@
 
 - (NSString *)labelForReuseView
 {
+    
+    if([self isKindOfClass:[UISegmentedControl class]]){//UISegmentedControl 特殊处理
+        long int count =  ((UISegmentedControl*)self).numberOfSegments ;
+        NSString *str = @"" ;
+        for(int i=0 ;i<count ;i++){
+            NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
+            str = [str stringByAppendingFormat:@"_%@",title?: @"" ] ;
+        }
+        for(int i=0;i<count;i++){
+            NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
+            [[[[[((UISegmentedControl *)self) subviews] reverseObjectEnumerator] allObjects] objectAtIndex:i] setAccessibilityLabel:[NSString stringWithFormat:@"TBUIAutoTest_Segment_%@_%@",str,title?: @""]] ;
+        }
+    }
+    
+    if ([self isKindOfClass:[UITabBar class]]){//UITabBarButton 特殊处理
+//        long int count =  ((UITabBar*)self).items.count ;
+//        for(int i=0 ; i<count ;i++){
+//            NSString* title = [((UITabBar*)self).items objectAtIndex:i].title ;
+//            [((UITabBar*)self).items objectAtIndex:i].accessibilityLabel = [NSString stringWithFormat:@"TBUIAutoTest_TabBar_%@",title?: @""] ;
+//        }
+        int i = 0 ;
+        for(UIView* view in self.subviews){
+            if([view isKindOfClass:NSClassFromString(@"UITabBarButton")]){
+                NSString* title = [((UITabBar*)self).items objectAtIndex:i].title ;
+                view.accessibilityIdentifier = [NSString stringWithFormat:@"TBUIAutoTest_TabBar_%@",title?: @""] ;
+                i = i + 1 ;
+            }
+        }
+
+    }
+    
     if ([self isKindOfClass:[UITableViewCell class]]) {//UITableViewCell 特殊处理
         UIView *view = [self superview];
         while (view && [view isKindOfClass:[UITableView class]] == NO) {

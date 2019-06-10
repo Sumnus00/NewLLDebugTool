@@ -7,7 +7,7 @@
 //
 
 #import "MonkeyRunner.h"
-
+#import "UIView-Debugging.h"
 @implementation MonkeyRunner
 
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm{
@@ -29,20 +29,27 @@
  ***/
 -(void)runOneStep{
     
+    [UIView printViewHierarchy] ;
+    
     Tree* tree =[[App sharedApp] getCurrentTree] ;
     //更新树
     [[App sharedApp] updateTree: tree] ;
     
-    if(_preTree && _preElement && tree && [_preTree isSameTreeId:tree]){
+    if(_preTree && _preElement && tree && !_preElement.isMenu && [_preTree isSameTreeId:tree]){
         _preElement.isBack = YES ;
         _preTree = nil ;
         _curTree = nil ;
     }
     
-    if(_curTree && tree && _preElement && ![_curTree isSameTreeId:tree] && !_preElement.isBack){
+    if(_curTree && tree && _preElement && ![_curTree isSameTreeId:tree] && !_preElement.isBack && _preElement.isMenu){
         _preElement.isJumped = true ;
+        _preTree = nil ;
+        _curTree = nil ;
+    }else if(_curTree && tree && _preElement && ![_curTree isSameTreeId:tree] && !_preElement.isBack && !_preElement.isMenu){
+        _preElement.isJumped = true ;
+        //内存泄漏
         _preElement.toTree = tree ;
-    }else if(_curTree && tree && _preElement && ![_curTree isSameTree: tree] && !_preElement.isBack){
+    }else if(_curTree && tree && _preElement && ![_curTree isSameTree: tree] && !_preElement.isBack && !_preElement.isMenu){
         _preElement.isTreeChanged = true ;
     }
     
@@ -66,6 +73,9 @@
         _preElement = element ;
         [self OperateElement:element] ;
         element.clickTimes = element.clickTimes + 1 ;
+        if([element.type isEqual:@"UITabBarButton"]){
+            element.isMenu = true ;
+        }
     }
     
 }
@@ -104,10 +114,23 @@
         
     }else if([className isEqual:@"UITableViewCell"]){
         NSLog(@"haleli >>>> test monkey,UITableViewCell tap action") ;
-        [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
+        if([element.info count] > 0){
+            NSInteger section = [[element.info objectForKey:@"section"] intValue];
+            NSInteger row = [[element.info objectForKey:@"row"] intValue];
+            NSString *accessibilityIdentifier = [element.info objectForKey:@"accessibilityIdentifier"] ;
+            [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier section:section row:row] ;
+        }
     }else if([className isEqual:@"UICollectionViewCell"]){
         NSLog(@"haleli >>>> test monkey,UICollectionViewCell tap action") ;
-        [UICollectionViewCellActions tapCollectionViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
+        if([element.info count] > 0){
+            NSInteger section = [[element.info objectForKey:@"section"] intValue];
+            NSInteger item = [[element.info objectForKey:@"item"] intValue];
+            NSString *accessibilityIdentifier = [element.info objectForKey:@"accessibilityIdentifier"] ;
+            [UICollectionViewCellActions tapCollectionViewCellWithAccessibilityIdentifier:accessibilityIdentifier section:section item:item] ;
+        }
+    }else if([className isEqual:@"UITabBarButton"]){
+        NSLog(@"haleli >>>> test monkey,UITabBarButton tap action") ;
+        [UITabBarButtonActions tapTabBarButtonWithAccessibilityIdentifier:accessibilityIdentifier] ;
     }
     else{
         NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;

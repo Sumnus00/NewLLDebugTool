@@ -18,9 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,assign) BOOL isTreeChanged ;
 @property (nonatomic , assign) BOOL isJumped ;
 @property (nonatomic , assign) BOOL isBack ;
+@property (nonatomic , assign) BOOL isMenu ;
 @property (nonatomic , strong) Tree *toTree ;
 @property (copy , nonatomic , nonnull) NSString *type ;
+@property (nonatomic,strong) NSMutableDictionary *info ;
 - (instancetype)initWithElementId:(NSString*)elementId elementName:(NSString*)elementName type:(NSString*)type;
+-(void)setInfoKey:(NSString*)key withInfoValue:(NSString*)value ;
 - (NSInteger) getElementScore ;
 @end
 

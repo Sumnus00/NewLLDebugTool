@@ -17,12 +17,17 @@
         _isTreeChanged = false ;
         _isJumped = false ;
         _isBack = false ;
+        _isMenu = false ;
         _toTree = nil ;
         _type = type ;
+        _info = [[NSMutableDictionary alloc] init]  ;
     }
     return self ;
 }
 
+-(void)setInfoKey:(NSString*)key withInfoValue:(NSString*)value{
+    [_info setObject:value forKey:key] ;
+}
 - (BOOL)isEqual:(id)object {
     if (self == object) {
         return YES;

@@ -21,5 +21,6 @@
 #import "UICollectionViewActions.h"
 #import "UITableViewCellActions.h"
 #import "UICollectionViewCellActions.h"
+#import "UITabBarButtonActions.h"
 
 #endif /* Actions_h */

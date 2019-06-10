@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UICollectionViewCellActions : NSObject
-+(void)tapCollectionViewCellWithAccessibilityIdentifier:(NSString *)identifier;
++(void)tapCollectionViewCellWithAccessibilityIdentifier:(NSString *)identifier section:(NSInteger)section item:(NSInteger)item ;
 @end
 
 NS_ASSUME_NONNULL_END

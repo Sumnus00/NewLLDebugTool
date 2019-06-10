@@ -9,7 +9,7 @@
 #import "UICollectionViewCellActions.h"
 
 @implementation UICollectionViewCellActions
-+(void)tapCollectionViewCellWithAccessibilityIdentifier:(NSString *)identifier{
++(void)tapCollectionViewCellWithAccessibilityIdentifier:(NSString *)identifier section:(NSInteger)section item:(NSInteger)item{
     UIView *view = nil;
     UIAccessibilityElement *element = nil;
     
@@ -17,8 +17,16 @@
     
     [tester tryFindingAccessibilityElement:&element view:&view withElementMatchingPredicate:filter tappable:NO error:nil] ;
     
-    if([view isKindOfClass:[UICollectionViewCell class]]){
-        [tester tapAccessibilityElement:element inView:view] ;
+    if([view isKindOfClass:[UICollectionView class]]){
+        NSInteger sections = ((UICollectionView *)view).numberOfSections ;
+        if(section < sections){
+            NSInteger items = [((UICollectionView *)view) numberOfItemsInSection:section] ;
+            if(item < items){
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section] ;
+                [tester tapItemAtIndexPath:indexPath inCollectionView:view] ;
+            }
+        }
+        
     }
 }
 @end

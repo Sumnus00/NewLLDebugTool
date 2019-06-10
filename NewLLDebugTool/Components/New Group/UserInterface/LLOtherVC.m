@@ -590,13 +590,14 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                     NSLog(@"haleli >>>> test monkey,UICollectionView swipe action") ;
                     [UICollectionViewActions swipeCollectionViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
                     
-                }else if([className isEqual:@"UITableViewCell"]){
-                    NSLog(@"haleli >>>> test monkey,UITableViewCell tap action") ;
-                    [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UICollectionViewCell"]){
-                    NSLog(@"haleli >>>> test monkey,UICollectionViewCell tap action") ;
-                    [UICollectionViewCellActions tapCollectionViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
                 }
+//                else if([className isEqual:@"UITableViewCell"]){
+//                    NSLog(@"haleli >>>> test monkey,UITableViewCell tap action") ;
+//                    [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
+//                }else if([className isEqual:@"UICollectionViewCell"]){
+//                    NSLog(@"haleli >>>> test monkey,UICollectionViewCell tap action") ;
+//                    [UICollectionViewCellActions tapCollectionViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
+//                }
                 else{
                     NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;
                 }

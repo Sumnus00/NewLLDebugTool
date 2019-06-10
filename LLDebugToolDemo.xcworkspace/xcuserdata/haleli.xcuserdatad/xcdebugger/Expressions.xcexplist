@@ -25,6 +25,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[UIView(Tree) subviews1:]:UIView+Tree.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "[self isKindOfClass:[UITableViewCell class]]">
+            </PersistentString>
+            <PersistentString
+               value = "row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "main:main.m">
          <PersistentStrings>
             <PersistentString
@@ -48,6 +62,12 @@
                value = "cell.accessibilityIdentifier">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MonkeyRunner runOneStep]:MonkeyRunner.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[UIView(Tree) tree1]:UIView+Tree.m">
       </ContextState>
       <ContextState
          contextName = "+[UIButtonActions tapButtonWithAccessibilityIdentifier:]:UIButtonActions.m">

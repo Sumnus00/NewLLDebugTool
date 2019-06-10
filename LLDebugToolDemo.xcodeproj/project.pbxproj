@@ -100,6 +100,7 @@
 		89C02305225CC39B00686898 /* UIView+TBUIAutoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C02301225CC39B00686898 /* UIView+TBUIAutoTest.m */; };
 		89C4A2D022A7B84600D8CD73 /* MonkeyRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4A2CF22A7B84600D8CD73 /* MonkeyRunner.m */; };
 		89C4A2D322A7C20000D8CD73 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C4A2D222A7C20000D8CD73 /* App.m */; };
+		89C826BA22AE7A9F0083AF55 /* UITabBarButtonActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C826B922AE7A9F0083AF55 /* UITabBarButtonActions.m */; };
 		89CCD9D822817345001848E5 /* monkey_driver.js in Resources */ = {isa = PBXBuildFile; fileRef = 89CCD9D722817345001848E5 /* monkey_driver.js */; };
 		89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FE073B22166154009BCD99 /* LLOtherVC.m */; };
 		C43BA80C205AB095006307BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BA80B205AB095006307BE /* AppDelegate.m */; };
@@ -400,6 +401,8 @@
 		89C4A2CF22A7B84600D8CD73 /* MonkeyRunner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonkeyRunner.m; sourceTree = "<group>"; };
 		89C4A2D122A7C20000D8CD73 /* App.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		89C4A2D222A7C20000D8CD73 /* App.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
+		89C826B822AE7A9F0083AF55 /* UITabBarButtonActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITabBarButtonActions.h; sourceTree = "<group>"; };
+		89C826B922AE7A9F0083AF55 /* UITabBarButtonActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITabBarButtonActions.m; sourceTree = "<group>"; };
 		89CCD9D722817345001848E5 /* monkey_driver.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = monkey_driver.js; sourceTree = "<group>"; };
 		89FE073A22166154009BCD99 /* LLOtherVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOtherVC.h; sourceTree = "<group>"; };
 		89FE073B22166154009BCD99 /* LLOtherVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOtherVC.m; sourceTree = "<group>"; };
@@ -705,6 +708,8 @@
 				18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */,
 				18D3AF2B22AB98FA00B5A263 /* UICollectionViewCellActions.h */,
 				18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */,
+				89C826B822AE7A9F0083AF55 /* UITabBarButtonActions.h */,
+				89C826B922AE7A9F0083AF55 /* UITabBarButtonActions.m */,
 			);
 			path = Operate;
 			sourceTree = "<group>";
@@ -1905,6 +1910,7 @@
 				897378E12293F42F00ECF1EF /* Element.m in Sources */,
 				3629E3972136830A00226C79 /* TestColorStyleViewController.m in Sources */,
 				C44F412D2152AA7000153F46 /* LLSubTitleTableViewCell.m in Sources */,
+				89C826BA22AE7A9F0083AF55 /* UITabBarButtonActions.m in Sources */,
 				89256707225D985200E89146 /* UITableViewActions.m in Sources */,
 				89C022EE225CBF0D00686898 /* UITouch+FakeTouch.m in Sources */,
 				369D09342153853A001C9D4B /* LLLogHelper.m in Sources */,
