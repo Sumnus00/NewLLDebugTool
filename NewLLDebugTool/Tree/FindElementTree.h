@@ -14,8 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FindElementTree : NSObject
-+(NSMutableArray *)tree;
-+(Tree *)tree1 ;
++(Tree *)tree ;
 @end
 
 NS_ASSUME_NONNULL_END

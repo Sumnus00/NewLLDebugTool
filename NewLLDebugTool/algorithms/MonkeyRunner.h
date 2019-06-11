@@ -21,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) Element *preElement ;
 @property (nonatomic , strong) id<MonkeyAlgorithmDelegate> algorithm ;
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm ;
--(void)runOneStep ;
+-(void)runOneCocosStep ;
+-(void)runOneRandomStep ;
+-(void)runOneQuickStep ;
 @end
 
 NS_ASSUME_NONNULL_END

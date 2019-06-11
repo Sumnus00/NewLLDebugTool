@@ -7,6 +7,7 @@
 //
 
 #import "MonkeyRunner.h"
+#import "LLDebugTool.h"
 @implementation MonkeyRunner
 
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm{
@@ -20,8 +21,129 @@
     return self ;
 }
 
+//cocos monkey
+-(void)runOneCocosStep{
+    UIViewController *controller = [FindTopController topController] ;
+    //cocos 页面
+    if([controller isKindOfClass:[[UIApplication sharedApplication].keyWindow.rootViewController class]]){
+        NSLog(@"haleli >>>> 页面 属于 cocos") ;
+        int width = [[UIScreen mainScreen] bounds].size.width ;
+        int height = [[UIScreen mainScreen] bounds].size.height ;
+        int x = arc4random() % width  ;
+        int y = arc4random() % height ;
+        int seed = arc4random() % 10 ;
+        
+        //10%的概率发送滑动事件
+        if(seed<1){
+            int endX = arc4random() % width ;
+            int endY = arc4random() % height ;
+            NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
+            [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
+            //10%的概率发送click事件
+        }else if(seed<2){
+            NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
+            [self touchesWithPoint:CGPointMake(x,y)];
+        }else if(seed < 10){
+            if([LLDebugTool sharedTool].ccTree){
+                
+                double width = MAX([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
+                double height = MIN([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
+                
+                NSDictionary *tree = [LLDebugTool sharedTool].ccTree() ;
+                
+                NSArray *children = [tree objectForKey:@"children"] ;
+                
+                NSDictionary *child = nil ;
+                //10%的返回事件
+                if(seed < 3){
+                    if([children count] > 0){
+                        
+                        child = [children lastObject] ;
+                        NSLog(@"haleli >>>> test monkey,back action , click name : %@ ",[child objectForKey:@"name"]) ;
+                        if(![[[child objectForKey:@"name"] lowercaseString] containsString:@"back"]){
+                            [self touchesWithPoint:CGPointMake(344,32)];
+                            return ;
+                        }
+                        
+                    }
+                    //70%的概率发送UI事件
+                }else{
+                    if([children count] > 1){
+                        int random = arc4random() % ([children count] - 1);
+                        child = [children objectAtIndex:random] ;
+                        
+                        NSLog(@"haleli >>>> test monkey,ui action , click name : %@ ",[child objectForKey:@"name"]) ;
+                    }
+                }
+                
+                NSDictionary *payload = [child objectForKey:@"payload"] ;
+                
+                NSArray *pos = [payload objectForKey:@"pos"] ;
+                
+                
+                double x = [[pos objectAtIndex:0] doubleValue] * width;
+                double y = [[pos objectAtIndex:1] doubleValue] * height;
+                [self touchesWithPoint:CGPointMake(x,y)];
+                
+                
+            }else{
+                NSLog(@"cocos creator don't get tree") ;
+            }
+        }
+        //ios 页面
+    }else{
+        NSLog(@"haleli >>>> 页面 属于 iOS") ;
+        [self runOneRandomStep] ;
+    }
+}
+//随机便利算法的一步
+-(void)runOneRandomStep{
+    int width = [[UIScreen mainScreen] bounds].size.height ;
+    int height = [[UIScreen mainScreen] bounds].size.height ;
+    int x = arc4random() % width  ;
+    int y = arc4random() % height ;
+    int seed = arc4random() % 20 ;
+    
+    //5%的概率发送滑动事件
+    if(seed<1){
+        int endX = arc4random() % width ;
+        int endY = arc4random() % height ;
+        NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
+        [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
+        //5%的返回事件
+    }
+    else if(seed<2){
+        NSLog(@"haleli >>>> test monkey,back action") ;
+        [BackActions back] ;
+        //5%的点击alert事件
+    }
+    else if(seed<3){
+        NSLog(@"haleli >>>> test monkey,acknowledge alert action") ;
+        [UIAlertActions acknowledgeAlert] ;
+        //15%的概率发送click事件
+    }
+    else if(seed<6){
+        NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
+        [self touchesWithPoint:CGPointMake(x,y)];
+    }else if(seed < 20){
+        //75%的概率发送UI事件
+        //查找控件树
+        Tree* tree =[[App sharedApp] getCurrentTree] ;
+        
+        //从树里面选择一个控件
+        Element *element = [_algorithm chooseElementFromTree:_curTree] ;
+        
+        if(element == nil){
+            //需要返回上一个界面
+            [BackActions back] ;
+        }else{
+            [self OperateElement:element] ;
+        }
+    }
+}
 
--(void)runOneStep{
+//快速遍历算法的一步
+-(void)runOneQuickStep{
     
     Tree* tree =[[App sharedApp] getCurrentTree] ;
     //更新树
@@ -72,8 +194,6 @@
 }
 
 -(void)OperateElement:(Element *)element{
-    //40%的概率发送UI事件
-    //查找控件树
   
     NSString *accessibilityIdentifier = element.elementId;
     NSString *className = element.type ;
@@ -126,5 +246,17 @@
     else{
         NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;
     }
+}
+
+
+-(void)touchesWithPoint:(CGPoint)zspoint{
+    [ZSFakeTouch beginTouchWithPoint:zspoint];
+    [ZSFakeTouch endTouchWithPoint:zspoint];
+}
+
+-(void)swapWithPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint{
+    [ZSFakeTouch beginTouchWithPoint:startPoint];
+    [ZSFakeTouch moveTouchWithPoint:endPoint];
+    [ZSFakeTouch endTouchWithPoint:endPoint];
 }
 @end
