@@ -10,15 +10,10 @@
 
 @implementation FindElementTree
 
-+(NSMutableArray *)tree{
-    NSMutableArray *array = [UIView tree] ;
-    return array ;
-}
-
-+(Tree *)tree1{
++(Tree *)tree{
     NSString * treeId = NSStringFromClass([[FindTopController topController] class]) ;
     Tree* tree = [[Tree alloc] initWithTreeId:treeId withTreeName:treeId] ;
-    NSMutableDictionary *dict = [UIView tree1] ;
+    NSMutableDictionary *dict = [UIView tree] ;
     tree.elements = dict ;
     return tree ;
 }

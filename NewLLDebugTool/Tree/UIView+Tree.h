@@ -11,8 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (Tree)
-+(NSMutableArray *)tree ;
-+(NSMutableDictionary *)tree1 ;
++(NSMutableDictionary *)tree ;
 @end
 
 NS_ASSUME_NONNULL_END

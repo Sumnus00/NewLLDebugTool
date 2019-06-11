@@ -31,7 +31,7 @@ static App *_instance = nil;
 }
 
 -(Tree *)getCurrentTree{
-    return [FindElementTree tree1] ;
+    return [FindElementTree tree] ;
 }
 
 -(BOOL)isNewTree:(Tree*)tree{

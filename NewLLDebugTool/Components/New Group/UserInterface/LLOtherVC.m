@@ -341,7 +341,8 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                     }
                 });
                 
-                
+                QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
+                runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
                 [LLDebugTool sharedTool].cocosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomCocosMonkey) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -370,16 +371,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 
--(void)touchesWithPoint:(CGPoint)zspoint{
-    [ZSFakeTouch beginTouchWithPoint:zspoint];
-    [ZSFakeTouch endTouchWithPoint:zspoint];
-}
 
--(void)swapWithPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint{
-    [ZSFakeTouch beginTouchWithPoint:startPoint];
-    [ZSFakeTouch moveTouchWithPoint:endPoint];
-    [ZSFakeTouch endTouchWithPoint:endPoint];
-}
 
 -(UIViewController *)topController {
     
@@ -401,103 +393,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 -(void)randomTest{
     
-    [runner runOneStep] ;
+    [runner runOneQuickStep] ;
     
-//    NSMutableArray *array = [FindElementTree tree] ;
-//
-//    if(array.count>0){
-//        int random = arc4random() % [array count] ;
-//
-//        NSDictionary *dict = [array objectAtIndex:0] ;
-//
-//        if(![[dict objectForKey:@"identifier"] isEqual:@""] ){
-//            NSString *accessibilityIdentifier = [dict objectForKey:@"identifier"] ;
-//            NSString *className = [dict objectForKey:@"className"] ;
-//
-//            if([className isEqual:@"UITableViewCell"]){
-//                NSLog(@"accessibilityIdentifier:%@",accessibilityIdentifier) ;
-//                 [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
-//                [BackActions back] ;
-//            }
-//        }else{
-//            NSLog(@"haleli >>>> test monkey,no identifier") ;
-//        }
-//    }
+    
 }
 
 - (void)randomCocosMonkey{
-    UIViewController *controller = [FindTopController topController] ;
-    //cocos 页面
-    if([controller isKindOfClass:[[UIApplication sharedApplication].keyWindow.rootViewController class]]){
-        NSLog(@"haleli >>>> 页面 属于 cocos") ;
-        int width = self.view.bounds.size.width ;
-        int height = self.view.bounds.size.height ;
-        int x = arc4random() % width  ;
-        int y = arc4random() % height ;
-        int seed = arc4random() % 10 ;
-        
-        //10%的概率发送滑动事件
-        if(seed<1){
-            int endX = arc4random() % width ;
-            int endY = arc4random() % height ;
-            NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
-            [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
-            //10%的概率发送click事件
-        }else if(seed<2){
-            NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
-            [self touchesWithPoint:CGPointMake(x,y)];
-        }else if(seed < 10){
-            if([LLDebugTool sharedTool].ccTree){
-                
-                double width = MAX([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
-                double height = MIN([[UIScreen mainScreen] bounds].size.width,[[UIScreen mainScreen] bounds].size.height) ;
-                
-                NSDictionary *tree = [LLDebugTool sharedTool].ccTree() ;
-                
-                NSArray *children = [tree objectForKey:@"children"] ;
-                
-                NSDictionary *child = nil ;
-                //10%的返回事件
-                if(seed < 3){
-                    if([children count] > 0){
-                        
-                        child = [children lastObject] ;
-                        NSLog(@"haleli >>>> test monkey,back action , click name : %@ ",[child objectForKey:@"name"]) ;
-                        if(![[[child objectForKey:@"name"] lowercaseString] containsString:@"back"]){
-                            [self touchesWithPoint:CGPointMake(344,32)];
-                            return ;
-                        }
-                        
-                    }
-                    //70%的概率发送UI事件
-                }else{
-                    if([children count] > 1){
-                        int random = arc4random() % ([children count] - 1);
-                        child = [children objectAtIndex:random] ;
-                        
-                        NSLog(@"haleli >>>> test monkey,ui action , click name : %@ ",[child objectForKey:@"name"]) ;
-                    }
-                }
-                
-                NSDictionary *payload = [child objectForKey:@"payload"] ;
-                
-                NSArray *pos = [payload objectForKey:@"pos"] ;
-                
-                
-                double x = [[pos objectAtIndex:0] doubleValue] * width;
-                double y = [[pos objectAtIndex:1] doubleValue] * height;
-                [self touchesWithPoint:CGPointMake(x,y)];
-                
-                
-            }else{
-                NSLog(@"cocos creator don't get tree") ;
-            }
-        }
-        //ios 页面
-    }else{
-        NSLog(@"haleli >>>> 页面 属于 iOS") ;
-        [self randomIOSMonkey] ;
-    }
+    [runner runOneCocosStep] ;
 }
 
 -(BOOL)swizzleMethods
@@ -523,89 +425,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 - (void)randomIOSMonkey{
-    
-    int width = self.view.bounds.size.width ;
-    int height = self.view.bounds.size.height ;
-    int x = arc4random() % width  ;
-    int y = arc4random() % height ;
-    int seed = arc4random() % 10 ;
-
-    //10%的概率发送滑动事件
-    if(seed<1){
-        int endX = arc4random() % width ;
-        int endY = arc4random() % height ;
-        NSLog(@"haleli >>>> test monkey,swip(%d,%d) to (%d,%d)",x,y,endX,endY) ;
-        [self swapWithPoint:CGPointMake(x, y) endPoint:CGPointMake(endX, endY)] ;
-    //10%的返回事件
-    }
-    else if(seed<2){
-        NSLog(@"haleli >>>> test monkey,back action") ;
-        [BackActions back] ;
-    //10%的点击alert事件
-    }
-    else if(seed<3){
-        NSLog(@"haleli >>>> test monkey,acknowledge alert action") ;
-        [UIAlertActions acknowledgeAlert] ;
-    //30%的概率发送click事件
-    }
-    else if(seed<6){
-        NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
-        [self touchesWithPoint:CGPointMake(x,y)];
-    }else if(seed < 10){
-        //40%的概率发送UI事件
-        //查找控件树
-        NSMutableArray *array = [FindElementTree tree] ;
-        
-        if(array.count>0){
-            int random = arc4random() % [array count] ;
-            
-            NSDictionary *dict = [array objectAtIndex:random] ;
-            
-            if(![[dict objectForKey:@"identifier"] isEqual:@""] ){
-                NSString *accessibilityIdentifier = [dict objectForKey:@"identifier"] ;
-                NSString *className = [dict objectForKey:@"className"] ;
-                
-                if([className isEqual:@"UITableView"]){
-                    NSLog(@"haleli >>>> test monkey,UITableView swipe action") ;
-                    [UITableViewActions swipeTableViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UISwitch"]){
-                    NSLog(@"haleli >>>> test monkey,UISwitch tap action") ;
-                    [UISwitchActions setSwitchWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UITabBar"]){
-                    NSLog(@"haleli >>>> test monkey,UITabBar tap action") ;
-                    [UITabBarActions tapTabBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UINavigationBar"]){
-                    NSLog(@"haleli >>>> test monkey,UINavigationBar tap action") ;
-                    [UINavigationBarActions tapNavigationBarWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UITextField"]){
-                    NSLog(@"haleli >>>> test monkey,UITextFieldActions enter text action") ;
-                    [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UIButton"]){
-                    NSLog(@"haleli >>>> test monkey,UIButton tap action") ;
-                    [UIButtonActions tapButtonWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UISegmentedControl"]){
-                    NSLog(@"haleli >>>> test monkey,UISegmentedControl tap action") ;
-                    [UISegmentedControlActions tapSegmentedControlWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                }else if([className isEqual:@"UICollectionView"]){
-                    NSLog(@"haleli >>>> test monkey,UICollectionView swipe action") ;
-                    [UICollectionViewActions swipeCollectionViewWithAccessibilityIdentifier:accessibilityIdentifier] ;
-                    
-                }
-//                else if([className isEqual:@"UITableViewCell"]){
-//                    NSLog(@"haleli >>>> test monkey,UITableViewCell tap action") ;
-//                    [UITableViewCellActions tapTableViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
-//                }else if([className isEqual:@"UICollectionViewCell"]){
-//                    NSLog(@"haleli >>>> test monkey,UICollectionViewCell tap action") ;
-//                    [UICollectionViewCellActions tapCollectionViewCellWithAccessibilityIdentifier:accessibilityIdentifier] ;
-//                }
-                else{
-                    NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;
-                }
-            }else{
-                NSLog(@"haleli >>>> test monkey,no identifier") ;
-            }
-        }
-    }
+    [runner runOneRandomStep] ;
 }
 
 - (void)highMemoryOperate{
