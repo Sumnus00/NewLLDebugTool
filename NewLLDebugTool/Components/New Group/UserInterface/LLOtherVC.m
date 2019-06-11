@@ -395,7 +395,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     
     [runner runOneQuickStep] ;
     
-    
 }
 
 - (void)randomCocosMonkey{
