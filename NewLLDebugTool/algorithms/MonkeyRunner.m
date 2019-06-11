@@ -131,7 +131,7 @@
         Tree* tree =[[App sharedApp] getCurrentTree] ;
         
         //从树里面选择一个控件
-        Element *element = [_algorithm chooseElementFromTree:_curTree] ;
+        Element *element = [_algorithm chooseElementFromTree:tree] ;
         
         if(element == nil){
             //需要返回上一个界面
@@ -144,17 +144,16 @@
 
 //快速遍历算法的一步
 -(void)runOneQuickStep{
-    
     Tree* tree =[[App sharedApp] getCurrentTree] ;
     //更新树
     [[App sharedApp] updateTree: tree] ;
-    
+
     if(_preTree && _preElement && tree && !_preElement.isMenu && [_preTree isSameTreeId:tree]){
         _preElement.isBack = YES ;
         _preTree = nil ;
         _curTree = nil ;
     }
-    
+
     if(_curTree && tree && _preElement && ![_curTree isSameTreeId:tree] && !_preElement.isBack && _preElement.isMenu){
         _preElement.isJumped = true ;
         _preTree = nil ;
@@ -165,23 +164,23 @@
     }else if(_curTree && tree && _preElement && ![_curTree isSameTree: tree] && !_preElement.isBack && !_preElement.isMenu){
         _preElement.isTreeChanged = true ;
     }
-    
+
     if(tree && _curTree && ![tree isSameTreeId:_curTree]){
         _preTree = _curTree ;
     }
-    
+
     _curTree = tree ;
-    
+
     //从树里面选择一个控件
     Element *element = [_algorithm chooseElementFromTree:_curTree] ;
-    
+
     if(element == nil){
         //需要返回上一个界面
         _preElement = nil ;
         _preTree = nil ;
         _curTree = nil ;
         [BackActions back] ;
-        
+
     }else{
         _preElement = element ;
         [self OperateElement:element] ;

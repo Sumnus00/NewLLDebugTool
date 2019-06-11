@@ -124,6 +124,12 @@
             }
             labelStr = [@"TBUIAutoTest_UISegmentedControl" stringByAppendingFormat:@"%@",str];
         }
+        else if([self isKindOfClass:[UITableView class]]){
+            labelStr = @"TBUIAutoTest_Table" ;
+        }
+        else if([self isKindOfClass:[UICollectionView class]]){
+            labelStr = @"TBUIAutoTest_Collection" ;
+        }
         
         NSString *label = [self labelForReuseView];
         if (label.length > 0) {
@@ -188,7 +194,7 @@
             view = [view superview];
         }
         UITableView *tableView = (UITableView *)view;
-        tableView.accessibilityIdentifier = @"TBUIAutoTest_Table" ;
+//        tableView.accessibilityIdentifier = @"TBUIAutoTest_Table" ;
         NSIndexPath *indexPath = [tableView indexPathForCell:(UITableViewCell *)self];
     
         UITableViewCell *cell = ((UITableViewCell *)self) ;
@@ -207,7 +213,7 @@
             view = [view superview];
         }
         UICollectionView *collectionView = (UICollectionView *)view;
-        collectionView.accessibilityIdentifier = @"TBUIAutoTest_Collection" ;
+//        collectionView.accessibilityIdentifier = @"TBUIAutoTest_Collection" ;
         NSIndexPath *indexPath = [collectionView indexPathForCell:(UICollectionViewCell *)self];
         return [NSString stringWithFormat:@"TBUIAutoTest_CollectionCell_%@_%ld_%ld", ((UICollectionViewCell *)self).reuseIdentifier, (long)indexPath.section, (long)indexPath.row];
     }
