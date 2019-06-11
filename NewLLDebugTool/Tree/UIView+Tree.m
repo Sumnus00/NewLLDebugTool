@@ -70,6 +70,9 @@
 
 - (void)subviews1:(NSMutableDictionary *)dict
 {
+    if(self.hidden){
+        return ;
+    }
     NSString* identifier = self.accessibilityIdentifier;
     if(identifier){
         NSString* className = nil ;
@@ -105,17 +108,15 @@
             className = @"UINavigationBar" ;
             Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
             [dict setObject:element forKey:element.elementId] ;
+            return ;
         }else if([self isKindOfClass:[UITextField class]]){
             className = @"UITextField" ;
             Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
             [dict setObject:element forKey:element.elementId] ;
         }else if([self isKindOfClass:[UIButton class]]){
             className = @"UIButton" ;
-            //UITableViewCell的默认UIButton无法点击，点击会发生crash。这个不影响button的功能，因为cell是可以点击的
-            if(!([className isEqual:@"UIButton"] && [[self superview] isKindOfClass:[UITableViewCell class]])){
-                Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
-                [dict setObject:element forKey:element.elementId] ;
-            }
+            Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
+            [dict setObject:element forKey:element.elementId] ;
         }else if([self isKindOfClass:[UISegmentedControl class]]){
             className = @"UISegmentedControl" ;
             Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
@@ -143,6 +144,10 @@
             className = @"UITabBarButton" ;
             Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
             [dict setObject:element forKey:element.elementId] ;
+        }else if([self isKindOfClass:[UITableViewCell class]]){
+            return ;
+        }else if([self isKindOfClass:[UICollectionViewCell class]]){
+            return ;
         }
     }
     for (UIView *view in self.subviews) {

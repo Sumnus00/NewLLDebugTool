@@ -153,6 +153,16 @@
             NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
             [[[[[((UISegmentedControl *)self) subviews] reverseObjectEnumerator] allObjects] objectAtIndex:i] setAccessibilityLabel:[NSString stringWithFormat:@"TBUIAutoTest_Segment_%@_%@",str,title?: @""]] ;
         }
+//        int i = 0 ;
+//        for(UIView* view in self.subviews){
+//            if([view isKindOfClass:NSClassFromString(@"UISegment")]){
+//                NSString *title =  [((UISegmentedControl*)self) titleForSegmentAtIndex:i] ;
+//                NSString* accessibilityIdentifier = [NSString stringWithFormat:@"TBUIAutoTest_Segment_%@_%@",str,title?: @""] ;
+//                [view setAccessibilityIdentifier:accessibilityIdentifier] ;
+//
+//                i = i + 1 ;
+//            }
+//        }
     }
     
     if ([self isKindOfClass:[UITabBar class]]){//UITabBarButton 特殊处理

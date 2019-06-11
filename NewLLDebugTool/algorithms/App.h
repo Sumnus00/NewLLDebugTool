@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedApp;
 -(Tree *)getCurrentTree;
 -(void) updateTree:(Tree*)tree ;
+-(Tree*)getTree:(NSString*)treeID ;
 @end
 
 NS_ASSUME_NONNULL_END

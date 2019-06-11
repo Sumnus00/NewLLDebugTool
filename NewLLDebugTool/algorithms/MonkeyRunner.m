@@ -7,7 +7,6 @@
 //
 
 #import "MonkeyRunner.h"
-#import "UIView-Debugging.h"
 @implementation MonkeyRunner
 
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm{
@@ -21,15 +20,8 @@
     return self ;
 }
 
-/***
- A界面 点击 元素E 跳转到 界面B
- _preTree : A界面
- _preElement : 元素E
- _curTree : 界面B
- ***/
+
 -(void)runOneStep{
-    
-    [UIView printViewHierarchy] ;
     
     Tree* tree =[[App sharedApp] getCurrentTree] ;
     //更新树
@@ -47,8 +39,7 @@
         _curTree = nil ;
     }else if(_curTree && tree && _preElement && ![_curTree isSameTreeId:tree] && !_preElement.isBack && !_preElement.isMenu){
         _preElement.isJumped = true ;
-        //内存泄漏
-        _preElement.toTree = tree ;
+        _preElement.toTree = [[App sharedApp] getTree:tree.treeID] ;
     }else if(_curTree && tree && _preElement && ![_curTree isSameTree: tree] && !_preElement.isBack && !_preElement.isMenu){
         _preElement.isTreeChanged = true ;
     }

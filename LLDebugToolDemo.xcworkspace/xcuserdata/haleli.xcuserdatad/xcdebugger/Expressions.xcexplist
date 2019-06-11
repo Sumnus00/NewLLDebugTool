@@ -28,13 +28,28 @@
          contextName = "-[UIView(Tree) subviews1:]:UIView+Tree.m">
          <PersistentStrings>
             <PersistentString
+               value = "row">
+            </PersistentString>
+            <PersistentString
+               value = "self.superview">
+            </PersistentString>
+            <PersistentString
+               value = "self.superview.superview.superview.superview">
+            </PersistentString>
+            <PersistentString
                value = "section">
             </PersistentString>
             <PersistentString
-               value = "[self isKindOfClass:[UITableViewCell class]]">
+               value = "self.superview.superview.superview">
             </PersistentString>
             <PersistentString
-               value = "row">
+               value = "[self isHidden]">
+            </PersistentString>
+            <PersistentString
+               value = "self.superview.superview">
+            </PersistentString>
+            <PersistentString
+               value = "[self isKindOfClass:[UITableViewCell class]]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -50,21 +65,29 @@
          contextName = "-[UIView(TBUIAutoTest) labelForReuseView]:UIView+TBUIAutoTest.m">
          <PersistentStrings>
             <PersistentString
-               value = "cell.accessoryType">
+               value = "view.accessibilityLabel">
             </PersistentString>
             <PersistentString
-               value = "cell.subviews">
-            </PersistentString>
-            <PersistentString
-               value = "cell.accessoryView">
-            </PersistentString>
-            <PersistentString
-               value = "cell.accessibilityIdentifier">
+               value = "view.accessibilityIdentifier">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[MonkeyRunner runOneStep]:MonkeyRunner.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_preTree">
+            </PersistentString>
+            <PersistentString
+               value = "[App sharedApp]">
+            </PersistentString>
+            <PersistentString
+               value = "_curTree">
+            </PersistentString>
+            <PersistentString
+               value = "_preElement">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "+[UIView(Tree) tree1]:UIView+Tree.m">
