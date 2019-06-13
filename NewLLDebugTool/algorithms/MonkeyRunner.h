@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) Tree *curTree ;
 @property (nonatomic , strong) Element *preElement ;
 @property (nonatomic , strong) id<MonkeyAlgorithmDelegate> algorithm ;
+@property (nonatomic , strong) NSMutableArray *blacklist ;
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm ;
 -(void)runOneCocosStep ;
 -(void)runOneRandomStep ;

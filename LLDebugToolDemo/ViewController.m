@@ -278,8 +278,8 @@ static TestLogViewController *extracted() {
         TestLogViewController *vc = [extracted() initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 2) {
-//        TestCrashViewController *vc = [[TestCrashViewController alloc] initWithStyle:UITableViewStyleGrouped];
-//        [self.navigationController pushViewController:vc animated:YES];
+        TestCrashViewController *vc = [[TestCrashViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 3) {
         [self testAppInfo];
     } else if (indexPath.section == 4) {

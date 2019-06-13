@@ -10,7 +10,7 @@
 #import "CYXWaterflowController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginVC : UIViewController
+@interface LoginVC : UIViewController <UITextFieldDelegate>
 
 @end
 

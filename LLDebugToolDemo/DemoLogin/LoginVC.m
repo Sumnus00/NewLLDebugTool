@@ -13,7 +13,7 @@
 @property (nonatomic,strong) UIButton *loginButton;
 @end
 
-@implementation LoginVC
+@implementation LoginVC 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,11 +31,13 @@
     _account=[[UITextField alloc] initWithFrame:CGRectMake(20, 200, self.view.frame.size.width-40, 50)];
     _account.backgroundColor=[UIColor whiteColor];
     _account.placeholder=[NSString stringWithFormat:@"Email"];
+    _account.delegate = self ;
     [self.view addSubview:_account];
     
     _password=[[UITextField alloc] initWithFrame:CGRectMake(20, 260, self.view.frame.size.width-40, 50)];
     _password.backgroundColor=[UIColor whiteColor];
     _password.placeholder=[NSString stringWithFormat:@"Password"];
+    _password.delegate = self ;
     [self.view addSubview:_password];
     
     _loginButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -54,6 +56,11 @@
     [self.view addSubview:segmentedControl] ;
    
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return [textField resignFirstResponder];
+}
+
 -(void)pressBtn:(UIButton*)btn{
     NSLog(@"haleli >>> press button") ;
     [self.navigationController pushViewController:[[CYXWaterflowController alloc]init] animated:YES];

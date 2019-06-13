@@ -3,15 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "+[UISegmentedControlActions tapSegmentedControlWithAccessibilityIdentifier:]:UISegmentedControlActions.m">
+         contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
          <PersistentStrings>
             <PersistentString
-               value = "[((UISegmentedControl *)view) subviews]">
+               value = "dic.allValues.firstObject">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__35-[KIFUITestActor tapScreenAtPoint:]_block_invoke:KIFUITestActor.m">
+         contextName = "+[UIView(Tree) tree:]:UIView+Tree.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[[view superview] nextResponder] isKindOfClass:[UIWindow class]]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[LLOtherVC randomTest]:LLOtherVC.m">
@@ -23,6 +28,31 @@
                value = "[view superview]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[UISegmentedControlActions tapSegmentedControlWithAccessibilityIdentifier:]:UISegmentedControlActions.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[((UISegmentedControl *)view) subviews]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LLOtherVC randomMonkey]:LLOtherVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSClassFromString(className) isKindOfClass:[UISwitch class]]">
+            </PersistentString>
+            <PersistentString
+               value = "NSClassFromString(className)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[UIView(Tree) tree]:UIView+Tree.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[UIButtonActions tapButtonWithAccessibilityIdentifier:]:UIButtonActions.m">
       </ContextState>
       <ContextState
          contextName = "-[UIView(Tree) subviews1:]:UIView+Tree.m">
@@ -54,10 +84,49 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "main:main.m">
+         contextName = "+[UIView(Tree) tree1]:UIView+Tree.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[BackActions back]:BackActions.m">
          <PersistentStrings>
             <PersistentString
-               value = "[((UISegmentedControl *)self) subviews]">
+               value = "navigationController.navigationBar.topItem.leftBarButtonItem.title">
+            </PersistentString>
+            <PersistentString
+               value = "[FindTopController topController]">
+            </PersistentString>
+            <PersistentString
+               value = "[FindTopController topController].navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[KIFUITestActor tapStatusBar]:KIFUITestActor.m">
+      </ContextState>
+      <ContextState
+         contextName = "__49-[KIFUITestActor tapAccessibilityElement:inView:]_block_invoke:KIFUITestActor.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.isUserInteractionActuallyEnabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[FindElementTree tree]:FindElementTree.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "controller.view">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "model.url.path">
+            </PersistentString>
+            <PersistentString
+               value = "model.url.host">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -69,6 +138,64 @@
             </PersistentString>
             <PersistentString
                value = "view.accessibilityIdentifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[FindTopController topController]:FindTopController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "topC.presentedViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__35-[KIFUITestActor tapScreenAtPoint:]_block_invoke:KIFUITestActor.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[UIView(Tree) subviews:]:UIView+Tree.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.subviews">
+            </PersistentString>
+            <PersistentString
+               value = "[[self superview] superview].subviews">
+            </PersistentString>
+            <PersistentString
+               value = "[self nextResponder]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LLSandboxVC shareItemClick:]:LLSandboxVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "model.filePath">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MonkeyRunner runOneQuickStep]:MonkeyRunner.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[App sharedApp]">
+            </PersistentString>
+            <PersistentString
+               value = "_curTree">
+            </PersistentString>
+            <PersistentString
+               value = "_preElement">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "main:main.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[((UISegmentedControl *)self) subviews]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -90,93 +217,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "+[UIView(Tree) tree1]:UIView+Tree.m">
-      </ContextState>
-      <ContextState
-         contextName = "+[UIButtonActions tapButtonWithAccessibilityIdentifier:]:UIButtonActions.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[LLURLProtocol stopLoading]:LLURLProtocol.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "model.url.path">
-            </PersistentString>
-            <PersistentString
-               value = "model.url.host">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "+[BackActions back]:BackActions.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[FindTopController topController].navigationController">
-            </PersistentString>
-            <PersistentString
-               value = "[FindTopController topController]">
-            </PersistentString>
-            <PersistentString
-               value = "navigationController.navigationBar.topItem.leftBarButtonItem.title">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LLOtherVC randomMonkey]:LLOtherVC.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[NSClassFromString(className) isKindOfClass:[UISwitch class]]">
-            </PersistentString>
-            <PersistentString
-               value = "NSClassFromString(className)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__49-[KIFUITestActor tapAccessibilityElement:inView:]_block_invoke:KIFUITestActor.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "view.isUserInteractionActuallyEnabled">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "+[UIView(Tree) tree]:UIView+Tree.m">
-      </ContextState>
-      <ContextState
          contextName = "-[LLScreenshotHelper dataWithScreenshotInPNGFormat]:LLScreenshotHelper.m">
          <PersistentStrings>
             <PersistentString
                value = "window.center.x">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "dic.allValues.firstObject">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[UIView(Tree) subviews:]:UIView+Tree.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.subviews">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[KIFUITestActor tapStatusBar]:KIFUITestActor.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[LLSandboxVC shareItemClick:]:LLSandboxVC.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-            <PersistentString
-               value = "model.filePath">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

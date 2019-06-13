@@ -23,6 +23,9 @@
         //输入文案
         NSString *text = [self randomStringWithLength:(arc4random()%10 + 1 )] ;
         [tester enterText:text intoElement:element inView:view expectedResult:text] ;
+        
+        //放弃成为第一响应
+        [((UITextField*)view) resignFirstResponder] ;
     }
 }
 

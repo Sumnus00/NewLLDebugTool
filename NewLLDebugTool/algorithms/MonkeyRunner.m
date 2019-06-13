@@ -8,6 +8,7 @@
 
 #import "MonkeyRunner.h"
 #import "LLDebugTool.h"
+#import "UIView-Debugging.h"
 @implementation MonkeyRunner
 
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm{
@@ -17,6 +18,7 @@
         _curTree = nil ;
         _preElement = nil ;
         _algorithm = algorithm ;
+        _blacklist = [[NSMutableArray alloc] initWithArray:@[@"UIActivityViewController",@"UIAlertController",@"TestCrashViewController",@"LLOtherVC"]] ;
     }
     return self ;
 }
@@ -144,7 +146,18 @@
 
 //快速遍历算法的一步
 -(void)runOneQuickStep{
+    [UIView printViewHierarchy] ;
     Tree* tree =[[App sharedApp] getCurrentTree] ;
+    
+    if(tree){
+        if([_blacklist containsObject:tree.treeID]){
+            NSLog(@"点击到黑名单控件或者UIActivityViewController或者UIAlertController") ;
+            _preTree = nil ;
+            _curTree = nil ;
+            [BackActions back] ;
+            return ;
+        }
+    }
     //更新树
     [[App sharedApp] updateTree: tree] ;
 
@@ -176,7 +189,6 @@
 
     if(element == nil){
         //需要返回上一个界面
-        _preElement = nil ;
         _preTree = nil ;
         _curTree = nil ;
         [BackActions back] ;
