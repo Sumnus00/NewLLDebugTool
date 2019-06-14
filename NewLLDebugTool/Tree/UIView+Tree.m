@@ -23,33 +23,9 @@
     return dict ;
 }
 
-
-
-+(NSMutableDictionary *)tree:(UIView*)view{
-    
-    UIView *topView = nil ;
-    for (UIView* next = [view superview]; next; next = next.superview) {
-            UIResponder* nextResponder = [next nextResponder];
-            if ([nextResponder isKindOfClass:[UINavigationController class]]) {
-                topView = next ;
-                break ;
-            }else if([nextResponder isKindOfClass:[UITabBarController class]]){
-                topView = next ;
-                break ;
-            }else if([nextResponder isKindOfClass:[UIWindow class]]){
-                topView = next ;
-                break ;
-            }
-    }
-
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    if(topView)
-        [topView subviews:dict];
-    return dict ;
-}
-
 - (void)subviews:(NSMutableDictionary *)dict
 {
+  
     if(self.hidden){
         return ;
     }
@@ -127,6 +103,11 @@
         }else if([self isKindOfClass:[UITableViewCell class]]){
             return ;
         }else if([self isKindOfClass:[UICollectionViewCell class]]){
+            return ;
+        }else if([self isKindOfClass:[UIPickerView class]]){
+            className = @"UIPickerView" ;
+            Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
+            [dict setObject:element forKey:element.elementId] ;
             return ;
         }
     }

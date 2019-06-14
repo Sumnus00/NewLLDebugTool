@@ -14,7 +14,6 @@
     UIViewController *controller = [FindTopController topController] ;
     NSString * treeId = NSStringFromClass([controller class]) ;
     Tree* tree = [[Tree alloc] initWithTreeId:treeId withTreeName:treeId] ;
-//    NSMutableDictionary *dict = [UIView tree:[controller view]] ;
     NSMutableDictionary *dict = [UIView tree] ;
     tree.elements = dict ;
     return tree ;

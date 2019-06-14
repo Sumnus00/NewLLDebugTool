@@ -129,6 +129,8 @@
         }
         else if([self isKindOfClass:[UICollectionView class]]){
             labelStr = @"TBUIAutoTest_Collection" ;
+        }else if([self isKindOfClass:[UIPickerView class]]){
+            labelStr = @"TBUIAutoTest_Picker" ;
         }
         
         NSString *label = [self labelForReuseView];

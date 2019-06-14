@@ -8,7 +8,7 @@
 
 #import "MonkeyRunner.h"
 #import "LLDebugTool.h"
-#import "UIView-Debugging.h"
+
 @implementation MonkeyRunner
 
 - (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm{
@@ -146,7 +146,6 @@
 
 //快速遍历算法的一步
 -(void)runOneQuickStep{
-    [UIView printViewHierarchy] ;
     Tree* tree =[[App sharedApp] getCurrentTree] ;
     
     if(tree){
@@ -195,7 +194,15 @@
 
     }else{
         _preElement = element ;
-        [self OperateElement:element] ;
+        
+        @try {
+             [self OperateElement:element] ;
+        } @catch (NSException *exception) {
+            NSLog(@"haleli >>>> test monkey,exception : %@",exception.name);
+        } @finally {
+            ;
+        }
+        
         element.clickTimes = element.clickTimes + 1 ;
         if([element.type isEqual:@"UITabBarButton"]){
             element.isMenu = true ;
@@ -253,6 +260,9 @@
     }else if([className isEqual:@"UITabBarButton"]){
         NSLog(@"haleli >>>> test monkey,UITabBarButton tap action") ;
         [UITabBarButtonActions tapTabBarButtonWithAccessibilityIdentifier:accessibilityIdentifier] ;
+    }else if([className isEqual:@"UIPickerView"]){
+        NSLog(@"haleli >>>> test monkey,UIPickerView select action") ;
+        [UIPickerViewActions selectPickerViewRowWithAccessibilityIdentifier:accessibilityIdentifier] ;
     }
     else{
         NSLog(@"haleli >>>> test monkey,no support view : %@",className) ;

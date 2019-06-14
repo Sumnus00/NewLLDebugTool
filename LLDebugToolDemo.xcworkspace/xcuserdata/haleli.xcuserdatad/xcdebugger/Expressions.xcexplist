@@ -159,7 +159,13 @@
                value = "self.subviews">
             </PersistentString>
             <PersistentString
+               value = "[self.superview.superview.superview nextResponder]">
+            </PersistentString>
+            <PersistentString
                value = "[[self superview] superview].subviews">
+            </PersistentString>
+            <PersistentString
+               value = "self.accessibilityIdentifier">
             </PersistentString>
             <PersistentString
                value = "[self nextResponder]">
