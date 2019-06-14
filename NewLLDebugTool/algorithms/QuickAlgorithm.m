@@ -36,7 +36,6 @@
     
     if(minScore > 3 ){
         NSLog(@"elements of current tree are clicked") ;
-        return nil ;
     }
     
     if(minScore > 9){
