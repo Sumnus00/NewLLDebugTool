@@ -305,7 +305,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 
                 QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
                 runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
-                [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
+                [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
                 NSLog(@"haleli >>> 界面消失") ;
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
