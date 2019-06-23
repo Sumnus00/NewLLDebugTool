@@ -9,6 +9,23 @@
 /* Begin PBXBuildFile section */
 		18D3AF2A22AB908F00B5A263 /* UITableViewCellActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */; };
 		18D3AF2D22AB98FA00B5A263 /* UICollectionViewCellActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */; };
+		18EE5D3C22B48C7700CDD712 /* UIView+ViewCoverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D3B22B48C7700CDD712 /* UIView+ViewCoverage.m */; };
+		18EE5D3F22B4D79B00CDD712 /* ViewBound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D3E22B4D79B00CDD712 /* ViewBound.m */; };
+		18EE5D4422B73D7800CDD712 /* LLOscillogramWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4322B73D7800CDD712 /* LLOscillogramWindow.m */; };
+		18EE5D4722B741E200CDD712 /* LLOscillogramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4622B741E200CDD712 /* LLOscillogramViewController.m */; };
+		18EE5D4B22B7468700CDD712 /* UIColor+LL_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4A22B7468700CDD712 /* UIColor+LL_Utils.m */; };
+		18EE5D4E22B7604B00CDD712 /* CoverageOscillogramWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4D22B7604B00CDD712 /* CoverageOscillogramWindow.m */; };
+		18EE5D5122B763F100CDD712 /* CoverageOscillogramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D5022B763F100CDD712 /* CoverageOscillogramViewController.m */; };
+		18EE5D5422B7679B00CDD712 /* LLOscillogramWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D5322B7679B00CDD712 /* LLOscillogramWindowManager.m */; };
+		18EE5D5722B88B7A00CDD712 /* LLMonkeySettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D5622B88B7A00CDD712 /* LLMonkeySettingVC.m */; };
+		18EE5D5A22BA235200CDD712 /* LLMonkeyAlgorithmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D5922BA235200CDD712 /* LLMonkeyAlgorithmVC.m */; };
+		18EE5D5D22BB84D500CDD712 /* ViewBoundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D5C22BB84D500CDD712 /* ViewBoundConfig.m */; };
+		18EE5D6622BCFCF000CDD712 /* LLMonkeySettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D6522BCFCF000CDD712 /* LLMonkeySettingModel.m */; };
+		18EE5D6922BD102400CDD712 /* LLIOSMonkeySettingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D6822BD102400CDD712 /* LLIOSMonkeySettingHelper.m */; };
+		18EE5D6C22BD303900CDD712 /* LLMonkeySettingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D6B22BD303900CDD712 /* LLMonkeySettingConfig.m */; };
+		18EE5D6F22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D6E22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m */; };
+		18EE5D7222BDE74700CDD712 /* LLMonkeyDateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7122BDE74700CDD712 /* LLMonkeyDateVC.m */; };
+		18EE5D7522BE177700CDD712 /* LLMonkeyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */; };
 		208678B3E17E2AAB3B0E945F /* libPods-LLDebugToolDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533ECC0E7675B1A81455CB56 /* libPods-LLDebugToolDemo.a */; };
 		256DF576EB32FE0F9D9E099F /* libPods-LLDebugToolDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */; };
 		3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3629E3862136830A00226C79 /* BaseTestViewController.m */; };
@@ -208,6 +225,40 @@
 		18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITableViewCellActions.m; sourceTree = "<group>"; };
 		18D3AF2B22AB98FA00B5A263 /* UICollectionViewCellActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICollectionViewCellActions.h; sourceTree = "<group>"; };
 		18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCellActions.m; sourceTree = "<group>"; };
+		18EE5D3A22B48C7700CDD712 /* UIView+ViewCoverage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewCoverage.h"; sourceTree = "<group>"; };
+		18EE5D3B22B48C7700CDD712 /* UIView+ViewCoverage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewCoverage.m"; sourceTree = "<group>"; };
+		18EE5D3D22B4D79B00CDD712 /* ViewBound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewBound.h; sourceTree = "<group>"; };
+		18EE5D3E22B4D79B00CDD712 /* ViewBound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewBound.m; sourceTree = "<group>"; };
+		18EE5D4222B73D7800CDD712 /* LLOscillogramWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOscillogramWindow.h; sourceTree = "<group>"; };
+		18EE5D4322B73D7800CDD712 /* LLOscillogramWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOscillogramWindow.m; sourceTree = "<group>"; };
+		18EE5D4522B741E200CDD712 /* LLOscillogramViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOscillogramViewController.h; sourceTree = "<group>"; };
+		18EE5D4622B741E200CDD712 /* LLOscillogramViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOscillogramViewController.m; sourceTree = "<group>"; };
+		18EE5D4922B7468700CDD712 /* UIColor+LL_Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+LL_Utils.h"; sourceTree = "<group>"; };
+		18EE5D4A22B7468700CDD712 /* UIColor+LL_Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LL_Utils.m"; sourceTree = "<group>"; };
+		18EE5D4C22B7604B00CDD712 /* CoverageOscillogramWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverageOscillogramWindow.h; sourceTree = "<group>"; };
+		18EE5D4D22B7604B00CDD712 /* CoverageOscillogramWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverageOscillogramWindow.m; sourceTree = "<group>"; };
+		18EE5D4F22B763F100CDD712 /* CoverageOscillogramViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverageOscillogramViewController.h; sourceTree = "<group>"; };
+		18EE5D5022B763F100CDD712 /* CoverageOscillogramViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverageOscillogramViewController.m; sourceTree = "<group>"; };
+		18EE5D5222B7679B00CDD712 /* LLOscillogramWindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOscillogramWindowManager.h; sourceTree = "<group>"; };
+		18EE5D5322B7679B00CDD712 /* LLOscillogramWindowManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOscillogramWindowManager.m; sourceTree = "<group>"; };
+		18EE5D5522B88B7A00CDD712 /* LLMonkeySettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMonkeySettingVC.h; sourceTree = "<group>"; };
+		18EE5D5622B88B7A00CDD712 /* LLMonkeySettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeySettingVC.m; sourceTree = "<group>"; };
+		18EE5D5822BA235200CDD712 /* LLMonkeyAlgorithmVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMonkeyAlgorithmVC.h; sourceTree = "<group>"; };
+		18EE5D5922BA235200CDD712 /* LLMonkeyAlgorithmVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeyAlgorithmVC.m; sourceTree = "<group>"; };
+		18EE5D5B22BB84D500CDD712 /* ViewBoundConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewBoundConfig.h; sourceTree = "<group>"; };
+		18EE5D5C22BB84D500CDD712 /* ViewBoundConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewBoundConfig.m; sourceTree = "<group>"; };
+		18EE5D6422BCFCF000CDD712 /* LLMonkeySettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLMonkeySettingModel.h; path = "NewLLDebugTool/Components/New Group/UserInterface/LLMonkeySettingModel.h"; sourceTree = SOURCE_ROOT; };
+		18EE5D6522BCFCF000CDD712 /* LLMonkeySettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LLMonkeySettingModel.m; path = "NewLLDebugTool/Components/New Group/UserInterface/LLMonkeySettingModel.m"; sourceTree = SOURCE_ROOT; };
+		18EE5D6722BD102400CDD712 /* LLIOSMonkeySettingHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLIOSMonkeySettingHelper.h; path = "NewLLDebugTool/Components/New Group/UserInterface/LLIOSMonkeySettingHelper.h"; sourceTree = SOURCE_ROOT; };
+		18EE5D6822BD102400CDD712 /* LLIOSMonkeySettingHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LLIOSMonkeySettingHelper.m; path = "NewLLDebugTool/Components/New Group/UserInterface/LLIOSMonkeySettingHelper.m"; sourceTree = SOURCE_ROOT; };
+		18EE5D6A22BD303900CDD712 /* LLMonkeySettingConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLMonkeySettingConfig.h; path = "NewLLDebugTool/Components/New Group/UserInterface/LLMonkeySettingConfig.h"; sourceTree = SOURCE_ROOT; };
+		18EE5D6B22BD303900CDD712 /* LLMonkeySettingConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LLMonkeySettingConfig.m; path = "NewLLDebugTool/Components/New Group/UserInterface/LLMonkeySettingConfig.m"; sourceTree = SOURCE_ROOT; };
+		18EE5D6D22BD387D00CDD712 /* LLCocosMonkeySettingHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LLCocosMonkeySettingHelper.h; path = "NewLLDebugTool/Components/New Group/UserInterface/LLCocosMonkeySettingHelper.h"; sourceTree = SOURCE_ROOT; };
+		18EE5D6E22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LLCocosMonkeySettingHelper.m; path = "NewLLDebugTool/Components/New Group/UserInterface/LLCocosMonkeySettingHelper.m"; sourceTree = SOURCE_ROOT; };
+		18EE5D7022BDE74700CDD712 /* LLMonkeyDateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMonkeyDateVC.h; sourceTree = "<group>"; };
+		18EE5D7122BDE74700CDD712 /* LLMonkeyDateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeyDateVC.m; sourceTree = "<group>"; };
+		18EE5D7322BE177700CDD712 /* LLMonkeyListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMonkeyListVC.h; sourceTree = "<group>"; };
+		18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeyListVC.m; sourceTree = "<group>"; };
 		250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LLDebugToolDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34ACB65EBB30B1CA47DFC39F /* Pods-LLDebugToolDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3629E3862136830A00226C79 /* BaseTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTestViewController.m; sourceTree = "<group>"; };
@@ -594,6 +645,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18EE5D3922B48C0100CDD712 /* coverage */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5D3A22B48C7700CDD712 /* UIView+ViewCoverage.h */,
+				18EE5D3B22B48C7700CDD712 /* UIView+ViewCoverage.m */,
+				18EE5D3D22B4D79B00CDD712 /* ViewBound.h */,
+				18EE5D3E22B4D79B00CDD712 /* ViewBound.m */,
+				18EE5D4C22B7604B00CDD712 /* CoverageOscillogramWindow.h */,
+				18EE5D4D22B7604B00CDD712 /* CoverageOscillogramWindow.m */,
+				18EE5D4F22B763F100CDD712 /* CoverageOscillogramViewController.h */,
+				18EE5D5022B763F100CDD712 /* CoverageOscillogramViewController.m */,
+				18EE5D5B22BB84D500CDD712 /* ViewBoundConfig.h */,
+				18EE5D5C22BB84D500CDD712 /* ViewBoundConfig.m */,
+			);
+			path = coverage;
+			sourceTree = "<group>";
+		};
+		18EE5D4122B73D4900CDD712 /* LLOscillogramWindow */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5D4222B73D7800CDD712 /* LLOscillogramWindow.h */,
+				18EE5D4322B73D7800CDD712 /* LLOscillogramWindow.m */,
+				18EE5D4522B741E200CDD712 /* LLOscillogramViewController.h */,
+				18EE5D4622B741E200CDD712 /* LLOscillogramViewController.m */,
+				18EE5D5222B7679B00CDD712 /* LLOscillogramWindowManager.h */,
+				18EE5D5322B7679B00CDD712 /* LLOscillogramWindowManager.m */,
+			);
+			path = LLOscillogramWindow;
+			sourceTree = "<group>";
+		};
+		18EE5D4822B7465700CDD712 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5D4922B7468700CDD712 /* UIColor+LL_Utils.h */,
+				18EE5D4A22B7468700CDD712 /* UIColor+LL_Utils.m */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
 		3629E3852136830A00226C79 /* DemoViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,6 +1054,14 @@
 		89FE0735221651FB009BCD99 /* Function */ = {
 			isa = PBXGroup;
 			children = (
+				18EE5D6422BCFCF000CDD712 /* LLMonkeySettingModel.h */,
+				18EE5D6522BCFCF000CDD712 /* LLMonkeySettingModel.m */,
+				18EE5D6722BD102400CDD712 /* LLIOSMonkeySettingHelper.h */,
+				18EE5D6822BD102400CDD712 /* LLIOSMonkeySettingHelper.m */,
+				18EE5D6A22BD303900CDD712 /* LLMonkeySettingConfig.h */,
+				18EE5D6B22BD303900CDD712 /* LLMonkeySettingConfig.m */,
+				18EE5D6D22BD387D00CDD712 /* LLCocosMonkeySettingHelper.h */,
+				18EE5D6E22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -973,6 +1071,14 @@
 			children = (
 				89FE073A22166154009BCD99 /* LLOtherVC.h */,
 				89FE073B22166154009BCD99 /* LLOtherVC.m */,
+				18EE5D5522B88B7A00CDD712 /* LLMonkeySettingVC.h */,
+				18EE5D5622B88B7A00CDD712 /* LLMonkeySettingVC.m */,
+				18EE5D5822BA235200CDD712 /* LLMonkeyAlgorithmVC.h */,
+				18EE5D5922BA235200CDD712 /* LLMonkeyAlgorithmVC.m */,
+				18EE5D7022BDE74700CDD712 /* LLMonkeyDateVC.h */,
+				18EE5D7122BDE74700CDD712 /* LLMonkeyDateVC.m */,
+				18EE5D7322BE177700CDD712 /* LLMonkeyListVC.h */,
+				18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -1028,6 +1134,7 @@
 		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
+				18EE5D3922B48C0100CDD712 /* coverage */,
 				89855575228ED33D005439D8 /* algorithms */,
 				89CCD9D622817322001848E5 /* js */,
 				8980764B22700DF400B28780 /* OCMonkeyPaws */,
@@ -1217,6 +1324,7 @@
 		C44F40872152AA7000153F46 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				18EE5D4822B7465700CDD712 /* UIColor */,
 				C44F40882152AA7000153F46 /* UIImage */,
 				C44F408B2152AA7000153F46 /* UIButton */,
 			);
@@ -1253,6 +1361,7 @@
 		C44F40912152AA7000153F46 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				18EE5D4122B73D4900CDD712 /* LLOscillogramWindow */,
 				C44F40922152AA7000153F46 /* LLSubTitleTableViewCell */,
 				C44F40972152AA7000153F46 /* LLSearchBar */,
 				C44F409A2152AA7000153F46 /* LLNoneCopyTextField */,
@@ -1805,8 +1914,10 @@
 				89C826BD22AF9DFC0083AF55 /* RandomAlgorithm.m in Sources */,
 				89C02305225CC39B00686898 /* UIView+TBUIAutoTest.m in Sources */,
 				89C022D8225CBAC400686898 /* KIFTypist.m in Sources */,
+				18EE5D4422B73D7800CDD712 /* LLOscillogramWindow.m in Sources */,
 				89C02304225CC39B00686898 /* UIResponder+TBUIAutoTest.m in Sources */,
 				89C022E2225CBAC400686898 /* UITouch-KIFAdditions.m in Sources */,
+				18EE5D6622BCFCF000CDD712 /* LLMonkeySettingModel.m in Sources */,
 				369D09382153853A001C9D4B /* LLLogContentVC.m in Sources */,
 				C44F414B2152AA7000153F46 /* LLCrashHelper.m in Sources */,
 				C44F41442152AA7000153F46 /* LLNetworkImageCell.m in Sources */,
@@ -1831,6 +1942,7 @@
 				C44F412A2152AA7000153F46 /* UIImage+LL_Utils.m in Sources */,
 				C44F41472152AA7000153F46 /* LLNetworkCell.m in Sources */,
 				89C022F7225CC25A00686898 /* FindElementTree.m in Sources */,
+				18EE5D5722B88B7A00CDD712 /* LLMonkeySettingVC.m in Sources */,
 				C44F41312152AA7000153F46 /* LLFilterOtherView.m in Sources */,
 				3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */,
 				89C02303225CC39B00686898 /* TBUIAutoTest.m in Sources */,
@@ -1843,12 +1955,15 @@
 				89C022DD225CBAC400686898 /* NSString+KIFAdditions.m in Sources */,
 				C44F41662152AA7000153F46 /* LLWindow.m in Sources */,
 				C44F411D2152AA7000153F46 /* LLScreenshotHelper.m in Sources */,
+				18EE5D6922BD102400CDD712 /* LLIOSMonkeySettingHelper.m in Sources */,
 				8915EB3322452786001B7660 /* UITabBarController+AutoRotate.m in Sources */,
 				C44F41522152AA7000153F46 /* LLCrashCell.m in Sources */,
 				89C022F1225CC00300686898 /* UIApplication+FakeTouchPrivate.m in Sources */,
 				89C022D5225CBAC400686898 /* KIFUITestActor-ConditionalTests.m in Sources */,
 				892567992265B87C00E89146 /* UIButtonActions.m in Sources */,
+				18EE5D5122B763F100CDD712 /* CoverageOscillogramViewController.m in Sources */,
 				C44F41272152AA7000153F46 /* NSObject+LL_Utils.m in Sources */,
+				18EE5D7222BDE74700CDD712 /* LLMonkeyDateVC.m in Sources */,
 				C44F41262152AA7000153F46 /* NSString+LL_Utils.m in Sources */,
 				C44F41632152AA7000153F46 /* LLAppHelper.m in Sources */,
 				89C022D9225CBAC400686898 /* KIFTestActor.m in Sources */,
@@ -1857,10 +1972,13 @@
 				C44F41282152AA7000153F46 /* LLBaseModel.m in Sources */,
 				89C4A2D322A7C20000D8CD73 /* App.m in Sources */,
 				369D093B2153855D001C9D4B /* LLLogFilterView.m in Sources */,
+				18EE5D5422B7679B00CDD712 /* LLOscillogramWindowManager.m in Sources */,
 				C44F41252152AA7000153F46 /* LLRoute.m in Sources */,
 				C44F413A2152AA7000153F46 /* LLFilterEventView.m in Sources */,
 				8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */,
+				18EE5D4E22B7604B00CDD712 /* CoverageOscillogramWindow.m in Sources */,
 				89C022EB225CBAC400686898 /* CALayer-KIFAdditions.m in Sources */,
+				18EE5D5A22BA235200CDD712 /* LLMonkeyAlgorithmVC.m in Sources */,
 				36A0007720BE863700AE8810 /* NetTool.m in Sources */,
 				C44F411A2152AA7000153F46 /* LLConfig.m in Sources */,
 				89256710225F301900E89146 /* UITabBarActions.m in Sources */,
@@ -1880,16 +1998,21 @@
 				C44F41342152AA7000153F46 /* LLFilterDateView.m in Sources */,
 				897728C8228C379700E7B223 /* KIFTestActor+Monkey.m in Sources */,
 				C44F411E2152AA7000153F46 /* LLScreenshotView.m in Sources */,
+				18EE5D6C22BD303900CDD712 /* LLMonkeySettingConfig.m in Sources */,
 				8925670D225F22FD00E89146 /* UISwitchActions.m in Sources */,
 				89C022F8225CC25A00686898 /* UIView+Tree.m in Sources */,
 				C44F41332152AA7000153F46 /* LLFilterTextFieldModel.m in Sources */,
+				18EE5D4722B741E200CDD712 /* LLOscillogramViewController.m in Sources */,
 				C44F41432152AA7000153F46 /* LLNetworkHelper.m in Sources */,
+				18EE5D3F22B4D79B00CDD712 /* ViewBound.m in Sources */,
 				89C022D3225CBAC400686898 /* KIFUIViewTestActor.m in Sources */,
 				8980765522700E3700B28780 /* GestureHash.m in Sources */,
 				C44F41652152AA7000153F46 /* LLDebugTool.m in Sources */,
+				18EE5D7522BE177700CDD712 /* LLMonkeyListVC.m in Sources */,
 				369D093E2153AE14001C9D4B /* NSURLSession+LL_Swizzling.m in Sources */,
 				C44F41302152AA7000153F46 /* LLNoneCopyTextField.m in Sources */,
 				C44F41222152AA7000153F46 /* LLScreenshotSelectorModel.m in Sources */,
+				18EE5D5D22BB84D500CDD712 /* ViewBoundConfig.m in Sources */,
 				89C022DC225CBAC400686898 /* NSException-KIFAdditions.m in Sources */,
 				89FE073C22166154009BCD99 /* LLOtherVC.m in Sources */,
 				89C022E8225CBAC400686898 /* UIEvent+KIFAdditions.m in Sources */,
@@ -1905,12 +2028,14 @@
 				3629E3952136830A00226C79 /* TestLogViewController.m in Sources */,
 				369D09352153853A001C9D4B /* LLLogCell.m in Sources */,
 				897378DE2293F3D200ECF1EF /* Tree.m in Sources */,
+				18EE5D6F22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m in Sources */,
 				C44F41372152AA7000153F46 /* LLFilterTextFieldCell.m in Sources */,
 				891414F02222A06E00974B52 /* ZSFakeTouch.m in Sources */,
 				369D09332153853A001C9D4B /* LLLogModel.m in Sources */,
 				C44F41502152AA7000153F46 /* LLCrashContentCell.m in Sources */,
 				8980765622700E3700B28780 /* Gesture.m in Sources */,
 				89C022E1225CBAC400686898 /* UIView-Debugging.m in Sources */,
+				18EE5D3C22B48C7700CDD712 /* UIView+ViewCoverage.m in Sources */,
 				C44F411B2152AA7000153F46 /* LLStorageManager.m in Sources */,
 				89C022DF225CBAC400686898 /* UIWindow-KIFAdditions.m in Sources */,
 				C43BA80C205AB095006307BE /* AppDelegate.m in Sources */,
@@ -1927,6 +2052,7 @@
 				89C022EE225CBF0D00686898 /* UITouch+FakeTouch.m in Sources */,
 				369D09342153853A001C9D4B /* LLLogHelper.m in Sources */,
 				C44F413B2152AA7000153F46 /* LLFilterLabelModel.m in Sources */,
+				18EE5D4B22B7468700CDD712 /* UIColor+LL_Utils.m in Sources */,
 				C44F41292152AA7000153F46 /* LLTool.m in Sources */,
 				89C022EA225CBAC400686898 /* NSPredicate+KIFAdditions.m in Sources */,
 			);
@@ -2174,7 +2300,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48U7H75HY6;
+				DEVELOPMENT_TEAM = PU839N5Z6P;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2185,7 +2311,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -2205,7 +2331,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48U7H75HY6;
+				DEVELOPMENT_TEAM = PU839N5Z6P;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2216,7 +2342,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

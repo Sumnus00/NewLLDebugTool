@@ -42,7 +42,7 @@ static NSString *const kEmptyCellID = @"emptyCellID";
 {
     self = [super init];
     if (self) {
-        _style = UITableViewStyleGrouped;
+        _style = UITableViewStylePlain ;
     }
     return self;
 }

@@ -32,6 +32,15 @@
 #define LLCONFIG_BACKGROUND_COLOR [LLConfig sharedConfig].backgroundColor
 
 /**
+ storage identity
+ **/
+static NSString * _Nonnull const kIOSMonekyIdentity = @"LLIOSMonekyIdentity";
+static NSString * _Nonnull const kCocosMonekyIdentity = @"LLCocosMonekyIdentity";
+
+
+
+
+/**
 switch tag enum
 
 */
@@ -40,22 +49,9 @@ typedef NS_ENUM(NSUInteger, LLConfigSwitchTag) {
     LLConfigSwitchTagMock,
     LLConfigSwitchTagLowNetwork,
     LLConfigSwitchTagLowMemory,
-    LLConfigSwitchTagIOSMonkey,
-    LLConfigSwitchTagCocosMonkey,
     LLConfigSwitchTagPrivateNetwork,
-    LLConfigSwitchTagExpected,
-};
-
-/**
- Cell style enum
- 
- - LLConfigCellAccessoryStyleSwitch : switch style
- - LLConfigCellAccessoryStyleDisclosureIndicator : disclosure indicator style
- */
-typedef NS_ENUM(NSUInteger, LLConfigCellAccessoryStyle) {
-    LLConfigCellAccessoryStyleSwitch,
-    LLConfigCellAccessoryStyleDisclosureIndicator,
-    LLConfigCellAccessoryStyleNone,
+    LLConfigSwitchTagCoverageText ,
+    LLConfigSwitchTagCoverageBound ,
 };
 
 /**

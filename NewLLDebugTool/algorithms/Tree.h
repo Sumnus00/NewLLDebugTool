@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Element.h"
+#import <UIKit/UIKit.h>
+
 @class Element ;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(BOOL)isExistsElement:(Element*)element ;
 -(void)setElement:(Element*)element ;
 -(Element *)getElement:(NSString*)elementID ;
+-(CGFloat)getCoverage ;
+-(NSInteger)getClickedViews;
+-(NSInteger)getViews ;
 @end
 
 @interface Path : NSObject

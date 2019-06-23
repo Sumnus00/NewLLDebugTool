@@ -71,4 +71,33 @@ static App *_instance = nil;
         }
     }
 }
+
+-(CGFloat)getCoverage{
+    int views = [self getViews] ;
+    if(views==0){
+        return 0.0 ;
+    }else{
+        return ([self getClickedViews] * 100.0 / views) ;
+    }
+}
+
+-(NSInteger)getClickedViews{
+    int clickedViewsNum = 0 ;
+    NSArray *trees = _trees.allValues ;
+    for(int i=0;i<trees.count;i++){
+        Tree* tree = [trees objectAtIndex:i] ;
+        clickedViewsNum = clickedViewsNum + [tree getClickedViews] ;
+    }
+    return clickedViewsNum ;
+}
+
+-(NSInteger)getViews{
+    int viewNum = 0 ;
+    NSArray *trees = _trees.allValues ;
+    for(int i=0;i<trees.count;i++){
+        Tree* tree = [trees objectAtIndex:i] ;
+        viewNum = viewNum + [tree getViews] ;
+    }
+    return viewNum ;
+}
 @end

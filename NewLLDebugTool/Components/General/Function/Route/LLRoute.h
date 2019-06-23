@@ -37,6 +37,7 @@ static NSString * _Nonnull const kLLLogVCName = @"LLLogVC";
 static NSString * _Nonnull const kLLNetworkModelName = @"LLNetworkModel";
 static NSString * _Nonnull const kLLLogModelName = @"LLLogModel";
 static NSString * _Nonnull const kLLCrashModelName = @"LLCrashModel";
+static NSString * _Nonnull const kLLMonkeySettingModelName = @"LLMonkeySettingModel";
 
 @interface LLRoute : NSObject
 

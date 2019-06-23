@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(Tree *)getCurrentTree;
 -(void) updateTree:(Tree*)tree ;
 -(Tree*)getTree:(NSString*)treeID ;
+-(CGFloat)getCoverage;
 @end
 
 NS_ASSUME_NONNULL_END

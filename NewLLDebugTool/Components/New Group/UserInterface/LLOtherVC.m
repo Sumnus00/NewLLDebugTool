@@ -13,13 +13,8 @@
 #import "LLDebugTool.h"
 #import "ZSFakeTouch.h"
 #import "FindElementTree.h"
-#import "KIF.h"
-#import "Actions.h"
-#import "MonkeyPaws.h"
-#import "KIFTestActor+Monkey.h"
-#import <objc/runtime.h>
-#import "QuickAlgorithm.h"
-#import "MonkeyRunner.h"
+#import "LLMonkeySettingVC.h"
+#import "LLMonkeySettingConfig.h"
 //#ifdef ISLOCAL
 //#import "LLDebugToolDemo-Swift.h"
 //#else
@@ -28,11 +23,13 @@
 //#endif
 
 static NSString *const kLLOtherVCCellID = @"LLOtherVCCellID";
+static NSString *const kLLOtherVCSwitchCellID = @"LLOtherVCSwitchCellID";
+static NSString *const kLLOtherVCNoneCellID = @"LLOtherVCNoneCellID";
+static NSString *const kLLOtherVCLogCellID = @"LLOtherVCLogCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 
 @interface LLOtherVC (){
     Byte  *_addMemory;
-    MonkeyRunner *runner ;
 }
 
 @property (nonatomic , strong) NSMutableArray *dataArray;
@@ -47,31 +44,36 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     [self initial];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.dataArray = [self otherInfos];
+    self.navigationItem.title = @"更多功能";
+}
 
 - (NSArray *)mockInfos {
-    return @[@{@"mock开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
+    return @[@{@"mock开关" : @""}];
 }
 
 - (NSArray *)lowResourcesInfos {
-    return @[@{@"弱网开关" :  [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]},
-             @{@"低内存开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleDisclosureIndicator]}];
+    return @[@{@"弱网开关" :  @""},
+             @{@"低内存开关" : @""}];
 }
 
 - (NSArray *)monkeyInfos {
-    return @[@{@"ios Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]},
-             @{@"cocos Monkey开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
+    return @[@{@"ios Monkey开关" : @""},
+             @{@"cocos Monkey开关" : @""}];
 }
 
 - (NSArray *)privateNetworkInfos {
-    return @[@{@"私有包显示开关" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleSwitch]}];
+    return @[@{@"私有包显示开关" : @""}];
 }
 
 - (NSArray *)commonToolsInfos {
-    return @[@{@"日志上传" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleNone]}];
+    return @[@{@"日志上传" : @""}];
 }
 
 - (NSArray *)expectedInfos {
-    return @[@{@"更多功能" : [NSNumber numberWithInteger:LLConfigCellAccessoryStyleNone]}];
+    return @[@{@"更多功能" : @""}];
 }
 
 
@@ -98,9 +100,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,privateNetwork,commonTools,expected, nil];
 }
 
+
+
 - (void)initial {
-    self.dataArray = [self otherInfos];
-    self.navigationItem.title = @"更多功能";
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kLLOtherVCHeaderID];
 }
 
@@ -114,92 +116,168 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section==0){
-        //随机mock功能
-    }else if(indexPath.section==1){
-        //低资源模拟功能
-    }else if(indexPath.section == 2){
-        //monkey功能
-    }else if(indexPath.section == 3){
-        //私有包显示功能
-    }else if(indexPath.section ==4){
-        //常用工具
-        if(indexPath.row == 0){
-            //日志上传
-            if([LLDebugTool sharedTool].uploadLog){
-                [self showAlertControllerWithMessage:@"Sure to upload log ?" handler:^(NSInteger action) {
-                    if (action == 1) {
-                        [LLDebugTool sharedTool].uploadLog() ;
-                    }
-                }];
-                
-            }
+    switch(indexPath.section){
+        case 0:{
+            //随机mock功能
+            break ;
         }
-    }else if(indexPath.section == 5){
-        //敬请期待
+        case 1:{
+            //低资源模拟功能
+            break ;
+        }
+        case 2:{
+            //monkey功能
+            if(indexPath.row==0){
+                //IOS monkey
+                [LLMonkeySettingConfig defaultConfig].monkeyType = IOSMonkeyType ;
+                
+                LLMonkeySettingVC* vc = [[LLMonkeySettingVC alloc] init] ;
+                [self.navigationController pushViewController:vc animated:YES] ;
+            }else if(indexPath.row == 1){
+                
+                [LLMonkeySettingConfig defaultConfig].monkeyType = CocosMonkeyType ;
+                //cocos monkey
+                LLMonkeySettingVC* vc = [[LLMonkeySettingVC alloc] init] ;
+                [self.navigationController pushViewController:vc animated:YES] ;
+            }
+            break ;
+        }
+        case 3:{
+            //私有包显示功能
+            break ;
+        }
+        case 4:{
+            //常用工具
+            if(indexPath.row == 0){
+                //日志上传
+                if([LLDebugTool sharedTool].uploadLog){
+                    [self showAlertControllerWithMessage:@"Sure to upload log ?" handler:^(NSInteger action) {
+                        if (action == 1) {
+                            [LLDebugTool sharedTool].uploadLog() ;
+                        }
+                    }];
+                    
+                }
+            }
+            break ;
+        }
+        case 5:{
+            //敬请期待
+            break ;
+        }
     }
 }
 
+-(LLBaseTableViewCell *)getSwithCell:(UITableView*) tableView switchTag:(NSInteger)tag switchOn:(BOOL)on{
+    //switch cell
+    UISwitch *myswitch = [[UISwitch alloc]init];
+    myswitch.tag = tag ;
+    [myswitch setOn:on] ;
+    [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    LLBaseTableViewCell *switchCell = [tableView dequeueReusableCellWithIdentifier:kLLOtherVCSwitchCellID];
+    if (!switchCell) {
+        switchCell = [[LLBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLLOtherVCSwitchCellID];
+        switchCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        switchCell.accessoryView = myswitch ;
+    }
+    return switchCell ;
+}
+
+-(LLBaseTableViewCell *)getTextCell:(UITableView*)tableView{
+    //text cell
+    LLBaseTableViewCell *textCell = [tableView dequeueReusableCellWithIdentifier:kLLOtherVCCellID];
+    if (!textCell) {
+        textCell = [[LLBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kLLOtherVCCellID];
+        textCell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+        textCell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        textCell.detailTextLabel.minimumScaleFactor = 0.5;
+        textCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        textCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator ;
+    }
+    return textCell ;
+}
+
+-(LLBaseTableViewCell *)getNoneCell:(UITableView*)tableView{
+    //None cell
+    LLBaseTableViewCell *NoneCell = [tableView dequeueReusableCellWithIdentifier:kLLOtherVCNoneCellID];
+    if (!NoneCell) {
+        NoneCell = [[LLBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLLOtherVCNoneCellID];
+        NoneCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NoneCell.accessoryType = UITableViewCellAccessoryNone ;
+    }
+    return NoneCell ;
+}
+
+-(LLBaseTableViewCell *)getLogCell:(UITableView*)tableView{
+    //Log cell
+    LLBaseTableViewCell *LogCell = [tableView dequeueReusableCellWithIdentifier:kLLOtherVCLogCellID];
+    if (!LogCell) {
+        LogCell = [[LLBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLLOtherVCLogCellID];
+        LogCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        LogCell.accessoryType = UITableViewCellAccessoryNone ;
+        LogCell.textLabel.textColor = [[UIView alloc] init].tintColor ;
+    }
+    return LogCell ;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LLBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kLLOtherVCCellID];
-    if (!cell) {
-        cell = [[LLBaseTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kLLOtherVCCellID];
-        cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-        cell.detailTextLabel.minimumScaleFactor = 0.5;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+
+    LLBaseTableViewCell *cell = nil ;
+    
     NSDictionary *dic = self.dataArray[indexPath.section][indexPath.row];
-    cell.textLabel.text = dic.allKeys.firstObject;
+    
+    switch (indexPath.section) {
+        case 0:{
+            //mock 开关
+            cell = [self getSwithCell:tableView switchTag:LLConfigSwitchTagMock switchOn: [[LLDebugTool sharedTool] mockSwitch] ];
+            cell.textLabel.text = dic.allKeys.firstObject ;
+            break ;
+        }
+        case 1:{
+            //弱网开关
+            if(indexPath.row == 0){
+                cell = [self getSwithCell:tableView switchTag:LLConfigSwitchTagLowNetwork switchOn: [[LLDebugTool sharedTool] lowNetworkSwitch] ];
+                cell.textLabel.text = dic.allKeys.firstObject ;
+            }else if(indexPath.row == 1){
+                //低内存开关
+                cell = [self getSwithCell:tableView switchTag:LLConfigSwitchTagLowMemory switchOn:[[LLDebugTool sharedTool] lowMemorySwitch]] ;
+                cell.textLabel.text = dic.allKeys.firstObject ;
+            }
+            break ;
+            
+        }
+        case 2:{
+            //ios Monkey开关
+            if(indexPath.row == 0){
+                cell = [self getTextCell:tableView] ;
+                cell.textLabel.text = dic.allKeys.firstObject ;
+            }else if(indexPath.row == 1){
+                //cocos Monkey开关
+                cell = [self getTextCell:tableView]  ;
+                cell.textLabel.text = dic.allKeys.firstObject ;
+            }
+            break ;
+        }
+        case 3:{
+            //私有包显示开关
+            cell = [self getSwithCell:tableView switchTag:LLConfigSwitchTagPrivateNetwork switchOn:[[LLDebugTool sharedTool] privateNetworkSwitch]] ;
+            cell.textLabel.text = dic.allKeys.firstObject ;
+            break ;
+        }
+        case 4:{
+            //日志上传
+            cell = [self getLogCell:tableView] ;
+            cell.textLabel.text = dic.allKeys.firstObject ;
+            break ;
+        }
+        case 5:{
+            //更多功能
+            cell = [self getNoneCell:tableView] ;
+            cell.textLabel.text = dic.allKeys.firstObject ;
+            break ;
+        }
 
-    //1、cell 要改 
-//    cell.detailTextLabel.text = @"开关";
-   
-    
-    
-    if([cell.textLabel.text isEqualToString:@"mock开关"]){
-        UISwitch *myswitch = [[UISwitch alloc]init];
-        myswitch.tag = LLConfigSwitchTagMock ;
-        myswitch.on = [[LLDebugTool sharedTool] mockSwitch] ;
-        cell.accessoryView = myswitch ;
-        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    }else if([cell.textLabel.text isEqualToString:@"弱网开关"]){
-        UISwitch *myswitch = [[UISwitch alloc]init];
-        myswitch.tag = LLConfigSwitchTagLowNetwork ;
-        myswitch.on = [[LLDebugTool sharedTool] lowNetworkSwitch] ;
-        cell.accessoryView = myswitch ;
-        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    }else if([cell.textLabel.text isEqualToString:@"低内存开关"]){
-        UISwitch *myswitch = [[UISwitch alloc]init];
-        myswitch.tag = LLConfigSwitchTagLowMemory ;
-        myswitch.on = [[LLDebugTool sharedTool] lowMemorySwitch] ;
-        cell.accessoryView = myswitch ;
-        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    }else if([cell.textLabel.text isEqualToString:@"ios Monkey开关"]){
-        UISwitch *myswitch = [[UISwitch alloc]init];
-        myswitch.tag = LLConfigSwitchTagIOSMonkey ;
-        myswitch.on = [[LLDebugTool sharedTool] iosMonkeySwitch] ;
-        cell.accessoryView = myswitch ;
-        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    }else if([cell.textLabel.text isEqualToString:@"cocos Monkey开关"]){
-        UISwitch *myswitch = [[UISwitch alloc]init];
-        myswitch.tag = LLConfigSwitchTagCocosMonkey ;
-        myswitch.on = [[LLDebugTool sharedTool] cocosMonkeySwitch] ;
-        cell.accessoryView = myswitch ;
-        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    }else if([cell.textLabel.text isEqualToString:@"私有包显示开关"]){
-        UISwitch *myswitch = [[UISwitch alloc]init];
-        myswitch.tag = LLConfigSwitchTagPrivateNetwork ;
-        myswitch.on = [[LLDebugTool sharedTool] privateNetworkSwitch];
-        cell.accessoryView = myswitch ;
-        [myswitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    }else if([cell.textLabel.text isEqualToString:@"日志上传"]){
-        cell.textLabel.textColor = [[UIView alloc] init].tintColor ;
-        cell.accessoryType = UITableViewCellAccessoryNone ;
-    }else if([cell.textLabel.text isEqualToString:@"更多功能"]){
-        cell.accessoryType = UITableViewCellAccessoryNone ;
     }
-
     return cell;
 }
 
@@ -215,25 +293,35 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     return CGFLOAT_MIN;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+-(UITableViewHeaderFooterView*)getHeaderFooterView:(UITableView*)tableView{
     UITableViewHeaderFooterView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kLLOtherVCHeaderID];
     view.frame = CGRectMake(0, 0, LL_SCREEN_WIDTH, 30);
     if (view.backgroundView == nil) {
         view.backgroundView = [[UIView alloc] initWithFrame:view.bounds];
         view.backgroundView.backgroundColor = [LLCONFIG_TEXT_COLOR colorWithAlphaComponent:0.2];
     }
+    return view ;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewHeaderFooterView *view = nil ;
     if (section == 0) {
+        view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"随机mock功能";
     } else if (section == 1) {
+        view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"低资源模拟功能";
     }else if (section == 2){
+        view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"monkey功能" ;
     }else if(section == 3){
+        view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"私有包显示功能" ;
     }else if(section == 4){
+        view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"常用工具" ;
     }else if (section == 5) {
+        view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"敬请期待";
     }
     return view;
@@ -250,8 +338,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 - (void)switchAction:(id)sender{
     UISwitch *switchButton = (UISwitch*)sender;
     BOOL isButtonOn = [switchButton isOn];
-    static dispatch_once_t onceToken;
-    
     if(switchButton.tag == LLConfigSwitchTagMock){
         [[LLDebugTool sharedTool] saveMockSwitch:isButtonOn];
 //        NSLog(@"haleli >>> 界面消失") ;
@@ -275,156 +361,9 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
                 [LLDebugTool sharedTool].memoryThread  = nil;
             }
         }
-    }else if(switchButton.tag == LLConfigSwitchTagIOSMonkey){
-        [[LLDebugTool sharedTool] saveIOSMonkeySwitch:isButtonOn];
-        if(isButtonOn){
-            if([LLDebugTool sharedTool].iosMonkeyTimer == nil){
-                NSLog(@"haleli >>> switch_ios_monkey : %@",@"开始") ;
-//                [[[OCMonkey alloc] init] showMonkeyPawsINUITestWithWindow:[self lastWindow] ] ;
-//                UIWindow *theWindow = [[UIApplication sharedApplication] delegate].window ;
-//                [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:theWindow tapUIApplication:YES] ;
-                
-                dispatch_once(&onceToken, ^{
-                    
-                    [self swizzleMethods];
-                    
-                    id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
-                    if (delegate) {
-                        UIWindow *window;
-                        if ([delegate respondsToSelector:@selector(window)]) {
-                            window = [delegate window];
-                        } else {
-                            NSLog(@"Delegate does not respond to selector (window).");
-                            window = [[UIApplication sharedApplication] windows][0];
-                        }
-                         [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:window tapUIApplication:YES];
-                    } else {
-                         NSLog(@"Delegate is nil.");
-                    }
-                });
-                
-                QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
-                runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
-                [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
-                NSLog(@"haleli >>> 界面消失") ;
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-        }else{
-            if([LLDebugTool sharedTool].iosMonkeyTimer != nil){
-                NSLog(@"haleli >>> switch_ios_monkey : %@",@"关闭") ;
-                [[LLDebugTool sharedTool].iosMonkeyTimer  invalidate];
-                [LLDebugTool sharedTool].iosMonkeyTimer  = nil;
-            }
-        }
-    }else if(switchButton.tag == LLConfigSwitchTagCocosMonkey){
-        [[LLDebugTool sharedTool] saveCocosMonkeySwitch:isButtonOn];
-        if(isButtonOn){
-            if([LLDebugTool sharedTool].cocosMonkeyTimer == nil){
-                NSLog(@"haleli >>> switch_cocos_monkey : %@",@"开始") ;
-                
-                dispatch_once(&onceToken, ^{
-                    
-                    [self swizzleMethods];
-                    
-                    id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
-                    if (delegate) {
-                        UIWindow *window;
-                        if ([delegate respondsToSelector:@selector(window)]) {
-                            window = [delegate window];
-                        } else {
-                            NSLog(@"Delegate does not respond to selector (window).");
-                            window = [[UIApplication sharedApplication] windows][0];
-                        }
-                        [LLDebugTool sharedTool].paws = [[MonkeyPaws alloc] initWithView:window tapUIApplication:YES];
-                    } else {
-                        NSLog(@"Delegate is nil.");
-                    }
-                });
-                
-                QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
-                runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
-                [LLDebugTool sharedTool].cocosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomCocosMonkey) userInfo:nil repeats:YES];
-                NSLog(@"haleli >>> 界面消失") ;
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-        }else{
-            if([LLDebugTool sharedTool].cocosMonkeyTimer != nil){
-                NSLog(@"haleli >>> switch_cocos_monkey : %@",@"关闭") ;
-                [[LLDebugTool sharedTool].cocosMonkeyTimer  invalidate];
-                [LLDebugTool sharedTool].cocosMonkeyTimer  = nil;
-            }
-        }
     }else if(switchButton.tag == LLConfigSwitchTagPrivateNetwork){
         [[LLDebugTool sharedTool] savePrivateNetworkSwitch:isButtonOn];
     }
-}
-
--(UIWindow *)lastWindow
-{
-    NSArray *windows = [UIApplication sharedApplication].windows;
-    for(UIWindow *window in [windows reverseObjectEnumerator]) {
-        if ([window isKindOfClass:[UIWindow class]] &&
-            CGRectEqualToRect(window.bounds, [UIScreen mainScreen].bounds))
-            return window;
-    }
-    return [UIApplication sharedApplication].keyWindow;
-}
-
-
-
-
--(UIViewController *)topController {
-    
-    UIViewController *topC = [self topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
-    while (topC.presentedViewController) {
-        topC = [self topViewController:topC.presentedViewController];
-    }
-    return topC;
-}
-
--(UIViewController *)topViewController:(UIViewController *)controller {
-    if ([controller isKindOfClass:[UINavigationController class]]) {
-        return [self topViewController:[(UINavigationController *)controller topViewController]];
-    } else if ([controller isKindOfClass:[UITabBarController class]]) {
-        return [self topViewController:[(UITabBarController *)controller selectedViewController]];
-    } else {
-        return controller;
-    }
-}
--(void)randomTest{
-    
-    [runner runOneQuickStep] ;
-    
-}
-
-- (void)randomCocosMonkey{
-    [runner runOneCocosStep] ;
-}
-
--(BOOL)swizzleMethods
-{
-    Class class = [KIFTestActor class];
-    SEL originalSelector = @selector(failWithError:stopTest:);
-    SEL swizzledSelector = @selector(monkey_failWithError:stopTest:);
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-    BOOL didAddMethod = class_addMethod(class,
-                                        originalSelector,
-                                        method_getImplementation(swizzledMethod),
-                                        method_getTypeEncoding(swizzledMethod));
-    if (didAddMethod) {
-        class_replaceMethod(class,
-                            swizzledSelector,
-                            method_getImplementation(originalMethod),
-                            method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-    return YES;
-}
-
-- (void)randomIOSMonkey{
-    [runner runOneRandomStep] ;
 }
 
 - (void)highMemoryOperate{

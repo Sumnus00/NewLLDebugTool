@@ -54,5 +54,27 @@
     return [_elements objectForKey:elementId] ;
 }
 
+-(CGFloat)getCoverage{
+    int views = [self getViews] ;
+    if(views==0){
+        return 0.0 ;
+    }else{
+        return ([self getClickedViews] * 100.0 / views) ;
+    }
+}
 
+-(NSInteger)getClickedViews{
+    int clickedViewsNum = 0 ;
+    NSArray *elements = _elements.allValues ;
+    for(int i=0;i<elements.count;i++){
+        Element *element = [elements objectAtIndex:i] ;
+        if(element.clickTimes > 0){
+            clickedViewsNum = clickedViewsNum + 1 ;
+        }
+    }
+    return clickedViewsNum ;
+}
+-(NSInteger)getViews{
+    return _elements.count ;
+}
 @end

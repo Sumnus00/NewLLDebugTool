@@ -54,6 +54,8 @@ static NSString *const kDatabaseVersion = @"1";
 
 @property (assign , nonatomic) BOOL includeLog;
 
+@property (assign , nonatomic) BOOL includeMonkeySetting ;
+
 @end
 
 @implementation LLStorageManager
@@ -350,6 +352,7 @@ static NSString *const kDatabaseVersion = @"1";
     self.includeCrash = [self crashModelClass] ? YES : NO;
     self.includeNetwork = [self networkModelClass] ? YES : NO;
     self.includeLog = [self logModelClass] ? YES : NO;
+    self.includeMonkeySetting = [self monkeySettingModelClass] ? YES : NO ;
     
     NSString *filePath = [self.folderPath stringByAppendingPathComponent:@"LLDebugTool.db"];
     
@@ -358,6 +361,7 @@ static NSString *const kDatabaseVersion = @"1";
     BOOL ret1 = YES;
     BOOL ret2 = YES;
     BOOL ret3 = YES;
+    BOOL ret4 = YES;
     
     if (self.includeCrash) {
         ret1 = [self registerClass:[self crashModelClass]];
@@ -370,6 +374,9 @@ static NSString *const kDatabaseVersion = @"1";
         ret3 = [self registerClass:[self logModelClass]];
     }
 
+    if (self.includeMonkeySetting){
+        ret4 = [self registerClass:[self monkeySettingModelClass]] ;
+    }
     return ret1 && ret2 && ret3;
 }
 
@@ -547,6 +554,10 @@ static NSString *const kDatabaseVersion = @"1";
 
 - (Class _Nullable)logModelClass {
     return NSClassFromString(kLLLogModelName);
+}
+
+- (Class _Nullable)monkeySettingModelClass {
+    return NSClassFromString(kLLMonkeySettingModelName);
 }
 
 @end

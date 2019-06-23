@@ -184,4 +184,5 @@ UIKIT_EXTERN NSString * _Nonnull const LLAppHelperTotalDataTrafficKey;
  */
 - (void)updateRequestDataTraffic:(unsigned long long)requestDataTraffic responseDataTraffic:(unsigned long long)responseDataTraffic;
 
+- (BOOL)isIPhoneXSeries ;
 @end
