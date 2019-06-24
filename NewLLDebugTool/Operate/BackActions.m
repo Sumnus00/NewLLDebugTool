@@ -17,6 +17,7 @@
         //因为我们是在子线程执行pop操作，所以要设置为no
         [[FindTopController topController].navigationController popViewControllerAnimated:NO];
     }
+    [[[[UIApplication sharedApplication] delegate] window] makeKeyWindow] ;
 //    //如果topItem设置了左侧按钮组(leftBarButtonItems属性)，则默认使用最后一个item
 //    //如果topItem设置了左侧按钮(leftBarButtonItem属性), 则展示左侧按钮
 //    //如果backItem设置了返回按钮(backBarButtonItem属性), 则展示返回按钮

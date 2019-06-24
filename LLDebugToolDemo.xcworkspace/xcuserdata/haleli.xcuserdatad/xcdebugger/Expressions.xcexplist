@@ -3,6 +3,20 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[LLWindowViewController showDebugViewControllerWithIndex:]:LLWindowViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tabVC">
+            </PersistentString>
+            <PersistentString
+               value = "self.tabVC.viewControllers">
+            </PersistentString>
+            <PersistentString
+               value = "[self.tabVC viewControllers]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[LLOtherVC tableView:cellForRowAtIndexPath:]:LLOtherVC.m">
          <PersistentStrings>
             <PersistentString
@@ -227,6 +241,14 @@
          <PersistentStrings>
             <PersistentString
                value = "window.center.x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LLWindowViewController tabVC]:LLWindowViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "tab.tabBar.subviews">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

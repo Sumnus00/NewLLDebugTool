@@ -18,7 +18,7 @@
         _curTree = nil ;
         _preElement = nil ;
         _algorithm = algorithm ;
-        _blacklist = [[NSMutableArray alloc] initWithArray:@[@"UIActivityViewController",@"UIAlertController",@"TestCrashViewController",@"LLOtherVC"]] ;
+        _blacklist = [[NSMutableArray alloc] initWithArray:@[@"UIActivityViewController",@"UIAlertController",@"TestCrashViewController",@"LLOtherVC",@"UIViewController"]] ;
     }
     return self ;
 }
