@@ -40,7 +40,6 @@
     if (self.isHidden) {
         if ([[NSThread currentThread] isMainThread]) {
             self.hidden = NO;
-            [self.windowViewController reloadTabbar];
             [self.windowViewController registerLLAppHelperNotification];
         } else {
             [self performSelectorOnMainThread:@selector(showWindow) withObject:nil waitUntilDone:YES];

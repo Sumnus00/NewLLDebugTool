@@ -67,6 +67,7 @@
 		892567A622660D0300E89146 /* UICollectionViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 892567A522660D0300E89146 /* UICollectionViewActions.m */; };
 		893799192268250600FDF142 /* WKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 893799182268250600FDF142 /* WKWebViewVC.m */; };
 		8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8937991B226830FF00FDF142 /* UIWebViewVC.m */; };
+		893C712522C1F7E300036E5F /* LLHomeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C712422C1F7E300036E5F /* LLHomeWindow.m */; };
 		897378DB2293DAD800ECF1EF /* QuickAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 897378DA2293DAD800ECF1EF /* QuickAlgorithm.m */; };
 		897378DE2293F3D200ECF1EF /* Tree.m in Sources */ = {isa = PBXBuildFile; fileRef = 897378DD2293F3D200ECF1EF /* Tree.m */; };
 		897378E12293F42F00ECF1EF /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = 897378E02293F42F00ECF1EF /* Element.m */; };
@@ -348,6 +349,8 @@
 		893799182268250600FDF142 /* WKWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKWebViewVC.m; sourceTree = "<group>"; };
 		8937991A226830FF00FDF142 /* UIWebViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIWebViewVC.h; sourceTree = "<group>"; };
 		8937991B226830FF00FDF142 /* UIWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIWebViewVC.m; sourceTree = "<group>"; };
+		893C712322C1F7E300036E5F /* LLHomeWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLHomeWindow.h; sourceTree = "<group>"; };
+		893C712422C1F7E300036E5F /* LLHomeWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLHomeWindow.m; sourceTree = "<group>"; };
 		897378D92293DAD800ECF1EF /* QuickAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickAlgorithm.h; sourceTree = "<group>"; };
 		897378DA2293DAD800ECF1EF /* QuickAlgorithm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickAlgorithm.m; sourceTree = "<group>"; };
 		897378DC2293F3D200ECF1EF /* Tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
@@ -1625,6 +1628,8 @@
 				C44F41172152AA7000153F46 /* LLWindow.m */,
 				C44F41162152AA7000153F46 /* LLWindowViewController.h */,
 				C44F41192152AA7000153F46 /* LLWindowViewController.m */,
+				893C712322C1F7E300036E5F /* LLHomeWindow.h */,
+				893C712422C1F7E300036E5F /* LLHomeWindow.m */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -1886,6 +1891,7 @@
 			files = (
 				89C022D0225CBAC400686898 /* KIFTextInputTraitsOverrides.m in Sources */,
 				C44F414A2152AA7000153F46 /* LLNetworkContentVC.m in Sources */,
+				893C712522C1F7E300036E5F /* LLHomeWindow.m in Sources */,
 				893799192268250600FDF142 /* WKWebViewVC.m in Sources */,
 				89C022E0225CBAC400686898 /* UIScrollView-KIFAdditions.m in Sources */,
 				18D3AF2D22AB98FA00B5A263 /* UICollectionViewCellActions.m in Sources */,
@@ -2300,7 +2306,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PU839N5Z6P;
+				DEVELOPMENT_TEAM = 48U7H75HY6;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2311,7 +2317,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo2;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -2331,7 +2337,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PU839N5Z6P;
+				DEVELOPMENT_TEAM = 48U7H75HY6;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2342,7 +2348,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo2;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

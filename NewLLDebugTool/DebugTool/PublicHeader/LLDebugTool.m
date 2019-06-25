@@ -35,6 +35,7 @@
 #import "LLTool.h"
 #import "LLNetworkModel.h"
 #import "LLRoute.h"
+#import "LLHomeWindow.h"
 
 static LLDebugTool *_instance = nil;
 
@@ -114,7 +115,7 @@ static LLDebugTool *_instance = nil;
 }
 
 - (void)showDebugViewControllerWithIndex:(NSInteger)index {
-    [self.window.windowViewController showDebugViewControllerWithIndex:index];
+    [[LLHomeWindow shareInstance] showDebugViewControllerWithIndex:index];
 }
 
 - (void)logInFile:(NSString *)file function:(NSString *)function lineNo:(NSInteger)lineNo level:(LLConfigLogLevel)level onEvent:(NSString *)onEvent message:(NSString *)message {

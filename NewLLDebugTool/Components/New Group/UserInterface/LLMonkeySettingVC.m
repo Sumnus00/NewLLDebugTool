@@ -25,6 +25,7 @@
 #import "LLCocosMonkeySettingHelper.h"
 #import "LLMonkeySettingConfig.h"
 #import "LLMonkeyListVC.h"
+#import "LLHomeWindow.h"
 
 static NSString *const kLLMonkeySettingVCCellID = @"LLMonkeySettingVCCellID";
 static NSString *const kLLMonkeySettingVCButtonCellID = @"LLMonkeySettingVCButtonCellID";
@@ -395,7 +396,7 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
         runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
         [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
         NSLog(@"haleli >>> 界面消失") ;
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [[LLHomeWindow shareInstance] hideWindow] ;
     }
   
 }

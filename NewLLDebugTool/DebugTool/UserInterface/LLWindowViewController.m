@@ -22,22 +22,15 @@
 //  SOFTWARE.
 
 #import "LLWindowViewController.h"
-#import "LLBaseNavigationController.h"
 #import "LLScreenshotHelper.h"
 #import "LLImageNameConfig.h"
-#import "LLNetworkVC.h"
-#import "LLAppInfoVC.h"
-#import "LLSandboxVC.h"
-#import "LLAppHelper.h"
-#import "LLCrashVC.h"
 #import "LLMacros.h"
 #import "LLWindow.h"
 #import "LLConfig.h"
-#import "LLLogVC.h"
 #import "LLDebugTool.h"
 #import "LLDebugToolMacros.h"
 #import "LLLogHelperEventDefine.h"
-#import "LLOtherVC.h"
+#import "LLHomeWindow.h"
 
 @interface LLWindowViewController ()
 
@@ -79,43 +72,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:LLAppHelperDidUpdateAppInfosNotificationName object:nil];
 }
 
-- (void)reloadTabbar {
-    _tabVC = nil;
-}
-
-- (void)showDebugViewControllerWithIndex:(NSInteger)index {
-    if ([LLConfig sharedConfig].availables == LLConfigAvailableScreenshot) {
-        // Screenshot only. Don't open the window.
-        LLog_Event(kLLLogHelperDebugToolEvent, @"Current availables is only screenshot, can't open the tabbar.");
-        return;
-    }
-    
-    if (![LLConfig sharedConfig].XIBBundle) {
-        LLog_Warning_Event(kLLLogHelperFailedLoadingResourceEvent, [@"Failed to load the XIB bundle," stringByAppendingString:kLLLogHelperOpenIssueInGithub]);
-        return;
-    }
-    
-    if (![LLConfig sharedConfig].imageBundle) {
-        LLog_Warning_Event(kLLLogHelperFailedLoadingResourceEvent, [@"Failed to load the image bundle," stringByAppendingString:kLLLogHelperOpenIssueInGithub]);
-    }
-    if ([[NSThread currentThread] isMainThread]) {
-        [self.window hideWindow];
-        UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
-        UIViewController* vc2 = vc.presentedViewController;
-        
-        
-        [vc2?:vc presentViewController:self.tabVC animated:YES completion:nil];
-        self.tabVC.selectedIndex = index;
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.window hideWindow];
-            UIViewController* vc = [[[UIApplication sharedApplication].delegate window] rootViewController];
-            UIViewController* vc2 = vc.presentedViewController;
-            [vc2?:vc presentViewController:self.tabVC animated:YES completion:nil];
-            self.tabVC.selectedIndex = index;
-        });
-    }
-}
 
 #pragma mark - LLAppHelperNotification
 - (void)didReceiveLLAppHelperDidUpdateAppInfosNotification:(NSNotification *)notifi {
@@ -367,90 +323,14 @@
 }
 
 - (void)tapGR:(UITapGestureRecognizer *)gr {
-    [self showDebugViewControllerWithIndex:0];
+    
+    [[LLHomeWindow shareInstance] showDebugViewControllerWithIndex:0];
 }
 
 - (void)doubleTapGR:(UITapGestureRecognizer *)gr {
     [[LLScreenshotHelper sharedHelper] simulateTakeScreenshot];
 }
 
-#pragma mark - Lazy load
-- (UITabBarController *)tabVC {
-    if (_tabVC == nil) {
-        UITabBarController *tab = [[UITabBarController alloc] init];
-        
-        LLNetworkVC *networkVC = [[LLNetworkVC alloc] initWithStyle:UITableViewStyleGrouped];
-        UINavigationController *networkNav = [[LLBaseNavigationController alloc] initWithRootViewController:networkVC];
-        networkNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Network" image:[UIImage LL_imageNamed:kNetworkImageName] selectedImage:nil];
-        networkNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
-        networkNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        LLLogVC *logVC = [[LLLogVC alloc] initWithStyle:UITableViewStylePlain];
-        UINavigationController *logNav = [[LLBaseNavigationController alloc] initWithRootViewController:logVC];
-        logNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Log" image:[UIImage LL_imageNamed:kLogImageName] selectedImage:nil];
-        logNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
-        logNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        LLCrashVC *crashVC = [[LLCrashVC alloc] initWithStyle:UITableViewStyleGrouped];
-        UINavigationController *crashNav = [[LLBaseNavigationController alloc] initWithRootViewController:crashVC];
-        crashNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Crash" image:[UIImage LL_imageNamed:kCrashImageName] selectedImage:nil];
-        crashNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
-        crashNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        LLAppInfoVC *appInfoVC = [[LLAppInfoVC alloc] initWithStyle:UITableViewStyleGrouped];
-        UINavigationController *appInfoNav = [[LLBaseNavigationController alloc] initWithRootViewController:appInfoVC];
-        appInfoNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"App" image:[UIImage LL_imageNamed:kAppImageName] selectedImage:nil];
-        appInfoNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
-        appInfoNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        LLSandboxVC *sandboxVC = [[LLSandboxVC alloc] initWithStyle:UITableViewStyleGrouped];
-        UINavigationController *sandboxNav = [[LLBaseNavigationController alloc] initWithRootViewController:sandboxVC];
-        sandboxNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sandbox" image:[UIImage LL_imageNamed:kSandboxImageName] selectedImage:nil];
-        sandboxNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
-        sandboxNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        
-        LLOtherVC *otherVC = [[LLOtherVC alloc] initWithStyle:UITableViewStyleGrouped];
-        UINavigationController *otherNav = [[LLBaseNavigationController alloc] initWithRootViewController:otherVC];
-        otherNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Other" image:[UIImage LL_imageNamed:kSandboxImageName] selectedImage:nil];
-        otherNav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
-        otherNav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
-        LLConfigAvailableFeature availables = [LLConfig sharedConfig].availables;
-        if (availables & LLConfigAvailableNetwork) {
-            [viewControllers addObject:networkNav];
-        }
-//        if (availables & LLConfigAvailableLog) {
-//            [viewControllers addObject:logNav];
-//        }
-        if (availables & LLConfigAvailableCrash) {
-            [viewControllers addObject:crashNav];
-        }
-        if (availables & LLConfigAvailableAppInfo) {
-            [viewControllers addObject:appInfoNav];
-        }
-        if (availables & LLConfigAvailableSandbox) {
-            [viewControllers addObject:sandboxNav];
-        }
-        
-        if (availables & LLConfigAvailableOther) {
-            [viewControllers addObject:otherNav] ;
-        }
-
-        if (viewControllers.count == 0) {
-            [LLConfig sharedConfig].availables = LLConfigAvailableAll;
-            [viewControllers addObjectsFromArray:@[networkNav,logNav,crashNav,appInfoNav,sandboxNav,otherNav]];
-        }
-        
-        tab.viewControllers = viewControllers;
-        tab.tabBar.tintColor = LLCONFIG_TEXT_COLOR;
-        tab.tabBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
-        
-        _tabVC = tab;
-    }
-    return _tabVC;
-}
 
 - (UIView *)contentView {
     if (!_contentView) {

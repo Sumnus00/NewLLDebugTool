@@ -340,8 +340,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     BOOL isButtonOn = [switchButton isOn];
     if(switchButton.tag == LLConfigSwitchTagMock){
         [[LLDebugTool sharedTool] saveMockSwitch:isButtonOn];
-//        NSLog(@"haleli >>> 界面消失") ;
-//        [self dismissViewControllerAnimated:YES completion:nil];
         
     }else if(switchButton.tag == LLConfigSwitchTagLowNetwork){
         [[LLDebugTool sharedTool] saveLowNetworkSwitch:isButtonOn];

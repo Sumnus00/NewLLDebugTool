@@ -27,6 +27,7 @@
 #import "LLTool.h"
 #import "LLConfig.h"
 #import "LLRoute.h"
+#import "LLHomeWindow.h"
 
 static NSString *const kEmptyCellID = @"emptyCellID";
 
@@ -87,7 +88,7 @@ static NSString *const kEmptyCellID = @"emptyCellID";
 #pragma mark - Rewrite
 - (void)leftItemClick {
     [LLRoute showWindow];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [[LLHomeWindow shareInstance] hideWindow];
 }
 
 - (void)backAction {

@@ -46,10 +46,6 @@
  */
 @property (nonatomic , weak , nullable) LLWindow *window;
 
-/**
- Release current tabBarController.
- */
-- (void)reloadTabbar;
 
 /**
  Register app helper notification.
@@ -61,9 +57,5 @@
  */
 - (void)unregisterLLAppHelperNotification;
 
-/**
- Automatic open debug view controller with index.
- */
-- (void)showDebugViewControllerWithIndex:(NSInteger)index;
 
 @end
