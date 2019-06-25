@@ -115,7 +115,7 @@ static LLDebugTool *_instance = nil;
 }
 
 - (void)showDebugViewControllerWithIndex:(NSInteger)index {
-    [[LLHomeWindow shareInstance] showDebugViewControllerWithIndex:index];
+//    [[LLHomeWindow shareInstance] showDebugViewControllerWithIndex:index];
 }
 
 - (void)logInFile:(NSString *)file function:(NSString *)function lineNo:(NSInteger)lineNo level:(LLConfigLogLevel)level onEvent:(NSString *)onEvent message:(NSString *)message {
