@@ -68,6 +68,7 @@
 		893799192268250600FDF142 /* WKWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 893799182268250600FDF142 /* WKWebViewVC.m */; };
 		8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8937991B226830FF00FDF142 /* UIWebViewVC.m */; };
 		893C712522C1F7E300036E5F /* LLHomeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C712422C1F7E300036E5F /* LLHomeWindow.m */; };
+		893C714322C639A800036E5F /* UITextViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 893C714222C639A800036E5F /* UITextViewActions.m */; };
 		897378DB2293DAD800ECF1EF /* QuickAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 897378DA2293DAD800ECF1EF /* QuickAlgorithm.m */; };
 		897378DE2293F3D200ECF1EF /* Tree.m in Sources */ = {isa = PBXBuildFile; fileRef = 897378DD2293F3D200ECF1EF /* Tree.m */; };
 		897378E12293F42F00ECF1EF /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = 897378E02293F42F00ECF1EF /* Element.m */; };
@@ -351,6 +352,8 @@
 		8937991B226830FF00FDF142 /* UIWebViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIWebViewVC.m; sourceTree = "<group>"; };
 		893C712322C1F7E300036E5F /* LLHomeWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLHomeWindow.h; sourceTree = "<group>"; };
 		893C712422C1F7E300036E5F /* LLHomeWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLHomeWindow.m; sourceTree = "<group>"; };
+		893C714122C639A800036E5F /* UITextViewActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITextViewActions.h; sourceTree = "<group>"; };
+		893C714222C639A800036E5F /* UITextViewActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextViewActions.m; sourceTree = "<group>"; };
 		897378D92293DAD800ECF1EF /* QuickAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickAlgorithm.h; sourceTree = "<group>"; };
 		897378DA2293DAD800ECF1EF /* QuickAlgorithm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickAlgorithm.m; sourceTree = "<group>"; };
 		897378DC2293F3D200ECF1EF /* Tree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
@@ -811,6 +814,8 @@
 				89C826B922AE7A9F0083AF55 /* UITabBarButtonActions.m */,
 				89C826C322B288720083AF55 /* UIPickerViewActions.h */,
 				89C826C422B288720083AF55 /* UIPickerViewActions.m */,
+				893C714122C639A800036E5F /* UITextViewActions.h */,
+				893C714222C639A800036E5F /* UITextViewActions.m */,
 			);
 			path = Operate;
 			sourceTree = "<group>";
@@ -2013,6 +2018,7 @@
 				18EE5D3F22B4D79B00CDD712 /* ViewBound.m in Sources */,
 				89C022D3225CBAC400686898 /* KIFUIViewTestActor.m in Sources */,
 				8980765522700E3700B28780 /* GestureHash.m in Sources */,
+				893C714322C639A800036E5F /* UITextViewActions.m in Sources */,
 				C44F41652152AA7000153F46 /* LLDebugTool.m in Sources */,
 				18EE5D7522BE177700CDD712 /* LLMonkeyListVC.m in Sources */,
 				369D093E2153AE14001C9D4B /* NSURLSession+LL_Swizzling.m in Sources */,

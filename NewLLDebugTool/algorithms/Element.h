@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy , nonatomic , nonnull) NSString *elementId ;
 @property (copy , nonatomic , nonnull) NSString *elementName ;
 @property (nonatomic, assign) NSInteger clickTimes ;
+@property (nonatomic, assign) NSInteger weight ;
 @property (nonatomic ,assign) BOOL isTreeChanged ;
 @property (nonatomic , assign) BOOL isJumped ;
 @property (nonatomic , assign) BOOL isBack ;

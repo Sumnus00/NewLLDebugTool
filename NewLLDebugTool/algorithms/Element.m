@@ -8,12 +8,24 @@
 
 #import "Element.h"
 
+/**
+ weight type
+ **/
+typedef NS_ENUM(NSUInteger, LLWeightType) {
+    SUPERHIGH = 5 ,
+    HIGH = 4,
+    MIDDLE= 3,
+    LOW = 2 ,
+    SUPERLOW = 1,
+};
+
 @implementation Element
 - (instancetype)initWithElementId:(NSString*)elementId elementName:(NSString*)elementName type:(NSString*)type{
     if(self = [super init]){
         _elementId = elementId ;
         _elementName = elementName ;
         _clickTimes = 0 ;
+        _weight = [self initWeight:type] ;
         _isTreeChanged = false ;
         _isJumped = false ;
         _isBack = false ;
@@ -23,6 +35,41 @@
         _info = [[NSMutableDictionary alloc] init]  ;
     }
     return self ;
+}
+
+-(NSInteger)initWeight:(NSString*)type{
+    if([type isEqual:@"UITableView"]){
+        return LOW ;
+    }else if([type isEqual:@"UISwitch"]){
+        return LOW ;
+    }else if([type isEqual:@"UITabBar"]){
+        return SUPERLOW ;
+    }else if([type isEqual:@"UINavigationBar"]){
+        return LOW ;
+    }else if([type isEqual:@"UITextField"]){
+        //UITextField和UITextView优先级最高
+        return SUPERHIGH ;
+    }else if([type isEqual:@"UITextView"]){
+        //UITextField和UITextView优先级最高
+        return SUPERHIGH ;
+    }else if([type isEqual:@"UIButton"]){
+        return HIGH ;
+    }else if([type isEqual:@"UISegmentedControl"]){
+        return LOW ;
+    }else if([type isEqual:@"UICollectionView"]){
+        return LOW ;
+    }else if([type isEqual:@"UITableViewCell"]){
+        return MIDDLE ;
+    }else if([type isEqual:@"UICollectionViewCell"]){
+        return MIDDLE ;
+    }else if([type isEqual:@"UITabBarButton"]){
+        return SUPERLOW ;
+    }else if([type isEqual:@"UIPickerView"]){
+        return LOW ;
+    }
+    else{
+        return LOW ;
+    }
 }
 
 -(void)setInfoKey:(NSString*)key withInfoValue:(NSString*)value{

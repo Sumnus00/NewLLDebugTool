@@ -19,6 +19,7 @@
     }
 
     NSInteger minScore = 10000 ;
+    NSInteger maxWeight = -1 ;
     Element *minElement = nil ;
     
     for(int i=0;i<[elements count] ;i++){
@@ -31,6 +32,13 @@
         if(score < minScore){
             minScore = score ;
             minElement = element ;
+            maxWeight = element.weight ;
+        }else if(score == minScore){
+            if(element.weight > maxWeight){
+                minScore = score ;
+                minElement = element ;
+                maxWeight = element.weight ;
+            }
         }
     }
     

@@ -25,7 +25,11 @@
 
 - (void)subviews:(NSMutableDictionary *)dict
 {
-  
+    
+    if([NSStringFromClass([self class]) isEqual:@"UIRemoteKeyboardWindow"]){
+        return ;
+    }
+    
     if(self.hidden){
         return ;
     }
@@ -67,6 +71,10 @@
             return ;
         }else if([self isKindOfClass:[UITextField class]]){
             className = @"UITextField" ;
+            Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
+            [dict setObject:element forKey:element.elementId] ;
+        }else if([self isKindOfClass:[UITextView class]]){
+            className = @"UITextView" ;
             Element *element = [[Element alloc] initWithElementId:identifier elementName:identifier type:className] ;
             [dict setObject:element forKey:element.elementId] ;
         }else if([self isKindOfClass:[UIButton class]]){

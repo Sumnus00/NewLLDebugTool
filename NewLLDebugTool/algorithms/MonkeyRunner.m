@@ -231,6 +231,9 @@
     }else if([className isEqual:@"UITextField"]){
         NSLog(@"haleli >>>> test monkey,UITextFieldActions enter text action") ;
         [UITextFieldActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:accessibilityIdentifier] ;
+    }else if([className isEqual:@"UITextView"]){
+        NSLog(@"haleli >>>> test monkey,UITextViewActions enter text action") ;
+        [UITextViewActions clearTextFromAndThenEnterTextWithAccessibilityIdentifier:accessibilityIdentifier] ;
     }else if([className isEqual:@"UIButton"]){
         NSLog(@"haleli >>>> test monkey,UIButton tap action") ;
         [UIButtonActions tapButtonWithAccessibilityIdentifier:accessibilityIdentifier] ;

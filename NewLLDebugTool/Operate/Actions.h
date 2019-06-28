@@ -16,6 +16,7 @@
 #import "UINavigationBarActions.h"
 #import "UIAlertActions.h"
 #import "UITextFieldActions.h"
+#import "UITextViewActions.h"
 #import "UIButtonActions.h"
 #import "UISegmentedControlActions.h"
 #import "UICollectionViewActions.h"
