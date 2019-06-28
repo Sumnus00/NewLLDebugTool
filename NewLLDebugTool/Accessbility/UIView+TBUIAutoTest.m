@@ -97,7 +97,7 @@
     NSString *labelStr = [self.superview findNameWithInstance:self];
     
     if (labelStr && ![labelStr isEqualToString:@""]) {
-        labelStr = [NSString stringWithFormat:@"TBUIAutoTest_Property_%@", labelStr];
+        labelStr = [NSString stringWithFormat:@"TBUIAutoTest_Property_%@_%@", NSStringFromClass([self class]),labelStr];
     }
     else {
         if ([self isKindOfClass:[UILabel class]]) {//UILabel 使用 text
