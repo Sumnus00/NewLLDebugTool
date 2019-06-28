@@ -21,4 +21,20 @@
     [self monkey_sendEvent:event];
 }
 
+
+
+- (BOOL)monkey_canOpenURL:(NSURL *)url{
+    NSLog(@"haleli >>>> canOpenURL:%@",url) ;
+    return false ;
+}
+
+- (BOOL)monkey_openURL:(NSURL*)url{
+    NSLog(@"haleli >>>> openURL:%@",url) ;
+    return false ;
+}
+
+- (void)monkey_openURL:(NSURL*)url options:(NSDictionary<UIApplicationOpenExternalURLOptionsKey, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion{
+    NSLog(@"haleli >>>> openURL:%@",url) ;
+}
+
 @end

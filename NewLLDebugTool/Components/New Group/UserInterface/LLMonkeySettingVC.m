@@ -26,6 +26,7 @@
 #import "LLMonkeySettingConfig.h"
 #import "LLMonkeyListVC.h"
 #import "LLHomeWindow.h"
+#import "UIApplication+Monkey.h"
 
 static NSString *const kLLMonkeySettingVCCellID = @"LLMonkeySettingVCCellID";
 static NSString *const kLLMonkeySettingVCButtonCellID = @"LLMonkeySettingVCButtonCellID";
@@ -376,6 +377,9 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
         dispatch_once(&onceToken, ^{
             
             [self swizzleMethods];
+            [self swizzleMethods1] ;
+            [self swizzleMethods2] ;
+            [self swizzleMethods3] ;
             
             id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
             if (delegate) {
@@ -438,8 +442,77 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
     } else {
         method_exchangeImplementations(originalMethod, swizzledMethod);
     }
+    
     return YES;
 }
+
+
+-(BOOL)swizzleMethods1
+{
+    Class class = [UIApplication class];
+    SEL originalSelector = @selector(canOpenURL:);
+    SEL swizzledSelector = @selector(monkey_canOpenURL:);
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    BOOL didAddMethod = class_addMethod(class,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+    return YES;
+}
+
+-(BOOL)swizzleMethods2
+{
+    Class class = [UIApplication class];
+    SEL originalSelector = @selector(openURL:);
+    SEL swizzledSelector = @selector(monkey_openURL:);
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    BOOL didAddMethod = class_addMethod(class,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+    return YES;
+}
+
+-(BOOL)swizzleMethods3
+{
+    Class class = [UIApplication class];
+    SEL originalSelector = @selector(openURL:options:completionHandler:);
+    SEL swizzledSelector = @selector(monkey_openURL:options:completionHandler:);
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    BOOL didAddMethod = class_addMethod(class,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+    return YES;
+}
+
 
 - (void)randomIOSMonkey{
     [runner runOneRandomStep] ;
@@ -453,6 +526,9 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
         dispatch_once(&onceToken, ^{
             
             [self swizzleMethods];
+            [self swizzleMethods1] ;
+            [self swizzleMethods2] ;
+            [self swizzleMethods3] ;
             
             id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
             if (delegate) {
