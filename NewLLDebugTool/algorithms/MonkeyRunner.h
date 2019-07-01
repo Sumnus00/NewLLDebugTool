@@ -21,7 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) Element *preElement ;
 @property (nonatomic , strong) id<MonkeyAlgorithmDelegate> algorithm ;
 @property (nonatomic , strong) NSMutableArray *blacklist ;
-- (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm ;
+@property (nonatomic , strong) NSMutableArray *whitelist ;
+@property (nonatomic, assign) NSTimeInterval interval ;
+- (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>)algorithm blacklist:(NSMutableArray*)blacklist whitelist:(NSMutableArray*)whitelist interval :(NSTimeInterval)interval ;
 -(void)runOneCocosStep ;
 -(void)runOneRandomStep ;
 -(void)runOneQuickStep ;

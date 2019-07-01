@@ -8,17 +8,20 @@
 
 #import "MonkeyRunner.h"
 #import "LLDebugTool.h"
-
+#import "LLTool.h"
 @implementation MonkeyRunner
 
-- (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>) algorithm{
+- (instancetype)initWithAlgorithm: (id<MonkeyAlgorithmDelegate>)algorithm blacklist:(NSMutableArray*)blacklist whitelist:(NSMutableArray*)whitelist interval :(NSTimeInterval)interval{
     self = [super init] ;
     if(self){
         _preTree = nil ;
         _curTree = nil ;
         _preElement = nil ;
         _algorithm = algorithm ;
-        _blacklist = [[NSMutableArray alloc] initWithArray:@[@"UIActivityViewController",@"UIAlertController",@"TestCrashViewController",@"LLOtherVC",@"UIViewController"]] ;
+        _blacklist =  blacklist ;
+        [_blacklist addObjectsFromArray:@[@"UIActivityViewController",@"UIAlertController",@"TestCrashViewController",@"LLOtherVC",@"UIViewController"]] ;
+        _whitelist = whitelist ;
+        _interval = interval ;
     }
     return self ;
 }
@@ -100,6 +103,29 @@
 }
 //随机便利算法的一步
 -(void)runOneRandomStep{
+    
+    //判断monkey运行时间是否结束
+    NSDate *currentDate = [NSDate date] ;
+    
+    NSTimeInterval interval = [currentDate timeIntervalSinceDate:[LLDebugTool sharedTool].startDate];
+    if(_interval > 0 && _interval < interval){
+        [LLTool loadingMessage:@"monkey运行时间已完成，请杀掉进程重启app"];
+        return ;
+    }
+    
+    //黑名单的控件不允许点击
+    NSString* treeId =[[App sharedApp] getCurrentTreeId] ;
+    
+    if(treeId){
+        if([_blacklist containsObject:treeId]){
+            NSLog(@"点击到黑名单控件或者UIActivityViewController或者UIAlertController") ;
+            _preTree = nil ;
+            _curTree = nil ;
+            [BackActions back] ;
+            return ;
+        }
+    }
+    
     int width = [[UIScreen mainScreen] bounds].size.height ;
     int height = [[UIScreen mainScreen] bounds].size.height ;
     int x = arc4random() % width  ;
@@ -117,12 +143,7 @@
     else if(seed<2){
         NSLog(@"haleli >>>> test monkey,back action") ;
         [BackActions back] ;
-        //5%的点击alert事件
-    }
-    else if(seed<3){
-        NSLog(@"haleli >>>> test monkey,acknowledge alert action") ;
-        [UIAlertActions acknowledgeAlert] ;
-        //15%的概率发送click事件
+        //20%的概率发送click事件
     }
     else if(seed<6){
         NSLog(@"haleli >>>> test monkey,click(%d,%d)",x,y) ;
@@ -139,13 +160,28 @@
             //需要返回上一个界面
             [BackActions back] ;
         }else{
-            [self OperateElement:element] ;
+            @try {
+                [self OperateElement:element] ;
+            } @catch (NSException *exception) {
+                NSLog(@"haleli >>>> test monkey,exception : %@",exception.name);
+            } @finally {
+                ;
+            }
         }
     }
 }
 
 //快速遍历算法的一步
 -(void)runOneQuickStep{
+    
+    NSDate *currentDate = [NSDate date] ;
+    
+    NSTimeInterval interval = [currentDate timeIntervalSinceDate:[LLDebugTool sharedTool].startDate];
+    if(_interval > 0 && _interval < interval){
+        [LLTool loadingMessage:@"monkey运行时间已完成，请杀掉进程重启app"];
+        return ;
+    }
+    
     Tree* tree =[[App sharedApp] getCurrentTree] ;
     
     if(tree){

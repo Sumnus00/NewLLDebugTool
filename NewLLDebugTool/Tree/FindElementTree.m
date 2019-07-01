@@ -18,4 +18,10 @@
     tree.elements = dict ;
     return tree ;
 }
+
++(NSString *)treeId{
+    UIViewController *controller = [FindTopController topController] ;
+    NSString * treeId = NSStringFromClass([controller class]) ;
+    return treeId ;
+}
 @end

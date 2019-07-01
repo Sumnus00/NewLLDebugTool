@@ -122,6 +122,11 @@ typedef void (^PrivateNetworkBlock)(NSString *_Nullable);
 @property(nonatomic,strong,nullable)NSTimer *cocosMonkeyTimer;
 
 /**
+ monkey开始时间
+ */
+@property(nonatomic,strong,nullable)NSDate *startDate;
+
+/**
 更多功能的 switch开关
  */
 

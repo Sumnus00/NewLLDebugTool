@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong) NSMutableDictionary<NSString* , Tree*> *trees ;
 + (instancetype)sharedApp;
 -(Tree *)getCurrentTree;
+-(NSString *)getCurrentTreeId ;
 -(void) updateTree:(Tree*)tree ;
 -(Tree*)getTree:(NSString*)treeID ;
 -(CGFloat)getCoverage;

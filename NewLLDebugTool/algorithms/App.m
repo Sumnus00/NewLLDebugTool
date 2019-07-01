@@ -34,6 +34,11 @@ static App *_instance = nil;
     return [FindElementTree tree] ;
 }
 
+
+-(NSString *)getCurrentTreeId{
+    return [FindElementTree treeId] ;
+}
+
 -(BOOL)isNewTree:(Tree*)tree{
     if ([_trees objectForKey:tree.treeID]){
         return false ;

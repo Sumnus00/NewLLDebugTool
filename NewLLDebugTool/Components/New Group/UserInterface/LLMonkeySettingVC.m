@@ -20,6 +20,7 @@
 #import "KIFTestActor+Monkey.h"
 #import <objc/runtime.h>
 #import "QuickAlgorithm.h"
+#import "RandomAlgorithm.h"
 #import "MonkeyRunner.h"
 #import "LLIOSMonkeySettingHelper.h"
 #import "LLCocosMonkeySettingHelper.h"
@@ -369,10 +370,38 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
     }
 }
 
+-(NSTimeInterval)getInterval:(NSString*)date{
+    if([date isEqual:@"连续运行"]){
+        return -1 ;
+    }else if([date isEqual:@"5分钟"]){
+        return 5 * 60 ;
+    }else if([date isEqual:@"10分钟"]){
+        return 10 * 60 ;
+    }else if([date isEqual:@"20分钟"]){
+        return 20 * 60 ;
+    }else if([date isEqual:@"30分钟"]){
+        return 30 * 60 ;
+    }else if([date isEqual:@"60分钟"]){
+        return 60 * 60 ;
+    }else if([date isEqual:@"120分钟"]){
+        return 120 * 60 ;
+    }
+        
+    return -1 ;
+}
+
 -(void)startIOSMonkey{
     
     if([LLDebugTool sharedTool].iosMonkeyTimer == nil){
         NSLog(@"haleli >>> switch_ios_monkey : %@",@"开始") ;
+        
+        NSString* algorithm = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.algorithm ;
+        NSString* date = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.date ;
+        NSTimeInterval interval = [self getInterval:date] ;
+        NSMutableArray *blacklist = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.blacklist ;
+        NSMutableArray *whitelist = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.whitelist ;
+        
+        
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             
@@ -396,9 +425,18 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
             }
         });
         
-        QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
-        runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
-        [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
+        if([algorithm isEqual:@"快速遍历算法"]){
+            QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
+            runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm blacklist:blacklist whitelist:whitelist interval:interval] ;
+            [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(quickAlgorithm) userInfo:nil repeats:YES];
+            [LLDebugTool sharedTool].startDate = [NSDate date] ;
+        }else if([algorithm isEqual:@"随机遍历算法"]){
+            RandomAlgorithm *algorithm = [[RandomAlgorithm alloc] init] ;
+            runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm blacklist:blacklist whitelist:whitelist interval:interval] ;
+             [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(randomAlgorithm) userInfo:nil repeats:YES];
+             [LLDebugTool sharedTool].startDate = [NSDate date] ;
+        }
+       
         NSLog(@"haleli >>> 界面消失") ;
         [[LLHomeWindow shareInstance] hideWindow] ;
     }
@@ -413,11 +451,18 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
     }
 }
 
--(void)randomTest{
+//快速遍历算法
+-(void)quickAlgorithm{
     
     [runner runOneQuickStep] ;
     
 }
+
+//随机遍历算法
+-(void)randomAlgorithm{
+    [runner runOneRandomStep] ;
+}
+
 
 - (void)randomCocosMonkey{
     [runner runOneCocosStep] ;
@@ -513,15 +558,17 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
     return YES;
 }
 
-
-- (void)randomIOSMonkey{
-    [runner runOneRandomStep] ;
-}
-
 -(void) startCocosMonkey{
    
     if([LLDebugTool sharedTool].cocosMonkeyTimer == nil){
         NSLog(@"haleli >>> switch_cocos_monkey : %@",@"开始") ;
+        
+        NSString* algorithm = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.algorithm ;
+        NSString* date = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.date ;
+        NSTimeInterval interval = [self getInterval:date] ;
+        NSMutableArray *blacklist = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.blacklist ;
+        NSMutableArray *whitelist = [LLIOSMonkeySettingHelper sharedHelper].monkeySettingModel.whitelist ;
+        
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             
@@ -545,9 +592,16 @@ static NSString *const kLLMonkeySettingVCSpaceHeaderID = @"LLMonkeySettingVCSpac
             }
         });
         
-        QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
-        runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm] ;
-        [LLDebugTool sharedTool].cocosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(randomCocosMonkey) userInfo:nil repeats:YES];
+        if([algorithm isEqual:@"快速遍历算法"]){
+            QuickAlgorithm *algorithm = [[QuickAlgorithm alloc] init];
+            runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm blacklist:blacklist whitelist:whitelist interval:interval] ;
+            [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(quickAlgorithm) userInfo:nil repeats:YES];
+        }else if([algorithm isEqual:@"随机遍历算法"]){
+            RandomAlgorithm *algorithm = [[RandomAlgorithm alloc] init] ;
+            runner = [[MonkeyRunner alloc] initWithAlgorithm:algorithm blacklist:blacklist whitelist:whitelist interval:interval] ;
+            [LLDebugTool sharedTool].iosMonkeyTimer =[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(randomAlgorithm) userInfo:nil repeats:YES];
+        }
+        
         NSLog(@"haleli >>> 界面消失") ;
         [self dismissViewControllerAnimated:YES completion:nil];
     }
