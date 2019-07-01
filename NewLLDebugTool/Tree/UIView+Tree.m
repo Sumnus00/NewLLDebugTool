@@ -8,6 +8,10 @@
 
 #import "UIView+Tree.h"
 
+CG_INLINE CGPoint CGPointCenteredInRect(CGRect bounds) {
+    return CGPointMake(bounds.origin.x + bounds.size.width * 0.5f, bounds.origin.y + bounds.size.height * 0.5f);
+}
+
 @implementation UIView (Tree)
 
 +(NSMutableDictionary *)tree{
@@ -50,6 +54,117 @@
     return true ;
 }
 
+- (BOOL)isProbablyTappable
+{
+    // There are some issues with the tappability check in UIWebViews, so if the view is a UIWebView we will just skip the check.
+    return [NSStringFromClass([self class]) isEqualToString:@"UIWebBrowserView"] || self.isTappable;
+}
+
+// Is this view currently on screen?
+- (BOOL)isTappable;
+{
+    return ([self hasTapGestureRecognizer] ||
+            [self isTappableInRect:self.bounds]);
+}
+
+- (BOOL)hasTapGestureRecognizer
+{
+    __block BOOL hasTapGestureRecognizer = NO;
+    
+    [self.gestureRecognizers enumerateObjectsUsingBlock:^(id obj,
+                                                          NSUInteger idx,
+                                                          BOOL *stop) {
+        if ([obj isKindOfClass:[UITapGestureRecognizer class]]) {
+            hasTapGestureRecognizer = YES;
+            
+            if (stop != NULL) {
+                *stop = YES;
+            }
+        }
+    }];
+    
+    return hasTapGestureRecognizer;
+}
+
+- (BOOL)isTappableWithHitTestResultView:(UIView *)hitView;
+{
+    // Special case for UIControls, which may have subviews which don't respond to -hitTest:,
+    // but which are tappable. In this case the hit view will be the containing
+    // UIControl, and it will forward the tap to the appropriate subview.
+    // This applies with UISegmentedControl which contains UISegment views (a private UIView
+    // representing a single segment).
+    if ([hitView isKindOfClass:[UIControl class]] && [self isDescendantOfView:hitView]) {
+        return YES;
+    }
+    
+    // Button views in the nav bar (a private class derived from UINavigationItemView), do not return
+    // themselves in a -hitTest:. Instead they return the nav bar.
+    if ([hitView isKindOfClass:[UINavigationBar class]] && [self isNavigationItemView] && [self isDescendantOfView:hitView]) {
+        return YES;
+    }
+    
+    return [hitView isDescendantOfView:self];
+}
+
+- (BOOL)isNavigationItemView;
+{
+    return [self isKindOfClass:NSClassFromString(@"UINavigationItemView")] || [self isKindOfClass:NSClassFromString(@"_UINavigationBarBackIndicatorView")];
+}
+
+- (BOOL)isTappableInRect:(CGRect)rect;
+{
+    CGPoint tappablePoint = [self tappablePointInRect:rect];
+    
+    return !isnan(tappablePoint.x);
+}
+
+- (CGPoint)tappablePointInRect:(CGRect)rect;
+{
+    // Start at the top and recurse down
+    CGRect frame = [self.window convertRect:rect fromView:self];
+    
+    UIView *hitView = nil;
+    CGPoint tapPoint = CGPointZero;
+    
+    // Mid point
+    tapPoint = CGPointCenteredInRect(frame);
+    hitView = [self.window hitTest:tapPoint withEvent:nil];
+    if ([self isTappableWithHitTestResultView:hitView]) {
+        return [self.window convertPoint:tapPoint toView:self];
+    }
+    
+    // Top left
+    tapPoint = CGPointMake(frame.origin.x + 1.0f, frame.origin.y + 1.0f);
+    hitView = [self.window hitTest:tapPoint withEvent:nil];
+    if ([self isTappableWithHitTestResultView:hitView]) {
+        return [self.window convertPoint:tapPoint toView:self];
+    }
+    
+    // Top right
+    tapPoint = CGPointMake(frame.origin.x + frame.size.width - 1.0f, frame.origin.y + 1.0f);
+    hitView = [self.window hitTest:tapPoint withEvent:nil];
+    if ([self isTappableWithHitTestResultView:hitView]) {
+        return [self.window convertPoint:tapPoint toView:self];
+    }
+    
+    // Bottom left
+    tapPoint = CGPointMake(frame.origin.x + 1.0f, frame.origin.y + frame.size.height - 1.0f);
+    hitView = [self.window hitTest:tapPoint withEvent:nil];
+    if ([self isTappableWithHitTestResultView:hitView]) {
+        return [self.window convertPoint:tapPoint toView:self];
+    }
+    
+    // Bottom right
+    tapPoint = CGPointMake(frame.origin.x + frame.size.width - 1.0f, frame.origin.y + frame.size.height - 1.0f);
+    hitView = [self.window hitTest:tapPoint withEvent:nil];
+    if ([self isTappableWithHitTestResultView:hitView]) {
+        return [self.window convertPoint:tapPoint toView:self];
+    }
+    
+    return CGPointMake(NAN, NAN);
+}
+
+
 - (void)subviews:(NSMutableDictionary *)dict
 {
     
@@ -61,7 +176,7 @@
         return ;
     }
     NSString* identifier = self.accessibilityIdentifier;
-    if(identifier && [self isDisplayedInScreen]){
+    if(identifier && [self isDisplayedInScreen] &&[self isProbablyTappable] ){
         NSString* className = nil ;
         if([self isKindOfClass:[UITabBar class]]){
 //            className = @"UITabBar" ;
