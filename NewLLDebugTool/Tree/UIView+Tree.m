@@ -23,6 +23,33 @@
     return dict ;
 }
 
+
+-(BOOL) isDisplayedInScreen{
+    
+    if(self.superview == nil){
+        return false ;
+    }
+    
+    CGRect screenRect = [UIScreen mainScreen].bounds ;
+    
+    CGRect rect = [self.superview convertRect:self.frame toView:nil ] ;
+    
+    if(CGRectIsEmpty(rect) || CGRectIsNull(rect)){
+        return false ;
+    }
+    
+    if(CGSizeEqualToSize(rect.size, CGSizeZero)){
+        return false ;
+    }
+    
+    CGRect intersectionRect = CGRectIntersection(rect, screenRect) ;
+    if(CGRectIsEmpty(intersectionRect) || CGRectIsNull(intersectionRect)){
+        return false ;
+    }
+    
+    return true ;
+}
+
 - (void)subviews:(NSMutableDictionary *)dict
 {
     
@@ -34,7 +61,7 @@
         return ;
     }
     NSString* identifier = self.accessibilityIdentifier;
-    if(identifier){
+    if(identifier && [self isDisplayedInScreen]){
         NSString* className = nil ;
         if([self isKindOfClass:[UITabBar class]]){
 //            className = @"UITabBar" ;
