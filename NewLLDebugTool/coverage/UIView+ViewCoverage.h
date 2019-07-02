@@ -11,8 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (ViewCoverage)
-- (void)showFrameLineRecursive ;
-- (void)hideFrameLineRecursive ;
+- (void)frameLineRecursiveEnable:(BOOL)enable ;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -38,11 +38,7 @@
     _enable = enable;
     
     for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (enable) {
-            [window showFrameLineRecursive];
-        } else {
-            [window hideFrameLineRecursive];
-        }
+        [window frameLineRecursiveEnable:enable] ;
     }
 }
 @end

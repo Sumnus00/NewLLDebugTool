@@ -8,7 +8,6 @@
 
 #import "UIView+ViewCoverage.h"
 #import <objc/runtime.h>
-#import "ViewBound.h"
 #import "Element.h"
 #import "App.h"
 #import "ViewBoundConfig.h"
@@ -16,11 +15,18 @@
 /**
  click type
  **/
-typedef NS_ENUM(NSUInteger, LLClickType) {
+typedef NS_ENUM(NSInteger, LLClickType) {
     CLICKED = 2,
     UNCLICKED = 1,
     NOTCLICKED = -1 ,
 };
+
+@interface UIView ()
+
+@property (nonatomic ,strong) CALayer *borderLayer;
+
+@end
+
 
 @implementation UIView (ViewCoverage)
 
@@ -33,7 +39,7 @@ typedef NS_ENUM(NSUInteger, LLClickType) {
 }
 - (void)swizzle_layoutSubviews{
     [self swizzle_layoutSubviews];
-    [self showFrameLineRecursive];
+    [self frameLineRecursiveEnable:[ViewBoundConfig defaultConfig].enable];
 }
 
 -(BOOL)isClicked:(NSString*)accessibilityIdentifier{
@@ -56,15 +62,6 @@ typedef NS_ENUM(NSUInteger, LLClickType) {
 
 - (int)shouldShowFrameLine
 {
-    
-    if (![ViewBoundConfig defaultConfig].enable) {
-        return NOTCLICKED;
-    }
-    
-    if ([self isKindOfClass:[ViewBound class]]) {
-        return NOTCLICKED;
-    }
-    
     
     if([self isKindOfClass:[UITableView class]]){
         if([self isClicked:self.accessibilityIdentifier]){
@@ -135,7 +132,7 @@ typedef NS_ENUM(NSUInteger, LLClickType) {
         }
         UICollectionView *collectionView = (UICollectionView *)view;
         NSIndexPath *indexPath = [collectionView indexPathForCell:(UICollectionViewCell *)self];
-         NSString*accessibilityIdentifier = [NSString stringWithFormat:@"TBUIAutoTest_CollectionCell_%ld_%ld", indexPath.section,indexPath.row];
+        NSString*accessibilityIdentifier = [NSString stringWithFormat:@"TBUIAutoTest_CollectionCell_%ld_%ld", indexPath.section,indexPath.row];
         if([self isClicked:accessibilityIdentifier]){
             return CLICKED ;
         }else{
@@ -148,66 +145,60 @@ typedef NS_ENUM(NSUInteger, LLClickType) {
             return UNCLICKED ;
         }
     }
-   
+    
     
     return NOTCLICKED;
 }
-- (void)hideFrameLineRecursive
-{
-    for (UIView *subView in self.subviews) {
-        [subView hideFrameLineRecursive];
-    }
-    [self hideFrameLine];
-}
 
-- (void)hideFrameLine
-{
-    ViewBound *metricsView = [self getViewBound];
-    if (metricsView) {
-        metricsView.hidden = YES;
-    }
-}
-
-- (void)showFrameLineRecursive
-{
-    for (UIView *subView in self.subviews) {
-        [subView showFrameLineRecursive];
-    }
-    [self showFrameLine];
-    
-}
-
--(void) showFrameLine{
-    int result =[self shouldShowFrameLine] ;
-    if (result == NOTCLICKED) {
-        if(![ViewBoundConfig defaultConfig].enable){
-            [self hideFrameLine] ;
-        }
+- (void)frameLineRecursiveEnable:(BOOL)enable{
+    // 状态栏不显示元素边框
+    UIWindow *statusBarWindow = [[UIApplication sharedApplication] valueForKey:@"_statusBarWindow"];
+    if (statusBarWindow && [self isDescendantOfView:statusBarWindow]) {
         return;
     }
     
-    ViewBound *viewBound = [self getViewBound];
-    if (!viewBound) {
-        ViewBound *viewBound = [[ViewBound alloc] initWithFrame:self.bounds];
-        viewBound.tag = [NSStringFromClass([ViewBound class]) hash]+(NSInteger)self;
-        viewBound.userInteractionEnabled = NO;
-        [self addSubview:viewBound];
-    }
-    if(result ==  UNCLICKED){
-        viewBound.layer.borderColor = [ViewBoundConfig defaultConfig].borderUnClickedColor.CGColor;
-        viewBound.layer.borderWidth  = [ViewBoundConfig defaultConfig].borderWidth;
-    }else{
-        viewBound.layer.borderColor = [ViewBoundConfig defaultConfig].borderClickedColor.CGColor;
-        viewBound.layer.borderWidth  = [ViewBoundConfig defaultConfig].borderWidth;
+    for (UIView *subView in self.subviews) {
+        [subView frameLineRecursiveEnable:enable];
     }
     
-    viewBound.hidden = ![ViewBoundConfig defaultConfig].enable;
-
+    int result =[self shouldShowFrameLine] ;
+    if (result == NOTCLICKED) {
+        enable = false ;
+    }
+    
+    if (enable) {
+        if (!self.metricsBorderLayer) {
+             UIColor *borderColor = [ViewBoundConfig defaultConfig].borderUnClickedColor;
+            if(result ==  UNCLICKED){
+                borderColor = [ViewBoundConfig defaultConfig].borderUnClickedColor;
+            }else{
+                borderColor = [ViewBoundConfig defaultConfig].borderClickedColor;
+            }
+           
+            self.metricsBorderLayer = ({
+                CALayer *layer = CALayer.new;
+                layer.borderWidth = [ViewBoundConfig defaultConfig].borderWidth;
+                layer.borderColor = borderColor.CGColor;
+                layer;
+            });
+            [self.layer addSublayer:self.metricsBorderLayer];
+        }
+        
+        self.metricsBorderLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+        self.metricsBorderLayer.hidden = NO;
+    } else if (self.metricsBorderLayer) {
+        self.metricsBorderLayer.hidden = YES;
+    }
 }
 
--(ViewBound *)getViewBound{
-    NSInteger tag = [NSStringFromClass([ViewBound class]) hash]+(NSInteger)self;
-    return (ViewBound*)[self viewWithTag:tag];
+- (void)setMetricsBorderLayer:(CALayer *)metricsBorderLayer
+{
+    objc_setAssociatedObject(self, @selector(metricsBorderLayer), metricsBorderLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CALayer *)metricsBorderLayer
+{
+    return objc_getAssociatedObject(self, _cmd);
 }
 
 @end

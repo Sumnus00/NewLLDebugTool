@@ -10,7 +10,6 @@
 		18D3AF2A22AB908F00B5A263 /* UITableViewCellActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3AF2922AB908F00B5A263 /* UITableViewCellActions.m */; };
 		18D3AF2D22AB98FA00B5A263 /* UICollectionViewCellActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */; };
 		18EE5D3C22B48C7700CDD712 /* UIView+ViewCoverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D3B22B48C7700CDD712 /* UIView+ViewCoverage.m */; };
-		18EE5D3F22B4D79B00CDD712 /* ViewBound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D3E22B4D79B00CDD712 /* ViewBound.m */; };
 		18EE5D4422B73D7800CDD712 /* LLOscillogramWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4322B73D7800CDD712 /* LLOscillogramWindow.m */; };
 		18EE5D4722B741E200CDD712 /* LLOscillogramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4622B741E200CDD712 /* LLOscillogramViewController.m */; };
 		18EE5D4B22B7468700CDD712 /* UIColor+LL_Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D4A22B7468700CDD712 /* UIColor+LL_Utils.m */; };
@@ -229,8 +228,6 @@
 		18D3AF2C22AB98FA00B5A263 /* UICollectionViewCellActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCellActions.m; sourceTree = "<group>"; };
 		18EE5D3A22B48C7700CDD712 /* UIView+ViewCoverage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewCoverage.h"; sourceTree = "<group>"; };
 		18EE5D3B22B48C7700CDD712 /* UIView+ViewCoverage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewCoverage.m"; sourceTree = "<group>"; };
-		18EE5D3D22B4D79B00CDD712 /* ViewBound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewBound.h; sourceTree = "<group>"; };
-		18EE5D3E22B4D79B00CDD712 /* ViewBound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewBound.m; sourceTree = "<group>"; };
 		18EE5D4222B73D7800CDD712 /* LLOscillogramWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOscillogramWindow.h; sourceTree = "<group>"; };
 		18EE5D4322B73D7800CDD712 /* LLOscillogramWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLOscillogramWindow.m; sourceTree = "<group>"; };
 		18EE5D4522B741E200CDD712 /* LLOscillogramViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLOscillogramViewController.h; sourceTree = "<group>"; };
@@ -656,8 +653,6 @@
 			children = (
 				18EE5D3A22B48C7700CDD712 /* UIView+ViewCoverage.h */,
 				18EE5D3B22B48C7700CDD712 /* UIView+ViewCoverage.m */,
-				18EE5D3D22B4D79B00CDD712 /* ViewBound.h */,
-				18EE5D3E22B4D79B00CDD712 /* ViewBound.m */,
 				18EE5D4C22B7604B00CDD712 /* CoverageOscillogramWindow.h */,
 				18EE5D4D22B7604B00CDD712 /* CoverageOscillogramWindow.m */,
 				18EE5D4F22B763F100CDD712 /* CoverageOscillogramViewController.h */,
@@ -2015,7 +2010,6 @@
 				C44F41332152AA7000153F46 /* LLFilterTextFieldModel.m in Sources */,
 				18EE5D4722B741E200CDD712 /* LLOscillogramViewController.m in Sources */,
 				C44F41432152AA7000153F46 /* LLNetworkHelper.m in Sources */,
-				18EE5D3F22B4D79B00CDD712 /* ViewBound.m in Sources */,
 				89C022D3225CBAC400686898 /* KIFUIViewTestActor.m in Sources */,
 				8980765522700E3700B28780 /* GestureHash.m in Sources */,
 				893C714322C639A800036E5F /* UITextViewActions.m in Sources */,
