@@ -9,6 +9,8 @@
 #import "LLOscillogramWindowManager.h"
 #import "CoverageOscillogramWindow.h"
 #import "LLMacros.h"
+#import "LLAppHelper.h"
+
 @interface LLOscillogramWindowManager()
 @property (nonatomic, strong) CoverageOscillogramWindow *coverageWindow;
 @end

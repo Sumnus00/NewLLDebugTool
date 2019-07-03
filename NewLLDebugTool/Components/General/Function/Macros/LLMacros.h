@@ -24,8 +24,6 @@
 #ifndef LLMacros_h
 #define LLMacros_h
 
-#import "LLAppHelper.h"
-
 #define LL_SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define LL_SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 #define LL_NAVIGATION_HEIGHT (self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height)
@@ -37,8 +35,5 @@
 #define kLLSizeFrom750_Landscape(x) (kInterfaceOrientationPortrait ? kLLSizeFrom750(x) : ((x)*LL_SCREEN_HEIGHT/750))
 
 #define kInterfaceOrientationPortrait UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)
-
-#define IS_IPHONE_X_Series [[LLAppHelper sharedHelper] isIPhoneXSeries]
-#define IPHONE_TOPSENSOR_HEIGHT      (IS_IPHONE_X_Series ? 32 : 0)
 
 #endif /* LLMacros_h */

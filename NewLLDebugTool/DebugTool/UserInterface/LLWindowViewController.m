@@ -31,6 +31,7 @@
 #import "LLDebugToolMacros.h"
 #import "LLLogHelperEventDefine.h"
 #import "LLHomeWindow.h"
+#import "LLAppHelper.h"
 
 @interface LLWindowViewController ()
 

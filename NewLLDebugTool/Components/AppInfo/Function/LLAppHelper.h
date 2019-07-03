@@ -24,6 +24,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+
+#define IS_IPHONE_X_Series [[LLAppHelper sharedHelper] isIPhoneXSeries]
+#define IPHONE_TOPSENSOR_HEIGHT      (IS_IPHONE_X_Series ? 32 : 0)
 /**
  Notifications will post each second on main thread.
  Cpu is between 0.0% to 100.0%.
