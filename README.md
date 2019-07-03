@@ -202,6 +202,14 @@ NewLLDebugTool requirements is same with LLDebugTool, it works on iOS 8+ and req
 
 ## Change-log
 
+### 2019-7-3(tag:1.3.2)
+>1. ios monkey add weighted qucik traversal algorithm and random traversal algorithm
+>2. ios monkey add configuration interface : algorithm setting、blacklist and whitelist setting、execution time setting
+>3. ios monkey add coverage display
+>4. fix failed with kif error
+>5. add log upload interface
+
+
 ### 2019-5-15(tag:1.3.1)
 >1. add cocos monkey function
 >2. fix screenshot compatible with horizontal and vertical screen

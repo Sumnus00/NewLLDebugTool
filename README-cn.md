@@ -204,6 +204,13 @@ NewLLDebugTool的要求和LLDebugToo是一致的。NewLLDebugTool需要运行在
 
 ## 更新日志
 
+### 2019-7-3(tag:1.3.2)
+>1. ios monkey增加权重快速遍历算法和随机遍历算法
+>2. ios monkey增加配置界面：算法设置、黑白名单设置、执行时间设置
+>3. ios monkey增加覆盖率显示
+>4. 修复KIF执行失败的错误
+>5. 增加log上传接口
+
 ### 2019-5-15(tag:1.3.1)
 >1. 增加cocos monkey功能
 >2. 修复横竖屏截图兼容性问题
