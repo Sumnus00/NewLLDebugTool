@@ -56,6 +56,11 @@ static NSString * _Nonnull const kLLMonkeySettingModelName = @"LLMonkeySettingMo
  If LLDebugTool exists, LLDebugTool's window called hideWindow method, otherwise nothing will be done.
  */
 + (void)hideWindow;
+
+/**
+ If LLDebugTool exists, LLDebugTool's homewindow called hideWindow method, otherwise nothing will be done.
+ */
++ (void)hideHomeWindow ;
     
 #pragma mark - Log Route
 /**

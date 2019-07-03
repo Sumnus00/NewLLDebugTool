@@ -40,6 +40,7 @@
 #import "LLAppHelper.h"
 #import "LLScreenshotHelper.h"
 #import "LLWindow.h"
+#import "LLHomeWindow.h"
 #import "LLDebugToolMacros.h"
 #elif __has_include("<LLDebugTool.h>")
 #import "<LLDebugTool.h>"
@@ -49,6 +50,7 @@
 #import "<LLAppHelper.h>"
 #import "<LLScreenshotHelper.h>"
 #import "<LLWindow.h>"
+#import "<LLHomeWindow.h>"
 #import "<LLDebugToolMacros.h"
 #endif
 
@@ -112,6 +114,12 @@ NSString * const kLLOpenIssueInGithubPrompt = @" Open an issue in \"https://gith
 + (void)hideWindow {
 #if INSTALLED_LLDEBUGTOOL
     [[LLDebugTool sharedTool].window hideWindow];
+#endif
+}
+
++ (void)hideHomeWindow {
+#if INSTALLED_LLDEBUGTOOL
+    [[LLHomeWindow shareInstance] hideWindow] ;
 #endif
 }
 
