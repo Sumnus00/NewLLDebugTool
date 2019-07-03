@@ -891,6 +891,14 @@
 			path = algorithms;
 			sourceTree = "<group>";
 		};
+		8993DF2822CCA8AB007E40AD /* General */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5D4122B73D4900CDD712 /* LLOscillogramWindow */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		899AB6332201967E00D2FC57 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,6 +1145,7 @@
 		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
+				8993DF2822CCA8AB007E40AD /* General */,
 				18EE5D3922B48C0100CDD712 /* coverage */,
 				89855575228ED33D005439D8 /* algorithms */,
 				89CCD9D622817322001848E5 /* js */,
@@ -1364,7 +1373,6 @@
 		C44F40912152AA7000153F46 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				18EE5D4122B73D4900CDD712 /* LLOscillogramWindow */,
 				C44F40922152AA7000153F46 /* LLSubTitleTableViewCell */,
 				C44F40972152AA7000153F46 /* LLSearchBar */,
 				C44F409A2152AA7000153F46 /* LLNoneCopyTextField */,
