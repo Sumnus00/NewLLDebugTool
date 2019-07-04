@@ -14,34 +14,35 @@ NewLLDebugTool
 
 [Click here for an English introduction](https://github.com/didiaodanding/NewLLDebugTool)
 
-1、在实际的app自动化测试过程中，通常是ui自动化、逻辑自动化(白盒测试)、压力测试(monkey)、Fuzzy测试(mock)、性能测试。
+1. 在实际的app自动化测试过程中，通常是ui自动化、逻辑自动化(白盒测试)、压力测试(monkey)、Fuzzy测试(mock)、性能测试。
 但是我们通常只做单一自动化测试，关心单一自动化测试的效果，比如做性能的只关心cpu、内存、卡顿这些数据的上报，做monkey的只关心monkey能否遍历所有控件。很少相互结合从而产生1+1 > 2的效果。比如mock+逻辑自动化，monkey+性能测试，monkey+mock等等
 都有可能产生神奇的化学反应，所以有必要需要一个SDK可以将这些各种各样的自动化方案就行集成。
-2、在实际的app开发过程中，无论是开发还是测试都会在app中加一些小工具，比如日志上传、环境切换等。这些小工具在每个app里的作用都是相似的，
+
+2. 在实际的app开发过程中，无论是开发还是测试都会在app中加一些小工具，比如日志上传、环境切换等。这些小工具在每个app里的作用都是相似的，
 所以也有必要需要一个SDK可以将这些通用的小工具集成在一起，进行沉底，从而可以快速复用。
 
 ## 效果演示
 <div align="left">
-<img src="https://raw.githubusercontent.com/didiaodanding/ImageRepository/tree/master/NewLLDebugTool/app.jpeg" width="18%"></img>
-<img src="https://raw.githubusercontent.com/didiaodanding/ImageRepository/tree/master/NewLLDebugTool/monkey.jpeg" width="18%"> </img>
-<img src="https://raw.githubusercontent.com/didiaodanding/ImageRepository/tree/master/NewLLDebugTool/tools.jpeg" width="18%"> </img>
+<img src="https://raw.githubusercontent.com/didiaodanding/ImageRepository/blob/master/NewLLDebugTool/app.jpeg" width="18%"></img>
+<img src="https://raw.githubusercontent.com/didiaodanding/ImageRepository/blob/master/NewLLDebugTool/monkey.jpeg" width="18%"> </img>
+<img src="https://raw.githubusercontent.com/didiaodanding/ImageRepository/blob/master/NewLLDebugTool/tools.jpeg" width="18%"> </img>
 </div>
 
 ## 功能模块
 ### 一、工具集：
-1、**【网络查看】** 可以监控大部分的网络请求，包括使用NSURLSession，NSURLConnection和AFNetworking
-2、**【Crash查看】** 可以截获Crash，保存Crash信息、原因和堆栈信息。
-3、**【app信息查看】** 可以监控app的内存、CPU和FPS，可以便捷的查看app的各种信息
-4、**【沙盒】 **提供了一个快捷的方式来查看和操作沙盒文件，你可以更轻松的删除沙盒中的文件/文件夹，或者通过airdrop来分享文件/文件夹。只要是apple支持的文件格式，你可以直接通过NewLLDebugTool来预览
-5、**【日志查看】** 可以方便的查看日志
+1. **【网络查看】** 可以监控大部分的网络请求，包括使用NSURLSession，NSURLConnection和AFNetworking；
+2. **【Crash查看】** 可以截获Crash，保存Crash信息、原因和堆栈信息；
+3. **【app信息查看】** 可以监控app的内存、CPU和FPS，可以便捷的查看app的各种信息；
+4. **【沙盒】 **提供了一个快捷的方式来查看和操作沙盒文件，你可以更轻松的删除沙盒中的文件/文件夹，或者通过airdrop来分享文件/文件夹。只要是apple支持的文件格式，你可以直接通过NewLLDebugTool来预览；
+5. **【日志查看】** 可以方便的查看日志。
 
-自动化：
-1、**【iOS monkey】** 支持算法配置、黑白名单配置、运行时间设置，可以便捷的对app进行monkey测试（完成度100%）
-2、**【cocos monkey】** 支持算法配置、黑白名单配置、运行时间设置，可以便捷的对app进行monkey测试（完成度80%）
-3、**【逻辑自动化】** 支持对app进行逻辑自动化测试 （0%）
-4、**【ui自动化】** 支持对app进行ui自动化（0%）
-5、**【Fuzzy测试】** 已完成私有网络协议的mock(这一部分赞不开源，内部产品试用)，待完成http协议mock（完成度50%）
-6、**【性能测试】** 可以监控app的内存、cup和FPS，待完成内存泄漏的监控（完成度50%）
+### 二、自动化：
+1. **【iOS monkey】** 支持算法配置、黑白名单配置、运行时间设置，可以便捷的对app进行monkey测试（完成度100%）；
+2. **【cocos monkey】** 支持算法配置、黑白名单配置、运行时间设置，可以便捷的对app进行monkey测试（完成度80%）；
+3. **【逻辑自动化】** 支持对app进行逻辑自动化测试 （0%）；
+4. **【ui自动化】** 支持对app进行ui自动化（0%）；
+5. **【Fuzzy测试】** 已完成私有网络协议的mock(这一部分赞不开源，内部产品试用)，待完成http协议mock（完成度50%）；
+6. **【性能测试】** 可以监控app的内存、cup和FPS，待完成内存泄漏的监控（完成度50%）；
 
 ## 安装
 
@@ -52,7 +53,7 @@ NewLLDebugTool
 > 1. 添加 `pod 'NewLLDebugTool' ,  '~> 1.3.2'` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' ,  '~> 1.3.2' ,:configurations => ['Debug']` 到你的Podfile里 。
 > 2. 终端输入`pod install`来进行集成。搜索不到`NewLLDebugTool`或者搜不到最新版本时，可先运行`pod repo update`，再执行`pod install`。
 > 3. 在AppDelegate中添加头文件`#import "<NewLLDebugTool/LLDebug.h>"`。
-> 4. 在"application:(UIApplication * )application didFinishLaunchingWithOptions:(NSDictionary * )launchOptions"中添加`[[LLDebugTool sharedTool] startWorking]` 如下所示：
+> 4. 在`"application:(UIApplication * )application didFinishLaunchingWithOptions:(NSDictionary * )launchOptions"`中添加`[[LLDebugTool sharedTool] startWorking]` 如下所示：
 
 ```Objective-C
 #import "AppDelegate.h"
