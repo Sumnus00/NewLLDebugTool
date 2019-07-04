@@ -13,9 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LLHomeWindow : UIWindow
 
 /**
- Root viewController.
+ Root viewController. tabbar风格
  */
 @property (nonatomic , strong) UITabBarController *tabVC;
+
+
+/**
+ Root viewController. 表格风格
+ */
+@property (nonatomic , strong) UINavigationController *navVC;
 
 /**
  Init the window.

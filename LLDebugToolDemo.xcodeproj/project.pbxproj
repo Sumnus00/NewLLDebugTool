@@ -25,6 +25,7 @@
 		18EE5D6F22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D6E22BD387D00CDD712 /* LLCocosMonkeySettingHelper.m */; };
 		18EE5D7222BDE74700CDD712 /* LLMonkeyDateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7122BDE74700CDD712 /* LLMonkeyDateVC.m */; };
 		18EE5D7522BE177700CDD712 /* LLMonkeyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */; };
+		18EE5D7822CDB1CA00CDD712 /* LLHomeWindowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7722CDB1CA00CDD712 /* LLHomeWindowViewController.m */; };
 		208678B3E17E2AAB3B0E945F /* libPods-LLDebugToolDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533ECC0E7675B1A81455CB56 /* libPods-LLDebugToolDemo.a */; };
 		256DF576EB32FE0F9D9E099F /* libPods-LLDebugToolDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */; };
 		3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3629E3862136830A00226C79 /* BaseTestViewController.m */; };
@@ -258,6 +259,8 @@
 		18EE5D7122BDE74700CDD712 /* LLMonkeyDateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeyDateVC.m; sourceTree = "<group>"; };
 		18EE5D7322BE177700CDD712 /* LLMonkeyListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMonkeyListVC.h; sourceTree = "<group>"; };
 		18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeyListVC.m; sourceTree = "<group>"; };
+		18EE5D7622CDB1CA00CDD712 /* LLHomeWindowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLHomeWindowViewController.h; sourceTree = "<group>"; };
+		18EE5D7722CDB1CA00CDD712 /* LLHomeWindowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLHomeWindowViewController.m; sourceTree = "<group>"; };
 		250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LLDebugToolDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34ACB65EBB30B1CA47DFC39F /* Pods-LLDebugToolDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3629E3862136830A00226C79 /* BaseTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTestViewController.m; sourceTree = "<group>"; };
@@ -1638,6 +1641,8 @@
 				C44F41192152AA7000153F46 /* LLWindowViewController.m */,
 				893C712322C1F7E300036E5F /* LLHomeWindow.h */,
 				893C712422C1F7E300036E5F /* LLHomeWindow.m */,
+				18EE5D7622CDB1CA00CDD712 /* LLHomeWindowViewController.h */,
+				18EE5D7722CDB1CA00CDD712 /* LLHomeWindowViewController.m */,
 			);
 			path = UserInterface;
 			sourceTree = "<group>";
@@ -1978,6 +1983,7 @@
 				18EE5D5122B763F100CDD712 /* CoverageOscillogramViewController.m in Sources */,
 				C44F41272152AA7000153F46 /* NSObject+LL_Utils.m in Sources */,
 				18EE5D7222BDE74700CDD712 /* LLMonkeyDateVC.m in Sources */,
+				18EE5D7822CDB1CA00CDD712 /* LLHomeWindowViewController.m in Sources */,
 				C44F41262152AA7000153F46 /* NSString+LL_Utils.m in Sources */,
 				C44F41632152AA7000153F46 /* LLAppHelper.m in Sources */,
 				89C022D9225CBAC400686898 /* KIFTestActor.m in Sources */,

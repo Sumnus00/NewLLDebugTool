@@ -59,11 +59,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
              @{@"低内存开关" : @""}];
 }
 
-- (NSArray *)monkeyInfos {
-    return @[@{@"ios Monkey开关" : @""},
-             @{@"cocos Monkey开关" : @""}];
-}
-
 - (NSArray *)privateNetworkInfos {
     return @[@{@"私有包显示开关" : @""}];
 }
@@ -85,9 +80,6 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     // low resource
     NSArray *lowResources = [self lowResourcesInfos];
     
-    //monkey
-    NSArray *monkey = [self monkeyInfos] ;
-    
     //private network
     NSArray *privateNetwork = [self privateNetworkInfos] ;
     
@@ -97,7 +89,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     // expected
     NSArray *expected = [self expectedInfos];
     
-    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, monkey,privateNetwork,commonTools,expected, nil];
+    return [[NSMutableArray alloc] initWithObjects:mock ,lowResources, privateNetwork,commonTools,expected, nil];
 }
 
 
@@ -126,27 +118,10 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             break ;
         }
         case 2:{
-            //monkey功能
-            if(indexPath.row==0){
-                //IOS monkey
-                [LLMonkeySettingConfig defaultConfig].monkeyType = IOSMonkeyType ;
-                
-                LLMonkeySettingVC* vc = [[LLMonkeySettingVC alloc] init] ;
-                [self.navigationController pushViewController:vc animated:YES] ;
-            }else if(indexPath.row == 1){
-                
-                [LLMonkeySettingConfig defaultConfig].monkeyType = CocosMonkeyType ;
-                //cocos monkey
-                LLMonkeySettingVC* vc = [[LLMonkeySettingVC alloc] init] ;
-                [self.navigationController pushViewController:vc animated:YES] ;
-            }
-            break ;
-        }
-        case 3:{
             //私有包显示功能
             break ;
         }
-        case 4:{
+        case 3:{
             //常用工具
             if(indexPath.row == 0){
                 //日志上传
@@ -161,7 +136,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             }
             break ;
         }
-        case 5:{
+        case 4:{
             //敬请期待
             break ;
         }
@@ -247,30 +222,18 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
             
         }
         case 2:{
-            //ios Monkey开关
-            if(indexPath.row == 0){
-                cell = [self getTextCell:tableView] ;
-                cell.textLabel.text = dic.allKeys.firstObject ;
-            }else if(indexPath.row == 1){
-                //cocos Monkey开关
-                cell = [self getTextCell:tableView]  ;
-                cell.textLabel.text = dic.allKeys.firstObject ;
-            }
-            break ;
-        }
-        case 3:{
             //私有包显示开关
             cell = [self getSwithCell:tableView switchTag:LLConfigSwitchTagPrivateNetwork switchOn:[[LLDebugTool sharedTool] privateNetworkSwitch]] ;
             cell.textLabel.text = dic.allKeys.firstObject ;
             break ;
         }
-        case 4:{
+        case 3:{
             //日志上传
             cell = [self getLogCell:tableView] ;
             cell.textLabel.text = dic.allKeys.firstObject ;
             break ;
         }
-        case 5:{
+        case 4:{
             //更多功能
             cell = [self getNoneCell:tableView] ;
             cell.textLabel.text = dic.allKeys.firstObject ;
@@ -311,16 +274,13 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     } else if (section == 1) {
         view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"低资源模拟功能";
-    }else if (section == 2){
-        view = [self getHeaderFooterView:tableView] ;
-        view.textLabel.text = @"monkey功能" ;
-    }else if(section == 3){
+    }else if(section == 2){
         view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"私有包显示功能" ;
-    }else if(section == 4){
+    }else if(section == 3){
         view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"常用工具" ;
-    }else if (section == 5) {
+    }else if (section == 4) {
         view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"敬请期待";
     }

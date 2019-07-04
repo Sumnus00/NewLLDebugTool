@@ -21,6 +21,7 @@
 #import "LLLogHelperEventDefine.h"
 #import "LLDebugToolMacros.h"
 #import "LLRoute.h"
+#import "LLHomeWindowViewController.h"
 @implementation LLHomeWindow
 
 
@@ -59,9 +60,16 @@
     if (self.isHidden) {
         if ([[NSThread currentThread] isMainThread]) {
             // Set root
-            _tabVC = [self tabVC] ;
-            _tabVC.selectedIndex = index;
-            self.rootViewController = _tabVC;
+            //tabbar风格
+//            _tabVC = [self tabVC] ;
+//            _tabVC.selectedIndex = index;
+//            self.rootViewController = _tabVC;
+            
+            //表格风格
+            _navVC = [self nvaVC] ;
+            self.rootViewController = _navVC ;
+            
+            
             self.hidden = NO;
         } else {
             [self performSelectorOnMainThread:@selector(showWindow) withObject:nil waitUntilDone:YES];
@@ -72,7 +80,12 @@
 - (void)hideWindow {
     if (self.isHidden == NO) {
         if ([[NSThread currentThread] isMainThread]) {
-            _tabVC = nil ;
+            //tabbar风格
+//            _tabVC = nil ;
+            
+            //表格风格
+            _navVC = nil ;
+            
             self.rootViewController = nil ;
             self.hidden = YES;
         } else {
@@ -106,6 +119,17 @@
             [self showWindow:index] ;
         });
     }
+}
+
+-(UINavigationController *)nvaVC{
+    if(_navVC == nil){
+        LLHomeWindowViewController *vc = [[LLHomeWindowViewController alloc] initWithStyle:UITableViewStyleGrouped] ;
+        UINavigationController *nav = [[LLBaseNavigationController alloc] initWithRootViewController:vc] ;
+        nav.navigationBar.tintColor = LLCONFIG_TEXT_COLOR;
+        nav.navigationBar.barTintColor = LLCONFIG_BACKGROUND_COLOR;
+        _navVC = nav ;
+    }
+    return _navVC ;
 }
 
 #pragma mark - Lazy load
