@@ -50,7 +50,7 @@ NewLLDebugTool
 
 #### Objective - C
 
-> 1. 添加 `pod 'NewLLDebugTool' ,  '~> 1.3.2'` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' ,  '~> 1.3.2' ,:configurations => ['Debug']` 到你的Podfile里 。
+> 1. 添加 `pod 'NewLLDebugTool'` 到你的Podfile里。如果只想在Debug模式下使用，则添加`pod 'NewLLDebugTool' ,:configurations => ['Debug']` 到你的Podfile里 。
 > 2. 终端输入`pod install`来进行集成。搜索不到`NewLLDebugTool`或者搜不到最新版本时，可先运行`pod repo update`，再执行`pod install`。
 > 3. 在AppDelegate中添加头文件`#import "<NewLLDebugTool/LLDebug.h>"`。
 > 4. 在`"application:(UIApplication * )application didFinishLaunchingWithOptions:(NSDictionary * )launchOptions"`中添加`[[LLDebugTool sharedTool] startWorking]` 如下所示：
