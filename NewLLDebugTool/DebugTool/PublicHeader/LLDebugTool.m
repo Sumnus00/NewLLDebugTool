@@ -81,7 +81,7 @@ static LLDebugTool *_instance = nil;
         }
         if (available & LLConfigAvailableNetwork) {
             // Open network monitoring
-            [[LLNetworkHelper sharedHelper] setEnable:YES];
+            [[LLNetworkHelper sharedHelper] setEnable:NO];
         }
         if (available & LLConfigAvailableAppInfo) {
             // Open app monitoring

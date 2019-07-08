@@ -15,6 +15,7 @@
 #import "FindElementTree.h"
 #import "LLMonkeySettingVC.h"
 #import "LLMonkeySettingConfig.h"
+#import "LLNetworkHelper.h"
 //#ifdef ISLOCAL
 //#import "LLDebugToolDemo-Swift.h"
 //#else
@@ -60,7 +61,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
 }
 
 - (NSArray *)privateNetworkInfos {
-    return @[@{@"私有包显示开关" : @""}];
+    return @[@{@"网络显示开关" : @""}];
 }
 
 - (NSArray *)commonToolsInfos {
@@ -276,7 +277,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         view.textLabel.text = @"低资源模拟功能";
     }else if(section == 2){
         view = [self getHeaderFooterView:tableView] ;
-        view.textLabel.text = @"私有包显示功能" ;
+        view.textLabel.text = @"网络显示功能" ;
     }else if(section == 3){
         view = [self getHeaderFooterView:tableView] ;
         view.textLabel.text = @"常用工具" ;
@@ -321,6 +322,7 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
         }
     }else if(switchButton.tag == LLConfigSwitchTagPrivateNetwork){
         [[LLDebugTool sharedTool] savePrivateNetworkSwitch:isButtonOn];
+        [[LLNetworkHelper sharedHelper] setEnable:isButtonOn];
     }
 }
 
