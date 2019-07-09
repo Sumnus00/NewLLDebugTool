@@ -109,6 +109,11 @@ const double OHHTTPStubsDownloadSpeedWifi   =- 12000 / 8; // kbps -> KB/s
     return self;
 }
 
+
+-(instancetype)isOnlineMock:(BOOL)isOnlineMock{
+    _isOnlineMock = isOnlineMock ;
+    return self ;
+}
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Initializers
 

@@ -219,6 +219,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(instancetype)requestTime:(NSTimeInterval)requestTime responseTime:(NSTimeInterval)responseTime;
 
+/**
+ 
+ time:2019/7/9
+ 
+ author:haleli
+
+ */
+-(instancetype)isOnlineMock:(BOOL)isOnlineMock;
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Initializers

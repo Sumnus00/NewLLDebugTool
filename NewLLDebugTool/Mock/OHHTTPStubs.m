@@ -452,16 +452,19 @@ the default value is yes
                                    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
                                    int statusCode = (int)httpResponse.statusCode;
                                    NSDictionary *headers = httpResponse.allHeaderFields ;
-                                   OHHTTPStubsResponse *ohHTTPStubsResponse =  [OHHTTPStubsResponse responseWithData:data
-                                                                                                          statusCode:statusCode
-                                                                                                             headers:headers];
+                                   NSTimeInterval requestTime = responseStub.requestTime ;
+                                   NSTimeInterval responseTime = responseStub.responseTime ;
+                                   OHHTTPStubsResponse *ohHTTPStubsResponse =  [[OHHTTPStubsResponse responseWithData:data
+                                                                                                           statusCode:statusCode
+                                                                                                              headers:headers] requestTime:requestTime responseTime:responseTime];
+                                   
                                    [self handleRequest:request responseStub:ohHTTPStubsResponse client:client] ;
                                    self.stub.isMock = YES ;
                                }];
         
         
     }
-    if (responseStub.error == nil)
+    else if (responseStub.error == nil)
     {
         [self handleRequest:request responseStub:responseStub client:client] ;
     } else {

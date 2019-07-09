@@ -68,27 +68,47 @@
 }
 - (IBAction)installTextStub:(UISwitch *)sender {
     static id<OHHTTPStubsDescriptor> textStub = nil; // Note: no need to retain this value, it is retained by the OHHTTPStubs itself already
-        if (sender.on)
-        {
-            // Install
-            textStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-                // This stub will only configure stub requests for "*.txt" files
-                return [request.URL.pathExtension isEqualToString:@"txt"];
-            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-                // Stub txt files with this
-                return [[OHHTTPStubsResponse responseWithFileAtPath:OHPathForFile(@"stub.txt", self.class)
-                                                         statusCode:200
-                                                            headers:@{@"Content-Type":@"text/plain"}]
-                        requestTime:[self shouldUseDelay] ? 2.f: 0.f
-                        responseTime:OHHTTPStubsDownloadSpeedWifi];
-            }];
-            textStub.name = @"Text stub";
-        }
-        else
-        {
-            // Uninstall
-            [OHHTTPStubs removeStub:textStub];
-        }
+//        if (sender.on)
+//        {
+//            // Install
+//            textStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+//                // This stub will only configure stub requests for "*.txt" files
+//                return [request.URL.pathExtension isEqualToString:@"txt"];
+//            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+//                // Stub txt files with this
+//                return [[OHHTTPStubsResponse responseWithFileAtPath:OHPathForFile(@"stub.txt", self.class)
+//                                                         statusCode:200
+//                                                            headers:@{@"Content-Type":@"text/plain"}]
+//                        requestTime:[self shouldUseDelay] ? 2.f: 0.f
+//                        responseTime:OHHTTPStubsDownloadSpeedWifi];
+//            }];
+//            textStub.name = @"Text stub";
+//        }
+//        else
+//        {
+//            // Uninstall
+//            [OHHTTPStubs removeStub:textStub];
+//        }
+    
+    if (sender.on)
+    {
+        // Install
+        textStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+            // This stub will only configure stub requests for "*.txt" files
+            return YES;
+        } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+            // Stub txt files with this
+            OHHTTPStubsResponse *ohHTTPStubsResponse = [[[[OHHTTPStubsResponse alloc] init] requestTime:[self shouldUseDelay] ? 2.f: 0.f
+                                                                                           responseTime:OHHTTPStubsDownloadSpeedWifi] isOnlineMock:true] ;
+            return ohHTTPStubsResponse ;
+        }];
+        textStub.name = @"Text stub";
+    }
+    else
+    {
+        // Uninstall
+        [OHHTTPStubs removeStub:textStub];
+    }
 }
 
 - (IBAction)downloadImage:(UIButton *)sender {
