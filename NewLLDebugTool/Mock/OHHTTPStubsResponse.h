@@ -97,6 +97,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong, nullable) NSError* error;
 
+/**
+ 
+ time:2019/7/9
+ 
+ author:haleli
+ 
+ receive the online data and mock
+ 
+ the default value is no
+ */
+@property(nonatomic,assign) BOOL isOnlineMock ;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Commodity Constructors

@@ -54,6 +54,19 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
 @interface OHHTTPStubsDescriptor : NSObject <OHHTTPStubsDescriptor>
 @property(atomic, copy) OHHTTPStubsTestBlock testBlock;
 @property(atomic, copy) OHHTTPStubsResponseBlock responseBlock;
+
+/**
+ 
+time:2019/7/9
+ 
+author:haleli
+ 
+control the OHHTTPStubsDescriptor isMock
+ 
+the default value is yes
+ */
+@property(atomic, assign) BOOL isMock ;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,6 +82,7 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
     OHHTTPStubsDescriptor* stub = [OHHTTPStubsDescriptor new];
     stub.testBlock = testBlock;
     stub.responseBlock = responseBlock;
+    stub.isMock = true ;
     return stub;
 }
 
@@ -343,7 +357,13 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
-    BOOL found = ([OHHTTPStubs.sharedInstance firstStubPassingTestForRequest:request] != nil);
+    OHHTTPStubsDescriptor* stub = [OHHTTPStubs.sharedInstance firstStubPassingTestForRequest:request];
+    BOOL found = (stub != nil);
+    if(found){
+        if(!stub.isMock){
+            return false ;
+        }
+    }
     if (!found && OHHTTPStubs.sharedInstance.onStubMissingBlock) {
         OHHTTPStubs.sharedInstance.onStubMissingBlock(request);
     }
@@ -418,98 +438,32 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
         OHHTTPStubs.sharedInstance.onStubActivationBlock(request, self.stub, responseStub);
     }
 
+    if(responseStub.isOnlineMock)
+    {
+        
+        //这次请求不进行mock
+        self.stub.isMock = NO ;
+        //请求数据
+        NSOperationQueue *queue = [[NSOperationQueue alloc]init];
+        //发送异步请求
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:queue
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                                   NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                                   int statusCode = (int)httpResponse.statusCode;
+                                   NSDictionary *headers = httpResponse.allHeaderFields ;
+                                   OHHTTPStubsResponse *ohHTTPStubsResponse =  [OHHTTPStubsResponse responseWithData:data
+                                                                                                          statusCode:statusCode
+                                                                                                             headers:headers];
+                                   [self handleRequest:request responseStub:ohHTTPStubsResponse client:client] ;
+                                   self.stub.isMock = YES ;
+                               }];
+        
+        
+    }
     if (responseStub.error == nil)
     {
-        NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] initWithURL:request.URL
-                                                                     statusCode:responseStub.statusCode
-                                                                    HTTPVersion:@"HTTP/1.1"
-                                                                   headerFields:responseStub.httpHeaders];
-
-        // Cookies handling
-        if (request.HTTPShouldHandleCookies && request.URL)
-        {
-            NSArray* cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:responseStub.httpHeaders forURL:request.URL];
-            if (cookies)
-            {
-                [NSHTTPCookieStorage.sharedHTTPCookieStorage setCookies:cookies forURL:request.URL mainDocumentURL:request.mainDocumentURL];
-            }
-        }
-
-
-        NSString* redirectLocation = (responseStub.httpHeaders)[@"Location"];
-        NSURL* redirectLocationURL;
-        if (redirectLocation)
-        {
-            redirectLocationURL = [NSURL URLWithString:redirectLocation];
-        }
-        else
-        {
-            redirectLocationURL = nil;
-        }
-        [self executeOnClientRunLoopAfterDelay:responseStub.requestTime block:^{
-            if (!self.stopped)
-            {
-                // Notify if a redirection occurred
-                if (((responseStub.statusCode > 300) && (responseStub.statusCode < 400)) && redirectLocationURL)
-                {
-                    NSURLRequest *redirectRequest;
-                    NSMutableURLRequest *mReq;
-
-                    switch (responseStub.statusCode)
-                    {
-                        case 301:
-                        case 302:
-                        case 307:
-                        case 308: {
-                            //Preserve the original request method and body, and set the new location URL
-                            mReq = [self.request mutableCopy];
-                            [mReq setURL:redirectLocationURL];
-                            
-                            mReq = [self clearAuthHeadersForRequest:mReq];
-                            
-                            redirectRequest = (NSURLRequest*)[mReq copy];
-                            break;
-                        }
-                        default:
-                            redirectRequest = [NSURLRequest requestWithURL:redirectLocationURL];
-                            break;
-                    }
-
-                    [client URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:urlResponse];
-                    if (OHHTTPStubs.sharedInstance.onStubRedirectBlock)
-                    {
-                        OHHTTPStubs.sharedInstance.onStubRedirectBlock(request, redirectRequest, self.stub, responseStub);
-                    }
-                }
-
-                // Send the response (even for redirections)
-                [client URLProtocol:self didReceiveResponse:urlResponse cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-                if(responseStub.inputStream.streamStatus == NSStreamStatusNotOpen)
-                {
-                    [responseStub.inputStream open];
-                }
-                [self streamDataForClient:client
-                         withStubResponse:responseStub
-                               completion:^(NSError * error)
-                 {
-                     [responseStub.inputStream close];
-                     NSError *blockError = nil;
-                     if (error==nil)
-                     {
-                         [client URLProtocolDidFinishLoading:self];
-                     }
-                     else
-                     {
-                         [client URLProtocol:self didFailWithError:responseStub.error];
-                         blockError = responseStub.error;
-                     }
-                     if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
-                     {
-                         OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, responseStub, blockError);
-                     }
-                 }];
-            }
-        }];
+        [self handleRequest:request responseStub:responseStub client:client] ;
     } else {
         // Send the canned error
         [self executeOnClientRunLoopAfterDelay:responseStub.responseTime block:^{
@@ -523,6 +477,100 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
             }
         }];
     }
+}
+
+
+-(void)handleRequest:(NSURLRequest*)request responseStub:(OHHTTPStubsResponse*)responseStub client:(id<NSURLProtocolClient>)client{
+    NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] initWithURL:request.URL
+                                                                 statusCode:responseStub.statusCode
+                                                                HTTPVersion:@"HTTP/1.1"
+                                                               headerFields:responseStub.httpHeaders];
+    
+    // Cookies handling
+    if (request.HTTPShouldHandleCookies && request.URL)
+    {
+        NSArray* cookies = [NSHTTPCookie cookiesWithResponseHeaderFields:responseStub.httpHeaders forURL:request.URL];
+        if (cookies)
+        {
+            [NSHTTPCookieStorage.sharedHTTPCookieStorage setCookies:cookies forURL:request.URL mainDocumentURL:request.mainDocumentURL];
+        }
+    }
+    
+    
+    NSString* redirectLocation = (responseStub.httpHeaders)[@"Location"];
+    NSURL* redirectLocationURL;
+    if (redirectLocation)
+    {
+        redirectLocationURL = [NSURL URLWithString:redirectLocation];
+    }
+    else
+    {
+        redirectLocationURL = nil;
+    }
+    [self executeOnClientRunLoopAfterDelay:responseStub.requestTime block:^{
+        if (!self.stopped)
+        {
+            // Notify if a redirection occurred
+            if (((responseStub.statusCode > 300) && (responseStub.statusCode < 400)) && redirectLocationURL)
+            {
+                NSURLRequest *redirectRequest;
+                NSMutableURLRequest *mReq;
+                
+                switch (responseStub.statusCode)
+                {
+                    case 301:
+                    case 302:
+                    case 307:
+                    case 308: {
+                        //Preserve the original request method and body, and set the new location URL
+                        mReq = [self.request mutableCopy];
+                        [mReq setURL:redirectLocationURL];
+                        
+                        mReq = [self clearAuthHeadersForRequest:mReq];
+                        
+                        redirectRequest = (NSURLRequest*)[mReq copy];
+                        break;
+                    }
+                    default:
+                        redirectRequest = [NSURLRequest requestWithURL:redirectLocationURL];
+                        break;
+                }
+                
+                [client URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:urlResponse];
+                if (OHHTTPStubs.sharedInstance.onStubRedirectBlock)
+                {
+                    OHHTTPStubs.sharedInstance.onStubRedirectBlock(request, redirectRequest, self.stub, responseStub);
+                }
+            }
+            
+            // Send the response (even for redirections)
+            [client URLProtocol:self didReceiveResponse:urlResponse cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+            if(responseStub.inputStream.streamStatus == NSStreamStatusNotOpen)
+            {
+                [responseStub.inputStream open];
+            }
+            [self streamDataForClient:client
+                     withStubResponse:responseStub
+                           completion:^(NSError * error)
+             {
+                 [responseStub.inputStream close];
+                 NSError *blockError = nil;
+                 if (error==nil)
+                 {
+                     [client URLProtocolDidFinishLoading:self];
+                 }
+                 else
+                 {
+                     [client URLProtocol:self didFailWithError:responseStub.error];
+                     blockError = responseStub.error;
+                 }
+                 if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
+                 {
+                     OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, responseStub, blockError);
+                 }
+             }];
+        }
+    }];
 }
 
 - (void)stopLoading

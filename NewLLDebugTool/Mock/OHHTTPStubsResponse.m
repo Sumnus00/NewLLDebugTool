@@ -129,6 +129,7 @@ const double OHHTTPStubsDownloadSpeedWifi   =- 12000 / 8; // kbps -> KB/s
         _inputStream = inputStream;
         _dataSize = dataSize;
         _statusCode = statusCode;
+        _isOnlineMock = false ;
         NSMutableDictionary * headers = [NSMutableDictionary dictionaryWithDictionary:httpHeaders];
         static NSString *const ContentLengthHeader = @"Content-Length";
         if (!headers[ContentLengthHeader])
