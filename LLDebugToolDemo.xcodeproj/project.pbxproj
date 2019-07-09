@@ -26,6 +26,19 @@
 		18EE5D7222BDE74700CDD712 /* LLMonkeyDateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7122BDE74700CDD712 /* LLMonkeyDateVC.m */; };
 		18EE5D7522BE177700CDD712 /* LLMonkeyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */; };
 		18EE5D7822CDB1CA00CDD712 /* LLHomeWindowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5D7722CDB1CA00CDD712 /* LLHomeWindowViewController.m */; };
+		18EE5DC522D443B700CDD712 /* MockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DC322D443B600CDD712 /* MockViewController.m */; };
+		18EE5DC622D443B700CDD712 /* MockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EE5DC422D443B700CDD712 /* MockViewController.xib */; };
+		18EE5DCA22D48A7A00CDD712 /* stub.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18EE5DC822D48A7900CDD712 /* stub.txt */; };
+		18EE5DCB22D48A7A00CDD712 /* stub.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18EE5DC922D48A7900CDD712 /* stub.jpg */; };
+		18EE5DE322D492EE00CDD712 /* OHHTTPStubsResponse+HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DCE22D492ED00CDD712 /* OHHTTPStubsResponse+HTTPMessage.m */; };
+		18EE5DE422D492EE00CDD712 /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DCF22D492ED00CDD712 /* OHHTTPStubsResponse.m */; };
+		18EE5DE522D492EE00CDD712 /* OHHTTPStubs+Mocktail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DD322D492ED00CDD712 /* OHHTTPStubs+Mocktail.m */; };
+		18EE5DE622D492EE00CDD712 /* OHPathHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DD622D492ED00CDD712 /* OHPathHelpers.m */; };
+		18EE5DE722D492EE00CDD712 /* OHHTTPStubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DD822D492ED00CDD712 /* OHHTTPStubs.m */; };
+		18EE5DE822D492EE00CDD712 /* OHHTTPStubsResponse+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DDA22D492EE00CDD712 /* OHHTTPStubsResponse+JSON.m */; };
+		18EE5DE922D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DDD22D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.m */; };
+		18EE5DEA22D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DDE22D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.m */; };
+		18EE5DEB22D492EE00CDD712 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE5DE022D492EE00CDD712 /* OHHTTPStubs+NSURLSessionConfiguration.m */; };
 		208678B3E17E2AAB3B0E945F /* libPods-LLDebugToolDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533ECC0E7675B1A81455CB56 /* libPods-LLDebugToolDemo.a */; };
 		256DF576EB32FE0F9D9E099F /* libPods-LLDebugToolDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */; };
 		3629E3922136830A00226C79 /* BaseTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3629E3862136830A00226C79 /* BaseTestViewController.m */; };
@@ -261,6 +274,29 @@
 		18EE5D7422BE177700CDD712 /* LLMonkeyListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMonkeyListVC.m; sourceTree = "<group>"; };
 		18EE5D7622CDB1CA00CDD712 /* LLHomeWindowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLHomeWindowViewController.h; sourceTree = "<group>"; };
 		18EE5D7722CDB1CA00CDD712 /* LLHomeWindowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLHomeWindowViewController.m; sourceTree = "<group>"; };
+		18EE5DC222D443B600CDD712 /* MockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockViewController.h; sourceTree = "<group>"; };
+		18EE5DC322D443B600CDD712 /* MockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockViewController.m; sourceTree = "<group>"; };
+		18EE5DC422D443B700CDD712 /* MockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MockViewController.xib; sourceTree = "<group>"; };
+		18EE5DC822D48A7900CDD712 /* stub.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stub.txt; sourceTree = "<group>"; };
+		18EE5DC922D48A7900CDD712 /* stub.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stub.jpg; sourceTree = "<group>"; };
+		18EE5DCD22D492ED00CDD712 /* OHHTTPStubsResponse+HTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubsResponse+HTTPMessage.h"; sourceTree = "<group>"; };
+		18EE5DCE22D492ED00CDD712 /* OHHTTPStubsResponse+HTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubsResponse+HTTPMessage.m"; sourceTree = "<group>"; };
+		18EE5DCF22D492ED00CDD712 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHHTTPStubsResponse.m; sourceTree = "<group>"; };
+		18EE5DD022D492ED00CDD712 /* OHHTTPStubs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHHTTPStubs.h; sourceTree = "<group>"; };
+		18EE5DD222D492ED00CDD712 /* OHHTTPStubs+Mocktail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs+Mocktail.h"; sourceTree = "<group>"; };
+		18EE5DD322D492ED00CDD712 /* OHHTTPStubs+Mocktail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs+Mocktail.m"; sourceTree = "<group>"; };
+		18EE5DD422D492ED00CDD712 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
+		18EE5DD622D492ED00CDD712 /* OHPathHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHPathHelpers.m; sourceTree = "<group>"; };
+		18EE5DD722D492ED00CDD712 /* OHPathHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHPathHelpers.h; sourceTree = "<group>"; };
+		18EE5DD822D492ED00CDD712 /* OHHTTPStubs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHHTTPStubs.m; sourceTree = "<group>"; };
+		18EE5DDA22D492EE00CDD712 /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
+		18EE5DDB22D492EE00CDD712 /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
+		18EE5DDD22D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HTTPBodyTesting.m"; sourceTree = "<group>"; };
+		18EE5DDE22D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OHHTTPStubsMethodSwizzling.m; sourceTree = "<group>"; };
+		18EE5DDF22D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HTTPBodyTesting.h"; sourceTree = "<group>"; };
+		18EE5DE022D492EE00CDD712 /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
+		18EE5DE122D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHHTTPStubsMethodSwizzling.h; sourceTree = "<group>"; };
+		18EE5DE222D492EE00CDD712 /* OHHTTPStubsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OHHTTPStubsResponse.h; sourceTree = "<group>"; };
 		250A2DF7939C9F66F595658E /* libPods-LLDebugToolDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LLDebugToolDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34ACB65EBB30B1CA47DFC39F /* Pods-LLDebugToolDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLDebugToolDemoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLDebugToolDemoUITests/Pods-LLDebugToolDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3629E3862136830A00226C79 /* BaseTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTestViewController.m; sourceTree = "<group>"; };
@@ -686,6 +722,93 @@
 				18EE5D4A22B7468700CDD712 /* UIColor+LL_Utils.m */,
 			);
 			path = UIColor;
+			sourceTree = "<group>";
+		};
+		18EE5D7922D343EC00CDD712 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DD522D492ED00CDD712 /* OHPathHelpers */,
+				18EE5DCC22D492ED00CDD712 /* HTTPMessage */,
+				18EE5DD922D492ED00CDD712 /* JSON */,
+				18EE5DD122D492ED00CDD712 /* Mocktail */,
+				18EE5DDC22D492EE00CDD712 /* NSURLSession */,
+				18EE5DD022D492ED00CDD712 /* OHHTTPStubs.h */,
+				18EE5DD822D492ED00CDD712 /* OHHTTPStubs.m */,
+				18EE5DD422D492ED00CDD712 /* Compatibility.h */,
+				18EE5DE222D492EE00CDD712 /* OHHTTPStubsResponse.h */,
+				18EE5DCF22D492ED00CDD712 /* OHHTTPStubsResponse.m */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		18EE5D9A22D3470600CDD712 /* DemoMock */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DC722D48A7900CDD712 /* Stubs */,
+				18EE5DC222D443B600CDD712 /* MockViewController.h */,
+				18EE5DC322D443B600CDD712 /* MockViewController.m */,
+				18EE5DC422D443B700CDD712 /* MockViewController.xib */,
+			);
+			path = DemoMock;
+			sourceTree = "<group>";
+		};
+		18EE5DC722D48A7900CDD712 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DC822D48A7900CDD712 /* stub.txt */,
+				18EE5DC922D48A7900CDD712 /* stub.jpg */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		18EE5DCC22D492ED00CDD712 /* HTTPMessage */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DCD22D492ED00CDD712 /* OHHTTPStubsResponse+HTTPMessage.h */,
+				18EE5DCE22D492ED00CDD712 /* OHHTTPStubsResponse+HTTPMessage.m */,
+			);
+			path = HTTPMessage;
+			sourceTree = "<group>";
+		};
+		18EE5DD122D492ED00CDD712 /* Mocktail */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DD222D492ED00CDD712 /* OHHTTPStubs+Mocktail.h */,
+				18EE5DD322D492ED00CDD712 /* OHHTTPStubs+Mocktail.m */,
+			);
+			name = Mocktail;
+			path = "../../../Downloads/OHHTTPStubs-master/OHHTTPStubs/Sources/Mocktail";
+			sourceTree = "<group>";
+		};
+		18EE5DD522D492ED00CDD712 /* OHPathHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DD622D492ED00CDD712 /* OHPathHelpers.m */,
+				18EE5DD722D492ED00CDD712 /* OHPathHelpers.h */,
+			);
+			path = OHPathHelpers;
+			sourceTree = "<group>";
+		};
+		18EE5DD922D492ED00CDD712 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DDA22D492EE00CDD712 /* OHHTTPStubsResponse+JSON.m */,
+				18EE5DDB22D492EE00CDD712 /* OHHTTPStubsResponse+JSON.h */,
+			);
+			name = JSON;
+			path = "../../../Downloads/OHHTTPStubs-master/OHHTTPStubs/Sources/JSON";
+			sourceTree = "<group>";
+		};
+		18EE5DDC22D492EE00CDD712 /* NSURLSession */ = {
+			isa = PBXGroup;
+			children = (
+				18EE5DDD22D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.m */,
+				18EE5DDE22D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.m */,
+				18EE5DDF22D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.h */,
+				18EE5DE022D492EE00CDD712 /* OHHTTPStubs+NSURLSessionConfiguration.m */,
+				18EE5DE122D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.h */,
+			);
+			path = NSURLSession;
 			sourceTree = "<group>";
 		};
 		3629E3852136830A00226C79 /* DemoViewControllers */ = {
@@ -1123,6 +1246,7 @@
 		C43BA809205AB095006307BE /* LLDebugToolDemo */ = {
 			isa = PBXGroup;
 			children = (
+				18EE5D9A22D3470600CDD712 /* DemoMock */,
 				893799162268249C00FDF142 /* DemoWebView */,
 				8925679D2266047C00E89146 /* DemoCollectionView */,
 				89256790226577B000E89146 /* DemoLogin */,
@@ -1148,6 +1272,7 @@
 		C44F40542152AA7000153F46 /* NewLLDebugTool */ = {
 			isa = PBXGroup;
 			children = (
+				18EE5D7922D343EC00CDD712 /* Mock */,
 				8993DF2822CCA8AB007E40AD /* General */,
 				18EE5D3922B48C0100CDD712 /* coverage */,
 				89855575228ED33D005439D8 /* algorithms */,
@@ -1792,7 +1917,9 @@
 				C44F41492152AA7000153F46 /* LLNetworkCell.xib in Resources */,
 				C44F41592152AA7000153F46 /* LLSandboxCell.xib in Resources */,
 				369D09372153853A001C9D4B /* LLLogCell.xib in Resources */,
+				18EE5DCB22D48A7A00CDD712 /* stub.jpg in Resources */,
 				C44F412C2152AA7000153F46 /* LLDebugTool.bundle in Resources */,
+				18EE5DC622D443B700CDD712 /* MockViewController.xib in Resources */,
 				C44F41382152AA7000153F46 /* LLFilterTextFieldCell.xib in Resources */,
 				89CCD9D822817345001848E5 /* monkey_driver.js in Resources */,
 				C43BA817205AB095006307BE /* LaunchScreen.storyboard in Resources */,
@@ -1800,6 +1927,7 @@
 				C43BA814205AB095006307BE /* Assets.xcassets in Resources */,
 				367E27A120A1A8480032EF0D /* Localizable.strings in Resources */,
 				C43BA812205AB095006307BE /* Main.storyboard in Resources */,
+				18EE5DCA22D48A7A00CDD712 /* stub.txt in Resources */,
 				C44F414F2152AA7000153F46 /* LLCrashContentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1909,6 +2037,7 @@
 				89C022E0225CBAC400686898 /* UIScrollView-KIFAdditions.m in Sources */,
 				18D3AF2D22AB98FA00B5A263 /* UICollectionViewCellActions.m in Sources */,
 				C44F41562152AA7000153F46 /* LLSandboxModel.m in Sources */,
+				18EE5DEA22D492EE00CDD712 /* OHHTTPStubsMethodSwizzling.m in Sources */,
 				899AB6462201A6A500D2FC57 /* PrivateNetwork.m in Sources */,
 				899AB63A22019F6D00D2FC57 /* NSMutableArray+Swizzling.m in Sources */,
 				C44F41212152AA7000153F46 /* LLScreenshotBaseOperation.m in Sources */,
@@ -1949,6 +2078,7 @@
 				C44F41622152AA7000153F46 /* UIDevice+LL_Swizzling.m in Sources */,
 				C44F415A2152AA7000153F46 /* YWFilePreviewController.m in Sources */,
 				897378DB2293DAD800ECF1EF /* QuickAlgorithm.m in Sources */,
+				18EE5DE522D492EE00CDD712 /* OHHTTPStubs+Mocktail.m in Sources */,
 				C44F41542152AA7000153F46 /* LLCrashContentVC.m in Sources */,
 				8980765822700E3700B28780 /* UIApplication+Monkey.m in Sources */,
 				3629E3942136830A00226C79 /* TestWindowStyleViewController.m in Sources */,
@@ -1978,6 +2108,7 @@
 				8915EB3322452786001B7660 /* UITabBarController+AutoRotate.m in Sources */,
 				C44F41522152AA7000153F46 /* LLCrashCell.m in Sources */,
 				89C022F1225CC00300686898 /* UIApplication+FakeTouchPrivate.m in Sources */,
+				18EE5DE922D492EE00CDD712 /* NSURLRequest+HTTPBodyTesting.m in Sources */,
 				89C022D5225CBAC400686898 /* KIFUITestActor-ConditionalTests.m in Sources */,
 				892567992265B87C00E89146 /* UIButtonActions.m in Sources */,
 				18EE5D5122B763F100CDD712 /* CoverageOscillogramViewController.m in Sources */,
@@ -1994,8 +2125,10 @@
 				369D093B2153855D001C9D4B /* LLLogFilterView.m in Sources */,
 				18EE5D5422B7679B00CDD712 /* LLOscillogramWindowManager.m in Sources */,
 				C44F41252152AA7000153F46 /* LLRoute.m in Sources */,
+				18EE5DE622D492EE00CDD712 /* OHPathHelpers.m in Sources */,
 				C44F413A2152AA7000153F46 /* LLFilterEventView.m in Sources */,
 				8937991C226830FF00FDF142 /* UIWebViewVC.m in Sources */,
+				18EE5DC522D443B700CDD712 /* MockViewController.m in Sources */,
 				18EE5D4E22B7604B00CDD712 /* CoverageOscillogramWindow.m in Sources */,
 				89C022EB225CBAC400686898 /* CALayer-KIFAdditions.m in Sources */,
 				18EE5D5A22BA235200CDD712 /* LLMonkeyAlgorithmVC.m in Sources */,
@@ -2020,7 +2153,9 @@
 				C44F411E2152AA7000153F46 /* LLScreenshotView.m in Sources */,
 				18EE5D6C22BD303900CDD712 /* LLMonkeySettingConfig.m in Sources */,
 				8925670D225F22FD00E89146 /* UISwitchActions.m in Sources */,
+				18EE5DE422D492EE00CDD712 /* OHHTTPStubsResponse.m in Sources */,
 				89C022F8225CC25A00686898 /* UIView+Tree.m in Sources */,
+				18EE5DE322D492EE00CDD712 /* OHHTTPStubsResponse+HTTPMessage.m in Sources */,
 				C44F41332152AA7000153F46 /* LLFilterTextFieldModel.m in Sources */,
 				18EE5D4722B741E200CDD712 /* LLOscillogramViewController.m in Sources */,
 				C44F41432152AA7000153F46 /* LLNetworkHelper.m in Sources */,
@@ -2030,6 +2165,7 @@
 				C44F41652152AA7000153F46 /* LLDebugTool.m in Sources */,
 				18EE5D7522BE177700CDD712 /* LLMonkeyListVC.m in Sources */,
 				369D093E2153AE14001C9D4B /* NSURLSession+LL_Swizzling.m in Sources */,
+				18EE5DE822D492EE00CDD712 /* OHHTTPStubsResponse+JSON.m in Sources */,
 				C44F41302152AA7000153F46 /* LLNoneCopyTextField.m in Sources */,
 				C44F41222152AA7000153F46 /* LLScreenshotSelectorModel.m in Sources */,
 				18EE5D5D22BB84D500CDD712 /* ViewBoundConfig.m in Sources */,
@@ -2054,6 +2190,7 @@
 				369D09332153853A001C9D4B /* LLLogModel.m in Sources */,
 				C44F41502152AA7000153F46 /* LLCrashContentCell.m in Sources */,
 				8980765622700E3700B28780 /* Gesture.m in Sources */,
+				18EE5DE722D492EE00CDD712 /* OHHTTPStubs.m in Sources */,
 				89C022E1225CBAC400686898 /* UIView-Debugging.m in Sources */,
 				18EE5D3C22B48C7700CDD712 /* UIView+ViewCoverage.m in Sources */,
 				C44F411B2152AA7000153F46 /* LLStorageManager.m in Sources */,
@@ -2063,6 +2200,7 @@
 				C44F41392152AA7000153F46 /* LLFilterLabelCell.m in Sources */,
 				C44F41322152AA7000153F46 /* LLFilterFilePickerView.m in Sources */,
 				89C022E6225CBAC400686898 /* NSFileManager-KIFAdditions.m in Sources */,
+				18EE5DEB22D492EE00CDD712 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */,
 				C44F411C2152AA7000153F46 /* LLStorageModel.m in Sources */,
 				897378E12293F42F00ECF1EF /* Element.m in Sources */,
 				3629E3972136830A00226C79 /* TestColorStyleViewController.m in Sources */,
@@ -2320,7 +2458,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48U7H75HY6;
+				DEVELOPMENT_TEAM = PU839N5Z6P;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2331,7 +2469,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -2351,7 +2489,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48U7H75HY6;
+				DEVELOPMENT_TEAM = PU839N5Z6P;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2362,7 +2500,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo1;
+				PRODUCT_BUNDLE_IDENTIFIER = myCompany.tencent.LLDebugToolDemo2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

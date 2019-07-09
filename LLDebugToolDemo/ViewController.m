@@ -27,6 +27,7 @@
 #import "UIView-Debugging.h"
 #import "WKWebViewVC.h"
 #import "UIWebViewVC.h"
+#import "MockViewController.h"
 
 static NSString *const kCellID = @"cellID";
 
@@ -128,7 +129,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 12;
+    return 13;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -168,7 +169,9 @@ static NSString *const kCellID = @"cellID";
     if(section == 11){
         return 2 ;
     }
-    
+    if(section == 12){
+        return 1 ;
+    }
     return 0;
 }
 
@@ -262,6 +265,8 @@ static NSString *const kCellID = @"cellID";
         }else if(indexPath.row == 1){
             cell.textLabel.text = NSLocalizedString(@"test.block2", nil) ;
         }
+    }else if(indexPath.section == 12){
+        cell.textLabel.text = NSLocalizedString(@"test.mock",nil) ;
     }
     return cell;
 }
@@ -346,6 +351,9 @@ static TestLogViewController *extracted() {
                 NSLog(@"upload log") ;
             }
         }
+    }else if(indexPath.section ==12){
+        MockViewController *vc = [[MockViewController alloc] initWithNibName:@"MockViewController" bundle:[NSBundle mainBundle]];
+        [self.navigationController pushViewController:vc animated:YES] ;
     }
     
     [self.tableView reloadData];
@@ -376,6 +384,8 @@ static TestLogViewController *extracted() {
         return @"webview" ;
     } else if(section ==11){
         return @"block" ;
+    }else if(section == 12){
+        return @"mock" ;
     }
     return nil;
 }

@@ -47,6 +47,7 @@
 "test.share" = "展示UIActivityViewController用法";
 "test.login" = "登陆界面" ;
 "test.tree" = "控件树" ;
+"test.mock" = "展示Mock用法" ;
 "test.color.style" = "展示ColorStyle配置";
 "test.window.style" = "展示WindowStyle配置";
 
