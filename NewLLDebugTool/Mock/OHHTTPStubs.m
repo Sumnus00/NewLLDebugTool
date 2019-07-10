@@ -123,7 +123,7 @@ the default value is yes
 {
     if (self == [OHHTTPStubs class])
     {
-        [self _setEnable:YES];
+        [self _setEnable:NO];
     }
 }
 - (instancetype)init
@@ -132,7 +132,7 @@ the default value is yes
     if (self)
     {
         _stubDescriptors = [NSMutableArray array];
-        _enabledState = YES; // assume initialize has already been run
+        _enabledState = NO; // assume initialize has not already been run
     }
     return self;
 }
@@ -449,16 +449,28 @@ the default value is yes
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:queue
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-                                   NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-                                   int statusCode = (int)httpResponse.statusCode;
-                                   NSDictionary *headers = httpResponse.allHeaderFields ;
-                                   NSTimeInterval requestTime = responseStub.requestTime ;
-                                   NSTimeInterval responseTime = responseStub.responseTime ;
-                                   OHHTTPStubsResponse *ohHTTPStubsResponse =  [[OHHTTPStubsResponse responseWithData:data
-                                                                                                           statusCode:statusCode
-                                                                                                              headers:headers] requestTime:requestTime responseTime:responseTime];
                                    
-                                   [self handleRequest:request responseStub:ohHTTPStubsResponse client:client] ;
+                                   if(error){
+                                       NSLog(@"Httperror:%@%@", error.localizedDescription,@(error.code));
+                                       [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSUserCancelledError userInfo:nil] request:request responseStub:responseStub client:client] ;
+                                   }else{
+                                       //NSData convert to NSString
+                                       NSString* body = [self convertJSONStringFromData:data];
+                                       NSString *mock_body = [self mockHTTP:body] ;
+                                       
+                                       NSData *mock_data = [mock_body dataUsingEncoding:NSUTF8StringEncoding] ;
+                                       
+                                       NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                                       int statusCode = (int)httpResponse.statusCode;
+                                       NSDictionary *headers = httpResponse.allHeaderFields ;
+                                       NSTimeInterval requestTime = responseStub.requestTime ;
+                                       NSTimeInterval responseTime = responseStub.responseTime ;
+                                       OHHTTPStubsResponse *ohHTTPStubsResponse =  [[OHHTTPStubsResponse responseWithData:mock_data
+                                                                                                               statusCode:statusCode
+                                                                                                                  headers:headers] requestTime:requestTime responseTime:responseTime];
+                                       
+                                       [self handleRequest:request responseStub:ohHTTPStubsResponse client:client] ;
+                                   }
                                    self.stub.isMock = YES ;
                                }];
         
@@ -468,20 +480,240 @@ the default value is yes
     {
         [self handleRequest:request responseStub:responseStub client:client] ;
     } else {
-        // Send the canned error
-        [self executeOnClientRunLoopAfterDelay:responseStub.responseTime block:^{
-            if (!self.stopped)
-            {
-                [client URLProtocol:self didFailWithError:responseStub.error];
-                if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
-                {
-                    OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, responseStub, responseStub.error);
-                }
-            }
-        }];
+        
+        [self handleError:responseStub.error request:request responseStub:responseStub client:client] ;
     }
 }
 
+- (NSString *)mockHTTP:(NSString *)httpBody{
+    NSString *result = nil ;
+    if (httpBody.length == 0)
+    {
+        return result;
+    }
+    
+    NSString* mock_httpBody = [[NSString alloc] initWithString:httpBody] ;
+    id jsonObject = [self arrOrDictWithJsonString:httpBody] ;
+    if([jsonObject isKindOfClass:[NSDictionary class]]){
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self dictWithJsonString:httpBody]] ;
+        if ([[dict allKeys] count] > 0){
+            [self mockDict:dict] ;
+            mock_httpBody = [self convertJSONStringFromDictionary:dict] ;
+        }else{
+            mock_httpBody = @"" ;
+        }
+    }
+    if([jsonObject isKindOfClass:[NSArray class]]){
+        NSMutableArray *arr = [[self arrayWithJsonString:httpBody] mutableCopy] ;
+        if ([arr count] > 0){
+            [self mockArr:arr] ;
+            mock_httpBody = [self convertJSONStringFromArray:arr] ;
+        }else{
+            mock_httpBody = @"" ;
+        }
+    }
+    
+    NSLog(@"haleli >>> httpBody:%@",httpBody) ;
+    NSLog(@"haleli >>> mock_httpBody:%@",mock_httpBody) ;
+    return mock_httpBody ;
+    
+}
+
+-(id) mockStrategy:(id)value{
+    //blank:置空
+    //null:置 null
+    NSArray *strategy = @[@"blank",@"null"];
+    int random = arc4random() % [strategy count] ;
+    NSLog(@"haleli >>> mock strategy : %@",[strategy objectAtIndex:random]) ;
+    if(random==0){
+        return @"" ;
+    }else{
+        return [NSNull  null] ;
+    }
+}
+
+-(void) mockDict:(NSMutableDictionary *)dict{
+    //dict有数据
+    if ([[dict allKeys] count] > 0){
+        //产生一个随机数
+        int random = arc4random()% [[dict allKeys] count] ;
+        //获取key
+        id key = [[dict allKeys] objectAtIndex:random] ;
+        NSLog(@"haleli >>> random mock dict key : %@",key) ;
+        
+        //获取value
+        id value = [dict objectForKey:key] ;
+        
+        if([NSJSONSerialization isValidJSONObject:value]){
+            //如果是字典对象，继续递归
+            if([value isKindOfClass:[NSDictionary class]]){
+                NSMutableDictionary *sub_dict = [NSMutableDictionary dictionaryWithDictionary:value] ;
+                [self mockDict:sub_dict] ;
+                [dict setObject:sub_dict forKey:key] ;
+            }
+            //如果是数组对象，继续递归
+            if([value isKindOfClass:[NSArray class]]){
+                NSMutableArray *sub_arr = [value mutableCopy] ;
+                [self mockArr:sub_arr] ;
+                [dict setObject:sub_arr forKey:key] ;
+            }
+        }else{
+            
+            [dict setObject:[self mockStrategy:value] forKey:key] ;
+        }
+    }
+}
+
+-(void) mockArr:(NSMutableArray *)arr{
+    //arr有数据
+    if ([arr count] > 0){
+        //产生一个随机数
+        int random = arc4random()% [arr count] ;
+        
+        //获取value
+        id value = [arr objectAtIndex:random] ;
+        NSLog(@"haleli >>> random mock arr key : %d",random) ;
+        
+        if([NSJSONSerialization isValidJSONObject:value]){
+            //如果是字典或数组对象，继续递归
+            if([value isKindOfClass:[NSDictionary class]]){
+                NSMutableDictionary *sub_dict = [NSMutableDictionary dictionaryWithDictionary:value] ;
+                [self mockDict:sub_dict] ;
+                [arr replaceObjectAtIndex:random withObject:sub_dict] ;
+            }
+            //如果是数组对象，继续递归
+            if([value isKindOfClass:[NSArray class]]){
+                NSMutableArray *sub_arr = [value mutableCopy] ;
+                [self mockArr:sub_arr] ;
+                [arr replaceObjectAtIndex:random withObject:sub_arr] ;
+            }
+        }else{
+            [arr replaceObjectAtIndex:random withObject:[self mockStrategy:value]] ; ;
+        }
+    }
+}
+
+
+#pragma mark - 将json串转化为字典或者数组
+-(id)arrOrDictWithJsonString:(NSString *)json{
+    if(!json) return nil ;
+    
+    NSError *error = nil ;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error] ;
+    if(!jsonObject){
+        NSLog(@"parse json error:%@",error) ;
+    }
+    return jsonObject ;
+}
+
+#pragma mark -json串转换成数组
+-(NSArray *)arrayWithJsonString:(NSString *)json{
+    if(!json) return nil ;
+    
+    NSError *error = nil ;
+    NSArray *arr = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error] ;
+    
+    if(!arr){
+        NSLog(@"parse json array error : %@" ,error) ;
+    }
+    
+    return arr ;
+}
+
+
+#pragma mark -json串转换成字典
+-(NSDictionary*)dictWithJsonString:(NSString *)json {
+    if(!json) return nil;
+    
+    NSError* error = nil;
+    NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:&error];
+    if(!dict) {
+        NSLog(@"parse json dict error:%@", error);
+    }
+    
+    return dict;
+}
+
+#pragma mark -字典转换成json串
+- (NSString *)convertJSONStringFromDictionary:(NSDictionary *)dictionary {
+    
+    if (dictionary.allKeys.count == 0) {
+        return @"";
+    }
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                       options:0
+                                                         error:&error];
+    
+    NSString *jsonString = @"";
+    
+    if (jsonData) {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    return jsonString ?: @"";
+}
+
+
+#pragma mark -数组转成json串
+- (NSString *)convertJSONStringFromArray:(NSArray *)array{
+    if([array count] == 0){
+        return @"" ;
+    }
+    
+    NSError *error ;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:&error] ;
+    
+    NSString *jsonString = @"";
+    
+    if(jsonData){
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ;
+    }
+    
+    jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    return jsonString ?: @"";
+}
+
+- (NSString *)convertJSONStringFromData:(NSData *)data
+{
+    if ([data length] == 0) {
+        return @"";
+    }
+    NSString *prettyString = @"";
+    
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+    if ([NSJSONSerialization isValidJSONObject:jsonObject]) {
+        prettyString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:jsonObject options:NSJSONWritingPrettyPrinted error:NULL] encoding:NSUTF8StringEncoding];
+        // NSJSONSerialization escapes forward slashes. We want pretty json, so run through and unescape the slashes.
+        prettyString = [prettyString stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
+    } else {
+        prettyString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    
+    return prettyString ?: @"";
+}
+
+-(void)handleError:(NSError*)error request:(NSURLRequest*)request  responseStub:(OHHTTPStubsResponse*)responseStub client:(id<NSURLProtocolClient>)client{
+    // Send the canned error
+    [self executeOnClientRunLoopAfterDelay:responseStub.responseTime block:^{
+        if (!self.stopped)
+        {
+            [client URLProtocol:self didFailWithError:error];
+            if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
+            {
+                OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, responseStub, responseStub.error);
+            }
+        }
+    }];
+}
 
 -(void)handleRequest:(NSURLRequest*)request responseStub:(OHHTTPStubsResponse*)responseStub client:(id<NSURLProtocolClient>)client{
     NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] initWithURL:request.URL

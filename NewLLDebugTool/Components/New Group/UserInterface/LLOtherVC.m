@@ -16,6 +16,7 @@
 #import "LLMonkeySettingVC.h"
 #import "LLMonkeySettingConfig.h"
 #import "LLNetworkHelper.h"
+#import "OHHTTPStubs.h"
 //#ifdef ISLOCAL
 //#import "LLDebugToolDemo-Swift.h"
 //#else
@@ -28,7 +29,7 @@ static NSString *const kLLOtherVCSwitchCellID = @"LLOtherVCSwitchCellID";
 static NSString *const kLLOtherVCNoneCellID = @"LLOtherVCNoneCellID";
 static NSString *const kLLOtherVCLogCellID = @"LLOtherVCLogCellID";
 static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
-
+static id<OHHTTPStubsDescriptor> monkeyStub = nil; // Note: no need to retain this value, it is retained by the OHHTTPStubs itself already
 @interface LLOtherVC (){
     Byte  *_addMemory;
 }
@@ -301,7 +302,26 @@ static NSString *const kLLOtherVCHeaderID = @"LLOtherHeaderID";
     BOOL isButtonOn = [switchButton isOn];
     if(switchButton.tag == LLConfigSwitchTagMock){
         [[LLDebugTool sharedTool] saveMockSwitch:isButtonOn];
-        
+        //默认是关闭的
+        [OHHTTPStubs setEnabled:isButtonOn];
+        if (isButtonOn)
+        {
+            // Install
+            monkeyStub = [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                // This stub will only configure stub requests for "*.txt" files
+                return YES;
+            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+                // Stub txt files with this
+                OHHTTPStubsResponse *ohHTTPStubsResponse = [[[OHHTTPStubsResponse alloc] init]  isOnlineMock:true] ;
+                return ohHTTPStubsResponse ;
+            }];
+            monkeyStub.name = @"Monkey stub";
+        }
+        else
+        {
+            // Uninstall
+            [OHHTTPStubs removeStub:monkeyStub];
+        }
     }else if(switchButton.tag == LLConfigSwitchTagLowNetwork){
         [[LLDebugTool sharedTool] saveLowNetworkSwitch:isButtonOn];
     }else if(switchButton.tag == LLConfigSwitchTagLowMemory){

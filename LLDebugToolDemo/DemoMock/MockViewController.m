@@ -25,8 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:NO] ;
-    [self installTextStub:self.installTextStubSwitch];
-    [self installImageStub:self.installImageStubSwitch];
+//    [self installTextStub:self.installTextStubSwitch];
+//    [self installImageStub:self.installImageStubSwitch];
+    self.installTextStubSwitch.enabled = false ;
+    self.installImageStubSwitch.enabled = false ;
+    self.delaySwitch.enabled = false ;
     [OHHTTPStubs onStubActivation:^(NSURLRequest * _Nonnull request, id<OHHTTPStubsDescriptor>  _Nonnull stub, OHHTTPStubsResponse * _Nonnull responseStub) {
         NSLog(@"[OHHTTPStubs] Request to %@ has been stubbed with %@", request.URL, stub.name);
     }];
